@@ -1023,3 +1023,60 @@ body{
 .personal-goals-heading{margin:0 0 12px}
 @media(max-width:760px){.milestone-hero{grid-template-columns:1fr;padding:21px}.milestone-total{justify-self:start;text-align:left}.current-milestone{align-items:flex-start;flex-direction:column}.current-milestone-progress{width:100%;text-align:left}.milestones-grid{grid-template-columns:1fr}.milestone-description{min-height:0}}
 @media(prefers-reduced-motion:reduce){.milestone-shine{animation:none;opacity:.12}.milestone-card,.sidebar-revenue-goal{transition:none}}
+
+/* Cashfy — placas de conquista com acabamento metálico premium */
+.milestone-hero{padding:30px 32px 25px;border-radius:20px;border-color:#8654d955;background:radial-gradient(ellipse at 8% 0%,#9d63ff30,transparent 48%),radial-gradient(ellipse at 95% 100%,#542c9b20,transparent 42%),linear-gradient(125deg,#171321 0%,#0d0b14 72%);box-shadow:0 18px 45px #0005,inset 0 1px 0 #ffffff12}
+.milestone-hero:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.2;background:repeating-linear-gradient(135deg,transparent 0 26px,#ffffff08 27px,transparent 28px 52px)}
+.milestone-hero-copy,.milestone-total,.milestone-overall-track{position:relative;z-index:1}
+.milestone-hero h2{font-size:clamp(23px,3.3vw,32px);letter-spacing:-1.1px}
+.milestone-total strong{background:linear-gradient(180deg,#fff,#c9b8e9);-webkit-background-clip:text;background-clip:text;color:transparent;text-shadow:0 8px 22px #a879ff25}
+.current-milestone{padding:22px 26px;border-radius:17px;box-shadow:inset 0 1px 0 #ffffff12,0 12px 30px #0003}
+.milestones-grid{grid-template-columns:1fr;gap:17px;margin-bottom:22px}
+.milestone-card{display:grid;grid-template-columns:minmax(190px,260px) minmax(0,1fr);align-items:stretch;gap:24px;min-height:205px;padding:17px;border-radius:18px;border-color:color-mix(in srgb,var(--tier-color) 48%,#ffffff18);background:radial-gradient(ellipse at 5% 50%,color-mix(in srgb,var(--tier-color) 17%,transparent),transparent 55%),linear-gradient(112deg,#17151c,#0d0c12 72%);box-shadow:0 14px 35px #0005,inset 0 1px 0 #ffffff19,inset 0 -1px 0 #000}
+.milestone-card:before{content:"";position:absolute;inset:5px;border:1px solid color-mix(in srgb,var(--tier-color) 23%,transparent);border-radius:13px;pointer-events:none}
+.milestone-card:after{content:"";position:absolute;inset:0;pointer-events:none;border-radius:18px;background:linear-gradient(115deg,#ffffff0c,transparent 23%,transparent 75%,color-mix(in srgb,var(--tier-color) 12%,transparent))}
+.milestone-card:hover{transform:translateY(-3px) scale(1.002);border-color:color-mix(in srgb,var(--tier-color) 72%,#fff);box-shadow:0 19px 42px #0006,0 0 26px color-mix(in srgb,var(--tier-color) 18%,transparent),inset 0 1px 0 #ffffff22}
+.milestone-plaque{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:166px;padding:20px 13px 14px;border:2px solid color-mix(in srgb,var(--tier-color) 80%,#fff);border-radius:13px;background:linear-gradient(145deg,color-mix(in srgb,var(--tier-color) 40%,#171717),color-mix(in srgb,var(--tier-color) 13%,#08090d) 30%,#0c0b10 65%,color-mix(in srgb,var(--tier-color) 28%,#161616));box-shadow:inset 0 0 0 2px #ffffff22,inset 0 0 0 5px #0008,inset 0 0 25px color-mix(in srgb,var(--tier-color) 35%,transparent),0 5px 20px color-mix(in srgb,var(--tier-color) 22%,transparent),0 10px 20px #0008}
+.milestone-plaque:before{content:"";position:absolute;inset:7px;border:1px solid color-mix(in srgb,var(--tier-color) 65%,#fff);border-radius:8px;box-shadow:inset 0 0 15px color-mix(in srgb,var(--tier-color) 20%,transparent);pointer-events:none}
+.milestone-plaque:after{content:"";position:absolute;inset:-40% -60%;background:linear-gradient(110deg,transparent 42%,#ffffff08 46%,#ffffff75 49%,#ffffff12 52%,transparent 57%);transform:translateX(-85%);animation:plaque-glint 5.8s ease-in-out infinite;pointer-events:none}
+@keyframes plaque-glint{0%,15%{transform:translateX(-85%)}70%,100%{transform:translateX(85%)}}
+.plaque-crown{position:relative;z-index:1;font-size:28px;line-height:1;color:var(--tier-glow);filter:drop-shadow(0 2px 5px var(--tier-color)) drop-shadow(0 0 10px var(--tier-color));margin-bottom:4px}
+.plaque-gem{position:relative;z-index:1;font-size:22px;line-height:1;color:var(--tier-glow);text-shadow:0 0 13px var(--tier-color);margin-bottom:5px}
+.milestone-plaque>strong{position:relative;z-index:1;font:800 clamp(17px,2vw,23px) 'Space Grotesk';letter-spacing:1.4px;text-transform:uppercase;color:var(--tier-glow);text-shadow:0 1px 0 #fff9,0 2px 1px #000,0 0 14px var(--tier-color);background:linear-gradient(180deg,#fff,var(--tier-color) 52%,color-mix(in srgb,var(--tier-color) 55%,#111));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.milestone-plaque>small{position:relative;z-index:1;margin-top:5px;color:#f4edf7;font-size:9px;font-weight:750;letter-spacing:1.1px;text-shadow:0 2px 4px #000}
+.plaque-laurel{position:relative;z-index:1;margin-top:8px;color:var(--tier-glow);font-size:11px;letter-spacing:4px;text-shadow:0 0 8px var(--tier-color)}
+.milestone-details{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;min-width:0;padding:4px 5px 4px 0}
+.milestone-top{gap:10px}
+.milestone-status{border:1px solid color-mix(in srgb,var(--tier-color) 38%,transparent);padding:6px 10px;background:color-mix(in srgb,var(--tier-color) 13%,#100f16);font-size:9px;box-shadow:0 0 12px color-mix(in srgb,var(--tier-color) 10%,transparent)}
+.milestone-index{color:#716b7b;font-size:8px;letter-spacing:1px;font-weight:700}
+.milestone-description{min-height:0;margin:13px 0 12px;max-width:740px;font-size:11px;line-height:1.7;color:#b7b0bf}
+.milestone-amount{display:flex;align-items:baseline;gap:5px;margin-bottom:8px}
+.milestone-amount strong{font:700 16px 'Space Grotesk';color:#f4f0fa}
+.milestone-amount span{font-size:10px;color:#8f879a}
+.milestone-progress{height:8px;border:1px solid #ffffff12;background:#08070c;box-shadow:inset 0 2px 4px #000}
+.milestone-progress span{position:relative;overflow:hidden;box-shadow:0 0 12px var(--tier-color),0 0 22px color-mix(in srgb,var(--tier-color) 55%,transparent)}
+.milestone-progress span:after{content:"";position:absolute;inset:0;background:linear-gradient(100deg,transparent,#ffffff85,transparent);animation:progress-glow 3.2s ease-in-out infinite}
+@keyframes progress-glow{0%,20%{transform:translateX(-120%)}75%,100%{transform:translateX(120%)}}
+.milestone-foot{align-items:center;margin-top:10px;gap:12px}
+.milestone-foot strong{min-width:35px;font-size:11px}
+.milestone-foot span{font-size:10px;line-height:1.55}
+.tier-silver .milestone-plaque{background:linear-gradient(145deg,#f4f7fb,#6f7887 17%,#171a20 36%,#b8c0ca 50%,#20242b 69%,#e4e9f0)}
+.tier-gold .milestone-plaque{background:linear-gradient(145deg,#fff0ae,#a56a10 17%,#30200b 37%,#e6b94d 52%,#402909 70%,#ffe49a)}
+.tier-diamond .milestone-plaque{background:linear-gradient(145deg,#d9f8ff,#2786b8 17%,#09263c 38%,#65d8ff 52%,#09273d 70%,#d6faff)}
+.tier-red .milestone-plaque{background:linear-gradient(145deg,#ffd0d5,#a71e38 17%,#310912 38%,#fa405b 52%,#3b0713 70%,#ffb2bd)}
+.tier-pink .milestone-plaque{background:linear-gradient(145deg,#ffe0f7,#bd39a2 17%,#3b0b34 38%,#ff6ad6 52%,#420b3b 70%,#ffd2f4)}
+.tier-silver{--tier-color:#cbd5e2;--tier-glow:#f3f7ff}
+.tier-gold{--tier-color:#eab94e;--tier-glow:#fff0b4}
+.tier-diamond{--tier-color:#53caff;--tier-glow:#d0f6ff}
+.tier-red{--tier-color:#ff455f;--tier-glow:#ffd0d6}
+.tier-pink{--tier-color:#ff4bc8;--tier-glow:#ffe0f7}
+.milestone-card.is-locked{opacity:.82;filter:saturate(.78)}
+.milestone-card.is-active{border-width:2px;box-shadow:0 0 0 1px color-mix(in srgb,var(--tier-color) 16%,transparent),0 14px 38px #0006,0 0 25px color-mix(in srgb,var(--tier-color) 15%,transparent),inset 0 1px 0 #ffffff22}
+.milestone-card.is-reached{box-shadow:0 0 0 1px color-mix(in srgb,var(--tier-color) 24%,transparent),0 14px 38px #0006,0 0 28px color-mix(in srgb,var(--tier-color) 25%,transparent),inset 0 1px 0 #ffffff2c}
+.milestone-footer-note{display:flex;align-items:center;gap:14px;margin-top:20px;padding:18px 22px;border:1px solid #9e71e844;border-radius:14px;background:linear-gradient(110deg,#241735,#12101a);box-shadow:inset 0 1px 0 #ffffff10}
+.milestone-footer-note>span{font-size:24px;color:#c79aff;text-shadow:0 0 15px #b77cff}
+.milestone-footer-note strong,.milestone-footer-note small{display:block}
+.milestone-footer-note strong{font:650 12px 'Space Grotesk';color:#eadcff}
+.milestone-footer-note small{margin-top:4px;color:#a59caf;font-size:10px;line-height:1.5}
+@media(max-width:650px){.milestone-card{grid-template-columns:1fr;gap:14px;padding:14px}.milestone-plaque{min-height:145px}.milestone-details{padding:3px}.milestone-index{font-size:7px}.milestone-description{margin:10px 0}.milestone-hero{padding:22px 20px}.milestone-footer-note{padding:15px}}
+@media(prefers-reduced-motion:reduce){.milestone-plaque:after,.milestone-progress span:after{animation:none;opacity:.2}.milestone-card{transition:none}}
