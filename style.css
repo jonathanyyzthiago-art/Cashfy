@@ -496,3 +496,11 @@ button:focus-visible{
   justify-content:center;
  }
 }
+
+
+/* Ajuste fino do botao Atualizar */
+.dashboard-update > span{font-size:11px;font-weight:600;letter-spacing:.1px}
+.dashboard-update > i{order:-1;font-size:15px;transition:transform .2s ease}
+.dashboard-update:hover > i,.dashboard-update:focus-visible > i{animation:dashboardRefreshSpin .65s ease-in-out}
+.dashboard-update:active > i{animation:dashboardRefreshSpin .45s ease-in-out}
+@media(max-width:650px){.dashboard-update{gap:6px;padding-inline:10px}.dashboard-update > span{font-size:10px}.dashboard-update > i{font-size:14px}}
