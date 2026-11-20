@@ -9,11 +9,43 @@ if(!localStorage.getItem("cashfy_demo_sale_8000")) {
  localStorage.setItem("cashfy_demo_sale_8000","1");
  save();
 }
-const titles = {overview:["Dashboard","Acompanhe suas vendas e resultados em um só lugar."],products:["Produtos","Cadastre e organize os produtos que você vende."],sales:["Vendas","Acompanhe os pedidos registrados na sua operação."],customers:["Clientes","Consulte os clientes cadastrados na sua base."],settings:["Configurações","Gerencie as informações básicas do seu espaço."]};
+const titles = {
+ overview:["Dashboard","Acompanhe suas vendas e resultados em um só lugar."],
+ products:["Produtos","Cadastre e organize os produtos que você vende."],
+ sales:["Vendas","Acompanhe os pedidos registrados na sua operação."],
+ customers:["Clientes","Consulte os clientes cadastrados na sua base."],
+ subscriptions:["Assinaturas","Gerencie cobranças recorrentes e planos."],
+ refunds:["Reembolsos","Acompanhe solicitações e status de reembolso."],
+ affiliates:["Afiliados","Organize parceiros e comissões de divulgação."],
+ coupons:["Cupons","Crie e acompanhe cupons de desconto."],
+ checkout:["Checkout","Configure a experiência de pagamento dos seus clientes."],
+ balance:["Saldo e saques","Consulte saldo disponível e solicitações de saque."],
+ transactions:["Transações","Consulte movimentações financeiras da operação."],
+ reports:["Relatórios","Acompanhe indicadores e resultados da sua operação."],
+ integrations:["Integrações","Conecte serviços usados pela sua operação."],
+ settings:["Configurações","Gerencie as informações básicas do seu espaço."]
+};
+function modulePage(page){
+ const details={
+  subscriptions:["Cobranças recorrentes","Planos, periodicidade e situação das assinaturas."],
+  refunds:["Solicitações de reembolso","Acompanhe pedidos, motivos e andamento."],
+  affiliates:["Programa de afiliados","Parceiros, links de divulgação e comissões."],
+  coupons:["Descontos e campanhas","Cupons, regras de uso e validade."],
+  checkout:["Página de pagamento","Aparência, campos e opções de pagamento."],
+  balance:["Visão financeira","Saldo disponível, valores pendentes e saques."],
+  transactions:["Extrato de movimentações","Entradas, saídas, taxas e status."],
+  reports:["Desempenho da operação","Vendas, conversão, faturamento e produtos."],
+  integrations:["Conexões disponíveis","Serviços externos e chaves de integração."]
+ };
+ const item=details[page];
+ return '<section class="module-grid"><article class="panel module-card"><p class="eyebrow">CASHFY • '+escapeHtml(titles[page][0].toUpperCase())+'</p><h3>'+escapeHtml(item[0])+'</h3><p class="muted">'+escapeHtml(item[1])+'</p><div class="module-status"><span class="module-status-dot"></span> Área visual em preparação</div></article><article class="panel module-card"><h3>Integração necessária</h3><p class="muted">Esta área já está organizada no painel. As operações reais serão ativadas quando os serviços de pagamento e a estrutura de dados forem conectados.</p></article></section>';
+}
 function render(){
- const [title,subtitle]=titles[state.page]; $("#crumb").textContent=title; $("#pageTitle").textContent=title; $("#pageSubtitle").textContent=subtitle;
- $("#pageContent").innerHTML=state.page==="overview"?overview():state.page==="products"?productsPage():state.page==="sales"?salesPage():state.page==="customers"?customersPage():settingsPage();
- if(state.page==="overview")bindRevenueChart();
+ const current=titles[state.page]?state.page:"overview";
+ if(current!==state.page)state.page="overview";
+ const [title,subtitle]=titles[current]; $("#crumb").textContent=title; $("#pageTitle").textContent=title; $("#pageSubtitle").textContent=subtitle;
+ $("#pageContent").innerHTML=current==="overview"?overview():current==="products"?productsPage():current==="sales"?salesPage():current==="customers"?customersPage():current==="settings"?settingsPage():modulePage(current);
+ if(current==="overview")bindRevenueChart();
  if(introFinished)startRevealSequence();
 }
 
