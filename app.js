@@ -23,6 +23,10 @@ const titles = {
  transactions:["Transações","Consulte movimentações financeiras da operação."],
  reports:["Relatórios","Acompanhe indicadores e resultados da sua operação."],
  integrations:["Integrações","Conecte serviços usados pela sua operação."],
+ paymentLinks:["Links de pagamento","Crie links de cobrança para vender por qualquer canal."],
+ coproductions:["Coproduções","Gerencie parceiros, divisão de receita e comissões."],
+ members:["Área de membros","Organize cursos, conteúdos, alunos e acessos."],
+ disputes:["Disputas e chargebacks","Acompanhe contestações e prazos de resposta."],
  settings:["Configurações","Gerencie as informações básicas do seu espaço."]
 };
 function moduleStore(key, fallback=[]){
@@ -30,6 +34,8 @@ function moduleStore(key, fallback=[]){
 }
 const moduleData={
  refunds:moduleStore("refunds"),subscriptions:moduleStore("subscriptions"),affiliates:moduleStore("affiliates"),
+ coupons:moduleStore("coupons"),withdrawals:moduleStore("withdrawals"),integrations:moduleStore("integrations",{}),
+ paymentLinks:moduleStore("paymentLinks"),coproductions:moduleStore("coproductions"),members:moduleStore("members"),disputes:moduleStore("disputes"), refunds:moduleStore("refunds"),subscriptions:moduleStore("subscriptions"),affiliates:moduleStore("affiliates"),
  coupons:moduleStore("coupons"),withdrawals:moduleStore("withdrawals"),integrations:moduleStore("integrations",{}),
  checkout:moduleStore("checkout",{title:"Finalize sua compra",button:"Pagar agora",color:"#8b5cf6",pix:true,card:true,boleto:false}),
 };
@@ -85,7 +91,23 @@ function modulePage(page){
   const rows=state.products.map(p=>'<tr><td>'+escapeHtml(p.name)+'</td><td>'+money(p.price)+'</td><td>'+state.sales.filter(s=>String(s.productId||s.productName)===String(p.id)||s.productName===p.name).length+'</td></tr>');
   return '<div class="module-kpis"><div class="panel"><small>Faturamento registrado</small><strong>'+money(total)+'</strong></div><div class="panel"><small>Vendas registradas</small><strong>'+count+'</strong></div><div class="panel"><small>Ticket médio</small><strong>'+money(average)+'</strong></div></div>'+card("Desempenho por produto","Resumo dos produtos cadastrados.",moduleTable(["Produto","Preço cadastrado","Vendas relacionadas"],rows,"Cadastre produtos para visualizar o relatório.")+'<div class="module-toolbar"><button class="secondary-btn" id="exportReport" type="button">Baixar relatório CSV</button></div><p class="module-hint">Indicadores calculados sobre os dados disponíveis neste navegador, não sobre transações do gateway.</p>');
  }
- if(page==="integrations"){
+ if(page==="paymentLinks"){
+  const rows=data.paymentLinks.map((p,i)=>'<tr><td><b>'+escapeHtml(p.name)+'</b></td><td>'+money(p.amount)+'</td><td>'+p.method+'</td><td>'+p.created+'</td><td><span class="module-pill">'+p.status+'</span></td><td><button data-link-copy="'+i+'">Copiar link</button> <button data-link-toggle="'+i+'">'+(p.status==="Ativo"?"Pausar":"Ativar")+'</button></td></tr>');
+  return card("Criar link de pagamento","Gere uma cobrança compartilhável para WhatsApp, redes sociais ou atendimento.",form("paymentLinkForm",[moduleField("Nome da cobrança","name"),moduleField("Valor (R$)","amount","number"),moduleSelect("Forma de pagamento","method",[["Todos","Pix, cartão e boleto"],["Pix","Somente Pix"],["Cartão","Cartão de crédito"],["Pix e cartão","Pix e cartão"]]),moduleSelect("Tipo de cobrança","type",[["unica","Pagamento único"],["recorrente","Assinatura recorrente"]])],"Gerar link"))+card("Links criados","Gerencie links e copie para compartilhar.",moduleTable(["Oferta","Valor","Métodos","Criado em","Status","Ações"],rows,"Nenhum link criado.")+'<p class="module-hint">O link é demonstrativo nesta versão. Para receber pagamentos, é necessário publicar o checkout e integrar um provedor.</p>');
+ }
+ if(page==="coproductions"){
+  const rows=data.coproductions.map((p,i)=>'<tr><td>'+escapeHtml(p.name)+'</td><td>'+escapeHtml(p.email)+'</td><td>'+p.share+'%</td><td>'+p.role+'</td><td>'+p.status+'</td><td><button data-coproduction="'+i+'">Alterar status</button></td></tr>');
+  return card("Adicionar coprodutor","Cadastre parceiros e defina a participação na receita líquida.",form("coproductionForm",[moduleField("Nome do parceiro","name"),moduleField("E-mail","email","email"),moduleField("Participação (%)","share","number"),moduleSelect("Permissão","role",[["Gestor","Gestor"],["Editor","Editor"],["Financeiro","Financeiro"]])],"Adicionar coprodutor"))+card("Equipe do produto","A soma das participações não deve ultrapassar 100%.",moduleTable(["Parceiro","E-mail","Participação","Permissão","Status","Ação"],rows,"Nenhum coprodutor cadastrado."));
+ }
+ if(page==="members"){
+  const rows=data.members.map((m,i)=>'<tr><td>'+escapeHtml(m.name)+'</td><td>'+escapeHtml(m.email)+'</td><td>'+escapeHtml(m.product)+'</td><td>'+m.access+'</td><td>'+m.status+'</td><td><button data-member="'+i+'">'+(m.status==="Ativo"?"Suspender":"Liberar acesso")+'</button></td></tr>');
+  return card("Adicionar aluno","Registre um aluno e vincule o acesso a um produto ou curso.",form("memberForm",[moduleField("Nome do aluno","name"),moduleField("E-mail do aluno","email","email"),moduleField("Produto / curso","product"),moduleSelect("Duração do acesso","access",[["Vitalício","Vitalício"],["30 dias","30 dias"],["90 dias","90 dias"],["1 ano","1 ano"]])],"Adicionar aluno"))+card("Alunos e acessos","Controle a lista de alunos e o estado do acesso.",moduleTable(["Aluno","E-mail","Produto","Duração","Status","Ação"],rows,"Nenhum aluno cadastrado.")+'<p class="module-hint">O controle de login e entrega de aulas exige uma área de membros com autenticação e armazenamento no servidor.</p>');
+ }
+ if(page==="disputes"){
+  const rows=data.disputes.map((d,i)=>'<tr><td>'+escapeHtml(d.sale)+'</td><td>'+escapeHtml(d.customer)+'</td><td>'+money(d.amount)+'</td><td>'+escapeHtml(d.reason)+'</td><td>'+escapeHtml(d.deadline)+'</td><td><span class="module-pill">'+d.status+'</span></td><td><button data-dispute="'+i+'">Marcar como respondida</button></td></tr>');
+  return card("Registrar contestação","Organize prazos, evidências e o acompanhamento de chargebacks.",form("disputeForm",[moduleField("ID da venda","sale"),moduleField("Cliente","customer"),moduleField("Valor contestado (R$)","amount","number"),moduleSelect("Motivo","reason",[["Não reconhece a compra","Não reconhece a compra"],["Produto não recebido","Produto não recebido"],["Produto diferente","Produto diferente"],["Outro","Outro"]]),moduleField("Prazo de resposta","deadline","date")],"Registrar contestação"))+card("Contestações abertas","Acompanhe o status e registre quando a documentação for enviada.",moduleTable(["Venda","Cliente","Valor","Motivo","Prazo","Status","Ação"],rows,"Nenhuma contestação registrada.")+'<p class="module-hint">A resposta ao banco/adquirente e a reversão do chargeback dependem do processador de pagamentos.</p>');
+ }
+ if(page==="integrations"){ if(page==="integrations"){
   const items=[["Google Analytics","analytics"],["Meta Pixel","pixel"],["Webhook de eventos","webhook"],["API externa","api"]];
   return card("Conexões e integrações","Ative os conectores que deseja preparar e informe seus identificadores.",'<form id="integrationsForm">'+items.map(([label,key])=>'<div class="integration-row"><label><input type="checkbox" name="'+key+'" '+(data.integrations[key]&&data.integrations[key].enabled?"checked":"")+'> <b>'+label+'</b></label><input name="'+key+'_value" placeholder="'+(key==="webhook"?"https://seu-dominio.com/webhook":"ID ou URL de integração")+'" value="'+escapeHtml(data.integrations[key]?.value||"")+'"></div>').join("")+'<button class="primary-btn" type="submit">Salvar integrações</button></form><p class="module-hint">Apenas as preferências ficam salvas localmente. Para conectar de verdade, configure credenciais e endpoints seguros no backend. Nunca cole chaves secretas aqui.</p>');
  }
@@ -303,7 +325,11 @@ if(loadingScreen){window.setTimeout(()=>{loadingScreen.classList.add("is-hidden"
 document.addEventListener("submit",e=>{
  const f=e.target;
  const read=name=>f.elements[name]?.value?.trim()||"";
- if(f.id==="refundForm"){e.preventDefault();moduleData.refunds.unshift({id:Date.now().toString().slice(-7),customer:read("customer"),amount:Number(read("amount")),reason:read("reason"),status:"Solicitado"});persistModule("refunds");render();}
+ if(f.id==="paymentLinkForm"){e.preventDefault();moduleData.paymentLinks.unshift({name:read("name"),amount:Number(read("amount")),method:read("method"),type:read("type"),created:new Date().toLocaleDateString("pt-BR"),status:"Ativo",url:location.origin+location.pathname+"#checkout-"+Date.now()});persistModule("paymentLinks");render();}
+ if(f.id==="coproductionForm"){e.preventDefault();const share=Number(read("share"));const total=moduleData.coproductions.reduce((n,x)=>n+(x.status==="Ativo"?Number(x.share):0),0);if(share<=0||share+total>100){alert("A participação total dos coprodutores não pode ultrapassar 100%.");return;}moduleData.coproductions.unshift({name:read("name"),email:read("email"),share,role:read("role"),status:"Ativo"});persistModule("coproductions");render();}
+ if(f.id==="memberForm"){e.preventDefault();moduleData.members.unshift({name:read("name"),email:read("email"),product:read("product"),access:read("access"),status:"Ativo"});persistModule("members");render();}
+ if(f.id==="disputeForm"){e.preventDefault();moduleData.disputes.unshift({sale:read("sale"),customer:read("customer"),amount:Number(read("amount")),reason:read("reason"),deadline:read("deadline"),status:"Aberta"});persistModule("disputes");render();}
+ if(f.id==="refundForm"){ if(f.id==="refundForm"){e.preventDefault();moduleData.refunds.unshift({id:Date.now().toString().slice(-7),customer:read("customer"),amount:Number(read("amount")),reason:read("reason"),status:"Solicitado"});persistModule("refunds");render();}
  if(f.id==="subscriptionForm"){e.preventDefault();moduleData.subscriptions.unshift({name:read("name"),customer:read("customer"),amount:Number(read("amount")),cycle:read("cycle"),status:"Ativa"});persistModule("subscriptions");render();}
  if(f.id==="affiliateForm"){e.preventDefault();moduleData.affiliates.unshift({name:read("name"),email:read("email"),commission:Number(read("commission")),code:read("code"),status:"Ativo"});persistModule("affiliates");render();}
  if(f.id==="couponForm"){e.preventDefault();moduleData.coupons.unshift({code:read("code").toUpperCase(),kind:read("kind"),discount:Number(read("discount")),uses:Number(read("uses")),expires:read("expires"),status:"Ativo"});persistModule("coupons");render();}
@@ -312,7 +338,12 @@ document.addEventListener("submit",e=>{
  if(f.id==="integrationsForm"){e.preventDefault();moduleData.integrations={};["analytics","pixel","webhook","api"].forEach(k=>moduleData.integrations[k]={enabled:f.elements[k].checked,value:f.elements[k+"_value"].value.trim()});persistModule("integrations");render();}
 });
 document.addEventListener("click",e=>{
- const refund=e.target.closest("[data-refund]");if(refund){const r=moduleData.refunds[Number(refund.dataset.id)];if(r){r.status=refund.dataset.refund==="approve"?"Aprovado":"Recusado";persistModule("refunds");render();}return;}
+ const linkCopy=e.target.closest("[data-link-copy]");if(linkCopy){const item=moduleData.paymentLinks[Number(linkCopy.dataset.linkCopy)];if(item){navigator.clipboard?.writeText(item.url).then(()=>alert("Link copiado."),()=>alert(item.url));}return;}
+ const linkToggle=e.target.closest("[data-link-toggle]");if(linkToggle){const item=moduleData.paymentLinks[Number(linkToggle.dataset.linkToggle)];if(item){item.status=item.status==="Ativo"?"Pausado":"Ativo";persistModule("paymentLinks");render();}return;}
+ const copro=e.target.closest("[data-coproduction]");if(copro){const item=moduleData.coproductions[Number(copro.dataset.coproduction)];if(item){item.status=item.status==="Ativo"?"Pausado":"Ativo";persistModule("coproductions");render();}return;}
+ const member=e.target.closest("[data-member]");if(member){const item=moduleData.members[Number(member.dataset.member)];if(item){item.status=item.status==="Ativo"?"Suspenso":"Ativo";persistModule("members");render();}return;}
+ const dispute=e.target.closest("[data-dispute]");if(dispute){const item=moduleData.disputes[Number(dispute.dataset.dispute)];if(item){item.status="Documentação registrada";persistModule("disputes");render();}return;}
+ const refund=e.target.closest("[data-refund]"); const refund=e.target.closest("[data-refund]");if(refund){const r=moduleData.refunds[Number(refund.dataset.id)];if(r){r.status=refund.dataset.refund==="approve"?"Aprovado":"Recusado";persistModule("refunds");render();}return;}
  const sub=e.target.closest("[data-subscription]");if(sub){const s=moduleData.subscriptions[Number(sub.dataset.subscription)];if(s){s.status=s.status==="Ativa"?"Cancelada":"Ativa";persistModule("subscriptions");render();}return;}
  const aff=e.target.closest("[data-affiliate]");if(aff){const a=moduleData.affiliates[Number(aff.dataset.affiliate)];if(a){a.status=a.status==="Ativo"?"Pausado":"Ativo";persistModule("affiliates");render();}return;}
  const coupon=e.target.closest("[data-coupon]");if(coupon){const a=moduleData.coupons[Number(coupon.dataset.coupon)];if(a){a.status=a.status==="Ativo"?"Pausado":"Ativo";persistModule("coupons");render();}return;}
