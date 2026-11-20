@@ -91,3 +91,10 @@ body{
 .chart-xlabels{order:3}
 .chart-foot{order:4}
 @media(max-width:650px){.range-tabs{margin-top:12px;align-self:stretch}}
+
+/* Cards de resumo acima do gráfico */
+.revenue-panel>.stats{order:2;grid-template-columns:repeat(4,minmax(0,1fr));margin:8px 0 18px}
+.revenue-chart-wrap{order:3}
+.chart-xlabels{order:4}
+.chart-foot{order:5}
+@media(max-width:950px){.revenue-panel>.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
