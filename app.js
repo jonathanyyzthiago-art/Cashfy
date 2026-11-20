@@ -35,7 +35,7 @@ const moduleData={
 };
 function persistModule(key){localStorage.setItem("cashfy_"+key,JSON.stringify(moduleData[key]));}
 function moduleField(label,name,type="text",placeholder=""){
- return '<label class="module-field"><span>'+label+'</span><input name="'+name+'" type="'+type+'" placeholder="'+escapeHtml(placeholder)+'" '+(name==="amount"||name==="price"?"min=\"0.01\" step=\"0.01\"":"")+' required></label>';
+ return '<label class="module-field"><span>'+label+'</span><input name="'+name+'" type="'+type+'" '+(type==="color"?'value="'+escapeHtml(placeholder||"#8b5cf6")+'"':'placeholder="'+escapeHtml(placeholder)+'"')+' '+(name==="amount"||name==="price"?"min=\"0.01\" step=\"0.01\"":"")+' required></label>';
 }
 function moduleSelect(label,name,options){
  return '<label class="module-field"><span>'+label+'</span><select name="'+name+'">'+options.map(o=>'<option value="'+o[0]+'">'+o[1]+'</option>').join("")+'</select></label>';
@@ -319,3 +319,5 @@ document.addEventListener("click",e=>{
  const couponDelete=e.target.closest("[data-coupon-delete]");if(couponDelete&&confirm("Excluir este cupom?")){moduleData.coupons.splice(Number(couponDelete.dataset.couponDelete),1);persistModule("coupons");render();return;}
  if(e.target.closest("#exportTransactions")||e.target.closest("#exportReport")){const rows=[["ID","Descrição","Valor","Status","Data"],...state.sales.map(s=>[s.id||"",s.productName||s.product_name||"Venda",s.amount||s.total||s.price||0,s.status||"Registrada",s.dateISO||s.date||""])];const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(";")).join("\n");const url=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}));const a=document.createElement("a");a.href=url;a.download="cashfy-relatorio.csv";a.click();URL.revokeObjectURL(url);}
 });
+
+document.addEventListener("input",e=>{if(e.target.id==="transactionSearch"){const q=e.target.value.toLowerCase();document.querySelectorAll(".module-table tbody tr").forEach(row=>{row.hidden=!row.textContent.toLowerCase().includes(q);});}});
