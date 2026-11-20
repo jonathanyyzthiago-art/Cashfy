@@ -668,3 +668,7 @@ button:focus-visible{
 .cashfy-hero{height:auto !important;min-height:0 !important;padding:0 !important;margin:0 0 22px !important;display:block !important;overflow:hidden;border:0 !important;border-radius:15px !important;background:transparent !important;box-shadow:0 10px 28px rgba(0,0,0,.24)}
 .cashfy-banner-image{display:block;width:100%;height:auto;aspect-ratio:1600/420;object-fit:cover;border-radius:15px}
 @media(max-width:650px){.cashfy-hero{margin-bottom:18px !important;border-radius:12px !important}.cashfy-banner-image{border-radius:12px}}
+
+
+/* Exibe a imagem original do banner sem cortar */
+.cashfy-banner-image{display:block;width:100%;height:auto;aspect-ratio:auto;object-fit:contain;border-radius:15px}
