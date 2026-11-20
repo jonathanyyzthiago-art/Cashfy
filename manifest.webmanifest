@@ -11,10 +11,10 @@
   "theme_color": "#090711",
   "icons": [
     {
-      "src": "./file_00000000a164820eb5c41b1650eae634.png",
+      "src": "./assets/cashfy-app-icon.svg",
       "sizes": "any",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
     }
   ]
 }
