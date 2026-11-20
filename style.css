@@ -1287,3 +1287,41 @@ button[data-refund]{
  .cashfy-install-brand span{font-size:9px;max-width:155px}
  .cashfy-install-button{min-width:92px;padding:10px 12px;font-size:11px}
 }
+
+
+/* Restauração definitiva do layout compacto original da meta lateral */
+.sidebar-revenue-goal{
+  display:block!important;width:100%!important;height:auto!important;min-height:0!important;max-height:none!important;
+  margin:0 0 17px!important;padding:10px 11px 9px!important;
+  border:1px solid rgba(164,127,255,.17)!important;border-radius:10px!important;
+  background:linear-gradient(135deg,rgba(35,27,47,.76),rgba(17,15,24,.92))!important;
+  box-shadow:0 5px 15px rgba(0,0,0,.13)!important;overflow:hidden!important;
+  text-align:left!important;cursor:pointer!important;color:inherit!important;font:inherit!important;
+  appearance:none!important;-webkit-appearance:none!important;
+}
+.sidebar-revenue-goal .sidebar-goal-top{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:9px!important;width:100%!important;min-height:35px!important}
+.sidebar-revenue-goal .sidebar-goal-icon-wrap{display:grid!important;place-items:center!important;flex:0 0 35px!important;width:35px!important;height:35px!important}
+.sidebar-revenue-goal .sidebar-goal-icon{display:block!important;width:23px!important;height:23px!important;fill:none!important;stroke:#c49bff!important;stroke-width:1.7!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+.sidebar-revenue-goal .sidebar-goal-copy{display:block!important;min-width:0!important;flex:1 1 auto!important;text-align:left!important}
+.sidebar-revenue-goal .sidebar-goal-copy small{display:block!important;margin:0 0 4px!important;color:#a9a0b7!important;font-size:8px!important;letter-spacing:.55px!important;font-weight:650!important}
+.sidebar-revenue-goal .sidebar-goal-copy strong{display:block!important;margin:0!important;color:#eee8f8!important;font:600 10px 'Space Grotesk'!important;white-space:nowrap!important}
+.sidebar-revenue-goal .sidebar-goal-track{display:block!important;flex:0 0 5px!important;width:100%!important;height:5px!important;margin-top:9px!important;border-radius:20px!important;background:#0b0910!important;overflow:hidden!important}
+.sidebar-revenue-goal .sidebar-goal-track span{display:block!important;height:100%!important;border-radius:20px!important;background:linear-gradient(90deg,#9470d9,#c49bff)!important;transition:width .35s ease!important}
+.sidebar-revenue-goal .sidebar-goal-bottom{display:flex!important;flex:0 0 auto!important;width:100%!important;min-height:18px!important;align-items:center!important;justify-content:space-between!important;margin-top:6px!important;color:#81798d!important;font-size:8px!important}
+.sidebar-revenue-goal .sidebar-goal-bottom strong{color:#cbb7ed!important;font-size:9px!important}
+.sidebar.collapsed .sidebar-revenue-goal{padding:10px 7px!important}
+.sidebar.collapsed .sidebar-goal-copy,.sidebar.collapsed .sidebar-goal-track,.sidebar.collapsed .sidebar-goal-bottom{display:none!important}
+.sidebar.collapsed .sidebar-goal-top{justify-content:center!important}
+@media(max-width:650px){.sidebar-revenue-goal{margin-bottom:20px!important}}
+@media(prefers-reduced-motion:reduce){.sidebar-revenue-goal{transition:none!important}}
+
+/* Botão X da faixa de instalação com efeito glass */
+.cashfy-install-banner{position:relative}
+.cashfy-install-close{
+  position:absolute;top:7px;right:7px;z-index:2;width:25px;height:25px;padding:0;
+  display:grid;place-items:center;border:1px solid rgba(255,255,255,.18);border-radius:8px;
+  background:rgba(255,255,255,.09);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+  color:#eee7ff;font-size:19px;line-height:1;cursor:pointer;
+}
+.cashfy-install-close:hover{background:rgba(255,255,255,.18);border-color:rgba(210,190,255,.4)}
+.cashfy-install-button{margin-right:25px}
