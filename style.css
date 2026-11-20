@@ -860,34 +860,3 @@ body{
  .app-shell.sidebar-collapsed .sidebar-brand-row .brand{display:flex}
  .app-shell.sidebar-collapsed .sidebar-toggle{margin-top:-32px;transform:none}
 }
-
-
-/* Correção estrutural do cabeçalho lateral Cashfy */
-.sidebar-brand-row{display:flex;align-items:center;gap:17px;min-width:0;margin:0 0 34px;padding:0 8px}
-.sidebar-brand-row .brand{padding:0;flex:0 0 auto}
-.sidebar-brand-row .sidebar-toggle{position:static;flex:0 0 27px;width:27px;height:27px;margin:0}
-.app-shell.sidebar-collapsed .sidebar-brand-row{justify-content:center;gap:0;margin-bottom:34px}
-.app-shell.sidebar-collapsed .sidebar-brand-row .brand{display:none}
-.app-shell.sidebar-collapsed .sidebar-brand-row .sidebar-toggle{transform:rotate(180deg)}
-@media(max-width:650px){
- .sidebar-brand-row{margin-bottom:34px}
- .app-shell.sidebar-collapsed .sidebar-brand-row{justify-content:flex-start;gap:17px}
- .app-shell.sidebar-collapsed .sidebar-brand-row .brand{display:flex}
- .app-shell.sidebar-collapsed .sidebar-brand-row .sidebar-toggle{transform:none}
-}
-
-/* Correção de largura responsiva: o painel ocupa toda a tela no celular */
-html,body{width:100%;min-width:0;max-width:100%;overflow-x:hidden}
-.app-shell{width:100%;min-width:0;max-width:100%}
-.main{flex:1 1 0%;width:0;min-width:0;max-width:100%}
-.topbar{width:100%;min-width:0}
-.content{width:100%;min-width:0;max-width:1300px}
-@media(max-width:650px){
- .app-shell{display:block;width:100%;min-height:100vh}
- .sidebar{position:fixed !important;left:-260px;top:0;bottom:0;width:250px;z-index:20}
- .sidebar.open{left:0}
- .main{display:block;width:100%;max-width:100%;min-width:0;margin:0}
- .topbar{width:100%;height:60px;padding:0 15px;box-sizing:border-box}
- .content{display:block;width:100%;max-width:none;min-width:0;margin:0;padding:20px 15px 18px;box-sizing:border-box}
- .cashfy-hero,.page-heading,#pageContent,.revenue-panel,.dashboard-grid,.table-panel{width:100%;max-width:100%;min-width:0}
-}
