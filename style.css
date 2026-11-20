@@ -926,25 +926,3 @@ body{
  .login-heading{margin-bottom:16px !important}
  .login-divider{margin:12px 0 !important}
 }
-
-
-/* Cashfy — abertura neon roxa de 7 segundos */
-.loading-screen{
- position:fixed!important;inset:0!important;z-index:2147483647!important;
- display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;
- gap:17px!important;overflow:hidden!important;text-align:center!important;
- background:radial-gradient(ellipse at 50% 48%,rgba(115,61,205,.22) 0%,rgba(37,19,68,.12) 32%,transparent 66%),linear-gradient(145deg,#080610 0%,#10091c 52%,#07050d 100%)!important;
- animation:cashfy-bg-breathe 3.2s ease-in-out infinite alternate;
-}
-.loading-screen::before,.loading-screen::after{content:"";position:absolute;left:50%;top:50%;width:min(72vw,390px);aspect-ratio:1;border:1px solid rgba(164,112,255,.22);border-radius:50%;transform:translate(-50%,-50%);pointer-events:none;animation:cashfy-orbit 7s linear infinite}
-.loading-screen::after{width:min(94vw,510px);border-color:rgba(132,77,226,.12);animation-direction:reverse;animation-duration:11s}
-.loading-wordmark{position:relative;z-index:1;font:700 clamp(48px,13vw,76px)/1 'Space Grotesk',sans-serif;letter-spacing:-3.8px;color:#fff;text-shadow:0 0 7px #fff,0 0 17px #c6a2ff,0 0 34px #9a5cff,0 0 65px rgba(137,76,255,.9);animation:cashfy-neon-pulse 1.8s ease-in-out infinite alternate}
-.loading-wordmark span{color:#b98aff;text-shadow:0 0 8px #fff,0 0 18px #c69aff,0 0 38px #9b5cff,0 0 72px #7b35ff}
-.loading-wordmark i{font-style:normal;color:#d9c4ff;text-shadow:0 0 10px #fff,0 0 26px #a56aff}
-.loading-screen>p{position:relative;z-index:1;margin:0;color:#c0a8e9;font:600 9px 'DM Sans',sans-serif;letter-spacing:3px;text-shadow:0 0 12px rgba(174,126,255,.8);animation:cashfy-caption 1.8s ease-in-out infinite alternate}
-.loading-screen.is-hidden{display:none!important}
-@keyframes cashfy-neon-pulse{0%{opacity:.88;filter:brightness(.92);transform:scale(.985);text-shadow:0 0 5px #fff,0 0 12px #b98aff,0 0 27px #8c4cff,0 0 48px rgba(137,76,255,.65)}100%{opacity:1;filter:brightness(1.22);transform:scale(1.025);text-shadow:0 0 9px #fff,0 0 22px #d2b5ff,0 0 44px #9b5cff,0 0 85px rgba(137,76,255,1)}}
-@keyframes cashfy-bg-breathe{from{filter:brightness(.88)}to{filter:brightness(1.12)}}
-@keyframes cashfy-orbit{from{transform:translate(-50%,-50%) rotate(0deg) scale(.94)}to{transform:translate(-50%,-50%) rotate(360deg) scale(1.04)}}
-@keyframes cashfy-caption{from{opacity:.65;letter-spacing:2.5px}to{opacity:1;letter-spacing:3.3px}}
-@media(prefers-reduced-motion:reduce){.loading-screen,.loading-screen::before,.loading-screen::after,.loading-wordmark,.loading-screen>p{animation:none!important}}
