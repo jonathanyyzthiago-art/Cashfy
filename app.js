@@ -59,11 +59,28 @@ function modulePage(page){
  if(page==="goals"){
   const goals=data.goals;
   const total=state.sales.reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
+  const tiers=[
+   {id:"silver",name:"Prata",start:0,end:10000,range:"R$ 0 — R$ 10 mil",color:"#c8d0dc",desc:"O primeiro grande passo. Aqui você constrói consistência, valida sua operação e transforma as primeiras vendas em crescimento real.",congrats:"Parabéns por alcançar a marca Prata! Sua jornada começou e você provou que consegue transformar esforço em resultado."},
+   {id:"gold",name:"Ouro",start:10000,end:100000,range:"R$ 10 mil — R$ 100 mil",color:"#f2bd54",desc:"Uma nova fase de evolução. Seu negócio ganha ritmo, sua base cresce e você começa a construir resultados cada vez mais sólidos.",congrats:"Você chegou ao nível Ouro! Seu crescimento merece ser celebrado. Continue construindo, porque sua operação está ganhando força."},
+   {id:"diamond",name:"Diamante",start:100000,end:1000000,range:"R$ 100 mil — R$ 1 milhão",color:"#66c9ff",desc:"Um marco extraordinário. Você alcançou um patamar de faturamento que demonstra visão, estratégia e muita dedicação.",congrats:"Incrível! Você conquistou o nível Diamante e ultrapassou R$ 100 mil em faturamento. É uma conquista enorme!"},
+   {id:"red",name:"Elite Vermelha",start:1000000,end:5000000,range:"R$ 1 milhão — R$ 5 milhões",color:"#ff5369",desc:"Você entrou em uma faixa de alta performance. É hora de consolidar processos, ampliar oportunidades e pensar ainda maior.",congrats:"Parabéns pelo nível Elite Vermelha! Alcançar R$ 1 milhão é um feito marcante. Seu trabalho está deixando sua marca."},
+   {id:"pink",name:"Lenda Rosa",start:5000000,end:15000000,range:"R$ 5 milhões — R$ 15 milhões",color:"#ff65d4",desc:"O topo da jornada Cashfy. Um nível raro, criado para reconhecer uma trajetória de crescimento excepcional.",congrats:"VOCÊ CHEGOU AO TOPO! R$ 5 milhões em faturamento e o nível Lenda Rosa são uma conquista extraordinária. Celebre: você chegou muito longe!"}
+  ];
+  const currentTier=tiers.find(t=>total<t.end)||tiers[tiers.length-1];
+  const currentPct=Math.max(0,Math.min(100,Math.round((total-currentTier.start)/(currentTier.end-currentTier.start)*100)));
+  const tierCards=tiers.map(t=>{
+   const reached=total>=t.end,active=total>=t.start&&total<t.end;
+   const pct=Math.max(0,Math.min(100,Math.round((total-t.start)/(t.end-t.start)*100)));
+   const status=reached?"Conquistada":active?"Em progresso":"Próxima conquista";
+   const message=reached?t.congrats:active?"Você está nessa etapa. Faltam "+money(t.end-total)+" para conquistar este nível.": "Continue avançando: este nível será desbloqueado ao alcançar "+money(t.start)+".";
+   return '<article class="milestone-card tier-'+t.id+' '+(reached?"is-reached":active?"is-active":"is-locked")+'"><div class="milestone-shine"></div><div class="milestone-top"><span class="milestone-emblem">'+(t.id==="diamond"?"◆":t.id==="silver"?"✦":t.id==="gold"?"✧":t.id==="red"?"⬟":"✿")+'</span><span class="milestone-status">'+status+'</span></div><div class="milestone-name">'+t.name+'</div><div class="milestone-range">'+t.range+'</div><p class="milestone-description">'+t.desc+'</p><div class="milestone-progress"><span style="width:'+pct+'%"></span></div><div class="milestone-foot"><strong>'+pct+'%</strong><span>'+message+'</span></div></article>';
+  }).join("");
   const rows=goals.map((g,i)=>{
    const current=Number(g.current||0),target=Math.max(1,Number(g.target||1)),pct=Math.min(100,Math.round(current/target*100));
    return '<article class="goal-card" style="--goal-color:'+escapeHtml(g.color||"#a879ff")+'"><div class="goal-card-head"><div><span class="goal-color-dot"></span><h3>'+escapeHtml(g.name)+'</h3></div><button type="button" class="goal-delete" data-goal-delete="'+i+'" aria-label="Excluir meta">×</button></div><div class="goal-numbers"><strong>'+money(current)+'</strong><span>de '+money(target)+'</span></div><div class="goal-progress"><span style="width:'+pct+'%"></span></div><div class="goal-card-foot"><span>'+pct+'% concluído</span><span>'+money(Math.max(0,target-current))+' restantes</span></div></article>';
   });
-  return card("Criar nova meta","Escolha um nome, valor e cor para acompanhar cada objetivo.",'<form class="goal-form" id="goalForm"><label class="module-field"><span>Nome da meta</span><input name="name" maxlength="50" placeholder="Ex.: Reserva financeira" required></label><label class="module-field"><span>Valor desejado (R$)</span><input name="target" type="number" min="1" step="0.01" placeholder="10000" required></label><label class="module-field"><span>Valor atual (R$)</span><input name="current" type="number" min="0" step="0.01" value="0"></label><label class="module-field goal-color-field"><span>Cor da meta</span><input name="color" type="color" value="#a879ff"></label><button class="primary-btn" type="submit">Adicionar meta</button></form>')+'<section class="goals-grid">'+(rows.length?rows:'<div class="panel goals-empty">Suas metas criadas aparecerão aqui.</div>')+'</section>';
+  const overall=Math.min(100,Math.round(total/15000000*100));
+  return '<section class="milestone-hero"><div class="milestone-hero-glow"></div><div class="milestone-hero-copy"><span class="milestone-eyebrow">SUA JORNADA CASHFY</span><h2>Transforme resultados em <span>conquistas.</span></h2><p>Cada faixa representa um novo capítulo da evolução do seu faturamento.</p></div><div class="milestone-total"><small>FATURAMENTO ACUMULADO</small><strong>'+money(total)+'</strong><span>'+overall+'% da jornada até R$ 15 milhões</span></div><div class="milestone-overall-track"><span style="width:'+overall+'%"></span></div></section><section class="current-milestone tier-'+currentTier.id+'"><div><span class="milestone-eyebrow">SEU NÍVEL ATUAL</span><h3>'+currentTier.name+'</h3><p>'+currentTier.range+'</p></div><div class="current-milestone-progress"><strong>'+currentPct+'%</strong><span>da próxima conquista</span><div class="milestone-progress"><span style="width:'+currentPct+'%"></span></div><small>Faltam '+money(Math.max(0,currentTier.end-total))+' para o próximo nível</small></div></section><div class="milestones-heading"><div><span class="milestone-eyebrow">MARCOS DE CRESCIMENTO</span><h3>Suas conquistas</h3></div><span>5 níveis • R$ 15 milhões</span></div><section class="milestones-grid">'+tierCards+'</section><div class="personal-goals-heading"><div><span class="milestone-eyebrow">OBJETIVOS PERSONALIZADOS</span><h3>Suas outras metas</h3></div></div>'+card("Criar nova meta","Defina objetivos próprios e acompanhe cada progresso.",'<form class="goal-form" id="goalForm"><label class="module-field"><span>Nome da meta</span><input name="name" maxlength="50" placeholder="Ex.: Reserva financeira" required></label><label class="module-field"><span>Valor desejado (R$)</span><input name="target" type="number" min="1" step="0.01" placeholder="10000" required></label><label class="module-field"><span>Valor atual (R$)</span><input name="current" type="number" min="0" step="0.01" value="0"></label><label class="module-field goal-color-field"><span>Cor da meta</span><input name="color" type="color" value="#a879ff"></label><button class="primary-btn" type="submit">Adicionar meta</button></form>')+'<section class="goals-grid">'+(rows.length?rows:'<div class="panel goals-empty">Suas metas personalizadas aparecerão aqui.</div>')+'</section>';
  }
  if(page==="refunds"){
   const rows=data.refunds.map((r,i)=>'<tr><td>#'+escapeHtml(r.id)+'</td><td>'+escapeHtml(r.customer)+'</td><td>'+escapeHtml(r.reason)+'</td><td>'+money(r.amount)+'</td><td><span class="module-pill">'+r.status+'</span></td><td><div class="module-row-actions">'+(r.status==="Solicitado"?'<button data-refund="approve" data-id="'+i+'">Aprovar reembolso</button><button data-refund="cancel" data-id="'+i+'">Comprador desistiu</button>':'—')+'</div></td></tr>');
@@ -128,9 +145,12 @@ function updateSidebarRevenueGoal(){
  const total=state.sales.reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
  const pct=Math.min(100,Math.round(total/10000*100));
  const amount=$("#sidebarGoalAmount"),bar=$("#sidebarGoalProgress"),label=$("#sidebarGoalPercent");
- if(amount)amount.textContent=money(total)+" / R$ 10 mil";
- if(bar)bar.style.width=pct+"%";
- if(label)label.textContent=pct+"%";
+ const tiers=[{name:"Prata",end:10000},{name:"Ouro",end:100000},{name:"Diamante",end:1000000},{name:"Vermelho",end:5000000},{name:"Rosa",end:15000000}];
+ const tier=tiers.find(t=>total<t.end)||tiers[tiers.length-1];
+ const stagePct=Math.max(0,Math.min(100,Math.round(total/tier.end*100)));
+ if(amount)amount.textContent=money(total)+" / "+(tier.end>=1000000?"R$ "+(tier.end/1000000)+" mi":tier.end===100000?"R$ 100 mil":"R$ 10 mil");
+ if(bar)bar.style.width=stagePct+"%";
+ if(label)label.textContent=stagePct+"%";
 }
 function render(){
  const current=titles[state.page]?state.page:"overview";
