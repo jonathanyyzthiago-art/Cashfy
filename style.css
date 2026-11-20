@@ -163,3 +163,19 @@ button:focus-visible{
  button,.nav-link,.range-btn,.secondary-btn,.icon-btn{transition:none}
  button:hover,button:active,.nav-link:hover,.range-btn:hover{transform:none}
 }
+
+
+/* Profundidade leve nos cards, sem exagero */
+.stat-card,.panel{
+ transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease;
+ box-shadow:0 3px 0 rgba(5,3,12,.22),0 9px 22px rgba(0,0,0,.12),inset 0 1px 0 rgba(255,255,255,.025);
+}
+.stat-card:hover,.panel:hover{
+ transform:translateY(-2px);
+ border-color:rgba(164,127,255,.3);
+ box-shadow:0 5px 0 rgba(5,3,12,.2),0 13px 26px rgba(0,0,0,.17),inset 0 1px 0 rgba(255,255,255,.035);
+}
+@media(prefers-reduced-motion:reduce){
+ .stat-card,.panel{transition:none}
+ .stat-card:hover,.panel:hover{transform:none}
+}
