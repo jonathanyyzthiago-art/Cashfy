@@ -1080,3 +1080,44 @@ body{
 .milestone-footer-note small{margin-top:4px;color:#a59caf;font-size:10px;line-height:1.5}
 @media(max-width:650px){.milestone-card{grid-template-columns:1fr;gap:14px;padding:14px}.milestone-plaque{min-height:145px}.milestone-details{padding:3px}.milestone-index{font-size:7px}.milestone-description{margin:10px 0}.milestone-hero{padding:22px 20px}.milestone-footer-note{padding:15px}}
 @media(prefers-reduced-motion:reduce){.milestone-plaque:after,.milestone-progress span:after{animation:none;opacity:.2}.milestone-card{transition:none}}
+
+
+/* Cashfy — interface sem edição manual: cadastros e alterações são gerenciados pelo código */
+.module-form,
+.module-panel:has(> .module-form),
+.module-panel:has(#checkoutForm),
+#settingsForm,
+#modal,
+[data-action="new-product"],
+[data-delete],
+.module-row-actions,
+.module-table button,
+.settings-actions,
+button[data-coupon],
+button[data-coupon-delete],
+button[data-link-toggle],
+button[data-link-copy],
+button[data-subscription],
+button[data-affiliate],
+button[data-coproduction],
+button[data-member],
+button[data-dispute],
+button[data-refund]{
+ display:none !important;
+}
+
+/* Placas de metas — acabamento de metal gravado e volume físico */
+.milestone-plaque{
+ background-image:
+  radial-gradient(circle at 9px 9px,#fff9 0 2px,#5558 2.5px 4px,transparent 4.5px),
+  radial-gradient(circle at calc(100% - 9px) 9px,#fff9 0 2px,#5558 2.5px 4px,transparent 4.5px),
+  radial-gradient(circle at 9px calc(100% - 9px),#fff9 0 2px,#5558 2.5px 4px,transparent 4.5px),
+  radial-gradient(circle at calc(100% - 9px) calc(100% - 9px),#fff9 0 2px,#5558 2.5px 4px,transparent 4.5px),
+  linear-gradient(145deg,#ffffff22,transparent 32%,#0005 78%,#ffffff12);
+ background-blend-mode:screen,screen,screen,screen,normal;
+ transform:perspective(850px) rotateY(-2deg);
+ box-shadow:inset 0 2px 2px #ffffff70,inset 0 -5px 9px #0009,inset 0 0 0 2px #ffffff22,inset 0 0 0 5px #0008,0 8px 0 color-mix(in srgb,var(--tier-color) 30%,#09080d),0 13px 23px #0009,0 0 24px color-mix(in srgb,var(--tier-color) 24%,transparent);
+}
+.milestone-plaque>strong{filter:drop-shadow(0 2px 1px #000b)}
+.milestone-card.is-locked .milestone-plaque{filter:saturate(.75) brightness(.82)}
+@media(max-width:650px){.milestone-plaque{transform:none}}
