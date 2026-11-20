@@ -685,8 +685,6 @@ button:focus-visible{
 
 /* Ajustes pontuais de acabamento do dashboard */
 .dashboard-filters .dashboard-update > i{font-size:18px !important}
-.stat-card,.panel{padding:16px !important}
-button.primary-btn,button.secondary-btn,.nav-link,.range-btn,.icon-btn{padding-top:9px;padding-bottom:9px}
 body{
  background:
   radial-gradient(ellipse at 82% 8%,rgba(112,57,190,.13) 0%,rgba(112,57,190,0) 34rem),
