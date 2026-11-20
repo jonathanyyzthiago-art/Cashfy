@@ -1,0 +1,20 @@
+{
+  "name": "Cashfy",
+  "short_name": "Cashfy",
+  "description": "Sua operação, sob controle.",
+  "lang": "pt-BR",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#090711",
+  "theme_color": "#090711",
+  "icons": [
+    {
+      "src": "./file_00000000a164820eb5c41b1650eae634.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
