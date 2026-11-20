@@ -1122,3 +1122,44 @@ button[data-refund]{
 .milestone-plaque>strong{filter:drop-shadow(0 2px 1px #000b)}
 .milestone-card.is-locked .milestone-plaque{filter:saturate(.75) brightness(.82)}
 @media(max-width:650px){.milestone-plaque{transform:none}}
+
+
+/* Meta de faturamento — acabamento premium da barra lateral */
+.sidebar-revenue-goal{
+ position:relative;isolation:isolate;overflow:hidden;
+ margin:2px 0 22px;padding:13px 12px 11px;
+ border:1px solid rgba(174,139,255,.3);border-radius:13px;
+ background:radial-gradient(ellipse at 8% 0%,rgba(151,102,255,.2),transparent 58%),linear-gradient(145deg,#211832 0%,#151020 58%,#100d18 100%);
+ box-shadow:0 8px 24px rgba(0,0,0,.24),inset 0 1px 0 rgba(255,255,255,.07);
+}
+.sidebar-revenue-goal::before{
+ content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;
+ background:linear-gradient(115deg,transparent 20%,rgba(255,255,255,.045) 48%,transparent 72%);
+}
+.sidebar-revenue-goal::after{
+ content:"";position:absolute;z-index:-1;width:95px;height:95px;right:-48px;top:-55px;
+ border-radius:50%;background:rgba(161,112,255,.18);filter:blur(18px);pointer-events:none;
+}
+.sidebar-goal-top{display:flex;align-items:center;justify-content:flex-start;gap:10px}
+.sidebar-goal-icon-wrap{
+ width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;
+ border:1px solid rgba(188,157,255,.27);border-radius:10px;
+ background:linear-gradient(145deg,rgba(145,99,226,.28),rgba(76,51,115,.18));
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 3px 10px rgba(0,0,0,.16);
+}
+.sidebar-goal-icon{width:19px;height:19px;stroke:#d1b5ff;filter:drop-shadow(0 0 5px rgba(174,132,255,.5))}
+.sidebar-goal-copy{display:block;min-width:0}
+.sidebar-goal-copy small{display:block;margin:0 0 4px;color:#a99abd;font-size:7px;letter-spacing:1.05px;font-weight:750}
+.sidebar-goal-copy strong{display:block;margin:0;color:#fbf8ff;font:650 11px 'Space Grotesk';letter-spacing:-.15px;white-space:nowrap}
+.sidebar-goal-track{height:6px;margin-top:12px;border:1px solid rgba(255,255,255,.055);border-radius:20px;background:#0b0812;overflow:hidden;box-shadow:inset 0 1px 3px #000}
+.sidebar-goal-track span{position:relative;background:linear-gradient(90deg,#8051d6 0%,#ae82ff 58%,#e1c7ff 100%);box-shadow:0 0 10px rgba(166,119,255,.45)}
+.sidebar-goal-track span::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.32),transparent);opacity:.7}
+.sidebar-goal-bottom{margin-top:8px;color:#a69bb7;font-size:8px}
+.sidebar-goal-bottom strong{min-width:34px;padding:3px 6px;border:1px solid rgba(176,143,255,.2);border-radius:6px;background:rgba(145,99,226,.13);color:#d8c4ff;font-size:9px;text-align:center}
+.sidebar-revenue-goal:hover{border-color:rgba(196,166,255,.58);box-shadow:0 10px 26px rgba(0,0,0,.3),0 0 18px rgba(155,112,255,.12);transform:translateY(-2px)}
+.sidebar-revenue-goal:active{transform:translateY(0)}
+.sidebar.collapsed .sidebar-revenue-goal{padding:11px 7px}
+.sidebar.collapsed .sidebar-goal-copy,.sidebar.collapsed .sidebar-goal-track,.sidebar.collapsed .sidebar-goal-bottom{display:none}
+.sidebar.collapsed .sidebar-goal-top{justify-content:center}
+.sidebar.collapsed .sidebar-goal-icon-wrap{width:36px;height:36px}
+@media(max-width:650px){.sidebar-revenue-goal{margin-bottom:20px}}
