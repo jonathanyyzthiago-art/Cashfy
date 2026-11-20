@@ -765,3 +765,49 @@ body{
   border-color:rgba(197,164,255,.72);
   box-shadow:0 0 0 3px rgba(145,91,230,.12),0 0 22px rgba(142,87,230,.3);
 }
+
+
+/* Wordmark Cashfy — identidade mais marcante */
+.sidebar .brand{
+  gap:11px;
+  padding-left:8px;
+}
+.sidebar .brand>span{
+  position:relative;
+  display:inline-block;
+  text-transform:uppercase;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:23px;
+  font-weight:700;
+  letter-spacing:2.1px;
+  line-height:1;
+  background:linear-gradient(180deg,#ffffff 0%,#e5d5ff 48%,#a979ff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  -webkit-text-fill-color:transparent;
+  filter:drop-shadow(0 2px 9px rgba(151,99,255,.28));
+}
+.sidebar .brand>span:after{
+  content:"";
+  position:absolute;
+  left:1px;
+  right:2px;
+  bottom:-8px;
+  height:2px;
+  border-radius:3px;
+  background:linear-gradient(90deg,#a979ff 0%,rgba(169,121,255,.38) 62%,transparent 100%);
+  box-shadow:0 0 9px rgba(169,121,255,.45);
+}
+.sidebar .brand .brand-dot{
+  color:#c7a5ff;
+  -webkit-text-fill-color:#c7a5ff;
+  text-shadow:0 0 12px rgba(177,129,255,.9);
+}
+.sidebar .brand-logo{
+  width:43px;
+  height:43px;
+  border-radius:14px;
+  border:1px solid rgba(190,151,255,.5);
+  background:linear-gradient(145deg,#241638,#100b1b);
+  box-shadow:0 0 0 3px rgba(145,91,230,.09),0 0 20px rgba(116,65,202,.24),inset 0 1px 0 rgba(255,255,255,.12);
+}
