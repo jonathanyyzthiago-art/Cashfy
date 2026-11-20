@@ -627,3 +627,38 @@ button:focus-visible{
  .cashfy-orbit-one{right:-28%;width:250px}
  .cashfy-orbit-two{right:-20%;width:210px}
 }
+
+
+/* Banner Cashfy horizontal — proporção de faixa promocional */
+.cashfy-hero{
+ position:relative;isolation:isolate;overflow:hidden;
+ min-height:154px !important;height:154px !important;
+ margin:0 0 22px !important;padding:20px 26px !important;
+ display:flex !important;flex-direction:row !important;align-items:center !important;justify-content:space-between !important;
+ gap:16px;border:1px solid rgba(174,124,255,.27);border-radius:16px;
+ background:linear-gradient(105deg,#0d0918 0%,#1c1031 52%,#120b22 100%);
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.06),0 12px 28px rgba(0,0,0,.22);
+}
+.cashfy-hero:before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse at 78% 50%,rgba(137,73,232,.3),transparent 42%),linear-gradient(115deg,transparent 40%,rgba(157,100,255,.1) 65%,transparent 85%)}
+.cashfy-hero-glow{position:absolute;width:230px;height:120px;right:10%;top:15px;border-radius:50%;background:rgba(133,70,224,.24);filter:blur(42px);z-index:-1}
+.cashfy-hero-copy{position:relative;z-index:2;min-width:0}
+.cashfy-brand{display:flex !important;flex-direction:row !important;align-items:center !important;gap:9px !important;margin:0 0 9px !important;color:#fff;font-size:21px !important;font-weight:800;letter-spacing:-.7px}
+.cashfy-mark{display:block !important;flex:0 0 32px !important;width:32px !important;height:32px !important;max-width:32px !important;max-height:32px !important}
+.cashfy-y{color:#ad75ff}
+.cashfy-hero h2{margin:0 0 5px !important;color:#fff;font-size:clamp(17px,2.1vw,24px) !important;line-height:1.15;font-weight:750;letter-spacing:-.6px}
+.cashfy-hero p{margin:0 !important;color:#c7b9da;font-size:11px !important}
+.cashfy-hero-art{position:relative;flex:0 0 190px;height:120px;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.cashfy-art-ring{position:absolute;width:175px;height:78px;border:1px solid rgba(183,135,255,.32);border-radius:50%;transform:rotate(-24deg);box-shadow:0 0 25px rgba(143,82,235,.16),inset 0 0 18px rgba(143,82,235,.08)}
+.cashfy-art-c{font-size:104px;line-height:1;font-weight:900;font-style:italic;color:transparent;-webkit-text-stroke:2px rgba(188,143,255,.7);text-shadow:0 0 25px rgba(143,82,235,.34);transform:rotate(-10deg)}
+.cashfy-art-glint{position:absolute;width:7px;height:7px;border-radius:50%;background:#d6baff;box-shadow:0 0 13px 4px rgba(175,119,255,.65);right:25px;top:25px}
+@media(max-width:650px){
+ .cashfy-hero{height:142px !important;min-height:142px !important;padding:17px 16px !important;margin-bottom:18px !important;border-radius:14px}
+ .cashfy-brand{font-size:18px !important;gap:7px !important;margin-bottom:8px !important}
+ .cashfy-mark{width:27px !important;height:27px !important;flex-basis:27px !important;max-width:27px !important;max-height:27px !important}
+ .cashfy-hero h2{font-size:16px !important;max-width:270px}
+ .cashfy-hero p{font-size:10px !important;max-width:250px}
+ .cashfy-hero-art{flex-basis:95px;height:100px;margin-right:-8px}
+ .cashfy-art-ring{width:100px;height:48px}
+ .cashfy-art-c{font-size:65px;-webkit-text-stroke-width:1.5px}
+ .cashfy-art-glint{right:8px;top:18px}
+}
