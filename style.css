@@ -966,3 +966,60 @@ body{
 .sidebar-goal-track span{display:block;width:0;height:100%;border-radius:20px;background:linear-gradient(90deg,#9470d9,#c49bff);transition:width .35s ease}
 .sidebar-goal-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:6px;color:#81798d;font-size:8px}
 .sidebar-goal-bottom strong{color:#cbb7ed;font-size:9px}
+
+/* Jornada de metas e níveis Cashfy */
+.sidebar-revenue-goal{width:100%;display:block;text-align:left;cursor:pointer;color:inherit;font:inherit;appearance:none;-webkit-appearance:none;transition:border-color .2s,transform .2s,box-shadow .2s}
+.sidebar-revenue-goal:hover{border-color:rgba(190,157,255,.5);transform:translateY(-1px);box-shadow:0 7px 19px #0003,0 0 15px #a879ff18}
+.sidebar-revenue-goal:focus-visible{outline:2px solid #b99aff;outline-offset:3px}
+.sidebar-goal-top,.sidebar-goal-track,.sidebar-goal-bottom{display:flex}
+.sidebar-goal-track{display:block}
+.milestone-hero{position:relative;isolation:isolate;overflow:hidden;display:grid;grid-template-columns:1.35fr .8fr;gap:22px;align-items:center;padding:27px 28px 24px;margin-bottom:16px;border:1px solid rgba(181,151,239,.2);border-radius:18px;background:radial-gradient(ellipse at 10% 0%,#8c62c526,transparent 55%),linear-gradient(135deg,#191522,#100f18 72%);box-shadow:0 16px 38px #0002}
+.milestone-hero-glow{position:absolute;z-index:-1;width:260px;height:260px;right:10%;top:-190px;border-radius:50%;background:#a77aff25;filter:blur(45px)}
+.milestone-eyebrow{display:block;color:#a99abf;font-size:9px;font-weight:750;letter-spacing:1.45px}
+.milestone-hero h2{margin:9px 0 7px;font:650 clamp(20px,3vw,28px)/1.18 'Space Grotesk';letter-spacing:-.8px}
+.milestone-hero h2 span{background:linear-gradient(90deg,#c4a5ff,#f0c7f1);-webkit-background-clip:text;background-clip:text;color:transparent}
+.milestone-hero-copy p{margin:0;color:#a59caf;font-size:12px;line-height:1.65;max-width:440px}
+.milestone-total{justify-self:end;text-align:right}
+.milestone-total small{display:block;color:#a99fb6;font-size:8px;letter-spacing:1px;font-weight:700}
+.milestone-total strong{display:block;margin:8px 0 5px;font:650 clamp(21px,3vw,30px) 'Space Grotesk';letter-spacing:-.8px}
+.milestone-total>span{color:#a59caf;font-size:10px}
+.milestone-overall-track{grid-column:1/-1;height:5px;border-radius:10px;background:#09080e;overflow:hidden}
+.milestone-overall-track span{display:block;height:100%;border-radius:10px;background:linear-gradient(90deg,#9874db,#d9b5ff);box-shadow:0 0 12px #ad88ff88}
+.current-milestone{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:20px 23px;margin-bottom:24px;border:1px solid color-mix(in srgb,var(--tier-color) 35%,transparent);border-radius:15px;background:linear-gradient(110deg,color-mix(in srgb,var(--tier-color) 12%,#15131d),#111019 70%);box-shadow:inset 0 1px 0 #ffffff08}
+.current-milestone h3{margin:6px 0 3px;font:650 21px 'Space Grotesk';color:var(--tier-color)}
+.current-milestone p{margin:0;color:#a59caf;font-size:11px}
+.current-milestone-progress{width:min(320px,48%);text-align:right}
+.current-milestone-progress>strong{font:650 19px 'Space Grotesk';color:var(--tier-color)}
+.current-milestone-progress>span{margin-left:8px;color:#a59caf;font-size:10px}
+.current-milestone-progress .milestone-progress{margin:8px 0}
+.current-milestone-progress small{color:#a59caf;font-size:9px}
+.tier-silver{--tier-color:#c8d0dc;--tier-glow:#c8d0dc}
+.tier-gold{--tier-color:#f2bd54;--tier-glow:#ffe2a0}
+.tier-diamond{--tier-color:#66c9ff;--tier-glow:#a5e4ff}
+.tier-red{--tier-color:#ff5369;--tier-glow:#ff9aa7}
+.tier-pink{--tier-color:#ff65d4;--tier-glow:#ffc0ed}
+.milestones-heading,.personal-goals-heading{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:0 0 12px}
+.milestones-heading h3,.personal-goals-heading h3{margin:5px 0 0;font:650 17px 'Space Grotesk'}
+.milestones-heading>span{color:#8f879b;font-size:10px}
+.milestones-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-bottom:26px}
+.milestone-card{position:relative;isolation:isolate;overflow:hidden;min-width:0;padding:18px;border:1px solid color-mix(in srgb,var(--tier-color) 34%,transparent);border-radius:15px;background:radial-gradient(ellipse at 100% 0%,color-mix(in srgb,var(--tier-color) 15%,transparent),transparent 58%),linear-gradient(145deg,#191722,#111018 76%);box-shadow:0 10px 25px #0002;transition:transform .25s,border-color .25s,box-shadow .25s}
+.milestone-card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--tier-color) 65%,transparent);box-shadow:0 13px 30px #0004,0 0 18px color-mix(in srgb,var(--tier-color) 13%,transparent)}
+.milestone-shine{position:absolute;z-index:0;pointer-events:none;inset:-70% -55%;background:linear-gradient(110deg,transparent 42%,color-mix(in srgb,var(--tier-glow) 5%,transparent) 46%,color-mix(in srgb,var(--tier-glow) 24%,transparent) 49%,#ffffff24 50%,color-mix(in srgb,var(--tier-glow) 12%,transparent) 52%,transparent 57%);transform:translateX(-75%) rotate(8deg);animation:milestone-reflection 6s ease-in-out infinite}
+.milestone-card>*:not(.milestone-shine){position:relative;z-index:1}
+@keyframes milestone-reflection{0%,18%{transform:translateX(-75%) rotate(8deg)}72%,100%{transform:translateX(75%) rotate(8deg)}}
+.milestone-top{display:flex;justify-content:space-between;align-items:center}
+.milestone-emblem{display:grid;place-items:center;width:34px;height:34px;border:1px solid color-mix(in srgb,var(--tier-color) 45%,transparent);border-radius:10px;color:var(--tier-color);font-size:18px;background:color-mix(in srgb,var(--tier-color) 10%,#14121b);text-shadow:0 0 13px var(--tier-glow);box-shadow:0 0 17px color-mix(in srgb,var(--tier-color) 16%,transparent)}
+.milestone-status{padding:5px 8px;border-radius:20px;background:color-mix(in srgb,var(--tier-color) 12%,#17141e);color:var(--tier-color);font-size:8px;font-weight:750;letter-spacing:.45px}
+.milestone-name{margin-top:14px;color:var(--tier-color);font:700 18px 'Space Grotesk';letter-spacing:-.3px;text-shadow:0 0 16px color-mix(in srgb,var(--tier-glow) 30%,transparent)}
+.milestone-range{margin-top:3px;color:#d5cfdd;font:600 10px 'Space Grotesk'}
+.milestone-description{min-height:54px;margin:11px 0 13px;color:#a8a1b0;font-size:10px;line-height:1.65}
+.milestone-progress{height:6px;border-radius:20px;background:#08070d;overflow:hidden}
+.milestone-progress span{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,color-mix(in srgb,var(--tier-color) 72%,#fff),var(--tier-color));box-shadow:0 0 12px color-mix(in srgb,var(--tier-glow) 65%,transparent)}
+.milestone-foot{display:flex;align-items:flex-start;gap:9px;margin-top:10px}
+.milestone-foot strong{flex:0 0 auto;color:var(--tier-color);font:700 10px 'Space Grotesk'}
+.milestone-foot span{color:#b8b0c0;font-size:9px;line-height:1.55}
+.milestone-card.is-reached{border-color:color-mix(in srgb,var(--tier-color) 54%,transparent);box-shadow:inset 0 0 28px color-mix(in srgb,var(--tier-color) 6%,transparent),0 8px 24px #0002}
+.milestone-card.is-locked{filter:saturate(.58);opacity:.72}
+.personal-goals-heading{margin:0 0 12px}
+@media(max-width:760px){.milestone-hero{grid-template-columns:1fr;padding:21px}.milestone-total{justify-self:start;text-align:left}.current-milestone{align-items:flex-start;flex-direction:column}.current-milestone-progress{width:100%;text-align:left}.milestones-grid{grid-template-columns:1fr}.milestone-description{min-height:0}}
+@media(prefers-reduced-motion:reduce){.milestone-shine{animation:none;opacity:.12}.milestone-card,.sidebar-revenue-goal{transition:none}}
