@@ -1585,3 +1585,11 @@ button[data-refund]{
  .cashfy-install-brand img{border-radius:50%!important}
  .cashfy-install-button{border-radius:999px!important}
 }
+
+
+/* CASHFY — cápsula de vidro com volume mais arredondado */
+.cashfy-install-banner{border-radius:1000px!important;min-height:86px!important;padding-top:14px!important;padding-bottom:14px!important;overflow:hidden!important;}
+.cashfy-install-brand img{border-radius:50%!important;}
+.cashfy-install-button{border-radius:1000px!important;min-height:42px!important;}
+.cashfy-install-close{border-radius:50%!important;}
+@media(max-width:480px){.cashfy-install-banner{min-height:76px!important;padding-top:12px!important;padding-bottom:12px!important;border-radius:1000px!important;}.cashfy-install-button{min-height:38px!important;border-radius:1000px!important;}}
