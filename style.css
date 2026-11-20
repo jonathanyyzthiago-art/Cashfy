@@ -1523,3 +1523,65 @@ button[data-refund]{
  .cashfy-install-close{right:8px!important;width:26px!important;height:26px!important}
 }
 @media(prefers-reduced-motion:reduce){.cashfy-install-banner,.cashfy-install-banner:after{transition:none!important;animation:none!important}}
+
+
+/* CASHFY — vidro líquido estilo iPhone, cápsula super arredondada */
+.cashfy-install-banner{
+  border-radius:999px!important;
+  min-height:78px!important;
+  padding:11px 60px 11px 16px!important;
+  border:1px solid rgba(255,255,255,.22)!important;
+  background:
+    radial-gradient(ellipse at 18% -45%,rgba(255,255,255,.58),transparent 58%),
+    radial-gradient(ellipse at 88% 125%,rgba(170,133,255,.22),transparent 52%),
+    linear-gradient(125deg,rgba(255,255,255,.24),rgba(226,215,255,.105) 38%,rgba(130,101,178,.17) 100%)!important;
+  -webkit-backdrop-filter:blur(52px) saturate(285%) brightness(1.28)!important;
+  backdrop-filter:blur(52px) saturate(285%) brightness(1.28)!important;
+  box-shadow:
+    0 22px 65px rgba(0,0,0,.42),
+    0 5px 24px rgba(178,145,255,.16),
+    inset 0 1.5px 1px rgba(255,255,255,.58),
+    inset 0 -1px 1px rgba(255,255,255,.13),
+    inset 1px 0 1px rgba(255,255,255,.16),
+    inset -1px 0 1px rgba(255,255,255,.12)!important;
+}
+.cashfy-install-banner:before{
+  inset:1px!important;border-radius:inherit!important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.26),rgba(255,255,255,.035) 35%,transparent 68%),
+    radial-gradient(ellipse at 50% 0%,rgba(255,255,255,.17),transparent 72%)!important;
+  opacity:1!important;
+}
+.cashfy-install-banner:after{
+  top:-110%!important;height:320%!important;width:30%!important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),rgba(255,255,255,.10),transparent)!important;
+  filter:blur(2px)!important;
+  animation:cashfy-glass-glint-new 6.5s ease-in-out infinite!important;
+}
+.cashfy-install-brand img{
+  border-radius:50%!important;
+  border:1px solid rgba(255,255,255,.23)!important;
+  box-shadow:0 5px 18px rgba(0,0,0,.24),inset 0 1px 2px rgba(255,255,255,.34)!important;
+}
+.cashfy-install-button{
+  border-radius:999px!important;
+  border:1px solid rgba(255,255,255,.38)!important;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.30),transparent 55%),
+    linear-gradient(135deg,rgba(190,153,255,.96),rgba(104,57,205,.94))!important;
+  box-shadow:0 6px 22px rgba(112,68,206,.34),inset 0 1px 1px rgba(255,255,255,.62),inset 0 -1px 1px rgba(46,22,91,.22)!important;
+}
+.cashfy-install-close{
+  border-radius:50%!important;
+  border:1px solid rgba(255,255,255,.27)!important;
+  background:linear-gradient(145deg,rgba(255,255,255,.20),rgba(255,255,255,.055))!important;
+  box-shadow:0 3px 12px rgba(0,0,0,.12),inset 0 1px 1px rgba(255,255,255,.38)!important;
+}
+@media(max-width:480px){
+ .cashfy-install-banner{
+   min-height:68px!important;padding:9px 48px 9px 11px!important;
+   border-radius:999px!important;
+ }
+ .cashfy-install-brand img{border-radius:50%!important}
+ .cashfy-install-button{border-radius:999px!important}
+}
