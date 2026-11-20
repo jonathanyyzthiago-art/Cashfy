@@ -179,3 +179,59 @@ button:focus-visible{
  .stat-card,.panel{transition:none}
  .stat-card:hover,.panel:hover{transform:none}
 }
+
+
+/* Destaque do faturamento principal e privacidade do valor */
+.stats{
+ grid-template-columns:repeat(3,minmax(0,1fr));
+ gap:14px;
+}
+.stats>.stat-card-primary{
+ grid-column:1/-1;
+ min-height:142px;
+ padding:22px 24px;
+ display:flex;
+ flex-direction:column;
+ justify-content:center;
+ background:linear-gradient(115deg,rgba(112,72,177,.28),rgba(29,21,47,.96) 58%,rgba(20,15,32,.98));
+ border-color:rgba(171,132,255,.3);
+}
+.stat-card-primary .stat-top{
+ align-items:center;
+ font-size:12px;
+}
+.stat-card-primary .stat-value{
+ font-size:clamp(30px,4vw,38px);
+ margin:12px 0 5px;
+ transition:filter .28s ease,opacity .28s ease;
+}
+.stat-card-primary .stat-note{font-size:11px}
+.visibility-btn{
+ width:32px;height:32px;
+ display:grid;place-items:center;
+ padding:6px;
+ border:1px solid rgba(185,151,255,.2);
+ border-radius:9px;
+ background:rgba(165,125,255,.1);
+ color:#c7adff;
+ cursor:pointer;
+ transition:background .2s ease,border-color .2s ease,transform .2s ease;
+}
+.visibility-btn:hover{background:rgba(165,125,255,.2);border-color:rgba(185,151,255,.48);transform:translateY(-1px)}
+.visibility-btn svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.visibility-btn .eye-slash{opacity:0;transition:opacity .2s ease}
+.visibility-btn.is-hidden .eye-slash{opacity:1}
+.revenue-private.blurred{
+ filter:blur(9px);
+ opacity:.68;
+ user-select:none;
+}
+@media(max-width:950px){
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .stats>.stat-card-primary{grid-column:1/-1}
+}
+@media(max-width:650px){
+ .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .stats>.stat-card-primary{min-height:126px;padding:19px}
+ .stat-card-primary .stat-value{font-size:30px}
+}
