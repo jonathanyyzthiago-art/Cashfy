@@ -575,3 +575,17 @@ button:focus-visible{
  .dashboard-filters .custom-select-trigger{height:47px !important;min-height:47px !important;font-size:12px !important;padding:6px 12px 0 !important}
  .dashboard-update > span{font-size:13px !important}
 }
+
+
+/* Somente o tamanho do botao Atualizar */
+.dashboard-filters .dashboard-update{
+ height:44px !important;
+ min-height:44px !important;
+ border-radius:11px;
+}
+@media(max-width:650px){
+ .dashboard-filters .dashboard-update{
+  height:44px !important;
+  min-height:44px !important;
+ }
+}
