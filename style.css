@@ -589,3 +589,9 @@ button:focus-visible{
   min-height:44px !important;
  }
 }
+
+
+/* Aproxima somente os tres campos de filtro */
+.dashboard-filters{row-gap:3px !important}
+.dashboard-filters .filter-field + .filter-field{margin-top:-1px}
+@media(max-width:650px){.dashboard-filters{row-gap:3px !important}}
