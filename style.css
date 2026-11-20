@@ -1227,3 +1227,8 @@ button[data-refund]{
 }
 .sidebar.collapsed .sidebar-revenue-goal{padding:11px 7px!important}
 @media(prefers-reduced-motion:reduce){.sidebar-goal-track span:after{animation:none;opacity:.15}.sidebar-revenue-goal{transition:none}}
+
+
+/* Meta lateral: texto à esquerda e ícone à direita, preservando o visual original */
+.sidebar-goal-top{flex-direction:row-reverse!important;justify-content:space-between!important}
+.sidebar.collapsed .sidebar-goal-top{flex-direction:row!important;justify-content:center!important}
