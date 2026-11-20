@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=sequencedreveal20261120">
+  <link rel="stylesheet" href="style.css?v=paymentnav20261120">
 </head>
 <body>
   <div class="loading-screen" id="loadingScreen" aria-label="Carregando Cashfy"><img src="file_000000003564820e818c91cbec0141fc.png" alt="CF"></div>
@@ -17,15 +17,33 @@
     <aside class="sidebar" id="sidebar">
       <a class="brand" href="#"><img class="brand-logo" src="file_00000000a164820eb5c41b1650eae634.png" alt="Cashfy"><span>cashfy<span class="brand-dot">.</span></span></a>
       <div class="workspace"><span class="workspace-icon">⌂</span><span><small>ESPAÇO DE TRABALHO</small><strong>Minha operação</strong></span><span class="chevron">⌄</span></div>
-      <p class="nav-label">MENU PRINCIPAL</p>
+      <p class="nav-label">VISÃO GERAL</p>
       <nav class="nav">
-        <button class="nav-link active" data-page="overview"><span>▦</span> Visão geral</button>
-        <button class="nav-link" data-page="products"><span>◇</span> Produtos</button>
-        <button class="nav-link" data-page="sales"><span>↗</span> Vendas</button>
-        <button class="nav-link" data-page="customers"><span>♙</span> Clientes</button>
+        <button class="nav-link active" data-page="overview"><span>▦</span> Dashboard</button>
       </nav>
-      <p class="nav-label lower">CONFIGURAÇÕES</p>
+      <p class="nav-label lower">OPERAÇÃO</p>
       <nav class="nav">
+        <button class="nav-link" data-page="sales"><span>↗</span> Vendas</button>
+        <button class="nav-link" data-page="products"><span>◇</span> Produtos</button>
+        <button class="nav-link" data-page="customers"><span>♙</span> Clientes</button>
+        <button class="nav-link" data-page="subscriptions"><span>◷</span> Assinaturas</button>
+        <button class="nav-link" data-page="refunds"><span>↶</span> Reembolsos</button>
+      </nav>
+      <p class="nav-label lower">CRESCIMENTO</p>
+      <nav class="nav">
+        <button class="nav-link" data-page="affiliates"><span>♧</span> Afiliados</button>
+        <button class="nav-link" data-page="coupons"><span>％</span> Cupons</button>
+        <button class="nav-link" data-page="checkout"><span>▣</span> Checkout</button>
+      </nav>
+      <p class="nav-label lower">FINANCEIRO</p>
+      <nav class="nav">
+        <button class="nav-link" data-page="balance"><span>＄</span> Saldo e saques</button>
+        <button class="nav-link" data-page="transactions"><span>⇄</span> Transações</button>
+        <button class="nav-link" data-page="reports"><span>▤</span> Relatórios</button>
+      </nav>
+      <p class="nav-label lower">SISTEMA</p>
+      <nav class="nav">
+        <button class="nav-link" data-page="integrations"><span>⌘</span> Integrações</button>
         <button class="nav-link" data-page="settings"><span>⚙</span> Configurações</button>
       </nav>
       <div class="sidebar-bottom"><div class="avatar">CT</div><div><strong>Conta de teste</strong><small>Plano inicial</small></div><button class="more" aria-label="Mais opções">···</button></div>
@@ -43,6 +61,6 @@
     </main>
   </div>
   <div class="modal-backdrop" id="modal" hidden><form class="modal" id="productForm"><div class="modal-head"><div><p class="eyebrow">CATÁLOGO</p><h2>Cadastrar produto</h2></div><button type="button" class="close-btn" id="closeModal">×</button></div><label>Nome do produto<input name="name" required maxlength="70" placeholder="Ex.: Curso de marketing"></label><label>Preço (R$)<input name="price" type="number" min="0" step="0.01" required placeholder="0,00"></label><label>Descrição<textarea name="description" rows="3" placeholder="Descreva seu produto"></textarea></label><div class="modal-actions"><button type="button" class="secondary-btn" id="cancelModal">Cancelar</button><button class="primary-btn" type="submit">Salvar produto</button></div></form></div>
-  <script src="app.js?v=sequencedreveal20261120"></script>
+  <script src="app.js?v=paymentnav20261120"></script>
 </body>
 </html>
