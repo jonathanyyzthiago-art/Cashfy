@@ -21,15 +21,15 @@ function parseSaleDate(s){
  const d=br?new Date(Number(br[3]),Number(br[2])-1,Number(br[1])):new Date(raw);return isNaN(d)?null:d;
 }
 function chartBuckets(range){
- const now=new Date();now.setHours(23,59,59,999);
+ const today=new Date();today.setHours(0,0,0,0);
  const step=range==="12m"?"month":range==="90d"?"week":"day";
  const count=range==="7d"?7:range==="30d"?30:12,buckets=[];
- for(let i=count-1;i>=0;i--){
-  const from=new Date(now);
-  if(step==="day")from.setDate(from.getDate()-i);
-  if(step==="week")from.setDate(from.getDate()-i*7-6);
-  if(step==="month"){from.setDate(1);from.setMonth(from.getMonth()-i);}
-  from.setHours(0,0,0,0);const to=new Date(from);
+ for(let i=0;i<count;i++){
+  const from=new Date(today);
+  if(step==="day")from.setDate(today.getDate()+i);
+  if(step==="week")from.setDate(today.getDate()+i*7);
+  if(step==="month"){from.setDate(1);from.setMonth(today.getMonth()+i);}
+  const to=new Date(from);
   if(step==="day")to.setHours(23,59,59,999);
   if(step==="week"){to.setDate(to.getDate()+6);to.setHours(23,59,59,999);}
   if(step==="month"){to.setMonth(to.getMonth()+1);to.setDate(0);to.setHours(23,59,59,999);}
