@@ -762,3 +762,50 @@ body{
  .sidebar.collapsed .nav-link span{width:25px;font-size:17px}
 }
 @media(prefers-reduced-motion:reduce){.sidebar-toggle svg{transition:none}}
+
+
+/* Central de configurações Cashfy */
+.settings-intro{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:19px 21px;margin-bottom:14px;border:1px solid rgba(157,123,218,.2);border-radius:14px;background:linear-gradient(120deg,rgba(54,37,82,.48),rgba(20,15,32,.72))}
+.settings-intro strong{font:600 15px 'Space Grotesk';color:#f5efff}
+.settings-intro p{margin:6px 0 0;color:var(--muted);font-size:11px}
+.settings-live-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:#a47aff;box-shadow:0 0 10px #a47aff;margin-right:9px}
+.settings-demo-badge{flex-shrink:0;padding:7px 9px;border:1px solid rgba(193,154,255,.25);border-radius:7px;color:#c6aaff;font-size:9px;font-weight:700;letter-spacing:.7px}
+.settings-warning{margin-bottom:17px;padding:13px 15px;border:1px solid rgba(229,193,122,.2);border-radius:10px;background:rgba(91,67,30,.13);color:#c9bdab;font-size:11px;line-height:1.6}
+.settings-warning strong{color:#e6c98f}
+.settings-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.settings-card{min-width:0;padding:18px}
+.settings-card-head{display:flex;align-items:center;gap:12px;padding-bottom:15px;margin-bottom:15px;border-bottom:1px solid rgba(157,123,218,.13)}
+.settings-icon{width:35px;height:35px;flex:0 0 35px;display:grid;place-items:center;border-radius:10px;background:rgba(145,99,220,.16);color:#c5a6ff;font-size:18px}
+.settings-card-head h3{margin:0;color:#f3edff;font:600 14px 'Space Grotesk'}
+.settings-card-head p{margin:5px 0 0;color:var(--muted);font-size:10px;line-height:1.45}
+.settings-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.settings-field{display:grid;align-content:start;gap:7px;min-width:0;color:#c9c2d7;font-size:10px}
+.settings-field input,.settings-field select{width:100%;min-width:0;height:39px;padding:0 11px;border:1px solid #332b46;border-radius:8px;background:#0d0a16;color:#f4efff;font-size:11px;outline:none}
+.settings-field input:focus,.settings-field select:focus{border-color:#9565ff;box-shadow:0 0 0 3px rgba(149,101,255,.12)}
+.settings-field input[type=color]{padding:5px;cursor:pointer}
+.settings-field small,.settings-toggle small{display:block;color:#817a91;font-size:9px;line-height:1.5}
+.settings-toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid rgba(157,123,218,.1);cursor:pointer}
+.settings-toggle:last-child{border-bottom:0}
+.settings-toggle strong{display:block;color:#ded7ed;font-size:11px;font-weight:600}
+.settings-toggle input{position:absolute;opacity:0;pointer-events:none}
+.settings-toggle i{width:35px;height:20px;flex:0 0 35px;position:relative;border-radius:20px;background:#393247;transition:background .18s}
+.settings-toggle i:after{content:"";position:absolute;top:3px;left:3px;width:14px;height:14px;border-radius:50%;background:#c9c1d7;transition:transform .18s}
+.settings-toggle input:checked+i{background:#8052d6}
+.settings-toggle input:checked+i:after{transform:translateX(15px);background:#fff}
+.settings-toggle input:focus-visible+i{outline:2px solid #b99aff;outline-offset:3px}
+.settings-note{margin:12px 0 0;color:#8b839b;font-size:9px;line-height:1.55}
+.settings-status{margin-top:12px;padding:9px 10px;border-radius:7px;background:rgba(164,122,255,.08);color:#b9a6d8;font-size:10px}
+.settings-status b{color:#b58aff;margin-right:5px}
+.settings-actions{display:flex;align-items:center;justify-content:space-between;gap:15px;margin-top:17px;padding:16px 18px;border:1px solid rgba(157,123,218,.16);border-radius:12px;background:rgba(19,15,30,.72)}
+.settings-saved{color:#958ca6;font-size:10px}
+.settings-actions .primary-btn{white-space:nowrap}
+@media(max-width:850px){.settings-grid{grid-template-columns:1fr}}
+@media(max-width:650px){
+ .settings-intro{align-items:flex-start;flex-direction:column;padding:16px}
+ .settings-demo-badge{align-self:flex-start}
+ .settings-grid{grid-template-columns:minmax(0,1fr);gap:11px}
+ .settings-card{padding:15px}
+ .settings-fields{grid-template-columns:minmax(0,1fr);gap:11px}
+ .settings-actions{align-items:stretch;flex-direction:column}
+ .settings-actions .primary-btn{width:100%}
+}
