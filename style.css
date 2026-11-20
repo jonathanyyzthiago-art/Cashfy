@@ -235,3 +235,87 @@ button:focus-visible{
  .stats>.stat-card-primary{min-height:126px;padding:19px}
  .stat-card-primary .stat-value{font-size:30px}
 }
+
+
+/* Dashboard: filtros no estilo do painel de referência */
+.dashboard-filters{
+ display:grid;
+ grid-template-columns:1fr;
+ gap:10px;
+ margin:0 0 16px;
+ padding:0;
+}
+.dashboard-filters label{
+ display:grid;
+ gap:5px;
+ color:#aaa4b7;
+ font-size:11px;
+ padding:0 3px;
+}
+.dashboard-filters select{
+ width:100%;
+ min-height:54px;
+ appearance:none;
+ -webkit-appearance:none;
+ color:#f3effa;
+ background-color:rgba(30,27,34,.94);
+ border:1px solid rgba(255,255,255,.055);
+ border-radius:15px;
+ padding:0 42px 0 17px;
+ font:500 15px 'DM Sans',sans-serif;
+ outline:none;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23aaa4b7' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+ background-repeat:no-repeat;
+ background-position:right 16px center;
+}
+.dashboard-filters select:focus{border-color:#9565ff;box-shadow:0 0 0 3px rgba(149,101,255,.13)}
+.dashboard-update{
+ width:100%;
+ min-height:56px;
+ margin-top:3px;
+ border:0;
+ border-radius:14px;
+ color:#071b12;
+ background:#12ce60;
+ font:700 15px 'DM Sans',sans-serif;
+ text-align:left;
+ padding:0 22px;
+ cursor:pointer;
+ box-shadow:0 7px 18px rgba(18,206,96,.14);
+ transition:filter .18s ease,transform .18s ease;
+}
+.dashboard-update span{font-size:22px;vertical-align:-2px;margin-left:6px}
+.dashboard-update:hover{filter:brightness(1.08);transform:translateY(-1px)}
+.dashboard-summary{
+ display:flex;
+ flex-direction:column;
+ gap:12px;
+ margin-bottom:18px;
+}
+.dashboard-summary>.stat-card-primary{
+ grid-column:auto;
+ width:100%;
+ min-height:108px;
+ padding:17px 20px;
+}
+.dashboard-summary>.quantity-card{
+ width:100%;
+ min-height:92px;
+ padding:16px 20px;
+}
+.dashboard-summary .stat-value{margin:9px 0 3px}
+.dashboard-summary .stat-card-primary .stat-value{font-size:clamp(25px,3vw,32px)}
+.dashboard-summary .quantity-card .stat-value{font-size:25px}
+@media(min-width:760px){
+ .dashboard-filters{grid-template-columns:repeat(3,minmax(0,1fr)) auto;align-items:end;gap:12px}
+ .dashboard-filters label{min-width:0}
+ .dashboard-filters select{min-height:48px;font-size:13px}
+ .dashboard-update{width:auto;min-width:145px;min-height:48px;margin:0;padding:0 18px}
+ .dashboard-summary>.stat-card-primary{min-height:105px}
+}
+@media(max-width:650px){
+ .dashboard-filters{gap:9px;margin-bottom:14px}
+ .dashboard-filters select{min-height:52px}
+ .dashboard-update{min-height:56px}
+ .dashboard-summary{gap:10px}
+}
