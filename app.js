@@ -5,7 +5,6 @@ const save = () => { localStorage.setItem("cashfy_products",JSON.stringify(state
 const titles = {overview:["Visão geral","Acompanhe o desempenho da sua operação em um só lugar."],products:["Produtos","Cadastre e organize os produtos que você vende."],sales:["Vendas","Acompanhe os pedidos registrados na sua operação."],customers:["Clientes","Consulte os clientes cadastrados na sua base."],settings:["Configurações","Gerencie as informações básicas do seu espaço."]};
 function render(){
  const [title,subtitle]=titles[state.page]; $("#crumb").textContent=title; $("#pageTitle").textContent=title; $("#pageSubtitle").textContent=subtitle;
- $("#newProductBtn").hidden=state.page!=="overview"&&state.page!=="products";
  $("#pageContent").innerHTML=state.page==="overview"?overview():state.page==="products"?productsPage():state.page==="sales"?salesPage():state.page==="customers"?customersPage():settingsPage();
  if(state.page==="overview")bindRevenueChart();
 }
@@ -81,7 +80,7 @@ function closeModal(){$("#modal").hidden=true;}
 document.addEventListener("click",e=>{
  const range=e.target.closest("[data-range]");if(range){state.chartRange=range.dataset.range;render();return;}
  const nav=e.target.closest("[data-page]");if(nav){state.page=nav.dataset.page;document.querySelectorAll(".nav-link").forEach(n=>n.classList.toggle("active",n.dataset.page===state.page));render();$("#sidebar").classList.remove("open");}
- if(e.target.closest("#newProductBtn")||e.target.closest('[data-action="new-product"]'))openModal();
+ if(e.target.closest('[data-action="new-product"]'))openModal();
  const del=e.target.closest("[data-delete]");if(del&&confirm("Excluir este produto?")){state.products=state.products.filter(p=>p.id!==del.dataset.delete);save();render();}
 });
 $("#productForm").addEventListener("submit",e=>{e.preventDefault();const data=new FormData(e.currentTarget);state.products.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name:data.get("name").trim(),price:Number(data.get("price")),description:data.get("description").trim(),date:new Date().toLocaleDateString("pt-BR")});save();closeModal();state.page="products";document.querySelectorAll(".nav-link").forEach(n=>n.classList.toggle("active",n.dataset.page==="products"));render();});
