@@ -676,3 +676,8 @@ button:focus-visible{
 
 /* Alinha o conteudo do botao Atualizar ao canto esquerdo */
 .dashboard-filters .dashboard-update{justify-content:flex-start !important;padding-left:16px !important}
+
+
+/* Alinha o conteúdo do botão Atualizar à esquerda, sem mudar suas dimensões */
+.dashboard-filters .dashboard-update{justify-content:flex-start !important;text-align:left !important;padding-left:18px !important}
+.dashboard-filters .dashboard-update > span{margin-right:0 !important}
