@@ -174,6 +174,7 @@ const settingsDefaults={
 };
 let cashfySettings={...settingsDefaults,...JSON.parse(localStorage.getItem("cashfy_settings")||"{}")};
 const settingOptions={
+ accountLanguage:[["pt-BR","Português (Brasil)"]],
  documentType:[["CPF","CPF"],["CNPJ","CNPJ"]],
  companySegment:[["digital","Produtos digitais"],["physical","Produtos físicos"],["services","Serviços"],["education","Educação e cursos"],["other","Outro"]],
  bankAccountType:[["corrente","Conta corrente"],["poupanca","Conta poupança"]],
