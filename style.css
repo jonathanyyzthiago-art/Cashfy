@@ -1234,3 +1234,65 @@ button[data-refund]{
 .sidebar-revenue-goal .sidebar-goal-copy{order:1!important;flex:1 1 auto!important;text-align:left!important}
 .sidebar-revenue-goal .sidebar-goal-icon-wrap{order:2!important;flex:0 0 35px!important}
 .sidebar.collapsed .sidebar-revenue-goal .sidebar-goal-top{justify-content:center!important}
+
+/* Correção definitiva: impedir que a meta lateral seja achatada/cortada */
+.sidebar-revenue-goal{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  width:100%!important;
+  height:auto!important;
+  min-height:0!important;
+  max-height:none!important;
+  padding:13px 12px 11px!important;
+  overflow:hidden!important;
+  line-height:normal!important;
+  white-space:normal!important;
+}
+.sidebar-revenue-goal .sidebar-goal-top{
+  display:flex!important;
+  flex:0 0 auto!important;
+  width:100%!important;
+  min-height:35px!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+}
+.sidebar-revenue-goal .sidebar-goal-copy{
+  display:block!important;
+  min-width:0!important;
+  flex:1 1 auto!important;
+}
+.sidebar-revenue-goal .sidebar-goal-copy small,
+.sidebar-revenue-goal .sidebar-goal-copy strong{display:block!important}
+.sidebar-revenue-goal .sidebar-goal-icon-wrap{
+  display:grid!important;
+  width:35px!important;
+  height:35px!important;
+  min-width:35px!important;
+  flex:0 0 35px!important;
+}
+.sidebar-revenue-goal .sidebar-goal-track{
+  display:block!important;
+  flex:0 0 8px!important;
+  width:100%!important;
+  height:8px!important;
+  margin-top:12px!important;
+}
+.sidebar-revenue-goal .sidebar-goal-bottom{
+  display:flex!important;
+  flex:0 0 auto!important;
+  width:100%!important;
+  min-height:18px!important;
+  align-items:center!important;
+  justify-content:space-between!important;
+  margin-top:9px!important;
+}
+.sidebar.collapsed .sidebar-revenue-goal{
+  height:auto!important;
+  min-height:0!important;
+}
+.sidebar.collapsed .sidebar-goal-copy,
+.sidebar.collapsed .sidebar-goal-track,
+.sidebar.collapsed .sidebar-goal-bottom{display:none!important}
+.sidebar.collapsed .sidebar-goal-top{justify-content:center!important}
