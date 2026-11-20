@@ -832,3 +832,31 @@ body{
  .app-shell.sidebar-collapsed .sidebar>*:not(.sidebar-toggle){opacity:1;visibility:visible;pointer-events:auto}
  .app-shell.sidebar-collapsed .sidebar-toggle{transform:none}
 }
+
+
+/* Seta compacta ao lado do nome Cashfy */
+.sidebar-brand-row{display:flex;align-items:center;gap:17px;min-width:0}
+.sidebar-brand-row .brand{flex:0 0 auto}
+.sidebar-toggle{
+ position:static;flex:0 0 27px;width:27px;height:27px;
+ display:grid;place-items:center;margin-top:-32px;
+ border:1px solid rgba(174,139,235,.3);border-radius:8px;
+ background:linear-gradient(145deg,#211631,#120d1d);
+ color:#d8c4ff;font-size:19px;line-height:1;cursor:pointer;
+ box-shadow:0 2px 9px rgba(0,0,0,.2);
+ transition:background .18s,border-color .18s,transform .2s;
+}
+.sidebar-toggle:hover{background:#302044;border-color:#a879ff;color:#fff}
+.app-shell.sidebar-collapsed .sidebar{width:70px;padding-left:8px;padding-right:8px}
+.app-shell.sidebar-collapsed .sidebar>*:not(.sidebar-brand-row){opacity:0;visibility:hidden;pointer-events:none}
+.app-shell.sidebar-collapsed .sidebar-brand-row{justify-content:center;gap:0}
+.app-shell.sidebar-collapsed .sidebar-brand-row .brand{display:none}
+.app-shell.sidebar-collapsed .sidebar-toggle{margin:0;transform:rotate(180deg)}
+@media(max-width:650px){
+ .sidebar-toggle{margin-top:-32px}
+ .app-shell.sidebar-collapsed .sidebar{width:250px;padding:27px 17px 18px;left:-260px}
+ .app-shell.sidebar-collapsed .sidebar>*:not(.sidebar-brand-row){opacity:1;visibility:visible;pointer-events:auto}
+ .app-shell.sidebar-collapsed .sidebar-brand-row{justify-content:flex-start;gap:17px}
+ .app-shell.sidebar-collapsed .sidebar-brand-row .brand{display:flex}
+ .app-shell.sidebar-collapsed .sidebar-toggle{margin-top:-32px;transform:none}
+}
