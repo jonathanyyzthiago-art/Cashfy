@@ -956,3 +956,13 @@ body{
 .goal-card-foot{margin-top:9px;color:#a49caf;font-size:10px}
 .goals-empty{grid-column:1/-1;padding:25px;color:var(--muted);font-size:12px}
 @media(max-width:650px){.goal-form,.goals-grid{grid-template-columns:1fr}.sidebar-revenue-goal{margin-bottom:23px}}
+
+/* Refinamento compacto da meta na sidebar */
+.sidebar-revenue-goal{margin:0 0 17px;padding:10px 11px 9px;border:1px solid rgba(164,127,255,.17);border-radius:10px;background:linear-gradient(135deg,rgba(35,27,47,.76),rgba(17,15,24,.92));box-shadow:0 5px 15px rgba(0,0,0,.13)}
+.sidebar-goal-top{display:flex;align-items:center;justify-content:space-between;gap:7px}
+.sidebar-goal-top small{color:#a9a0b7;font-size:8px;letter-spacing:.55px;font-weight:650}
+.sidebar-goal-top strong{margin:0;color:#eee8f8;font:600 10px 'Space Grotesk';white-space:nowrap}
+.sidebar-goal-track{height:5px;margin-top:9px;border-radius:20px;background:#0b0910;overflow:hidden}
+.sidebar-goal-track span{display:block;width:0;height:100%;border-radius:20px;background:linear-gradient(90deg,#9470d9,#c49bff);transition:width .35s ease}
+.sidebar-goal-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:6px;color:#81798d;font-size:8px}
+.sidebar-goal-bottom strong{color:#cbb7ed;font-size:9px}
