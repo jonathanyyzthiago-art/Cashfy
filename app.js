@@ -319,16 +319,13 @@ $("#productForm").addEventListener("submit",e=>{e.preventDefault();const data=ne
 $("#closeModal").addEventListener("click",closeModal);$("#cancelModal").addEventListener("click",closeModal);$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal();});$("#mobileMenu").addEventListener("click",()=>$("#sidebar").classList.toggle("open"));$("#sidebarToggle").addEventListener("click",()=>{const sidebar=$("#sidebar");if(window.matchMedia("(max-width: 650px)").matches){sidebar.classList.remove("open");}else{const collapsed=sidebar.classList.toggle("collapsed");const button=$("#sidebarToggle");button.setAttribute("aria-label",collapsed?"Expandir barra lateral":"Recolher barra lateral");button.title=collapsed?"Expandir barra lateral":"Recolher barra lateral";}});
 render();
 const loadingScreen=$("#loadingScreen");
+$("#loginScreen").hidden=true;
 $("#appShell").hidden=true;
-if(loadingScreen){
- window.setTimeout(()=>{
-  loadingScreen.classList.add("is-hidden");
-  loadingScreen.setAttribute("aria-hidden","true");
-  introFinished=true;
-  $("#appShell").hidden=false;
-  startRevealSequence();
- },7000);
-}
+if(loadingScreen){window.setTimeout(()=>{loadingScreen.classList.add("is-hidden");loadingScreen.setAttribute("aria-hidden","true");introFinished=true;$("#appShell").hidden=true;$("#loginScreen").hidden=false;$("#loginEmail").focus({preventScroll:true});},7000);}
+$("#loginForm").addEventListener("submit",e=>{e.preventDefault();if(!e.currentTarget.reportValidity())return;sessionStorage.setItem("cashfy_demo_session","active");$("#loginScreen").hidden=true;$("#appShell").hidden=false;startRevealSequence();});
+$("#togglePassword").addEventListener("click",()=>{const field=$("#loginPassword");const show=field.type==="password";field.type=show?"text":"password";$("#togglePassword").setAttribute("aria-label",show?"Ocultar senha":"Mostrar senha");});
+$("#forgotPassword").addEventListener("click",()=>{$("#loginFeedback").textContent="A recuperação de senha será habilitada quando o serviço de autenticação estiver conectado.";});
+$("#createAccount").addEventListener("click",e=>{e.preventDefault();$("#loginFeedback").textContent="O cadastro de novas contas será disponibilizado em breve.";});
 
 
 document.addEventListener("submit",e=>{
