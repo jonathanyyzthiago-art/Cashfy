@@ -319,3 +319,99 @@ button:focus-visible{
  .dashboard-update{min-height:56px}
  .dashboard-summary{gap:10px}
 }
+
+
+/* Refinamento compacto dos filtros do Dashboard */
+.page-heading{margin-bottom:18px}
+.page-heading h1{font-size:25px}
+.subheading{font-size:11px}
+.dashboard-filters{
+ display:grid;
+ grid-template-columns:1fr;
+ gap:7px;
+ margin:0 0 13px;
+}
+.filter-field{position:relative;display:grid;gap:3px;min-width:0}
+.filter-label{font-size:10px;color:#aaa3b8;padding-left:3px}
+.custom-select{position:relative;min-width:0}
+.custom-select-trigger{
+ width:100%;height:43px;
+ display:flex;align-items:center;justify-content:space-between;
+ padding:0 14px;
+ border:1px solid rgba(173,145,225,.15);
+ border-radius:11px;
+ color:#f2edfc;
+ background:linear-gradient(135deg,#1c1729,#151220);
+ font:500 13px 'DM Sans',sans-serif;
+ text-align:left;cursor:pointer;
+ transition:border-color .18s ease,box-shadow .18s ease,background .18s ease;
+}
+.custom-select-trigger:hover,.custom-select-trigger[aria-expanded="true"]{
+ border-color:rgba(166,126,255,.65);
+ box-shadow:0 0 0 3px rgba(149,101,255,.1);
+ background:linear-gradient(135deg,#241a38,#191426);
+}
+.custom-select-trigger i{
+ width:8px;height:8px;border-right:1.7px solid #b8a5d9;border-bottom:1.7px solid #b8a5d9;
+ transform:rotate(45deg) translateY(-2px);transition:transform .18s ease;flex:none;
+}
+.custom-select-trigger[aria-expanded="true"] i{transform:rotate(225deg) translate(-2px,-1px)}
+.custom-select-menu{
+ position:absolute;z-index:8;top:calc(100% + 6px);left:0;right:0;
+ display:grid;gap:3px;padding:5px;
+ max-height:210px;overflow-y:auto;
+ border:1px solid rgba(170,133,255,.28);
+ border-radius:12px;
+ background:linear-gradient(145deg,#211a31,#15111f);
+ box-shadow:0 14px 34px rgba(0,0,0,.48),0 0 18px rgba(132,87,222,.12);
+ animation:filterMenuIn .16s ease-out;
+}
+.custom-select-menu[hidden]{display:none}
+@keyframes filterMenuIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.custom-select-option{
+ min-height:34px;display:flex;align-items:center;justify-content:space-between;gap:8px;
+ padding:7px 10px;border:1px solid transparent;border-radius:8px;
+ color:#c9c2d6;background:transparent;
+ font:500 12px 'DM Sans',sans-serif;text-align:left;cursor:pointer;
+}
+.custom-select-option:hover{background:rgba(150,105,255,.13);color:#fff}
+.custom-select-option.selected{
+ color:#e7dcff;background:linear-gradient(100deg,rgba(142,91,235,.23),rgba(112,70,186,.1));
+ border-color:rgba(166,126,255,.2);
+}
+.custom-select-option>span{color:#c5a6ff;font-weight:700}
+.dashboard-update{
+ width:100%;min-height:43px;margin:1px 0 0;
+ display:flex;align-items:center;justify-content:space-between;gap:10px;
+ padding:0 14px;border:1px solid rgba(187,151,255,.28);border-radius:11px;
+ color:#f7f2ff;
+ background:linear-gradient(115deg,#8151d8,#6339b8 58%,#4f2d94);
+ font:600 13px 'DM Sans',sans-serif;text-align:left;cursor:pointer;
+ box-shadow:0 5px 15px rgba(100,59,180,.22),inset 0 1px 0 rgba(255,255,255,.14);
+ transition:filter .18s ease,transform .18s ease,box-shadow .18s ease;
+}
+.dashboard-update:hover{filter:brightness(1.12);transform:translateY(-1px);box-shadow:0 8px 19px rgba(100,59,180,.3)}
+.dashboard-update i{font-style:normal;font-size:18px;color:#e8d9ff}
+.dashboard-summary{gap:9px;margin-bottom:15px}
+.dashboard-summary>.stat-card-primary{min-height:90px;padding:13px 16px}
+.dashboard-summary>.quantity-card{min-height:78px;padding:12px 16px}
+.dashboard-summary .stat-value{margin:6px 0 2px}
+.dashboard-summary .stat-card-primary .stat-value{font-size:25px}
+.dashboard-summary .quantity-card .stat-value{font-size:22px}
+@media(min-width:760px){
+ .dashboard-filters{grid-template-columns:repeat(3,minmax(0,1fr)) 132px;align-items:end;gap:9px}
+ .filter-label{font-size:9px}
+ .custom-select-trigger{height:42px;font-size:12px}
+ .dashboard-update{min-height:42px;width:132px}
+}
+@media(max-width:650px){
+ .content{padding-top:20px}
+ .page-heading{margin-bottom:14px}
+ .page-heading h1{font-size:23px}
+ .subheading{font-size:10px;line-height:1.4}
+ .dashboard-filters{gap:6px;margin-bottom:11px}
+ .custom-select-trigger{height:40px;font-size:12px}
+ .dashboard-update{min-height:41px}
+ .dashboard-summary>.stat-card-primary{min-height:84px}
+ .dashboard-summary>.quantity-card{min-height:74px}
+}
