@@ -1,9 +1,11 @@
-const CACHE_NAME = "cashfy-app-v3";
+const CACHE_NAME = "cashfy-app-v4";
 const APP_FILES = [
   "./",
   "./index.html",
   "./style.css",
   "./app.js",
+  "./manifest.webmanifest",
+  "./assets/cashfy-app-icon.svg",
   "./file_000000003564820e818c91cbec0141fc.png",
   "./file_00000000a164820eb5c41b1650eae634.png",
   "./file_00000000f1dc820ea5aa38558d6e56cc.png"
