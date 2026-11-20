@@ -441,3 +441,40 @@ button:focus-visible{
  .dashboard-summary .quantity-card .stat-value{font-size:20px}
  .dashboard-summary .stat-note{font-size:9px}
 }
+
+
+/* Botao Atualizar mais compacto com icone de recarregar */
+.dashboard-update{
+ width:max-content !important;
+ min-width:112px;
+ min-height:36px;
+ height:36px;
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ gap:8px;
+ padding:0 13px;
+}
+.dashboard-update i{
+ order:-1;
+ display:inline-flex;
+ align-items:center;
+ justify-content:center;
+ font-size:17px;
+ line-height:1;
+ transform-origin:center;
+}
+.dashboard-update:hover i,
+.dashboard-update:focus-visible i{
+ animation:dashboardRefreshSpin .65s ease-in-out;
+}
+.dashboard-update:active i{
+ animation:dashboardRefreshSpin .45s ease-in-out;
+}
+@keyframes dashboardRefreshSpin{
+ from{transform:rotate(0deg)}
+ to{transform:rotate(360deg)}
+}
+@media(prefers-reduced-motion:reduce){
+ .dashboard-update:hover i,.dashboard-update:focus-visible i,.dashboard-update:active i{animation:none}
+}
