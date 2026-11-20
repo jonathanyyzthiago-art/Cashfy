@@ -17,7 +17,11 @@
   <div class="app-shell" id="appShell" hidden>
     <aside class="sidebar" id="sidebar">
       <div class="brand-row"><a class="brand" href="#"><img class="brand-logo" src="file_00000000a164820eb5c41b1650eae634.png" alt="Cashfy"><span>cashfy<span class="brand-dot">.</span></span></a><button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Recolher barra lateral" title="Recolher barra lateral"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m14.5 5-7 7 7 7"/></svg></button></div>
-      <div class="workspace"><span class="workspace-icon">⌂</span><span><small>ESPAÇO DE TRABALHO</small><strong>Minha operação</strong></span><span class="chevron">⌄</span></div>
+      <section class="sidebar-revenue-goal" aria-label="Meta de faturamento">
+        <div class="sidebar-goal-top"><span class="cf-mark">CF</span><div><small>META DE FATURAMENTO</small><strong id="sidebarGoalAmount">R$ 0 / R$ 10 mil</strong></div></div>
+        <div class="sidebar-goal-track"><span id="sidebarGoalProgress"></span></div>
+        <div class="sidebar-goal-bottom"><span>R$ 0</span><strong id="sidebarGoalPercent">0%</strong><span>R$ 10 mil</span></div>
+      </section>
       <p class="nav-label">VISÃO GERAL</p>
       <nav class="nav">
         <button class="nav-link active" data-page="overview"><span>▦</span> Dashboard</button>
@@ -41,6 +45,7 @@
         <button class="nav-link" data-page="balance"><span>＄</span> Saldo e saques</button>
         <button class="nav-link" data-page="transactions"><span>⇄</span> Transações</button>
         <button class="nav-link" data-page="reports"><span>▤</span> Relatórios</button>
+        <button class="nav-link" data-page="goals"><span>◎</span> Metas</button>
       </nav>
       <p class="nav-label lower">SISTEMA</p>
       <nav class="nav">
