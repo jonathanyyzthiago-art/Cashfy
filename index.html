@@ -4,6 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#090711">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="apple-touch-icon" href="./file_00000000a164820eb5c41b1650eae634.png">
   <meta name="description" content="Cashfy — gestão simples de produtos, clientes e vendas.">
   <title>Cashfy — Painel</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -80,6 +82,13 @@
       removeLogin();
       window.setTimeout(function(){removeLogin();var app=document.getElementById('appShell');if(app){app.hidden=false;app.removeAttribute('hidden');}var intro=document.getElementById('loadingScreen');if(intro){intro.classList.add('is-hidden');intro.setAttribute('aria-hidden','true');}},7000);
     })();
+  </script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("./sw.js").catch(function (error) { console.error("Cashfy offline:", error); });
+      });
+    }
   </script>
 </body>
 </html>
