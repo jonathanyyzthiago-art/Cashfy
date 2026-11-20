@@ -175,17 +175,6 @@ document.addEventListener("click",e=>{
 });
 $("#productForm").addEventListener("submit",e=>{e.preventDefault();const data=new FormData(e.currentTarget);state.products.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name:data.get("name").trim(),price:Number(data.get("price")),description:data.get("description").trim(),date:new Date().toLocaleDateString("pt-BR")});save();closeModal();state.page="products";document.querySelectorAll(".nav-link").forEach(n=>n.classList.toggle("active",n.dataset.page==="products"));render();});
 $("#closeModal").addEventListener("click",closeModal);$("#cancelModal").addEventListener("click",closeModal);$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal();});$("#mobileMenu").addEventListener("click",()=>$("#sidebar").classList.toggle("open"));
-const sidebarToggle=$("#sidebarToggle");
-sidebarToggle.addEventListener("click",()=>{
- if(window.matchMedia("(max-width: 650px)").matches){
-  $("#sidebar").classList.remove("open");
- }else{
-  $(".app-shell").classList.toggle("sidebar-collapsed");
-  const collapsed=$(".app-shell").classList.contains("sidebar-collapsed");
-  sidebarToggle.setAttribute("aria-label",collapsed?"Expandir barra lateral":"Fechar barra lateral");
-  sidebarToggle.title=collapsed?"Expandir barra lateral":"Fechar barra lateral";
- }
-});
 render();
 const loadingScreen=$("#loadingScreen");
 if(loadingScreen){window.setTimeout(()=>{loadingScreen.classList.add("is-hidden");loadingScreen.setAttribute("aria-hidden","true");introFinished=true;startRevealSequence();},7000);}
