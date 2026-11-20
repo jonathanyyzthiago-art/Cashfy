@@ -82,12 +82,12 @@ body{
  .topbar{background:rgba(13,10,22,.78)}
 }
 
-/* Gráfico acima dos filtros de período */
+/* Opções de período acima do gráfico */
 .revenue-panel{display:flex;flex-direction:column}
 .revenue-head{display:contents}
 .revenue-head>div:first-child{order:0}
-.revenue-chart-wrap{order:1}
-.chart-xlabels{order:2}
-.range-tabs{order:3;align-self:flex-end;margin-top:14px}
+.range-tabs{order:1;align-self:flex-end;margin-top:14px}
+.revenue-chart-wrap{order:2}
+.chart-xlabels{order:3}
 .chart-foot{order:4}
 @media(max-width:650px){.range-tabs{margin-top:12px;align-self:stretch}}
