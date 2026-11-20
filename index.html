@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090711">
+  <meta name="description" content="Cashfy — gestão simples de produtos, clientes e vendas.">
+  <title>Cashfy — Painel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">C</span><span>cashfy<span class="brand-dot">.</span></span></a>
+      <div class="workspace"><span class="workspace-icon">⌂</span><span><small>ESPAÇO DE TRABALHO</small><strong>Minha operação</strong></span><span class="chevron">⌄</span></div>
+      <p class="nav-label">MENU PRINCIPAL</p>
+      <nav class="nav">
+        <button class="nav-link active" data-page="overview"><span>▦</span> Visão geral</button>
+        <button class="nav-link" data-page="products"><span>◇</span> Produtos</button>
+        <button class="nav-link" data-page="sales"><span>↗</span> Vendas</button>
+        <button class="nav-link" data-page="customers"><span>♙</span> Clientes</button>
+      </nav>
+      <p class="nav-label lower">CONFIGURAÇÕES</p>
+      <nav class="nav">
+        <button class="nav-link" data-page="settings"><span>⚙</span> Configurações</button>
+      </nav>
+      <div class="sidebar-bottom"><div class="avatar">CT</div><div><strong>Conta de teste</strong><small>Plano inicial</small></div><button class="more" aria-label="Mais opções">···</button></div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><button class="mobile-menu" id="mobileMenu">☰</button><div class="breadcrumb">Workspace <span>/</span> <strong id="crumb">Visão geral</strong></div><div class="top-actions"><span class="status"><i></i> Ambiente de demonstração</span><button class="icon-btn" title="Notificações">♧</button><div class="avatar small">CT</div></div></header>
+      <section class="content">
+        <div class="page-heading"><div><p class="eyebrow">QUINTA-FEIRA, 20 DE NOVEMBRO</p><h1 id="pageTitle">Visão geral</h1><p class="subheading" id="pageSubtitle">Acompanhe o desempenho da sua operação em um só lugar.</p></div><button class="primary-btn" id="newProductBtn">＋ Novo produto</button></div>
+        <div id="pageContent"></div>
+        <footer>Cashfy <span>•</span> Sua operação, sob controle.</footer>
+      </section>
+    </main>
+  </div>
+  <div class="modal-backdrop" id="modal" hidden><form class="modal" id="productForm"><div class="modal-head"><div><p class="eyebrow">CATÁLOGO</p><h2>Cadastrar produto</h2></div><button type="button" class="close-btn" id="closeModal">×</button></div><label>Nome do produto<input name="name" required maxlength="70" placeholder="Ex.: Curso de marketing"></label><label>Preço (R$)<input name="price" type="number" min="0" step="0.01" required placeholder="0,00"></label><label>Descrição<textarea name="description" rows="3" placeholder="Descreva seu produto"></textarea></label><div class="modal-actions"><button type="button" class="secondary-btn" id="cancelModal">Cancelar</button><button class="primary-btn" type="submit">Salvar produto</button></div></form></div>
+  <script src="app.js"></script>
+</body>
+</html>
