@@ -11,6 +11,7 @@ if(!localStorage.getItem("cashfy_demo_sale_8000")) {
 }
 const titles = {
  overview:["Dashboard","Acompanhe suas vendas e resultados em um só lugar."],
+ goals:["Metas","Defina objetivos e acompanhe seu progresso."],
  products:["Produtos","Cadastre e organize os produtos que você vende."],
  sales:["Vendas","Acompanhe os pedidos registrados na sua operação."],
  customers:["Clientes","Consulte os clientes cadastrados na sua base."],
@@ -35,7 +36,7 @@ function moduleStore(key, fallback=[]){
 const moduleData={
  refunds:moduleStore("refunds"),subscriptions:moduleStore("subscriptions"),affiliates:moduleStore("affiliates"),
  coupons:moduleStore("coupons"),withdrawals:moduleStore("withdrawals"),integrations:moduleStore("integrations",{}),
- paymentLinks:moduleStore("paymentLinks"),coproductions:moduleStore("coproductions"),members:moduleStore("members"),disputes:moduleStore("disputes"), refunds:moduleStore("refunds"),subscriptions:moduleStore("subscriptions"),affiliates:moduleStore("affiliates"),
+ paymentLinks:moduleStore("paymentLinks"),coproductions:moduleStore("coproductions"),members:moduleStore("members"),disputes:moduleStore("disputes"), goals:moduleStore("goals"), refunds:moduleStore("refunds"),subscriptions:moduleStore("subscriptions"),affiliates:moduleStore("affiliates"),
  coupons:moduleStore("coupons"),withdrawals:moduleStore("withdrawals"),integrations:moduleStore("integrations",{}),
  checkout:moduleStore("checkout",{title:"Finalize sua compra",button:"Pagar agora",color:"#8b5cf6",pix:true,card:true,boleto:false}),
 };
@@ -55,6 +56,15 @@ function modulePage(page){
  const dateNow=()=>new Date().toLocaleString("pt-BR");
  const card=(title,desc,body)=>'<section class="panel module-panel"><div class="module-panel-head"><div><h3>'+title+'</h3><p>'+desc+'</p></div></div>'+body+'</section>';
  const form=(id,fields,button)=>'<form class="module-form" id="'+id+'">'+fields.join("")+'<button class="primary-btn" type="submit">'+button+'</button></form>';
+ if(page==="goals"){
+  const goals=data.goals;
+  const total=state.sales.reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
+  const rows=goals.map((g,i)=>{
+   const current=Number(g.current||0),target=Math.max(1,Number(g.target||1)),pct=Math.min(100,Math.round(current/target*100));
+   return '<article class="goal-card" style="--goal-color:'+escapeHtml(g.color||"#a879ff")+'"><div class="goal-card-head"><div><span class="goal-color-dot"></span><h3>'+escapeHtml(g.name)+'</h3></div><button type="button" class="goal-delete" data-goal-delete="'+i+'" aria-label="Excluir meta">×</button></div><div class="goal-numbers"><strong>'+money(current)+'</strong><span>de '+money(target)+'</span></div><div class="goal-progress"><span style="width:'+pct+'%"></span></div><div class="goal-card-foot"><span>'+pct+'% concluído</span><span>'+money(Math.max(0,target-current))+' restantes</span></div></article>';
+  });
+  return card("Criar nova meta","Escolha um nome, valor e cor para acompanhar cada objetivo.",'<form class="goal-form" id="goalForm"><label class="module-field"><span>Nome da meta</span><input name="name" maxlength="50" placeholder="Ex.: Reserva financeira" required></label><label class="module-field"><span>Valor desejado (R$)</span><input name="target" type="number" min="1" step="0.01" placeholder="10000" required></label><label class="module-field"><span>Valor atual (R$)</span><input name="current" type="number" min="0" step="0.01" value="0"></label><label class="module-field goal-color-field"><span>Cor da meta</span><input name="color" type="color" value="#a879ff"></label><button class="primary-btn" type="submit">Adicionar meta</button></form>')+'<section class="goals-grid">'+(rows.length?rows:'<div class="panel goals-empty">Suas metas criadas aparecerão aqui.</div>')+'</section>';
+ }
  if(page==="refunds"){
   const rows=data.refunds.map((r,i)=>'<tr><td>#'+escapeHtml(r.id)+'</td><td>'+escapeHtml(r.customer)+'</td><td>'+escapeHtml(r.reason)+'</td><td>'+money(r.amount)+'</td><td><span class="module-pill">'+r.status+'</span></td><td><div class="module-row-actions">'+(r.status==="Solicitado"?'<button data-refund="approve" data-id="'+i+'">Aprovar reembolso</button><button data-refund="cancel" data-id="'+i+'">Comprador desistiu</button>':'—')+'</div></td></tr>');
   return '<div class="module-kpis"><div class="panel"><small>Solicitações</small><strong>'+data.refunds.length+'</strong></div><div class="panel"><small>Aguardando análise</small><strong>'+data.refunds.filter(x=>x.status==="Solicitado").length+'</strong></div><div class="panel"><small>Valor solicitado</small><strong>'+money(data.refunds.filter(x=>x.status==="Solicitado").reduce((s,x)=>s+x.amount,0))+'</strong></div></div>'+card("Nova solicitação de reembolso","Registre a solicitação recebida e acompanhe a janela de análise de 24 horas.",form("refundForm",[moduleField("ID da venda","sale"),moduleField("Cliente","customer"),moduleField("Contato do comprador","contact"),moduleField("Valor (R$)","amount","number"),moduleSelect("Motivo","reason",[["Arrependimento","Arrependimento"],["Produto não recebido","Produto não recebido"],["Cobrança duplicada","Cobrança duplicada"],["Outro","Outro"]])],"Registrar solicitação"))+card("Solicitações de reembolso","Analise, aprove ou recuse os pedidos.",moduleTable(["Pedido","Cliente","Motivo","Valor","Status","Ações"],rows,"Nenhuma solicitação registrada.")+'<p class="module-hint">Na referência Cakto, o pedido dentro da garantia fica em janela de 24 horas; o produtor pode processar antes, e o comprador pode desistir. O estorno real exige integração com o processador.</p>');
@@ -114,12 +124,21 @@ function modulePage(page){
  return '<section class="panel module-card"><h3>'+escapeHtml(titles[page][0])+'</h3><p class="muted">Módulo em construção.</p></section>';
 }
 
+function updateSidebarRevenueGoal(){
+ const total=state.sales.reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
+ const pct=Math.min(100,Math.round(total/10000*100));
+ const amount=$("#sidebarGoalAmount"),bar=$("#sidebarGoalProgress"),label=$("#sidebarGoalPercent");
+ if(amount)amount.textContent=money(total)+" / R$ 10 mil";
+ if(bar)bar.style.width=pct+"%";
+ if(label)label.textContent=pct+"%";
+}
 function render(){
  const current=titles[state.page]?state.page:"overview";
  if(current!==state.page)state.page="overview";
  const [title,subtitle]=titles[current]; $("#crumb").textContent=title; $("#pageTitle").textContent=title; $("#pageSubtitle").textContent=subtitle;
  $("#pageContent").innerHTML=current==="overview"?overview():current==="products"?productsPage():current==="sales"?salesPage():current==="customers"?customersPage():current==="settings"?settingsPage():modulePage(current);
  if(current==="overview")bindRevenueChart();
+ updateSidebarRevenueGoal();
  if(introFinished)startRevealSequence();
 }
 
@@ -313,6 +332,18 @@ document.addEventListener("click",e=>{
  const visibility=e.target.closest("#toggleRevenueVisibility");if(visibility){state.revenueHidden=!state.revenueHidden;const value=$(".revenue-private");value.classList.toggle("blurred",state.revenueHidden);visibility.classList.toggle("is-hidden",state.revenueHidden);visibility.setAttribute("aria-pressed",String(state.revenueHidden));visibility.setAttribute("aria-label",state.revenueHidden?"Mostrar faturamento":"Ocultar faturamento");visibility.title=state.revenueHidden?"Mostrar faturamento":"Ocultar faturamento";return;}
  if(e.target.closest('[data-action="new-product"]'))openModal();
  const del=e.target.closest("[data-delete]");if(del&&confirm("Excluir este produto?")){state.products=state.products.filter(p=>p.id!==del.dataset.delete);save();render();}
+});
+document.addEventListener("submit",e=>{
+ if(e.target.id==="goalForm"){
+  e.preventDefault();
+  const f=e.target;
+  moduleData.goals.unshift({name:f.elements.name.value.trim(),target:Number(f.elements.target.value),current:Number(f.elements.current.value||0),color:f.elements.color.value});
+  persistModule("goals");render();
+ }
+});
+document.addEventListener("click",e=>{
+ const del=e.target.closest("[data-goal-delete]");
+ if(del){moduleData.goals.splice(Number(del.dataset.goalDelete),1);persistModule("goals");render();}
 });
 document.addEventListener("submit",e=>{if(e.target.id==="settingsForm"){e.preventDefault();const next={...cashfySettings};e.target.querySelectorAll("[data-setting]").forEach(el=>{next[el.dataset.setting]=el.type==="checkbox"?el.checked:el.value;});cashfySettings=next;localStorage.setItem("cashfy_settings",JSON.stringify(cashfySettings));const saved=$("#settingsSaved");if(saved)saved.textContent="Configurações salvas neste navegador.";}});
 $("#productForm").addEventListener("submit",e=>{e.preventDefault();const data=new FormData(e.currentTarget);state.products.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name:data.get("name").trim(),price:Number(data.get("price")),description:data.get("description").trim(),date:new Date().toLocaleDateString("pt-BR")});save();closeModal();state.page="products";document.querySelectorAll(".nav-link").forEach(n=>n.classList.toggle("active",n.dataset.page==="products"));render();});
