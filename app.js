@@ -354,7 +354,7 @@ $("#closeModal").addEventListener("click",closeModal);$("#cancelModal").addEvent
 render();
 const loadingScreen=$("#loadingScreen");
 $("#appShell").hidden=true;
-if(loadingScreen){window.setTimeout(()=>{loadingScreen.classList.add("is-hidden");loadingScreen.setAttribute("aria-hidden","true");introFinished=true;$("#appShell").hidden=false;startRevealSequence();},7000);}else{$("#appShell").hidden=false;startRevealSequence();}
+if(loadingScreen){window.setTimeout(()=>{loadingScreen.classList.add("is-hidden");loadingScreen.setAttribute("aria-hidden","true");introFinished=true;$("#appShell").hidden=false;startRevealSequence();},1250);}else{$("#appShell").hidden=false;startRevealSequence();}
 
 
 document.addEventListener("submit",e=>{
