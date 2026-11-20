@@ -681,3 +681,17 @@ button:focus-visible{
 /* Alinha o conteúdo do botão Atualizar à esquerda, sem mudar suas dimensões */
 .dashboard-filters .dashboard-update{justify-content:flex-start !important;text-align:left !important;padding-left:18px !important}
 .dashboard-filters .dashboard-update > span{margin-right:0 !important}
+
+
+/* Ajustes pontuais de acabamento do dashboard */
+.dashboard-filters .dashboard-update > i{font-size:18px !important}
+.stat-card,.panel{padding:16px !important}
+button.primary-btn,button.secondary-btn,.nav-link,.range-btn,.icon-btn{padding-top:9px;padding-bottom:9px}
+body{
+ background:
+  radial-gradient(ellipse at 82% 8%,rgba(112,57,190,.13) 0%,rgba(112,57,190,0) 34rem),
+  radial-gradient(ellipse at 12% 72%,rgba(87,45,145,.08) 0%,rgba(87,45,145,0) 36rem),
+  linear-gradient(135deg,#050408 0%,#090610 52%,#050409 100%) !important;
+ background-attachment:fixed;
+}
+.app-shell{background:radial-gradient(ellipse at 55% 35%,rgba(92,49,150,.055),transparent 65%)}
