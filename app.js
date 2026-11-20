@@ -72,7 +72,7 @@ function overview(){
  const sales=filteredDashboardSales();
  const total=sales.reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
  const range=state.chartRange||"7d",buckets=chartBuckets(range),values=buckets.map(b=>b.amount),geo=chartGeometry(values),hasSales=values.some(v=>v>0);
- const rangeLabel={"7d":"Últimos 7 dias","30d":"Últimos 30 dias","90d":"Últimas 12 semanas","12m":"Últimos 12 meses"}[range];
+ const rangeLabel={"7d":"Próximos 7 dias","30d":"Próximos 30 dias","90d":"Próximas 12 semanas","12m":"Próximos 12 meses"}[range];
  const ticks=[0,1,2,3].map(i=>'<line x1="12" y1="'+(22+i*58)+'" x2="708" y2="'+(22+i*58)+'" stroke="#29243a" stroke-dasharray="3 6"/>').join("");
  const inds=[0,Math.floor((buckets.length-1)/3),Math.floor(2*(buckets.length-1)/3),buckets.length-1].filter((v,i,a)=>a.indexOf(v)===i);
  const labels=inds.map(i=>'<span>'+buckets[i].label+'</span>').join("");
