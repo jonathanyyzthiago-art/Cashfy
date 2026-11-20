@@ -1457,3 +1457,69 @@ button[data-refund]{
  .cashfy-install-close{right:8px!important;width:26px!important;height:26px!important}
 }
 @media(prefers-reduced-motion:reduce){.cashfy-install-banner,.cashfy-install-banner:after{transition:none!important;animation:none!important}}
+
+
+/* CASHFY — redesign visível do aviso de instalação */
+.cashfy-install-banner{
+  position:fixed!important;z-index:2147483000!important;
+  top:calc(env(safe-area-inset-top,0px) + 12px)!important;
+  left:50%!important;right:auto!important;
+  width:min(560px,calc(100vw - 24px))!important;
+  min-height:74px!important;padding:12px 58px 12px 15px!important;
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:12px!important;margin:0!important;
+  border:1px solid rgba(255,255,255,.10)!important;
+  border-radius:32px!important;overflow:hidden!important;isolation:isolate!important;
+  background:
+    radial-gradient(ellipse at 18% -35%,rgba(255,255,255,.42),transparent 55%),
+    linear-gradient(112deg,rgba(255,255,255,.20),rgba(190,158,255,.13) 48%,rgba(76,48,117,.22))!important;
+  -webkit-backdrop-filter:blur(42px) saturate(250%) brightness(1.22)!important;
+  backdrop-filter:blur(42px) saturate(250%) brightness(1.22)!important;
+  box-shadow:0 18px 55px rgba(0,0,0,.42),0 4px 18px rgba(164,125,255,.13),inset 0 1px 1px rgba(255,255,255,.38),inset 0 -1px 1px rgba(255,255,255,.08)!important;
+  opacity:0!important;visibility:hidden!important;pointer-events:none!important;
+  transform:translate(-50%,-24px) scale(.97)!important;
+  transition:opacity .55s ease,transform .65s cubic-bezier(.16,1,.3,1),visibility .55s ease!important;
+}
+.cashfy-install-banner.is-visible{
+  opacity:1!important;visibility:visible!important;pointer-events:auto!important;
+  transform:translate(-50%,0) scale(1)!important;
+}
+.cashfy-install-banner:before{
+  content:""!important;position:absolute!important;inset:1px!important;z-index:-1!important;
+  border-radius:inherit!important;pointer-events:none!important;
+  background:linear-gradient(105deg,rgba(255,255,255,.25),transparent 34%,rgba(196,164,255,.14) 75%,transparent)!important;
+}
+.cashfy-install-banner:after{
+  content:""!important;position:absolute!important;top:-90%;left:-55%;width:38%;height:280%!important;
+  transform:rotate(22deg)!important;pointer-events:none!important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.32),transparent)!important;
+  animation:cashfy-glass-glint-new 5.5s ease-in-out infinite!important;
+}
+@keyframes cashfy-glass-glint-new{0%,58%{left:-55%;opacity:0}68%{opacity:1}100%{left:125%;opacity:0}}
+.cashfy-install-brand{position:relative!important;z-index:2!important;gap:12px!important}
+.cashfy-install-brand img{width:44px!important;height:44px!important;flex:0 0 44px!important;border-radius:15px!important;box-shadow:0 7px 22px rgba(0,0,0,.32),0 0 18px rgba(197,164,255,.16)!important}
+.cashfy-install-brand strong{font-size:16px!important;letter-spacing:.2px!important;text-shadow:0 1px 14px rgba(255,255,255,.34)!important}
+.cashfy-install-brand span{font-size:10px!important;color:rgba(255,255,255,.86)!important}
+.cashfy-install-button{
+  position:relative!important;z-index:3!important;min-width:102px!important;margin:0!important;
+  padding:11px 15px!important;border:1px solid rgba(255,255,255,.25)!important;
+  border-radius:22px!important;background:linear-gradient(135deg,rgba(199,169,255,.94),rgba(113,65,211,.92))!important;
+  box-shadow:0 7px 24px rgba(117,66,220,.38),inset 0 1px 0 rgba(255,255,255,.52)!important;
+  font-size:11px!important;
+}
+.cashfy-install-close{
+  top:50%!important;right:11px!important;width:29px!important;height:29px!important;
+  border:1px solid rgba(255,255,255,.18)!important;border-radius:50%!important;
+  background:rgba(255,255,255,.12)!important;transform:translateY(-50%)!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.25)!important;
+}
+@media(max-width:480px){
+ .cashfy-install-banner{top:calc(env(safe-area-inset-top,0px) + 8px)!important;width:calc(100vw - 16px)!important;min-height:66px!important;padding:9px 48px 9px 10px!important;border-radius:27px!important;gap:7px!important}
+ .cashfy-install-brand{gap:8px!important}
+ .cashfy-install-brand img{width:38px!important;height:38px!important;flex-basis:38px!important;border-radius:13px!important}
+ .cashfy-install-brand strong{font-size:14px!important}
+ .cashfy-install-brand span{font-size:9px!important;max-width:145px!important}
+ .cashfy-install-button{min-width:82px!important;padding:9px 10px!important;font-size:10px!important}
+ .cashfy-install-close{right:8px!important;width:26px!important;height:26px!important}
+}
+@media(prefers-reduced-motion:reduce){.cashfy-install-banner,.cashfy-install-banner:after{transition:none!important;animation:none!important}}
