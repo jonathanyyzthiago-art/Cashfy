@@ -809,3 +809,7 @@ body{
  .settings-actions{align-items:stretch;flex-direction:column}
  .settings-actions .primary-btn{width:100%}
 }
+
+.settings-field textarea.settings-input{height:auto;min-height:76px;padding:10px 11px;resize:vertical;line-height:1.5;font:inherit}
+.settings-field input[type=date]{color-scheme:dark}
+.settings-field input[type=number]{font-variant-numeric:tabular-nums}
