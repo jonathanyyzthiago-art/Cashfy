@@ -53,6 +53,11 @@ function bindRevenueChart(){
  const svg=$("#revenueChart");if(!svg)return;
  const buckets=chartBuckets(state.chartRange||"7d"),values=buckets.map(b=>b.amount),max=Math.max(1,...values);
  const cross=$("#chartCrosshair"),dot=$("#chartDot"),tip=$("#chartTooltip"),revenue=$("#chartRevenue"),date=$("#chartDate");let active=false;
+ const clearSelection=()=>{
+  active=false;cross.setAttribute("opacity","0");dot.setAttribute("opacity","0");tip.hidden=true;
+  revenue.textContent=money(values.reduce((sum,v)=>sum+v,0));
+  date.textContent=({"7d":"Últimos 7 dias","30d":"Últimos 30 dias","90d":"Últimas 12 semanas","12m":"Últimos 12 meses"}[state.chartRange||"7d"]);
+ };
  const selectAt=e=>{
   const rect=svg.getBoundingClientRect(),x=Math.max(0,Math.min(720,(e.clientX-rect.left)/rect.width*720)),idx=Math.max(0,Math.min(buckets.length-1,Math.round(x/720*(buckets.length-1))));
   const px=12+idx*696/Math.max(1,buckets.length-1),py=198-(values[idx]/max)*176,b=buckets[idx];
@@ -62,7 +67,7 @@ function bindRevenueChart(){
  };
  svg.addEventListener("pointerdown",e=>{active=true;svg.setPointerCapture(e.pointerId);selectAt(e);});
  svg.addEventListener("pointermove",e=>{if(active||e.pointerType==="mouse")selectAt(e);});
- svg.addEventListener("pointerup",()=>{active=false;});svg.addEventListener("pointercancel",()=>{active=false;});
+ svg.addEventListener("pointerup",clearSelection);svg.addEventListener("pointercancel",clearSelection);svg.addEventListener("pointerleave",e=>{if(e.pointerType==="mouse"&&!active)clearSelection();});
 }
 
 function productTable(limit=100){if(!state.products.length)return '<div class="empty-row">Nenhum produto cadastrado ainda.</div>';return `<div class="table-wrap"><table><thead><tr><th>PRODUTO</th><th>PREÇO</th><th>STATUS</th><th>CADASTRO</th><th></th></tr></thead><tbody>${state.products.slice(0,limit).map(p=>`<tr><td><span class="product-title">${escapeHtml(p.name)}</span><span class="product-sub">${escapeHtml(p.description||"Sem descrição")}</span></td><td>${money(p.price)}</td><td><span class="pill">Ativo</span></td><td>${p.date}</td><td><button class="text-btn" data-delete="${p.id}">Excluir</button></td></tr>`).join("")}</tbody></table></div>`}
