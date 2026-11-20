@@ -860,3 +860,18 @@ body{
  .app-shell.sidebar-collapsed .sidebar-brand-row .brand{display:flex}
  .app-shell.sidebar-collapsed .sidebar-toggle{margin-top:-32px;transform:none}
 }
+
+
+/* Correção estrutural do cabeçalho lateral Cashfy */
+.sidebar-brand-row{display:flex;align-items:center;gap:17px;min-width:0;margin:0 0 34px;padding:0 8px}
+.sidebar-brand-row .brand{padding:0;flex:0 0 auto}
+.sidebar-brand-row .sidebar-toggle{position:static;flex:0 0 27px;width:27px;height:27px;margin:0}
+.app-shell.sidebar-collapsed .sidebar-brand-row{justify-content:center;gap:0;margin-bottom:34px}
+.app-shell.sidebar-collapsed .sidebar-brand-row .brand{display:none}
+.app-shell.sidebar-collapsed .sidebar-brand-row .sidebar-toggle{transform:rotate(180deg)}
+@media(max-width:650px){
+ .sidebar-brand-row{margin-bottom:34px}
+ .app-shell.sidebar-collapsed .sidebar-brand-row{justify-content:flex-start;gap:17px}
+ .app-shell.sidebar-collapsed .sidebar-brand-row .brand{display:flex}
+ .app-shell.sidebar-collapsed .sidebar-brand-row .sidebar-toggle{transform:none}
+}
