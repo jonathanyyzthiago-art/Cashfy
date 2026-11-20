@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=remove-login-final-20261120">
+  <link rel="stylesheet" href="style.css?v=login-hard-remove-20261120b">
 </head>
 <body>
   <div class="loading-screen" id="loadingScreen" aria-label="Carregando Cashfy"><img src="file_000000003564820e818c91cbec0141fc.png" alt="CF"></div>
@@ -66,6 +66,15 @@
     </main>
   </div>
   <div class="modal-backdrop" id="modal" hidden><form class="modal" id="productForm"><div class="modal-head"><div><p class="eyebrow">CATÁLOGO</p><h2>Cadastrar produto</h2></div><button type="button" class="close-btn" id="closeModal">×</button></div><label>Nome do produto<input name="name" required maxlength="70" placeholder="Ex.: Curso de marketing"></label><label>Preço (R$)<input name="price" type="number" min="0" step="0.01" required placeholder="0,00"></label><label>Descrição<textarea name="description" rows="3" placeholder="Descreva seu produto"></textarea></label><div class="modal-actions"><button type="button" class="secondary-btn" id="cancelModal">Cancelar</button><button class="primary-btn" type="submit">Salvar produto</button></div></form></div>
-  <script src="app.js?v=remove-login-final-20261120"></script>
+  <script src="app.js?v=login-hard-remove-20261120b"></script>
+
+  <style id="cashfy-login-removal">.login-screen,#loginScreen,.login-overlay,[class*="login-screen"],[id*="login-screen"]{display:none!important;visibility:hidden!important;pointer-events:none!important}.app-shell[hidden]{display:none!important}</style>
+  <script>
+    (function(){
+      function removeLogin(){document.querySelectorAll('.login-screen,#loginScreen,.login-overlay,[class*="login-screen"],[id*="login-screen"]').forEach(function(el){el.remove();});}
+      removeLogin();
+      window.setTimeout(function(){removeLogin();var app=document.getElementById('appShell');if(app){app.hidden=false;app.removeAttribute('hidden');}var intro=document.getElementById('loadingScreen');if(intro){intro.classList.add('is-hidden');intro.setAttribute('aria-hidden','true');}},7000);
+    })();
+  </script>
 </body>
 </html>
