@@ -1,4 +1,5 @@
 const $ = (s) => document.querySelector(s);
+let introFinished=false;
 const state = { revenueHidden:false, dashboardFilters:{type:"all",product:"all",period:"today"}, chartRange: "7d", page: "overview", products: JSON.parse(localStorage.getItem("cashfy_products") || "[]"), sales: JSON.parse(localStorage.getItem("cashfy_sales") || "[]"), customers: JSON.parse(localStorage.getItem("cashfy_customers") || "[]") };
 const money = value => Number(value || 0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 const save = () => { localStorage.setItem("cashfy_products",JSON.stringify(state.products)); localStorage.setItem("cashfy_sales",JSON.stringify(state.sales)); localStorage.setItem("cashfy_customers",JSON.stringify(state.customers)); };
@@ -13,7 +14,23 @@ function render(){
  const [title,subtitle]=titles[state.page]; $("#crumb").textContent=title; $("#pageTitle").textContent=title; $("#pageSubtitle").textContent=subtitle;
  $("#pageContent").innerHTML=state.page==="overview"?overview():state.page==="products"?productsPage():state.page==="sales"?salesPage():state.page==="customers"?customersPage():settingsPage();
  if(state.page==="overview")bindRevenueChart();
+ if(introFinished)startRevealSequence();
 }
+
+function startRevealSequence(){
+ const groups=[
+  ...Array.from(document.querySelectorAll(".sidebar > *")),
+  ...Array.from(document.querySelectorAll(".topbar > *")),
+  ...Array.from(document.querySelectorAll(".content > .cashfy-hero, .content > .page-heading, #pageContent > *, .content > footer"))
+ ];
+ groups.forEach((el,i)=>{
+  el.classList.remove("cashfy-reveal");
+  el.style.setProperty("--reveal-delay",(i*85)+"ms");
+  void el.offsetWidth;
+  el.classList.add("cashfy-reveal");
+ });
+}
+
 function parseSaleDate(s){
  const raw=s.dateISO||s.createdAt||s.timestamp||s.date||s.created_at;if(!raw)return null;
  if(typeof raw==="number"){const d=new Date(raw);return isNaN(d)?null:d;}
@@ -128,4 +145,4 @@ $("#productForm").addEventListener("submit",e=>{e.preventDefault();const data=ne
 $("#closeModal").addEventListener("click",closeModal);$("#cancelModal").addEventListener("click",closeModal);$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal();});$("#mobileMenu").addEventListener("click",()=>$("#sidebar").classList.toggle("open"));
 render();
 const loadingScreen=$("#loadingScreen");
-if(loadingScreen){window.setTimeout(()=>{loadingScreen.classList.add("is-hidden");loadingScreen.setAttribute("aria-hidden","true");},7000);}
+if(loadingScreen){window.setTimeout(()=>{loadingScreen.classList.add("is-hidden");loadingScreen.setAttribute("aria-hidden","true");introFinished=true;startRevealSequence();},7000);}
