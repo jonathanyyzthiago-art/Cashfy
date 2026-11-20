@@ -504,3 +504,10 @@ button:focus-visible{
 .dashboard-update:hover > i,.dashboard-update:focus-visible > i{animation:dashboardRefreshSpin .65s ease-in-out}
 .dashboard-update:active > i{animation:dashboardRefreshSpin .45s ease-in-out}
 @media(max-width:650px){.dashboard-update{gap:6px;padding-inline:10px}.dashboard-update > span{font-size:10px}.dashboard-update > i{font-size:14px}}
+
+
+/* Corrige apenas o texto e a posicao do icone; preserva a largura original */
+.dashboard-update{width:132px !important;min-width:132px !important;gap:6px;padding:0 12px}
+.dashboard-update > span{font-size:10px !important;font-weight:600}
+.dashboard-update > i{order:initial !important;font-size:14px !important}
+@media(max-width:650px){.dashboard-update{width:132px !important;min-width:132px !important;padding:0 12px}.dashboard-update > span{font-size:9px !important}.dashboard-update > i{font-size:13px !important}}
