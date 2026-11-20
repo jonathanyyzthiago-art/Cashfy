@@ -698,7 +698,7 @@ body{
 .brand-logo{width:44px;height:44px;object-fit:cover;border-radius:10px;box-shadow:0 0 15px #8b45ff35}
 .loading-screen{position:fixed;inset:0;z-index:2147483647;display:grid;place-items:center;background:#030206;opacity:1;visibility:visible;animation:cashfy-intro 7s ease forwards;pointer-events:auto}
 .loading-screen.is-hidden{opacity:0;visibility:hidden;pointer-events:none;animation:none}
-.loading-screen img{display:block;width:min(140px,38vw);height:auto;object-fit:contain;animation:cashfy-pulse 3.2s ease-in-out infinite;filter:drop-shadow(0 0 7px #8d35ff75) drop-shadow(0 0 22px #7c2cff42);will-change:transform,filter}
+.loading-screen img{display:block;width:min(110px,30vw);height:auto;object-fit:contain;animation:cashfy-pulse 3.2s ease-in-out infinite;filter:drop-shadow(0 0 7px #8d35ff75) drop-shadow(0 0 22px #7c2cff42);will-change:transform,filter}
 @keyframes cashfy-pulse{0%,100%{transform:scale(.94);filter:drop-shadow(0 0 5px #8d35ff55) drop-shadow(0 0 15px #7c2cff30)}50%{transform:scale(1.045);filter:drop-shadow(0 0 10px #a45cffaa) drop-shadow(0 0 28px #7c2cff65)}}
 @media(prefers-reduced-motion:reduce){.loading-screen img{animation:none}}
 
