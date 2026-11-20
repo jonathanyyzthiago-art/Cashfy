@@ -11,7 +11,7 @@ if(!localStorage.getItem("cashfy_demo_sale_8000")) {
 }
 const titles = {
  overview:["Dashboard","Acompanhe suas vendas e resultados em um só lugar."],
- goals:["Metas","Defina objetivos e acompanhe seu progresso."],
+ goals:["Metas","Acompanhe suas conquistas e a evolução do faturamento automaticamente."],
  products:["Produtos","Cadastre e organize os produtos que você vende."],
  sales:["Vendas","Acompanhe os pedidos registrados na sua operação."],
  customers:["Clientes","Consulte os clientes cadastrados na sua base."],
@@ -54,8 +54,8 @@ function moduleTable(headers,rows,empty){
 function modulePage(page){
  const data=moduleData;
  const dateNow=()=>new Date().toLocaleString("pt-BR");
- const card=(title,desc,body)=>'<section class="panel module-panel"><div class="module-panel-head"><div><h3>'+title+'</h3><p>'+desc+'</p></div></div>'+body+'</section>';
- const form=(id,fields,button)=>'<form class="module-form" id="'+id+'">'+fields.join("")+'<button class="primary-btn" type="submit">'+button+'</button></form>';
+ const card=(title,desc,body)=>body?'<section class="panel module-panel"><div class="module-panel-head"><div><h3>'+title+'</h3><p>'+desc+'</p></div></div>'+body+'</section>':"";
+ const form=(id,fields,button)=>"";
  if(page==="goals"){
   const total=state.sales.reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
   const tiers=[
