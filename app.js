@@ -25,21 +25,73 @@ const titles = {
  integrations:["Integrações","Conecte serviços usados pela sua operação."],
  settings:["Configurações","Gerencie as informações básicas do seu espaço."]
 };
-function modulePage(page){
- const details={
-  subscriptions:["Cobranças recorrentes","Planos, periodicidade e situação das assinaturas."],
-  refunds:["Solicitações de reembolso","Acompanhe pedidos, motivos e andamento."],
-  affiliates:["Programa de afiliados","Parceiros, links de divulgação e comissões."],
-  coupons:["Descontos e campanhas","Cupons, regras de uso e validade."],
-  checkout:["Página de pagamento","Aparência, campos e opções de pagamento."],
-  balance:["Visão financeira","Saldo disponível, valores pendentes e saques."],
-  transactions:["Extrato de movimentações","Entradas, saídas, taxas e status."],
-  reports:["Desempenho da operação","Vendas, conversão, faturamento e produtos."],
-  integrations:["Conexões disponíveis","Serviços externos e chaves de integração."]
- };
- const item=details[page];
- return '<section class="module-grid"><article class="panel module-card"><p class="eyebrow">CASHFY • '+escapeHtml(titles[page][0].toUpperCase())+'</p><h3>'+escapeHtml(item[0])+'</h3><p class="muted">'+escapeHtml(item[1])+'</p><div class="module-status"><span class="module-status-dot"></span> Área visual em preparação</div></article><article class="panel module-card"><h3>Integração necessária</h3><p class="muted">Esta área já está organizada no painel. As operações reais serão ativadas quando os serviços de pagamento e a estrutura de dados forem conectados.</p></article></section>';
+function moduleStore(key, fallback=[]){
+ try{return JSON.parse(localStorage.getItem("cashfy_"+key)||"null")??fallback;}catch{return fallback;}
 }
+const moduleData={
+ refunds:moduleStore("refunds"),subscriptions:moduleStore("subscriptions"),affiliates:moduleStore("affiliates"),
+ coupons:moduleStore("coupons"),withdrawals:moduleStore("withdrawals"),integrations:moduleStore("integrations",{}),
+ checkout:moduleStore("checkout",{title:"Finalize sua compra",button:"Pagar agora",color:"#8b5cf6",pix:true,card:true,boleto:false}),
+};
+function persistModule(key){localStorage.setItem("cashfy_"+key,JSON.stringify(moduleData[key]));}
+function moduleField(label,name,type="text",placeholder=""){
+ return '<label class="module-field"><span>'+label+'</span><input name="'+name+'" type="'+type+'" placeholder="'+escapeHtml(placeholder)+'" '+(name==="amount"||name==="price"?"min=\"0.01\" step=\"0.01\"":"")+' required></label>';
+}
+function moduleSelect(label,name,options){
+ return '<label class="module-field"><span>'+label+'</span><select name="'+name+'">'+options.map(o=>'<option value="'+o[0]+'">'+o[1]+'</option>').join("")+'</select></label>';
+}
+function moduleButton(label,action,kind="secondary-btn"){return '<button type="button" class="'+kind+'" data-module-action="'+action+'">'+label+'</button>';}
+function moduleTable(headers,rows,empty){
+ return '<div class="module-table-wrap"><table class="module-table"><thead><tr>'+headers.map(h=>'<th>'+h+'</th>').join("")+'</tr></thead><tbody>'+(rows.length?rows.join(""):'<tr><td colspan="'+headers.length+'" class="module-empty">'+empty+'</td></tr>')+'</tbody></table></div>';
+}
+function modulePage(page){
+ const data=moduleData;
+ const dateNow=()=>new Date().toLocaleString("pt-BR");
+ const card=(title,desc,body)=>'<section class="panel module-panel"><div class="module-panel-head"><div><h3>'+title+'</h3><p>'+desc+'</p></div></div>'+body+'</section>';
+ const form=(id,fields,button)=>'<form class="module-form" id="'+id+'">'+fields.join("")+'<button class="primary-btn" type="submit">'+button+'</button></form>';
+ if(page==="refunds"){
+  const rows=data.refunds.map((r,i)=>'<tr><td>#'+escapeHtml(r.id)+'</td><td>'+escapeHtml(r.customer)+'</td><td>'+escapeHtml(r.reason)+'</td><td>'+money(r.amount)+'</td><td><span class="module-pill">'+r.status+'</span></td><td><div class="module-row-actions">'+(r.status==="Solicitado"?'<button data-refund="approve" data-id="'+i+'">Aprovar</button><button data-refund="deny" data-id="'+i+'">Recusar</button>':'—')+'</div></td></tr>');
+  return '<div class="module-kpis"><div class="panel"><small>Solicitações</small><strong>'+data.refunds.length+'</strong></div><div class="panel"><small>Aguardando análise</small><strong>'+data.refunds.filter(x=>x.status==="Solicitado").length+'</strong></div><div class="panel"><small>Valor solicitado</small><strong>'+money(data.refunds.filter(x=>x.status==="Solicitado").reduce((s,x)=>s+x.amount,0))+'</strong></div></div>'+card("Nova solicitação de reembolso","Registre o pedido e acompanhe a análise.",form("refundForm",[moduleField("Cliente","customer"),moduleField("Valor (R$)","amount","number"),moduleSelect("Motivo","reason",[["Arrependimento","Arrependimento"],["Produto não recebido","Produto não recebido"],["Cobrança duplicada","Cobrança duplicada"],["Outro","Outro"]])],"Registrar solicitação"))+card("Solicitações de reembolso","Analise, aprove ou recuse os pedidos.",moduleTable(["Pedido","Cliente","Motivo","Valor","Status","Ações"],rows,"Nenhuma solicitação registrada.")+'<p class="module-hint">A aprovação aqui altera o status demonstrativo. A devolução financeira exige integração com o processador.</p>');
+ }
+ if(page==="subscriptions"){
+  const rows=data.subscriptions.map((s,i)=>'<tr><td>'+escapeHtml(s.name)+'</td><td>'+escapeHtml(s.customer)+'</td><td>'+money(s.amount)+'</td><td>'+s.cycle+'</td><td>'+s.status+'</td><td><button data-subscription="'+i+'">'+(s.status==="Ativa"?"Cancelar":"Reativar")+'</button></td></tr>');
+  return card("Criar plano/assinatura","Cadastre uma recorrência para controle da operação.",form("subscriptionForm",[moduleField("Nome do plano","name"),moduleField("Cliente","customer"),moduleField("Valor recorrente (R$)","amount","number"),moduleSelect("Periodicidade","cycle",[["Mensal","Mensal"],["Anual","Anual"],["Semanal","Semanal"]])],"Criar assinatura"))+card("Assinaturas cadastradas","Consulte e altere o status das recorrências.",moduleTable(["Plano","Cliente","Valor","Ciclo","Status","Ação"],rows,"Nenhuma assinatura cadastrada.")+'<p class="module-hint">Cobranças recorrentes automáticas dependem de gateway e agendador no servidor.</p>');
+ }
+ if(page==="affiliates"){
+  const rows=data.affiliates.map((a,i)=>'<tr><td>'+escapeHtml(a.name)+'</td><td>'+escapeHtml(a.email)+'</td><td>'+a.commission+'%</td><td>'+a.code+'</td><td>'+a.status+'</td><td><button data-affiliate="'+i+'">Alternar status</button></td></tr>');
+  return card("Adicionar afiliado","Cadastre parceiros e defina a comissão.",form("affiliateForm",[moduleField("Nome","name"),moduleField("E-mail","email","email"),moduleField("Comissão (%)","commission","number"),moduleField("Código/link de divulgação","code")],"Adicionar afiliado"))+card("Seus afiliados","Gerencie os parceiros cadastrados.",moduleTable(["Nome","E-mail","Comissão","Código","Status","Ação"],rows,"Nenhum afiliado cadastrado."));
+ }
+ if(page==="coupons"){
+  const rows=data.coupons.map((c,i)=>'<tr><td><b>'+escapeHtml(c.code)+'</b></td><td>'+c.discount+(c.kind==="percent"?"%":" R$")+'</td><td>'+c.uses+'</td><td>'+c.expires+'</td><td>'+c.status+'</td><td><button data-coupon="'+i+'">Ativar/desativar</button> <button data-coupon-delete="'+i+'">Excluir</button></td></tr>');
+  return card("Criar cupom","Defina desconto, limite de uso e validade.",form("couponForm",[moduleField("Código do cupom","code"),moduleSelect("Tipo de desconto","kind",[["percent","Porcentagem (%)"],["fixed","Valor fixo (R$)"]]),moduleField("Desconto","discount","number"),moduleField("Limite de utilizações","uses","number"),moduleField("Validade","expires","date")],"Criar cupom"))+card("Cupons cadastrados","Ative, pause ou remova campanhas.",moduleTable(["Código","Desconto","Limite","Validade","Status","Ações"],rows,"Nenhum cupom criado."));
+ }
+ if(page==="checkout"){
+  const s=data.checkout;
+  return card("Personalização do checkout","Configure a aparência e os métodos exibidos na página.",'<form id="checkoutForm" class="module-form">'+moduleField("Título do checkout","title","text",s.title)+moduleField("Texto do botão","button","text",s.button)+moduleField("Cor principal","color","color",s.color)+'<label class="module-check"><input type="checkbox" name="pix" '+(s.pix?"checked":"")+'> Aceitar Pix</label><label class="module-check"><input type="checkbox" name="card" '+(s.card?"checked":"")+'> Aceitar cartão</label><label class="module-check"><input type="checkbox" name="boleto" '+(s.boleto?"checked":"")+'> Aceitar boleto</label><button class="primary-btn">Salvar checkout</button></form>')+card("Prévia da página","Visualização local das opções configuradas.",'<div class="checkout-preview" style="--checkout-color:'+escapeHtml(s.color)+'"><h3>'+escapeHtml(s.title)+'</h3><p>Produto selecionado</p><strong>R$ 97,00</strong><div class="checkout-methods">'+(s.pix?"Pix ":"")+(s.card?"Cartão ":"")+(s.boleto?"Boleto":"")+'</div><button type="button">'+escapeHtml(s.button)+'</button></div><p class="module-hint">Prévia visual. A captura e o processamento de pagamentos ainda não estão conectados.</p>');
+ }
+ if(page==="balance"){
+  const total=state.sales.reduce((n,x)=>n+Number(x.amount||x.total||x.price||0),0);
+  const requested=data.withdrawals.reduce((n,x)=>n+x.amount,0);
+  const rows=data.withdrawals.map(w=>'<tr><td>'+w.date+'</td><td>'+money(w.amount)+'</td><td>'+w.destination+'</td><td>'+w.status+'</td></tr>');
+  return '<div class="module-kpis"><div class="panel"><small>Saldo bruto demonstrativo</small><strong>'+money(total)+'</strong></div><div class="panel"><small>Saques solicitados</small><strong>'+money(requested)+'</strong></div><div class="panel"><small>Saldo estimado</small><strong>'+money(Math.max(0,total-requested))+'</strong></div></div>'+card("Solicitar saque","Registre uma solicitação demonstrativa de retirada.",form("withdrawForm",[moduleField("Valor do saque (R$)","amount","number"),moduleField("Chave Pix / destino","destination")],"Solicitar saque"))+card("Histórico de saques","Acompanhe as solicitações registradas.",moduleTable(["Data","Valor","Destino","Status"],rows,"Nenhum saque solicitado.")+'<p class="module-hint">Valores são simulados a partir dos registros locais. Nenhuma transferência bancária é realizada.</p>');
+ }
+ if(page==="transactions"){
+  const rows=state.sales.map(s=>'<tr><td>'+escapeHtml(s.id||"Venda")+'</td><td>'+escapeHtml(s.productName||s.product_name||"Venda")+'</td><td>'+money(s.amount||s.total||s.price)+'</td><td>'+escapeHtml(s.status||"Registrada")+'</td><td>'+escapeHtml(s.dateISO?new Date(s.dateISO).toLocaleDateString("pt-BR"):(s.date||"—"))+'</td></tr>');
+  return card("Extrato de transações","Movimentações registradas neste navegador.",'<div class="module-toolbar"><input id="transactionSearch" placeholder="Buscar por produto, ID ou status"><button class="secondary-btn" id="exportTransactions" type="button">Exportar CSV</button></div>'+moduleTable(["ID","Descrição","Valor","Status","Data"],rows,"Nenhuma transação registrada.")+'<p class="module-hint">Este extrato reúne registros locais de vendas. Para conciliação real, conecte o provedor de pagamentos.</p>');
+ }
+ if(page==="reports"){
+  const total=state.sales.reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
+  const count=state.sales.length;const average=count?total/count:0;
+  const rows=state.products.map(p=>'<tr><td>'+escapeHtml(p.name)+'</td><td>'+money(p.price)+'</td><td>'+state.sales.filter(s=>String(s.productId||s.productName)===String(p.id)||s.productName===p.name).length+'</td></tr>');
+  return '<div class="module-kpis"><div class="panel"><small>Faturamento registrado</small><strong>'+money(total)+'</strong></div><div class="panel"><small>Vendas registradas</small><strong>'+count+'</strong></div><div class="panel"><small>Ticket médio</small><strong>'+money(average)+'</strong></div></div>'+card("Desempenho por produto","Resumo dos produtos cadastrados.",moduleTable(["Produto","Preço cadastrado","Vendas relacionadas"],rows,"Cadastre produtos para visualizar o relatório.")+'<div class="module-toolbar"><button class="secondary-btn" id="exportReport" type="button">Baixar relatório CSV</button></div><p class="module-hint">Indicadores calculados sobre os dados disponíveis neste navegador, não sobre transações do gateway.</p>');
+ }
+ if(page==="integrations"){
+  const items=[["Google Analytics","analytics"],["Meta Pixel","pixel"],["Webhook de eventos","webhook"],["API externa","api"]];
+  return card("Conexões e integrações","Ative os conectores que deseja preparar e informe seus identificadores.",'<form id="integrationsForm">'+items.map(([label,key])=>'<div class="integration-row"><label><input type="checkbox" name="'+key+'" '+(data.integrations[key]&&data.integrations[key].enabled?"checked":"")+'> <b>'+label+'</b></label><input name="'+key+'_value" placeholder="'+(key==="webhook"?"https://seu-dominio.com/webhook":"ID ou URL de integração")+'" value="'+escapeHtml(data.integrations[key]?.value||"")+'"></div>').join("")+'<button class="primary-btn" type="submit">Salvar integrações</button></form><p class="module-hint">Apenas as preferências ficam salvas localmente. Para conectar de verdade, configure credenciais e endpoints seguros no backend. Nunca cole chaves secretas aqui.</p>');
+ }
+ return '<section class="panel module-card"><h3>'+escapeHtml(titles[page][0])+'</h3><p class="muted">Módulo em construção.</p></section>';
+}
+
 function render(){
  const current=titles[state.page]?state.page:"overview";
  if(current!==state.page)state.page="overview";
@@ -246,3 +298,24 @@ $("#closeModal").addEventListener("click",closeModal);$("#cancelModal").addEvent
 render();
 const loadingScreen=$("#loadingScreen");
 if(loadingScreen){window.setTimeout(()=>{loadingScreen.classList.add("is-hidden");loadingScreen.setAttribute("aria-hidden","true");introFinished=true;startRevealSequence();},7000);}
+
+
+document.addEventListener("submit",e=>{
+ const f=e.target;
+ const read=name=>f.elements[name]?.value?.trim()||"";
+ if(f.id==="refundForm"){e.preventDefault();moduleData.refunds.unshift({id:Date.now().toString().slice(-7),customer:read("customer"),amount:Number(read("amount")),reason:read("reason"),status:"Solicitado"});persistModule("refunds");render();}
+ if(f.id==="subscriptionForm"){e.preventDefault();moduleData.subscriptions.unshift({name:read("name"),customer:read("customer"),amount:Number(read("amount")),cycle:read("cycle"),status:"Ativa"});persistModule("subscriptions");render();}
+ if(f.id==="affiliateForm"){e.preventDefault();moduleData.affiliates.unshift({name:read("name"),email:read("email"),commission:Number(read("commission")),code:read("code"),status:"Ativo"});persistModule("affiliates");render();}
+ if(f.id==="couponForm"){e.preventDefault();moduleData.coupons.unshift({code:read("code").toUpperCase(),kind:read("kind"),discount:Number(read("discount")),uses:Number(read("uses")),expires:read("expires"),status:"Ativo"});persistModule("coupons");render();}
+ if(f.id==="checkoutForm"){e.preventDefault();moduleData.checkout={title:read("title"),button:read("button"),color:read("color"),pix:f.elements.pix.checked,card:f.elements.card.checked,boleto:f.elements.boleto.checked};persistModule("checkout");render();}
+ if(f.id==="withdrawForm"){e.preventDefault();const amount=Number(read("amount"));if(!(amount>0)){alert("Informe um valor válido.");return;}moduleData.withdrawals.unshift({amount,destination:read("destination"),date:dateNow(),status:"Solicitado"});persistModule("withdrawals");render();}
+ if(f.id==="integrationsForm"){e.preventDefault();moduleData.integrations={};["analytics","pixel","webhook","api"].forEach(k=>moduleData.integrations[k]={enabled:f.elements[k].checked,value:f.elements[k+"_value"].value.trim()});persistModule("integrations");render();}
+});
+document.addEventListener("click",e=>{
+ const refund=e.target.closest("[data-refund]");if(refund){const r=moduleData.refunds[Number(refund.dataset.id)];if(r){r.status=refund.dataset.refund==="approve"?"Aprovado":"Recusado";persistModule("refunds");render();}return;}
+ const sub=e.target.closest("[data-subscription]");if(sub){const s=moduleData.subscriptions[Number(sub.dataset.subscription)];if(s){s.status=s.status==="Ativa"?"Cancelada":"Ativa";persistModule("subscriptions");render();}return;}
+ const aff=e.target.closest("[data-affiliate]");if(aff){const a=moduleData.affiliates[Number(aff.dataset.affiliate)];if(a){a.status=a.status==="Ativo"?"Pausado":"Ativo";persistModule("affiliates");render();}return;}
+ const coupon=e.target.closest("[data-coupon]");if(coupon){const a=moduleData.coupons[Number(coupon.dataset.coupon)];if(a){a.status=a.status==="Ativo"?"Pausado":"Ativo";persistModule("coupons");render();}return;}
+ const couponDelete=e.target.closest("[data-coupon-delete]");if(couponDelete&&confirm("Excluir este cupom?")){moduleData.coupons.splice(Number(couponDelete.dataset.couponDelete),1);persistModule("coupons");render();return;}
+ if(e.target.closest("#exportTransactions")||e.target.closest("#exportReport")){const rows=[["ID","Descrição","Valor","Status","Data"],...state.sales.map(s=>[s.id||"",s.productName||s.product_name||"Venda",s.amount||s.total||s.price||0,s.status||"Registrada",s.dateISO||s.date||""])];const csv=rows.map(r=>r.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(";")).join("\n");const url=URL.createObjectURL(new Blob(["\ufeff"+csv],{type:"text/csv;charset=utf-8"}));const a=document.createElement("a");a.href=url;a.download="cashfy-relatorio.csv";a.click();URL.revokeObjectURL(url);}
+});
