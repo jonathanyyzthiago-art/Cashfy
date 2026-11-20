@@ -27,3 +27,57 @@
  .revenue-total{font-size:24px}
  .chart-foot{font-size:9px}
 }
+
+/* Cashfy — refined purple atmosphere */
+:root{
+ --bg:#0b0814;
+ --panel:#12101d;
+ --panel2:#191429;
+ --line:#2c2440;
+ --purple:#a27aff;
+ --purple2:#7849df;
+}
+body{
+ background:
+  radial-gradient(ellipse at 78% 4%,rgba(117,72,205,.16) 0%,rgba(117,72,205,0) 34rem),
+  radial-gradient(ellipse at 18% 48%,rgba(91,57,153,.10) 0%,rgba(91,57,153,0) 38rem),
+  linear-gradient(135deg,#0b0814 0%,#0e0a19 48%,#0a0812 100%);
+ background-attachment:fixed;
+}
+.app-shell{background:transparent}
+.sidebar{
+ background:linear-gradient(180deg,rgba(18,14,29,.97),rgba(13,10,22,.98));
+ border-right-color:rgba(157,123,218,.16);
+ box-shadow:8px 0 35px rgba(0,0,0,.12);
+}
+.topbar{
+ background:rgba(13,10,22,.48);
+ border-bottom-color:rgba(157,123,218,.13);
+ backdrop-filter:blur(14px);
+}
+.content{position:relative}
+.stat-card,.panel{
+ background:linear-gradient(145deg,rgba(27,21,43,.94),rgba(17,14,28,.96));
+ border-color:rgba(157,123,218,.17);
+ box-shadow:0 12px 32px rgba(0,0,0,.13),inset 0 1px 0 rgba(255,255,255,.018);
+}
+.stat-card:hover,.panel:hover{
+ border-color:rgba(164,127,255,.29);
+}
+.workspace{
+ background:linear-gradient(135deg,rgba(39,29,61,.82),rgba(20,16,32,.9));
+ border-color:rgba(157,123,218,.2);
+}
+.nav-link:hover,.nav-link.active{
+ background:linear-gradient(90deg,rgba(133,91,211,.2),rgba(133,91,211,.07));
+}
+.primary-btn{
+ background:linear-gradient(120deg,#a985ff,#7546d8);
+ box-shadow:0 7px 22px rgba(126,78,216,.24);
+}
+.range-tabs{border-color:rgba(157,123,218,.2);background:rgba(12,9,20,.72)}
+.range-btn.active{background:rgba(126,83,194,.28);color:#e1d2ff;box-shadow:inset 0 0 0 1px rgba(173,139,255,.28)}
+@media(max-width:760px){
+ body{background-attachment:scroll}
+ .topbar{background:rgba(13,10,22,.78)}
+}
