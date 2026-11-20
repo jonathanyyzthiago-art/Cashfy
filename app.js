@@ -308,7 +308,7 @@ document.addEventListener("submit",e=>{
  if(f.id==="affiliateForm"){e.preventDefault();moduleData.affiliates.unshift({name:read("name"),email:read("email"),commission:Number(read("commission")),code:read("code"),status:"Ativo"});persistModule("affiliates");render();}
  if(f.id==="couponForm"){e.preventDefault();moduleData.coupons.unshift({code:read("code").toUpperCase(),kind:read("kind"),discount:Number(read("discount")),uses:Number(read("uses")),expires:read("expires"),status:"Ativo"});persistModule("coupons");render();}
  if(f.id==="checkoutForm"){e.preventDefault();moduleData.checkout={title:read("title"),button:read("button"),color:read("color"),pix:f.elements.pix.checked,card:f.elements.card.checked,boleto:f.elements.boleto.checked};persistModule("checkout");render();}
- if(f.id==="withdrawForm"){e.preventDefault();const amount=Number(read("amount"));if(!(amount>0)){alert("Informe um valor válido.");return;}moduleData.withdrawals.unshift({amount,destination:read("destination"),date:dateNow(),status:"Solicitado"});persistModule("withdrawals");render();}
+ if(f.id==="withdrawForm"){e.preventDefault();const amount=Number(read("amount"));if(!(amount>0)){alert("Informe um valor válido.");return;}moduleData.withdrawals.unshift({amount,destination:read("destination"),date:new Date().toLocaleString("pt-BR"),status:"Solicitado"});persistModule("withdrawals");render();}
  if(f.id==="integrationsForm"){e.preventDefault();moduleData.integrations={};["analytics","pixel","webhook","api"].forEach(k=>moduleData.integrations[k]={enabled:f.elements[k].checked,value:f.elements[k+"_value"].value.trim()});persistModule("integrations");render();}
 });
 document.addEventListener("click",e=>{
