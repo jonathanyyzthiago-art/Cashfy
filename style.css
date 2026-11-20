@@ -725,3 +725,43 @@ body{
 .module-status{display:flex;align-items:center;gap:8px;margin-top:24px;color:#c4b3e8;font-size:11px}
 .module-status-dot{width:7px;height:7px;border-radius:50%;background:#a47aff;box-shadow:0 0 9px #a47aff88}
 @media(max-width:650px){.module-grid{grid-template-columns:1fr}.module-card{min-height:0}}
+
+
+/* Identidade visual do nome Cashfy na barra lateral */
+.sidebar .brand{
+  position:relative;
+  width:max-content;
+  gap:10px;
+  padding:0 10px 34px;
+  font-family:'Space Grotesk',sans-serif;
+  font-size:25px;
+  font-weight:700;
+  letter-spacing:-1.25px;
+  line-height:1;
+  color:#fff;
+  text-shadow:0 2px 16px rgba(164,112,255,.2);
+}
+.sidebar .brand-logo{
+  width:42px;
+  height:42px;
+  padding:3px;
+  border:1px solid rgba(185,145,255,.38);
+  border-radius:13px;
+  background:linear-gradient(145deg,rgba(155,104,255,.2),rgba(48,30,77,.55));
+  box-shadow:0 0 0 3px rgba(145,91,230,.07),0 5px 18px rgba(116,65,202,.2);
+}
+.sidebar .brand>span{
+  background:linear-gradient(100deg,#fff 8%,#e6d8ff 55%,#b991ff 100%);
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+}
+.sidebar .brand .brand-dot{
+  color:#b68aff;
+  -webkit-text-fill-color:#b68aff;
+  text-shadow:0 0 12px rgba(177,129,255,.8);
+}
+.sidebar .brand:hover .brand-logo{
+  border-color:rgba(197,164,255,.72);
+  box-shadow:0 0 0 3px rgba(145,91,230,.12),0 0 22px rgba(142,87,230,.3);
+}
