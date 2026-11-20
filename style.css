@@ -1163,3 +1163,67 @@ button[data-refund]{
 .sidebar.collapsed .sidebar-goal-top{justify-content:center}
 .sidebar.collapsed .sidebar-goal-icon-wrap{width:36px;height:36px}
 @media(max-width:650px){.sidebar-revenue-goal{margin-bottom:20px}}
+
+
+/* Cashfy — meta lateral com acabamento visual premium */
+.sidebar-revenue-goal{
+ position:relative;isolation:isolate;overflow:hidden;
+ padding:13px 12px 11px!important;
+ border:1px solid rgba(174,139,255,.42)!important;
+ border-radius:14px!important;
+ background:
+  radial-gradient(ellipse at 100% 0%,rgba(173,126,255,.23),transparent 48%),
+  linear-gradient(145deg,#211832 0%,#171124 52%,#100d18 100%)!important;
+ box-shadow:0 9px 24px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.12),inset 0 0 22px rgba(151,103,255,.06)!important;
+ transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease;
+}
+.sidebar-revenue-goal:before{
+ content:"";position:absolute;z-index:-1;left:0;top:13px;bottom:13px;width:3px;
+ border-radius:0 5px 5px 0;background:linear-gradient(180deg,#e0c7ff,#9862ef 55%,#6840b8);
+ box-shadow:0 0 12px rgba(174,132,255,.55);
+}
+.sidebar-revenue-goal:after{
+ content:"";position:absolute;z-index:-1;width:100px;height:100px;right:-48px;top:-55px;
+ border-radius:50%;background:rgba(165,119,255,.2);filter:blur(20px);pointer-events:none;
+}
+.sidebar-revenue-goal:hover{
+ transform:translateY(-2px);
+ border-color:rgba(205,178,255,.7)!important;
+ box-shadow:0 13px 28px rgba(0,0,0,.34),0 0 19px rgba(155,112,255,.16),inset 0 1px 0 rgba(255,255,255,.15)!important;
+}
+.sidebar-goal-top{position:relative;z-index:1;gap:9px!important}
+.sidebar-goal-icon-wrap{
+ width:35px;height:35px;flex:0 0 35px;display:grid;place-items:center;
+ border:1px solid rgba(199,169,255,.38);border-radius:11px;
+ background:linear-gradient(145deg,rgba(163,119,255,.32),rgba(83,55,130,.22));
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 4px 12px rgba(0,0,0,.2),0 0 13px rgba(158,112,255,.12);
+}
+.sidebar-goal-icon{width:19px;height:19px;stroke:#e0caff!important;filter:drop-shadow(0 0 5px rgba(184,145,255,.65))}
+.sidebar-goal-copy small{color:#bca9d7!important;font-size:7px!important;letter-spacing:1.2px!important}
+.sidebar-goal-copy strong{color:#fff!important;font-size:11px!important;letter-spacing:.05px;text-shadow:0 1px 10px rgba(205,177,255,.2)}
+.sidebar-goal-track{
+ position:relative;height:8px!important;margin-top:12px!important;
+ border:1px solid rgba(255,255,255,.1);border-radius:20px!important;
+ background:linear-gradient(180deg,#08060e,#100b18)!important;
+ box-shadow:inset 0 2px 4px #000,0 1px 0 rgba(255,255,255,.04);
+}
+.sidebar-goal-track span{
+ position:relative;display:block;height:100%;border-radius:20px;
+ background:linear-gradient(90deg,#7144c5 0%,#a36af2 48%,#d6b5ff 100%)!important;
+ box-shadow:0 0 9px rgba(168,119,255,.62),0 0 17px rgba(168,119,255,.24);
+}
+.sidebar-goal-track span:after{
+ content:"";position:absolute;inset:0;border-radius:inherit;
+ background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.65) 50%,transparent 80%);
+ animation:sidebar-goal-shimmer 3s ease-in-out infinite;
+}
+@keyframes sidebar-goal-shimmer{0%,15%{transform:translateX(-110%)}75%,100%{transform:translateX(110%)}}
+.sidebar-goal-bottom{position:relative;z-index:1;margin-top:9px!important;color:#b3a8c4!important;font-size:8px!important}
+.sidebar-goal-bottom strong{
+ min-width:36px;padding:3px 7px;border:1px solid rgba(190,158,255,.3);
+ border-radius:7px;background:linear-gradient(135deg,rgba(151,103,235,.24),rgba(93,59,143,.2));
+ color:#e8d8ff!important;font-size:9px!important;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 2px 7px rgba(0,0,0,.15);
+}
+.sidebar.collapsed .sidebar-revenue-goal{padding:11px 7px!important}
+@media(prefers-reduced-motion:reduce){.sidebar-goal-track span:after{animation:none;opacity:.15}.sidebar-revenue-goal{transition:none}}
