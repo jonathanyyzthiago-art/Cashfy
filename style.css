@@ -1229,10 +1229,10 @@ button[data-refund]{
 @media(prefers-reduced-motion:reduce){.sidebar-goal-track span:after{animation:none;opacity:.15}.sidebar-revenue-goal{transition:none}}
 
 
-/* Meta lateral: faturamento à esquerda e símbolo à direita */
-.sidebar-revenue-goal .sidebar-goal-top{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:9px!important}
+/* Meta lateral restaurada: símbolo à esquerda e faturamento à direita */
+.sidebar-revenue-goal .sidebar-goal-top{display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important}
+.sidebar-revenue-goal .sidebar-goal-icon-wrap{order:0!important;flex:0 0 35px!important}
 .sidebar-revenue-goal .sidebar-goal-copy{order:1!important;flex:1 1 auto!important;text-align:left!important}
-.sidebar-revenue-goal .sidebar-goal-icon-wrap{order:2!important;flex:0 0 35px!important}
 .sidebar.collapsed .sidebar-revenue-goal .sidebar-goal-top{justify-content:center!important}
 
 /* Correção definitiva: impedir que a meta lateral seja achatada/cortada */
