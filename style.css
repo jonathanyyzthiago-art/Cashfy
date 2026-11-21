@@ -2926,3 +2926,27 @@ body.profile-view .content{padding-top:14px}
  .profile-dashboard-panel .profile-mini-plaque{aspect-ratio:.58/1}
  .profile-dashboard-panel .profile-mini-plaque>strong{font-size:6px}
 }
+
+
+/* Correção final: perfil sem banner/cabeçalho e cards pequenos horizontais */
+body.profile-view .content > .cashfy-hero,
+body.profile-view .content > .page-heading,
+body.profile-view .content > .cashfy-install-banner{display:none!important;height:0!important;min-height:0!important;margin:0!important;padding:0!important;overflow:hidden!important}
+body.profile-view .content{padding-top:12px!important}
+body.profile-view #pageContent{margin-top:0!important;padding-top:0!important}
+body.profile-view .profile-dashboard-panel .profile-minis-panel .profile-minis{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:5px!important}
+body.profile-view .profile-dashboard-panel .profile-mini-card{min-width:0!important;width:100%!important;overflow:hidden!important}
+body.profile-view .profile-dashboard-panel .profile-mini-plaque{width:100%!important;aspect-ratio:1.48/1!important;height:auto!important;min-height:0!important;padding:4px 2px!important;display:flex!important;flex-direction:column!important;align-items:center!important;justify-content:center!important;gap:2px!important;border-radius:6px!important}
+body.profile-view .profile-dashboard-panel .profile-mini-plaque:before{inset:2px!important}
+body.profile-view .profile-dashboard-panel .profile-mini-plaque .plaque-gem{font-size:clamp(9px,2.7vw,13px)!important;margin:0!important}
+body.profile-view .profile-dashboard-panel .profile-mini-plaque>strong{font-size:clamp(6px,1.8vw,9px)!important;line-height:1!important;white-space:nowrap!important}
+body.profile-view .profile-dashboard-panel .profile-mini-plaque>small{font-size:clamp(3.5px,1.15vw,5px)!important;line-height:1!important;white-space:nowrap!important;letter-spacing:-.35px!important}
+body.profile-view .profile-dashboard-panel .profile-mini-plaque .plaque-laurel{font-size:5px!important;line-height:1!important;margin-top:2px!important;white-space:nowrap!important}
+@media(max-width:370px){
+ body.profile-view .profile-dashboard-panel{padding:8px!important}
+ body.profile-view .profile-dashboard-panel .profile-minis-panel{padding:6px 4px!important}
+ body.profile-view .profile-dashboard-panel .profile-minis-panel .profile-minis{gap:3px!important}
+ body.profile-view .profile-dashboard-panel .profile-mini-plaque{aspect-ratio:1.38/1!important;padding:3px 1px!important}
+ body.profile-view .profile-dashboard-panel .profile-mini-plaque>strong{font-size:5.5px!important}
+ body.profile-view .profile-dashboard-panel .profile-mini-plaque>small{font-size:3.2px!important}
+}
