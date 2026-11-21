@@ -1879,3 +1879,12 @@ button, a, [role="button"], input, select, textarea, label, summary,
   }
 }
 ::selection { background:rgba(167,122,255,.22); color:inherit; }
+
+
+/* Correção isolada do terceiro filtro do Dashboard: Período */
+.dashboard-filters > .filter-field:nth-child(3){position:relative;z-index:40;isolation:isolate}
+.dashboard-filters > .filter-field:nth-child(3) .custom-select{position:relative;z-index:41}
+.dashboard-filters > .filter-field:nth-child(3) .custom-select-trigger{background:#191426!important;color:#f3effa!important;opacity:1!important;border-color:rgba(173,145,225,.28)!important}
+.dashboard-filters > .filter-field:nth-child(3) .custom-select-menu{z-index:60!important;background:#191426!important;opacity:1!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 14px 34px rgba(0,0,0,.72)!important}
+.dashboard-filters > .filter-field:nth-child(3) .custom-select-option{background-color:#191426!important;color:#eee8f7!important;opacity:1!important}
+.dashboard-filters > .filter-field:nth-child(3) .custom-select-option:hover,.dashboard-filters > .filter-field:nth-child(3) .custom-select-option.selected{background:#302344!important;color:#fff!important}
