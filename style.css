@@ -3461,3 +3461,15 @@ body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achie
 body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achievement-row .profile-mini-plaque>small{font-size:5px!important;line-height:6px!important;letter-spacing:-.2px!important}
 body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achievement-row .plaque-laurel{margin-top:2px!important;font-size:7px!important;line-height:8px!important}
 @media(max-width:370px){body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achievement-row>article.profile-mini-card,body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achievement-row>article.profile-mini-card>.milestone-plaque.profile-mini-plaque{flex-basis:46px!important;width:46px!important;min-width:46px!important;max-width:46px!important;height:82px!important;min-height:82px!important;max-height:82px!important}}
+
+
+/* Perfil: ocupar a altura disponível sem deixar faixa vazia abaixo */
+@media(max-width:650px){
+ body.profile-view .app-shell{min-height:100vh;min-height:100svh}
+ body.profile-view .main{display:flex!important;flex-direction:column!important;min-height:100vh;min-height:100svh}
+ body.profile-view .content{flex:1 0 auto!important;display:flex!important;flex-direction:column!important;padding-bottom:10px!important}
+ body.profile-view #pageContent{flex:1 0 auto!important;display:flex!important;flex-direction:column!important;gap:12px!important}
+ body.profile-view .profile-dashboard-panel{flex:0 0 auto!important}
+ body.profile-view .profile-cards-panel{flex:1 0 auto!important;margin-bottom:0!important}
+ body.profile-view .cashfy-site-footer{margin-top:auto!important;padding-top:18px!important;padding-bottom:8px!important}
+}
