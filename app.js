@@ -156,8 +156,10 @@ function termsPage(){
 }
 
 function profilePage(){
- const name=escapeHtml(cashfySettings.accountName||"Conta de teste");
+ const rawName=String(cashfySettings.accountName||"Conta de teste");
+ const name=escapeHtml(rawName);
  const email=escapeHtml(cashfySettings.accountEmail||"E-mail não informado");
+ const initials=escapeHtml(rawName.trim().split(/\\s+/).slice(0,2).map(part=>part.charAt(0)).join("").toUpperCase()||"CT");
  const tiers=[
   {id:"silver",name:"Prata",range:"R$ 0 — R$ 10 mil",reward:"Cupom de 20% de desconto na assinatura",symbol:"✦",color:"#c8d0dc"},
   {id:"gold",name:"Ouro",range:"R$ 10 mil — R$ 100 mil",reward:"VIP por 2 meses extras",symbol:"✧",color:"#f2bd54"},
@@ -166,7 +168,7 @@ function profilePage(){
   {id:"pink",name:"Honra",range:"R$ 5 milhões — R$ 15 milhões",reward:"VIP permanente + 5 microSaaS gratuitos à sua escolha",symbol:"✿",color:"#ff65d4"}
  ];
  const cards=tiers.map((t,i)=>'<article class="profile-reward-card tier-'+t.id+'" style="--profile-tier:'+t.color+'"><div class="profile-card-top"><span class="profile-card-gem">'+t.symbol+'</span><span class="profile-card-number">CASHFY • 0'+(i+1)+'</span></div><div class="profile-card-emblem">'+t.symbol+'</div><h3>'+t.name+'</h3><span class="profile-card-range">'+t.range+'</span><div class="profile-card-divider"></div><small>RECOMPENSA</small><p>'+t.reward+'</p><span class="profile-card-preview">PRÉVIA DO CARD</span></article>').join("");
- return '<section class="profile-identity panel"><div class="profile-identity-top"><div class="profile-avatar-large">CT</div><div><span class="profile-kicker">SUA CONTA CASHFY</span><h2>'+name+'</h2><p>Perfil pessoal</p></div><button type="button" class="profile-edit-btn" data-page="settings">Editar dados</button></div><div class="profile-data-grid"><div class="profile-data-item"><span>Nome</span><strong>'+name+'</strong></div><div class="profile-data-item"><span>E-mail</span><strong>'+email+'</strong></div><div class="profile-data-item profile-password"><span>Senha</span><strong aria-label="Senha oculta">••••••••••••</strong><small>Oculta por segurança</small></div></div></section><section class="profile-collection-head"><div><span class="profile-kicker">SUA COLEÇÃO</span><h3>Meus cards</h3><p>Todos os cards disponíveis no Cashfy, exibidos como prévia para você visualizar a coleção.</p></div><span class="profile-card-count">05 CARDS</span></section><section class="profile-reward-grid">'+cards+'</section>';
+ return '<section class="profile-identity panel"><div class="profile-identity-top"><div class="profile-avatar-large">'+initials+'</div><div class="profile-title-copy"><span class="profile-kicker">ÁREA PESSOAL CASHFY</span><h2>'+name+'</h2><p>Gerencie seus dados e acompanhe suas conquistas.</p></div><button type="button" class="profile-edit-btn" data-page="settings">Editar dados <span aria-hidden="true">↗</span></button></div><div class="profile-data-heading"><span>INFORMAÇÕES DA CONTA</span><small><i></i> Dados deste navegador</small></div><div class="profile-data-grid"><div class="profile-data-item"><span>Nome completo</span><strong>'+name+'</strong></div><div class="profile-data-item"><span>E-mail de acesso</span><strong>'+email+'</strong></div><div class="profile-data-item profile-password"><span>Senha</span><strong aria-label="Senha oculta">••••••••••••</strong><small><span class="profile-lock-icon">⌑</span> Oculta por segurança</small></div></div><p class="profile-security-note">Seus dados de acesso são exibidos apenas para consulta. A senha nunca é apresentada em texto.</p></section><section class="profile-collection-head"><div><span class="profile-kicker">COLEÇÃO CASHFY</span><h3>Meus cards</h3><p>Veja todos os 5 cards e as recompensas de cada etapa da jornada.</p></div><span class="profile-card-count">05 CARDS</span></section><section class="profile-reward-grid">'+cards+'</section>';
 }
 
 function render(){
