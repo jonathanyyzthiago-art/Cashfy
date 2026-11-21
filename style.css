@@ -1978,3 +1978,31 @@ button, a, [role="button"], input, select, textarea, label, summary,
   box-shadow:0 14px 34px rgba(0,0,0,.82)!important;
 }
 .dashboard-filters > .dashboard-update{position:relative!important;z-index:1!important}
+
+
+/* Correção definitiva: o terceiro filtro usa o mesmo menu sobreposto dos demais */
+.dashboard-filters > .filter-field:nth-child(3):has(.custom-select-trigger[aria-expanded="true"]){
+  position:relative!important;z-index:500!important;isolation:auto!important;
+}
+.dashboard-filters > .filter-field:nth-child(3):has(.custom-select-trigger[aria-expanded="true"]) .custom-select{
+  position:relative!important;z-index:501!important;
+}
+.dashboard-filters > .filter-field:nth-child(3) .custom-select-menu,
+.dashboard-filters > .filter-field:nth-child(3):has(.custom-select-trigger[aria-expanded="true"]) .custom-select-menu,
+.dashboard-filters > .filter-field:nth-child(3):has(.custom-select-trigger[aria-expanded="true"]) .custom-select-menu:not([hidden]){
+  position:absolute!important;top:calc(100% + 6px)!important;left:0!important;right:0!important;bottom:auto!important;
+  display:grid!important;width:100%!important;margin:0!important;padding:5px!important;max-height:210px!important;
+  overflow-y:auto!important;z-index:502!important;border:1px solid rgba(170,133,255,.28)!important;
+  border-radius:12px!important;background:#191426!important;background-image:none!important;
+  opacity:1!important;visibility:visible!important;filter:none!important;backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;transform:none!important;animation:none!important;
+  box-shadow:0 14px 34px rgba(0,0,0,.82)!important;
+}
+.dashboard-filters > .filter-field:nth-child(3) .custom-select-menu[hidden]{display:none!important}
+.dashboard-filters > .filter-field:nth-child(3) .custom-select-option,
+.dashboard-filters > .filter-field:nth-child(3) .custom-select-option:hover,
+.dashboard-filters > .filter-field:nth-child(3) .custom-select-option.selected{
+  background:#211a31!important;background-image:none!important;color:#f2ecfb!important;
+  opacity:1!important;visibility:visible!important;filter:none!important;
+}
+.dashboard-filters > .dashboard-update{position:relative!important;z-index:1!important}
