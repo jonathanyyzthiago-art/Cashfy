@@ -2306,3 +2306,14 @@ button, a, [role="button"], input, select, textarea, label, summary,
 .subscription-plan-grid{width:100%!important;max-width:790px!important;margin-left:auto!important;margin-right:auto!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important}
 .subscription-plan{width:100%!important;min-width:0!important}
 @media(max-width:650px){.subscription-plan-grid{max-width:100%!important;gap:9px!important}}
+
+
+/* Cards de assinatura ainda mais compactos e quase quadrados */
+.subscription-plan-grid{max-width:620px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:16px!important}
+.subscription-plan{aspect-ratio: .88 / 1!important;min-height:0!important;height:auto!important;padding:22px!important}
+.subscription-plan-foot{margin-top:auto!important}
+.subscription-subscribe-btn{margin-top:14px!important}
+@media(max-width:650px){
+ .subscription-plan-grid{max-width:100%!important;gap:8px!important}
+ .subscription-plan{aspect-ratio:auto!important;min-height:440px!important;padding:12px 9px!important}
+}
