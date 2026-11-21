@@ -2317,3 +2317,34 @@ button, a, [role="button"], input, select, textarea, label, summary,
  .subscription-plan-grid{max-width:100%!important;gap:8px!important}
  .subscription-plan{aspect-ratio:auto!important;min-height:440px!important;padding:12px 9px!important}
 }
+
+
+/* Ajuste definitivo: cards mais estreitos e altos, inclusive no celular */
+.subscription-plan-grid{
+  width:100%!important;
+  max-width:500px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:12px!important;
+}
+.subscription-plan{
+  min-width:0!important;
+  min-height:410px!important;
+  height:410px!important;
+  aspect-ratio:auto!important;
+  padding:18px 14px!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+.subscription-plan-foot{margin-top:auto!important}
+.subscription-subscribe-btn{margin-top:12px!important}
+@media(max-width:650px){
+  .subscription-plan-grid{max-width:500px!important;gap:9px!important}
+  .subscription-plan{height:390px!important;min-height:390px!important;padding:13px 9px!important}
+  .subscription-plan h4{font-size:17px!important}
+  .subscription-plan-desc{font-size:8px!important;min-height:42px!important}
+  .subscription-plan li{font-size:7px!important;line-height:1.35!important}
+  .subscription-plan-foot{font-size:7px!important}
+  .subscription-subscribe-btn{min-height:36px!important;margin-top:9px!important}
+}
