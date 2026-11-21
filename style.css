@@ -1848,3 +1848,17 @@ body:before{
 /* Prioridade máxima para a animação de saída, inclusive em dispositivos com redução de movimento */
 .cashfy-install-banner.is-closing,
 .cashfy-install-banner.is-closing.is-visible{opacity:0!important;transform:translate3d(0,30px,0) scale(.78)!important;pointer-events:none!important;transition:opacity .5s ease-in,transform .5s cubic-bezier(.35,0,.2,1)!important;}
+
+
+/* Fechamento Liquid Glass: recuo 3D lento e perceptível */
+@keyframes cashfyInstallBackExit {
+  0% { opacity:1; transform:perspective(900px) translate3d(0,0,0) scale(1) rotateX(0deg); }
+  35% { opacity:.82; transform:perspective(900px) translate3d(0,8px,-90px) scale(.82) rotateX(4deg); }
+  100% { opacity:0; transform:perspective(900px) translate3d(0,18px,-300px) scale(.38) rotateX(13deg); }
+}
+.cashfy-install-banner.is-closing,
+.cashfy-install-banner.is-closing.is-visible {
+  animation:cashfyInstallBackExit 1.15s cubic-bezier(.22,.68,.18,1) both!important;
+  transition:none!important;
+  pointer-events:none!important;
+}
