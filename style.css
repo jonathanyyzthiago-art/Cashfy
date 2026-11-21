@@ -1813,3 +1813,11 @@ body:before{
 .cashfy-terms-end{margin-top:18px;padding:13px;border-radius:12px;background:rgba(169,128,255,.08);color:#e2d7f5!important}
 .cashfy-terms-back{margin-top:8px}
 @media(max-width:600px){.cashfy-site-footer{gap:7px 9px}.cashfy-terms-page{padding:19px 16px;border-radius:17px}.cashfy-terms-page p{font-size:12px}}
+
+
+/* Rodapé: todos os textos em cinza */
+.cashfy-site-footer,
+.cashfy-site-footer > *,
+.cashfy-site-footer a,
+.cashfy-site-footer span{color:#85818d!important}
+.cashfy-site-footer a:hover{color:#b8b3c0!important}
