@@ -3040,3 +3040,41 @@ body.profile-view .profile-dashboard-panel .profile-mini-plaque .plaque-laurel{d
  .profile-cards-panel .profile-mini-plaque{width:62px!important;max-width:62px!important}
  .profile-cards-panel .profile-mini-plaque{height:44px!important;min-height:44px!important}
 }
+
+
+/* FORÇA formato de retângulo horizontal nos cards conquistados */
+.profile-cards-panel .profile-minis{
+ display:flex!important;
+ flex-flow:row nowrap!important;
+ justify-content:center!important;
+ align-items:center!important;
+ gap:5px!important;
+}
+.profile-cards-panel .profile-mini-card{
+ flex:0 0 62px!important;
+ width:62px!important;
+ max-width:62px!important;
+ min-width:62px!important;
+}
+.profile-cards-panel .profile-mini-plaque{
+ box-sizing:border-box!important;
+ display:flex!important;
+ width:62px!important;
+ min-width:62px!important;
+ max-width:62px!important;
+ height:34px!important;
+ min-height:34px!important;
+ max-height:34px!important;
+ aspect-ratio:unset!important;
+ padding:2px!important;
+ border-radius:5px!important;
+}
+.profile-cards-panel .profile-mini-plaque:before{inset:2px!important}
+.profile-cards-panel .profile-mini-plaque .plaque-gem{font-size:9px!important}
+.profile-cards-panel .profile-mini-plaque>strong{font-size:7px!important}
+@media(max-width:370px){
+ .profile-cards-panel .profile-minis{gap:3px!important}
+ .profile-cards-panel .profile-mini-card,
+ .profile-cards-panel .profile-mini-plaque{flex-basis:60px!important;width:60px!important;min-width:60px!important;max-width:60px!important}
+ .profile-cards-panel .profile-mini-plaque{height:33px!important;min-height:33px!important;max-height:33px!important}
+}
