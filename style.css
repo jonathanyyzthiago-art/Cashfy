@@ -2074,3 +2074,9 @@ button, a, [role="button"], input, select, textarea, label, summary,
 /* Aproximar os três filtros do Dashboard */
 .dashboard-filters{row-gap:4px!important;column-gap:6px!important}
 .dashboard-filters>.filter-field{gap:3px!important}
+
+
+/* Compactar ainda mais o espaçamento vertical dos três filtros */
+.dashboard-filters{row-gap:1px!important}
+.dashboard-filters>.filter-field{gap:1px!important}
+.dashboard-filters>.filter-field>.filter-label{margin-bottom:0!important;line-height:12px!important}
