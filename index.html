@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=cashfy-android-apk-20261120g">
+  <link rel="stylesheet" href="style.css?v=cashfy-android-apk-fix-20261121a">
 </head>
 <body>
   <div class="loading-screen" id="loadingScreen" aria-label="Carregando Cashfy"><img src="file_000000003564820e818c91cbec0141fc.png" alt="CF"></div>
@@ -69,7 +69,7 @@
             <div><strong>Cashfy</strong><span>Aplicativo Android independente</span></div>
           </div>
           <button type="button" class="cashfy-install-close" id="cashfyInstallClose" aria-label="Fechar aviso de instalação" title="Fechar">×</button>
-          <button type="button" class="cashfy-install-button" id="cashfyInstallButton"><span>Baixar aplicativo</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg></button>
+          <button type="button" class="cashfy-install-button" id="cashfyInstallButton"><span>Instalar aplicativo</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg></button>
         </section>
         <section class="cashfy-hero" aria-label="Apresentação Cashfy">
           <img class="cashfy-banner-image" src="file_00000000f1dc820ea5aa38558d6e56cc.png" alt="Cashfy — Sua gestão, em outro nível.">
@@ -93,7 +93,7 @@
       window.setTimeout(function(){if(!banner.hidden)banner.classList.add("is-visible");},1550);
       if(closeButton){closeButton.addEventListener("click",function(){banner.classList.remove("is-visible");window.setTimeout(function(){banner.hidden=true;},700);});}
       button.addEventListener("click",function(){
-        window.location.href="https://github.com/jonathanyyzthiago-art/Cashfy/releases/latest/download/Cashfy.apk";
+        window.location.assign("https://github.com/jonathanyyzthiago-art/Cashfy/releases/download/cashfy-android/Cashfy.apk");
       });
     })();
   </script>
