@@ -1,4 +1,4 @@
-const CACHE_NAME = "cashfy-app-v25";
+const CACHE_NAME = "cashfy-app-v26";
 const APP_FILES = [
   "./",
   "./index.html",
