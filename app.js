@@ -161,11 +161,11 @@ function profilePage(){
  const email=escapeHtml(cashfySettings.accountEmail||"E-mail não informado");
  const initials=escapeHtml(rawName.trim().split(/\\s+/).slice(0,2).map(part=>part.charAt(0)).join("").toUpperCase()||"CT");
  const tiers=[
-  {id:"silver",name:"Prata",symbol:"✦",range:"R$ 0 — R$ 10 mil"},
-  {id:"gold",name:"Ouro",symbol:"✧",range:"R$ 10 mil — R$ 100 mil"},
-  {id:"diamond",name:"Diamante",symbol:"◆",range:"R$ 100 mil — R$ 1 milhão"},
-  {id:"red",name:"Elite",symbol:"⬟",range:"R$ 1 milhão — R$ 5 milhões"},
-  {id:"pink",name:"Honra",symbol:"✿",range:"R$ 5 milhões — R$ 15 milhões"}
+  {id:"silver",name:"Prata",symbol:"✦",range:"0–10k"},
+  {id:"gold",name:"Ouro",symbol:"✧",range:"10k–100k"},
+  {id:"diamond",name:"Diamante",symbol:"◆",range:"100k–1mi"},
+  {id:"red",name:"Elite",symbol:"⬟",range:"1mi–5mi"},
+  {id:"pink",name:"Honra",symbol:"✿",range:"5mi–15mi"}
  ];
  const total=state.sales.reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
  const cards=tiers.map((t,i)=>'<article class="profile-mini-card tier-'+t.id+' '+(total>=([0,10000,100000,1000000,5000000][i])?"is-unlocked":"is-locked")+'"><div class="milestone-plaque profile-mini-plaque"><span class="plaque-gem">'+t.symbol+'</span><strong>'+t.name+'</strong><small>'+t.range+'</small><span class="plaque-laurel">✦　✧　✦</span></div></article>').join("");
