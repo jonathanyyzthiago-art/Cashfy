@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=cashfy-liquid-glass-round-20261120f">
+  <link rel="stylesheet" href="style.css?v=cashfy-android-apk-20261120g">
 </head>
 <body>
   <div class="loading-screen" id="loadingScreen" aria-label="Carregando Cashfy"><img src="file_000000003564820e818c91cbec0141fc.png" alt="CF"></div>
@@ -66,10 +66,10 @@
         <section class="cashfy-install-banner" id="cashfyInstallBanner" aria-label="Instale o aplicativo Cashfy">
           <div class="cashfy-install-brand">
             <img src="file_00000000a164820eb5c41b1650eae634.png" alt="Cashfy">
-            <div><strong>Cashfy</strong><span>Tenha o Cashfy no seu dispositivo</span></div>
+            <div><strong>Cashfy</strong><span>Aplicativo Android independente</span></div>
           </div>
           <button type="button" class="cashfy-install-close" id="cashfyInstallClose" aria-label="Fechar aviso de instalação" title="Fechar">×</button>
-          <button type="button" class="cashfy-install-button" id="cashfyInstallButton"><span>Instalar</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg></button>
+          <button type="button" class="cashfy-install-button" id="cashfyInstallButton"><span>Baixar aplicativo</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 17v3h14v-3"/></svg></button>
         </section>
         <section class="cashfy-hero" aria-label="Apresentação Cashfy">
           <img class="cashfy-banner-image" src="file_00000000f1dc820ea5aa38558d6e56cc.png" alt="Cashfy — Sua gestão, em outro nível.">
@@ -87,33 +87,13 @@
       var banner=document.getElementById("cashfyInstallBanner");
       var button=document.getElementById("cashfyInstallButton");
       var closeButton=document.getElementById("cashfyInstallClose");
-      window.setTimeout(function(){if(!banner.hidden)banner.classList.add("is-visible");},1550);
       if(!banner||!button)return;
-      var installPrompt=null;
+      var params=new URLSearchParams(window.location.search);
+      if(params.get("native")==="1"){banner.hidden=true;return;}
+      window.setTimeout(function(){if(!banner.hidden)banner.classList.add("is-visible");},1550);
       if(closeButton){closeButton.addEventListener("click",function(){banner.classList.remove("is-visible");window.setTimeout(function(){banner.hidden=true;},700);});}
-      var isInstalled=window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;
-      if(isInstalled){banner.hidden=true;return;}
-      window.addEventListener("beforeinstallprompt",function(event){
-        event.preventDefault();
-        installPrompt=event;
-        banner.classList.add("is-install-ready");
-      });
-      window.addEventListener("appinstalled",function(){
-        installPrompt=null;
-        banner.hidden=true;
-      });
-      button.addEventListener("click",async function(){
-        if(installPrompt){
-          installPrompt.prompt();
-          var choice=await installPrompt.userChoice;
-          if(choice&&choice.outcome==="accepted"){banner.hidden=true;}
-          installPrompt=null;
-          return;
-        }
-        var isIOS=/iphone|ipad|ipod/i.test(navigator.userAgent);
-        alert(isIOS
-          ? "Para instalar o Cashfy: toque em Compartilhar e depois em Adicionar à Tela de Início."
-          : "Para instalar o Cashfy, abra o menu ⋮ do navegador e escolha 'Instalar app' ou 'Adicionar à tela inicial'.");
+      button.addEventListener("click",function(){
+        window.location.href="https://github.com/jonathanyyzthiago-art/Cashfy/releases/latest/download/Cashfy.apk";
       });
     })();
   </script>
