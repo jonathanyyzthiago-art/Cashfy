@@ -3242,3 +3242,45 @@ body.profile-view .profile-cards-panel article.profile-mini-card > .milestone-pl
  body.profile-view .profile-cards-panel article.profile-mini-card{flex-basis:50px!important;width:50px!important;min-width:50px!important;max-width:50px!important}
  body.profile-view .profile-cards-panel article.profile-mini-card > .milestone-plaque.profile-mini-plaque{width:50px!important;min-width:50px!important;max-width:50px!important;height:70px!important;min-height:70px!important;max-height:70px!important}
 }
+
+
+/* Cards do perfil: cinco cards lado a lado com faixa visível */
+body.profile-view .profile-cards-panel .profile-minis-panel .profile-minis{
+ display:grid!important;
+ grid-template-columns:repeat(5,minmax(0,1fr))!important;
+ gap:6px!important;
+ width:100%!important;
+ overflow:visible!important;
+ padding:3px 0 8px!important;
+}
+body.profile-view .profile-cards-panel article.profile-mini-card{
+ width:100%!important;
+ min-width:0!important;
+ max-width:none!important;
+ flex:initial!important;
+}
+body.profile-view .profile-cards-panel article.profile-mini-card > .milestone-plaque.profile-mini-plaque{
+ width:100%!important;
+ min-width:0!important;
+ max-width:none!important;
+ height:88px!important;
+ min-height:88px!important;
+ max-height:88px!important;
+ padding:5px 2px!important;
+ gap:3px!important;
+}
+body.profile-view .profile-cards-panel article.profile-mini-card > .milestone-plaque.profile-mini-plaque > strong{
+ font-size:clamp(6px,1.8vw,8px)!important;
+ line-height:9px!important;
+}
+body.profile-view .profile-cards-panel article.profile-mini-card > .milestone-plaque.profile-mini-plaque > small{
+ display:block!important;
+ font-size:clamp(5px,1.55vw,7px)!important;
+ line-height:8px!important;
+ white-space:nowrap!important;
+ text-align:center!important;
+}
+@media(max-width:370px){
+ body.profile-view .profile-cards-panel .profile-minis-panel .profile-minis{gap:4px!important}
+ body.profile-view .profile-cards-panel article.profile-mini-card > .milestone-plaque.profile-mini-plaque{height:84px!important;min-height:84px!important;max-height:84px!important}
+}
