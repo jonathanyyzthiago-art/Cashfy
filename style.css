@@ -3197,3 +3197,48 @@ body.profile-view .profile-cards-panel article.profile-mini-card > .milestone-pl
  color:#c1a2ff!important;
 }
 .top-search-result small,.top-search-arrow,.top-search-empty{color:#a397b9!important}
+
+
+/* Cards conquistados do perfil: menores e retangulares na vertical */
+body.profile-view .profile-cards-panel .profile-minis-panel .profile-minis{
+ display:flex!important;
+ flex-flow:row nowrap!important;
+ justify-content:flex-start!important;
+ gap:7px!important;
+ overflow-x:auto!important;
+ overflow-y:hidden!important;
+ padding:2px 1px 8px!important;
+}
+body.profile-view .profile-cards-panel article.profile-mini-card{
+ flex:0 0 54px!important;
+ width:54px!important;
+ min-width:54px!important;
+ max-width:54px!important;
+}
+body.profile-view .profile-cards-panel article.profile-mini-card > .milestone-plaque.profile-mini-plaque{
+ width:54px!important;
+ min-width:54px!important;
+ max-width:54px!important;
+ height:74px!important;
+ min-height:74px!important;
+ max-height:74px!important;
+ aspect-ratio:auto!important;
+ padding:5px 2px!important;
+ gap:4px!important;
+ border-radius:7px!important;
+}
+body.profile-view .profile-cards-panel article.profile-mini-card > .milestone-plaque.profile-mini-plaque .plaque-gem{
+ font-size:13px!important;
+ line-height:15px!important;
+}
+body.profile-view .profile-cards-panel article.profile-mini-card > .milestone-plaque.profile-mini-plaque > strong{
+ font-size:7px!important;
+ line-height:9px!important;
+ white-space:normal!important;
+ text-align:center!important;
+}
+@media(max-width:370px){
+ body.profile-view .profile-cards-panel .profile-minis-panel .profile-minis{gap:5px!important}
+ body.profile-view .profile-cards-panel article.profile-mini-card{flex-basis:50px!important;width:50px!important;min-width:50px!important;max-width:50px!important}
+ body.profile-view .profile-cards-panel article.profile-mini-card > .milestone-plaque.profile-mini-plaque{width:50px!important;min-width:50px!important;max-width:50px!important;height:70px!important;min-height:70px!important;max-height:70px!important}
+}
