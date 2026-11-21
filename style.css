@@ -2275,3 +2275,28 @@ button, a, [role="button"], input, select, textarea, label, summary,
 .subscription-subscribe-btn{min-height:39px!important;font-size:8px!important}
 }
 @media(prefers-reduced-motion:reduce){.subscription-plan,.subscription-subscribe-btn:after{transition:none!important}.subscription-plan:hover{transform:none!important}}
+
+
+/* Cards de assinatura com proporção mais quadrada */
+.subscription-plan{min-height:430px!important;padding:25px!important;border-radius:20px!important}
+.subscription-plan-top{margin-bottom:16px!important}
+.subscription-plan-symbol{width:41px!important;height:41px!important}
+.subscription-plan h4{font-size:24px!important}
+.subscription-plan-desc{min-height:43px!important;margin:7px 0 13px!important;line-height:1.5!important}
+.subscription-price strong{font-size:40px!important}
+.subscription-installments{margin-top:8px!important;padding:8px 10px!important}
+.subscription-plan-divider{margin:15px 0 12px!important}
+.subscription-plan ul{gap:9px!important}
+.subscription-plan li{font-size:11px!important}
+.subscription-plan-foot{margin-top:15px!important;padding-top:11px!important}
+.subscription-subscribe-btn{min-height:46px!important}
+@media(max-width:650px){
+ .subscription-plan{min-height:455px!important;padding:13px 10px!important;border-radius:17px!important}
+ .subscription-plan-top{margin-bottom:11px!important}
+ .subscription-plan-desc{min-height:49px!important;margin:5px 0 9px!important}
+ .subscription-plan-divider{margin:11px 0 9px!important}
+ .subscription-plan ul{gap:7px!important}
+ .subscription-plan-foot{margin-top:10px!important;padding-top:8px!important}
+ .subscription-subscribe-btn{min-height:37px!important}
+}
+@media(max-width:370px){.subscription-plan{min-height:465px!important}}
