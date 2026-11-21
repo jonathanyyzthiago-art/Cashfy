@@ -2638,3 +2638,12 @@ img,svg,canvas{max-width:100%}
  .subscription-plan-lifetime .subscription-installment-note{font-size:5.5px!important;line-height:1.15!important;margin-top:3px!important}
  .subscription-plan-lifetime .subscription-subscribe-btn{min-height:28px!important;margin-top:6px!important;padding:6px 4px!important}
 }
+
+
+/* Cards de assinatura: mesma altura e mais presença vertical, sem aumentar a largura */
+.subscription-plan-grid{align-items:stretch!important}
+.subscription-plan-grid>.subscription-plan{height:auto!important;min-height:480px!important;width:100%!important;box-sizing:border-box!important}
+@media(max-width:650px){
+  .subscription-plan-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+  .subscription-plan-grid>.subscription-plan{height:auto!important;min-height:340px!important;width:100%!important;padding:12px 9px!important}
+}
