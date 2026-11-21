@@ -3,6 +3,8 @@
     <application
         android:allowBackup="false"
         android:label="Cashfy"
+        android:icon="@drawable/ic_cashfy"
+        android:roundIcon="@drawable/ic_cashfy"
         android:theme="@android:style/Theme.Material.Light.NoActionBar"
         android:usesCleartextTraffic="false">
         <activity
