@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=cashfy-sidebar-icons-20261121">
+  <link rel="stylesheet" href="style.css?v=cashfy-install-performance-20261121">
 </head>
 <body>
   <div class="loading-screen" id="loadingScreen" aria-label="Carregando Cashfy"><img src="file_000000003564820e818c91cbec0141fc.png" alt="CF"></div>
@@ -91,7 +91,7 @@
       var params=new URLSearchParams(window.location.search);
       if(params.get("native")==="1"){banner.hidden=true;return;}
       window.setTimeout(function(){if(!banner.hidden)banner.classList.add("is-visible");},1550);
-      if(closeButton){closeButton.addEventListener("click",function(){banner.classList.remove("is-visible");window.setTimeout(function(){banner.hidden=true;},700);});}
+      if(closeButton){closeButton.addEventListener("click",function(){banner.classList.remove("is-visible");banner.hidden=true;});}
       button.addEventListener("click",function(){
         window.location.assign("https://github.com/jonathanyyzthiago-art/Cashfy/releases/download/cashfy-android/Cashfy.apk");
       });
