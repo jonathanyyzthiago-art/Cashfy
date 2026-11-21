@@ -2348,3 +2348,61 @@ button, a, [role="button"], input, select, textarea, label, summary,
   .subscription-plan-foot{font-size:7px!important}
   .subscription-subscribe-btn{min-height:36px!important;margin-top:9px!important}
 }
+
+
+/* Proporção compacta: dois cards lado a lado, sem formato de faixa */
+.subscription-plan-grid{
+  width:100%!important;
+  max-width:660px!important;
+  margin:0 auto!important;
+  display:grid!important;
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+  gap:14px!important;
+  align-items:stretch!important;
+}
+.subscription-plan{
+  box-sizing:border-box!important;
+  width:100%!important;
+  min-width:0!important;
+  height:340px!important;
+  min-height:340px!important;
+  padding:16px 14px!important;
+  display:flex!important;
+  flex-direction:column!important;
+}
+.subscription-plan-top{margin-bottom:10px!important}
+.subscription-plan-symbol{width:34px!important;height:34px!important;font-size:18px!important}
+.subscription-plan-tag{font-size:7px!important;padding:5px 6px!important}
+.subscription-plan h4{font-size:20px!important}
+.subscription-plan-desc{font-size:9px!important;line-height:1.35!important;min-height:34px!important;margin:5px 0 9px!important}
+.subscription-price strong{font-size:31px!important}
+.subscription-installments{padding:6px 8px!important;margin-top:5px!important}
+.subscription-installments strong{font-size:9px!important}
+.subscription-installments span{font-size:8px!important}
+.subscription-plan-divider{margin:10px 0 8px!important}
+.subscription-plan ul{gap:6px!important}
+.subscription-plan li{font-size:8px!important;line-height:1.3!important;padding-left:16px!important}
+.subscription-plan-foot{font-size:8px!important;margin-top:auto!important;padding-top:8px!important}
+.subscription-installment-note{font-size:6px!important;line-height:1.2!important;margin-top:4px!important}
+.subscription-subscribe-btn{min-height:35px!important;margin-top:8px!important;font-size:9px!important}
+@media(max-width:650px){
+  .subscription-plan-grid{max-width:460px!important;gap:8px!important}
+  .subscription-plan{height:285px!important;min-height:285px!important;padding:11px 9px!important;border-radius:15px!important}
+  .subscription-plan-top{gap:5px!important;margin-bottom:7px!important}
+  .subscription-plan-symbol{width:27px!important;height:27px!important;font-size:14px!important}
+  .subscription-plan-tag{font-size:5.5px!important;padding:4px 4px!important;letter-spacing:0!important}
+  .subscription-plan h4{font-size:15px!important}
+  .subscription-plan-desc{font-size:7px!important;min-height:28px!important;margin:4px 0 6px!important}
+  .subscription-price strong{font-size:22px!important;letter-spacing:-.7px!important}
+  .subscription-price span{font-size:7px!important}
+  .subscription-installments{padding:5px 4px!important}
+  .subscription-installments strong{font-size:7px!important}
+  .subscription-installments span{font-size:6px!important}
+  .subscription-plan-divider{margin:7px 0 6px!important}
+  .subscription-plan ul{gap:5px!important}
+  .subscription-plan li{font-size:6.5px!important;line-height:1.25!important;padding-left:12px!important}
+  .subscription-plan li:before{width:10px;height:10px;font-size:7px!important}
+  .subscription-plan-foot{font-size:6.5px!important;padding-top:6px!important}
+  .subscription-installment-note{font-size:5px!important}
+  .subscription-subscribe-btn{min-height:30px!important;margin-top:6px!important;font-size:8px!important;border-radius:9px!important}
+}
