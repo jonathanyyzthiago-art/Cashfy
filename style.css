@@ -2651,3 +2651,54 @@ img,svg,canvas{max-width:100%}
 
 /* Sobe levemente a área das assinaturas na tela */
 .subscription-offers{transform:translateY(-12px)!important}
+
+
+/* Refinamento da área de assinaturas: hierarquia, alinhamento e acabamento */
+.subscription-offers{
+  max-width:900px!important;
+  margin:0 auto 24px!important;
+  padding:18px 16px 20px!important;
+  border:1px solid rgba(177,143,232,.16)!important;
+  border-radius:22px!important;
+  background:linear-gradient(145deg,rgba(26,20,40,.48),rgba(12,10,19,.32))!important;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 12px 30px rgba(0,0,0,.08)!important;
+  transform:translateY(-12px)!important;
+}
+.subscription-offers-heading{
+  max-width:700px!important;
+  margin:0 auto 18px!important;
+  padding:2px 0 14px 13px!important;
+  text-align:left!important;
+  border-bottom:1px solid rgba(185,151,239,.16)!important;
+}
+.subscription-offers-heading h3{margin:0!important;line-height:1.2!important}
+.subscription-offers-heading p{margin-top:7px!important;line-height:1.5!important}
+.subscription-plan-grid{
+  max-width:700px!important;
+  margin:0 auto!important;
+  gap:14px!important;
+  align-items:stretch!important;
+}
+.subscription-plan-grid>.subscription-plan{
+  min-height:480px!important;
+  height:100%!important;
+  padding:20px 17px!important;
+  border-radius:19px!important;
+}
+.subscription-plan-top{min-height:42px!important;margin-bottom:14px!important}
+.subscription-plan h4{margin-top:2px!important}
+.subscription-plan-desc{margin-bottom:14px!important}
+.subscription-plan-divider{margin:17px 0 14px!important}
+.subscription-plan ul{gap:10px!important}
+.subscription-plan-foot{margin-top:auto!important;padding-top:12px!important}
+.subscription-subscribe-btn{margin-top:14px!important}
+@media(max-width:650px){
+  .subscription-offers{padding:13px 9px 14px!important;border-radius:17px!important;margin-bottom:18px!important}
+  .subscription-offers-heading{margin-bottom:12px!important;padding:1px 0 11px 10px!important}
+  .subscription-offers-heading h3{font-size:18px!important}
+  .subscription-offers-heading p{font-size:9px!important}
+  .subscription-plan-grid{gap:8px!important}
+  .subscription-plan-grid>.subscription-plan{min-height:340px!important;height:100%!important;padding:12px 9px!important;border-radius:15px!important}
+  .subscription-plan-top{min-height:0!important;margin-bottom:8px!important}
+  .subscription-plan-foot{margin-top:auto!important}
+}
