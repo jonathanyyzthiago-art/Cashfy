@@ -1836,3 +1836,10 @@ body:before{
 .cashfy-install-banner[hidden]{display:none!important;visibility:hidden!important;pointer-events:none!important}
 @media(max-width:700px){.cashfy-install-banner{-webkit-backdrop-filter:blur(8px) saturate(125%)!important;backdrop-filter:blur(8px) saturate(125%)!important;box-shadow:0 8px 22px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.28)!important}.cashfy-install-banner:before{opacity:.65!important}}
 @media(prefers-reduced-motion:reduce){.cashfy-install-banner{transition:none!important}}
+
+
+/* Fechamento do aviso: recua suavemente sem animar filtros pesados */
+.cashfy-install-banner{transform:translate3d(0,0,0) scale(1);opacity:1;will-change:transform,opacity}
+.cashfy-install-banner.is-closing{opacity:0!important;transform:translate3d(0,14px,0) scale(.88)!important;pointer-events:none!important;transition:opacity .22s ease,transform .22s cubic-bezier(.2,.75,.25,1)!important}
+.cashfy-install-banner.is-visible{transition:opacity .18s ease,transform .18s ease!important}
+@media(prefers-reduced-motion:reduce){.cashfy-install-banner.is-closing{transition:none!important}}
