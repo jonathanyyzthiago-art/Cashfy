@@ -2406,3 +2406,107 @@ button, a, [role="button"], input, select, textarea, label, summary,
   .subscription-installment-note{font-size:5px!important}
   .subscription-subscribe-btn{min-height:30px!important;margin-top:6px!important;font-size:8px!important;border-radius:9px!important}
 }
+
+
+/* Sistema responsivo global: escala o painel conforme a tela */
+:root{
+  --ui-space:clamp(10px,1.15vw,18px);
+  --ui-radius:clamp(10px,1vw,16px);
+}
+html{font-size:clamp(13px,.32vw + 11.5px,16px)}
+.app-shell{width:100%;min-width:0}
+.main{min-width:0;flex:1 1 auto}
+.content{width:100%;max-width:1440px;padding:clamp(22px,2.7vw,42px) clamp(18px,3vw,46px) 22px}
+.topbar{padding-inline:clamp(18px,3vw,46px)}
+.stats{gap:var(--ui-space)}
+.stat-card,.panel,.module-card,.module-panel,.settings-card,.goal-card{min-width:0;border-radius:var(--ui-radius)}
+.stat-card,.panel,.module-card,.module-panel,.settings-card{padding:clamp(13px,1.4vw,22px)}
+.dashboard-grid,.module-grid,.settings-grid{min-width:0;gap:var(--ui-space)}
+.dashboard-grid>* ,.module-grid>* ,.settings-grid>*{min-width:0}
+.module-kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,180px),1fr));gap:var(--ui-space)}
+.module-form,.settings-fields{min-width:0}
+.module-table-wrap,.table-wrap{max-width:100%;overflow-x:auto}
+.module-table{min-width:560px}
+input,select,textarea,button{max-width:100%}
+img,svg,canvas{max-width:100%}
+
+/* PC: mais área útil e cards de assinatura grandes/quadrados */
+@media(min-width:1100px){
+  .sidebar{width:clamp(235px,17vw,280px)}
+  .content{max-width:1560px}
+  .subscription-plan-grid{max-width:880px!important;gap:22px!important}
+  .subscription-plan{
+    height:420px!important;
+    min-height:420px!important;
+    aspect-ratio:1/1!important;
+    padding:25px 23px!important;
+  }
+  .subscription-plan-top{margin-bottom:14px!important}
+  .subscription-plan-symbol{width:42px!important;height:42px!important;font-size:22px!important}
+  .subscription-plan-tag{font-size:8px!important}
+  .subscription-plan h4{font-size:25px!important}
+  .subscription-plan-desc{font-size:11px!important;min-height:42px!important}
+  .subscription-price strong{font-size:39px!important}
+  .subscription-plan li{font-size:10px!important}
+  .subscription-plan-foot{font-size:10px!important}
+  .subscription-subscribe-btn{min-height:43px!important;font-size:11px!important}
+}
+
+/* Notebook e tablet horizontal */
+@media(min-width:651px) and (max-width:1099px){
+  .sidebar{width:205px;padding:22px 13px}
+  .topbar{padding-inline:22px}
+  .content{padding:26px 22px 18px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dashboard-grid{grid-template-columns:minmax(0,1.35fr) minmax(0,1fr)}
+  .subscription-plan-grid{max-width:660px!important;gap:12px!important}
+  .subscription-plan{height:360px!important;min-height:360px!important;padding:15px 12px!important}
+  .subscription-plan h4{font-size:19px!important}
+  .subscription-price strong{font-size:29px!important}
+  .subscription-plan li{font-size:8px!important}
+  .module-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+
+/* Celular: reduz espaçamentos, tipografia e colunas sem criar rolagem lateral */
+@media(max-width:650px){
+  .content{padding:20px 12px 16px}
+  .topbar{padding-inline:12px}
+  .page-heading{gap:9px;margin-bottom:18px}
+  .page-heading h1{font-size:clamp(20px,5vw,25px)}
+  .subheading{font-size:11px}
+  .stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .stat-card{padding:11px}
+  .stat-top{font-size:9px}
+  .stat-value{font-size:clamp(17px,5vw,21px)}
+  .stat-note{font-size:8px}
+  .panel,.module-card,.module-panel,.settings-card{padding:12px}
+  .dashboard-grid,.module-grid,.settings-grid{grid-template-columns:minmax(0,1fr);gap:10px}
+  .module-kpis{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .module-kpis>.panel{padding:10px}
+  .module-kpis strong{font-size:18px}
+  .module-form{gap:10px}
+  .module-field input,.module-field select,.module-toolbar input{min-height:40px}
+  .settings-fields{grid-template-columns:minmax(0,1fr);gap:9px}
+  .module-table th,.module-table td{padding:9px 7px;font-size:9px}
+  .subscription-plan-grid{max-width:460px!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+  .subscription-plan{height:285px!important;min-height:285px!important;aspect-ratio:auto!important;padding:11px 9px!important}
+  .modal-backdrop{padding:10px}
+  .modal{padding:17px}
+}
+
+/* Telas estreitas */
+@media(max-width:380px){
+  .content{padding-inline:9px}
+  .topbar{padding-inline:9px}
+  .subscription-plan-grid{gap:6px!important}
+  .subscription-plan{padding:9px 7px!important}
+  .module-kpis{grid-template-columns:minmax(0,1fr)}
+  .page-heading>.primary-btn{font-size:9px;padding:8px}
+}
+
+/* Telas grandes: aproveita espaço sem esticar textos e campos */
+@media(min-width:1600px){
+  .content{max-width:1680px}
+  .dashboard-grid{gap:22px}
+  .stat-card,.panel,.module-card,.module-panel,.settings-card{padding:24px}
+}
