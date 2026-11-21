@@ -1843,3 +1843,8 @@ body:before{
 .cashfy-install-banner.is-closing{opacity:0!important;transform:translate3d(0,14px,0) scale(.88)!important;pointer-events:none!important;transition:opacity .22s ease,transform .22s cubic-bezier(.2,.75,.25,1)!important}
 .cashfy-install-banner.is-visible{transition:opacity .18s ease,transform .18s ease!important}
 @media(prefers-reduced-motion:reduce){.cashfy-install-banner.is-closing{transition:none!important}}
+
+
+/* Prioridade máxima para a animação de saída, inclusive em dispositivos com redução de movimento */
+.cashfy-install-banner.is-closing,
+.cashfy-install-banner.is-closing.is-visible{opacity:0!important;transform:translate3d(0,30px,0) scale(.78)!important;pointer-events:none!important;transition:opacity .5s ease-in,transform .5s cubic-bezier(.35,0,.2,1)!important;}
