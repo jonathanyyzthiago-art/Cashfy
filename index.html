@@ -105,7 +105,7 @@
     (function(){
       function removeLogin(){document.querySelectorAll('.login-screen,#loginScreen,.login-overlay,[class*="login-screen"],[id*="login-screen"]').forEach(function(el){el.remove();});}
       removeLogin();
-      window.setTimeout(function(){removeLogin();var app=document.getElementById('appShell');if(app){app.hidden=false;app.removeAttribute('hidden');}var intro=document.getElementById('loadingScreen');if(intro){intro.classList.add('is-hidden');intro.setAttribute('aria-hidden','true');}},8000);
+      window.setTimeout(function(){removeLogin();var app=document.getElementById('appShell');if(app){app.hidden=false;app.removeAttribute('hidden');}var intro=document.getElementById('loadingScreen');if(intro){intro.classList.add('is-hidden');intro.setAttribute('aria-hidden','true');}},10000);
     })();
   </script>
   <script>
