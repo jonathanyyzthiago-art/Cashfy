@@ -2069,3 +2069,8 @@ button, a, [role="button"], input, select, textarea, label, summary,
   .sidebar.open{z-index:2147483647!important}
   .dashboard-filters,.dashboard-filters>.filter-field{z-index:auto!important}
 }
+
+
+/* Aproximar os três filtros do Dashboard */
+.dashboard-filters{row-gap:4px!important;column-gap:6px!important}
+.dashboard-filters>.filter-field{gap:3px!important}
