@@ -1821,3 +1821,9 @@ body:before{
 .cashfy-site-footer a,
 .cashfy-site-footer span{color:#85818d!important}
 .cashfy-site-footer a:hover{color:#b8b3c0!important}
+
+
+/* Ícones vetoriais da navegação lateral */
+.sidebar .nav-link span svg{width:18px;height:18px;display:inline-block;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.sidebar .nav-link[data-page="coupons"] span svg{width:15px;height:15px}
+.sidebar .nav-link span{line-height:1;vertical-align:middle}
