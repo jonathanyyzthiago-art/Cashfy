@@ -1650,3 +1650,65 @@ button[data-refund]{
     transition-duration: .01ms !important;
   }
 }
+
+
+/* CASHFY 3D — relevo consistente em todas as opções, otimizado para mobile */
+:root{--cashfy-3d-edge:rgba(5,3,12,.48);--cashfy-3d-light:rgba(255,255,255,.12)}
+button,[role="button"],.custom-select-trigger,.filter-option,.tab-option{
+  transform-style:preserve-3d;
+  backface-visibility:hidden;
+  transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,filter .16s ease;
+}
+.nav-link,.range-btn,.custom-select-trigger,.dashboard-update,
+.primary-btn,.secondary-btn,.icon-btn,.visibility-btn,
+.sidebar-revenue-goal,.cashfy-install-button,.filter-chip,.tab-btn{
+  position:relative;
+  box-shadow:0 3px 0 var(--cashfy-3d-edge),0 7px 14px rgba(0,0,0,.16),inset 0 1px 0 var(--cashfy-3d-light);
+}
+.nav-link:hover,.range-btn:hover,.custom-select-trigger:hover,
+.dashboard-update:hover,.primary-btn:hover,.secondary-btn:hover,
+.icon-btn:hover,.visibility-btn:hover,.sidebar-revenue-goal:hover,
+.cashfy-install-button:hover,.filter-chip:hover,.tab-btn:hover{
+  transform:perspective(500px) translateY(-2px) translateZ(3px);
+  box-shadow:0 5px 0 var(--cashfy-3d-edge),0 11px 19px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.17);
+}
+.nav-link:active,.range-btn:active,.custom-select-trigger:active,
+.dashboard-update:active,.primary-btn:active,.secondary-btn:active,
+.icon-btn:active,.visibility-btn:active,.sidebar-revenue-goal:active,
+.cashfy-install-button:active,.filter-chip:active,.tab-btn:active{
+  transform:perspective(500px) translateY(2px) translateZ(-1px);
+  box-shadow:0 1px 0 var(--cashfy-3d-edge),inset 0 2px 5px rgba(0,0,0,.2);
+}
+.nav-link.active,.range-btn.active{
+  box-shadow:0 2px 0 rgba(5,3,12,.42),inset 0 1px 0 rgba(255,255,255,.18),0 5px 12px rgba(0,0,0,.14);
+}
+.custom-select-trigger,.dashboard-filters select,
+input,textarea,.modal input,.modal textarea{
+  box-shadow:0 3px 0 rgba(3,2,8,.42),inset 0 1px 0 rgba(255,255,255,.07);
+}
+.stat-card,.panel,.milestone-card,.goal-card,.sidebar-revenue-goal{
+  transform-style:preserve-3d;
+  box-shadow:0 4px 0 rgba(4,2,10,.34),0 10px 22px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.055);
+}
+.stat-card:hover,.panel:hover,.milestone-card:hover,.goal-card:hover{
+  transform:translateY(-2px);
+  box-shadow:0 6px 0 rgba(4,2,10,.3),0 14px 26px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.07);
+}
+@media(max-width:700px){
+  button,[role="button"],.custom-select-trigger,.filter-option,.tab-option{
+    transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease;
+  }
+  .nav-link:hover,.range-btn:hover,.custom-select-trigger:hover,
+  .dashboard-update:hover,.primary-btn:hover,.secondary-btn:hover,
+  .icon-btn:hover,.visibility-btn:hover,.sidebar-revenue-goal:hover,
+  .cashfy-install-button:hover,.filter-chip:hover,.tab-btn:hover{
+    transform:none;
+  }
+  .stat-card,.panel,.milestone-card,.goal-card,.sidebar-revenue-goal{
+    box-shadow:0 3px 0 rgba(4,2,10,.3),0 7px 15px rgba(0,0,0,.14),inset 0 1px 0 rgba(255,255,255,.045);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  button,[role="button"],.custom-select-trigger,.filter-option,.tab-option,
+  .stat-card,.panel,.milestone-card,.goal-card{transition:none!important}
+}
