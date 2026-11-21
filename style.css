@@ -2110,3 +2110,34 @@ button, a, [role="button"], input, select, textarea, label, summary,
 .subscription-plan-foot{margin-top:18px;padding-top:12px;border-top:1px solid rgba(173,137,255,.12);color:#b8a5df;font-size:10px;font-weight:700}
 .subscription-installment-note{display:block;margin-top:9px;color:#837b92;font-size:8px;line-height:1.45}
 @media(max-width:650px){.subscription-plan-grid{grid-template-columns:1fr;gap:11px}.subscription-plan{padding:18px}.subscription-plan-desc{min-height:0;margin-bottom:14px}.subscription-price strong{font-size:29px}.subscription-offers-heading h3{font-size:18px}}
+
+/* Acabamento premium e dois planos lado a lado também no celular */
+.subscription-plan{transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.subscription-plan:before{content:"";position:absolute;left:14px;right:14px;top:0;height:2px;border-radius:0 0 8px 8px;background:linear-gradient(90deg,transparent,rgba(190,158,255,.8),transparent);opacity:.7}
+.subscription-plan-monthly:before{background:linear-gradient(90deg,transparent,rgba(147,128,190,.65),transparent)}
+.subscription-plan-lifetime:before{height:3px;background:linear-gradient(90deg,transparent,#b99aff,#f0d7ff,#9b70ff,transparent);opacity:1;box-shadow:0 0 14px rgba(175,132,255,.55)}
+.subscription-plan:hover{transform:translateY(-3px);border-color:rgba(180,145,255,.55);box-shadow:0 17px 38px rgba(0,0,0,.26),0 0 22px rgba(133,91,211,.1),inset 0 1px 0 rgba(255,255,255,.08)}
+.subscription-plan-lifetime .subscription-plan-symbol{background:linear-gradient(145deg,rgba(177,139,255,.28),rgba(111,68,180,.16));box-shadow:0 0 18px rgba(157,112,255,.16)}
+.subscription-plan-tag{max-width:68%;line-height:1.25}
+.subscription-plan li{line-height:1.5}
+@media(max-width:650px){
+ .subscription-plan-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:9px!important;align-items:stretch}
+ .subscription-plan{padding:13px 11px;border-radius:14px}
+ .subscription-plan-top{align-items:flex-start;flex-direction:column;gap:8px;margin-bottom:13px}
+ .subscription-plan-symbol{width:29px;height:29px;border-radius:9px;font-size:16px}
+ .subscription-plan-tag{max-width:100%;font-size:7px;padding:5px 7px;letter-spacing:.35px}
+ .subscription-plan h4{font-size:15px}
+ .subscription-plan-desc{min-height:48px;margin:5px 0 11px;font-size:9px;line-height:1.45}
+ .subscription-price{gap:3px}
+ .subscription-price strong{font-size:22px;letter-spacing:-.7px}
+ .subscription-price span{font-size:9px}
+ .subscription-installments{gap:3px;margin-top:8px}
+ .subscription-installments strong{font-size:10px;line-height:1.35}
+ .subscription-installments span{font-size:8px;line-height:1.35}
+ .subscription-plan-divider{margin:12px 0 10px}
+ .subscription-plan ul{gap:7px}
+ .subscription-plan li{padding-left:13px;font-size:8px;line-height:1.4}
+ .subscription-plan-foot{margin-top:12px;padding-top:9px;font-size:8px;line-height:1.4}
+ .subscription-installment-note{font-size:7px;line-height:1.35}
+}
+@media(prefers-reduced-motion:reduce){.subscription-plan{transition:none}.subscription-plan:hover{transform:none}}
