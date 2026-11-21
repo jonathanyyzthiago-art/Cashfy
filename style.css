@@ -2141,3 +2141,32 @@ button, a, [role="button"], input, select, textarea, label, summary,
  .subscription-installment-note{font-size:7px;line-height:1.35}
 }
 @media(prefers-reduced-motion:reduce){.subscription-plan{transition:none}.subscription-plan:hover{transform:none}}
+
+
+/* Planos maiores, premium e botões roxos de assinatura */
+.subscription-plan{padding:27px!important;min-height:100%;display:flex;flex-direction:column}
+.subscription-plan h4{font-size:21px!important;letter-spacing:.1px}
+.subscription-plan-desc{font-size:11px!important;min-height:42px}
+.subscription-price strong{font-size:36px!important}
+.subscription-plan li{font-size:11px!important}
+.subscription-plan-foot{font-size:11px!important}
+.subscription-subscribe-btn{display:block;width:100%;margin-top:auto;padding:13px 16px;border:1px solid rgba(222,202,255,.42);border-radius:12px;background:linear-gradient(135deg,#a56aff 0%,#8245e8 48%,#6d35d4 100%);color:#fff;font-size:12px;font-weight:800;letter-spacing:.5px;box-shadow:0 7px 20px rgba(126,70,224,.32),inset 0 1px 0 rgba(255,255,255,.28);text-shadow:0 1px 2px rgba(40,15,75,.25);cursor:pointer;transition:transform .2s ease,filter .2s ease,box-shadow .2s ease}
+.subscription-subscribe-btn:hover{transform:translateY(-2px);filter:brightness(1.12);box-shadow:0 10px 26px rgba(126,70,224,.45),inset 0 1px 0 rgba(255,255,255,.32)}
+.subscription-subscribe-btn:active{transform:scale(.98)}
+.subscription-plan-lifetime .subscription-subscribe-btn{background:linear-gradient(135deg,#bb8aff 0%,#9254f3 48%,#7138d9 100%);box-shadow:0 8px 24px rgba(143,83,239,.4),0 0 18px rgba(157,112,255,.14),inset 0 1px 0 rgba(255,255,255,.35)}
+@media(max-width:650px){
+ .subscription-plan-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:11px!important}
+ .subscription-plan{padding:17px 14px!important;border-radius:16px}
+ .subscription-plan h4{font-size:17px!important}
+ .subscription-plan-desc{font-size:9px!important;min-height:54px}
+ .subscription-price strong{font-size:26px!important}
+ .subscription-plan li{font-size:9px!important}
+ .subscription-plan-foot{font-size:9px!important}
+ .subscription-subscribe-btn{padding:11px 8px;font-size:11px;border-radius:10px;margin-top:15px}
+}
+@media(max-width:370px){
+ .subscription-plan{padding:13px 10px!important}
+ .subscription-plan h4{font-size:15px!important}
+ .subscription-price strong{font-size:23px!important}
+ .subscription-plan li{font-size:8px!important}
+}
