@@ -161,14 +161,14 @@ function profilePage(){
  const email=escapeHtml(cashfySettings.accountEmail||"E-mail não informado");
  const initials=escapeHtml(rawName.trim().split(/\\s+/).slice(0,2).map(part=>part.charAt(0)).join("").toUpperCase()||"CT");
  const tiers=[
-  {id:"silver",name:"Prata",symbol:"✦",color:"#d5deed"},
-  {id:"gold",name:"Ouro",symbol:"✧",color:"#ffd36a"},
-  {id:"diamond",name:"Diamante",symbol:"◆",color:"#72d8ff"},
-  {id:"red",name:"Elite",symbol:"⬟",color:"#ff647d"},
-  {id:"pink",name:"Honra",symbol:"✿",color:"#ff79dc"}
+  {id:"silver",name:"Prata",symbol:"✦",range:"R$ 0 — R$ 10 mil"},
+  {id:"gold",name:"Ouro",symbol:"✧",range:"R$ 10 mil — R$ 100 mil"},
+  {id:"diamond",name:"Diamante",symbol:"◆",range:"R$ 100 mil — R$ 1 milhão"},
+  {id:"red",name:"Elite",symbol:"⬟",range:"R$ 1 milhão — R$ 5 milhões"},
+  {id:"pink",name:"Honra",symbol:"✿",range:"R$ 5 milhões — R$ 15 milhões"}
  ];
- const cards=tiers.map((t,i)=>'<article class="profile-mini-card mini-'+t.id+'" style="--mini-glow:'+t.color+'"><span class="profile-mini-index">0'+(i+1)+'</span><span class="profile-mini-symbol">'+t.symbol+'</span><strong>'+t.name+'</strong><span class="profile-mini-shine"></span></article>').join("");
- return '<section class="profile-clean"><div class="profile-clean-heading"><div class="profile-clean-avatar">'+initials+'</div><div class="profile-clean-title"><span class="profile-kicker">MINHA CONTA</span><h2>Meu perfil</h2><p>Suas informações pessoais</p></div><button type="button" class="profile-edit-btn" data-page="settings">Editar dados <span aria-hidden="true">↗</span></button></div><div class="profile-clean-info"><div class="profile-clean-field"><span>Nome</span><strong>'+name+'</strong></div><div class="profile-clean-field"><span>E-mail</span><strong>'+email+'</strong></div><div class="profile-clean-field"><span>Senha</span><strong class="profile-clean-password">••••••••••••</strong><small>Protegida</small></div></div></section><section class="profile-minis" aria-label="Cards de conquistas">'+cards+'</section>';
+ const cards=tiers.map((t,i)=>'<article class="profile-mini-card tier-'+t.id+'"><div class="milestone-plaque profile-mini-plaque"><span class="plaque-gem">'+t.symbol+'</span><strong>'+t.name+'</strong><small>'+t.range+'</small><span class="plaque-laurel">✦　✧　✦</span></div></article>').join("");
+ return '<section class="profile-clean"><div class="profile-clean-heading"><div class="profile-clean-avatar">'+initials+'</div><div class="profile-clean-title"><span class="profile-kicker">MINHA CONTA</span><h2>Meu perfil</h2><p>Suas informações pessoais</p></div><button type="button" class="profile-edit-btn" data-page="settings">Editar dados <span aria-hidden="true">↗</span></button></div><div class="profile-clean-info"><div class="profile-clean-field"><span>Nome</span><strong>'+name+'</strong></div><div class="profile-clean-field"><span>E-mail</span><strong>'+email+'</strong></div><div class="profile-clean-field"><span>Senha</span><strong class="profile-clean-password">••••••••••••</strong><small>Protegida</small></div></div></section><section class="profile-minis-panel" aria-label="Coleção de cards"><div class="profile-minis">'+cards+'</div></section>';
 }
 
 function render(){
