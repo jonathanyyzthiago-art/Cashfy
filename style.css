@@ -1794,3 +1794,22 @@ body:before{
 .milestone-reward-status{padding:3px 6px;border-radius:999px;background:#ffffff0b;color:#a9a1b6;font-size:8px;white-space:nowrap}
 .milestone-reward-row:has(.milestone-reward-status:first-child){color:inherit}
 @media(max-width:420px){.milestone-reward-row{grid-template-columns:64px minmax(0,1fr);gap:5px}.milestone-reward-status{grid-column:2;justify-self:start}}
+
+
+/* CASHFY — página de Termos e Condições */
+.cashfy-site-footer{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px 10px!important}
+.cashfy-terms-link{color:#85818d!important;text-decoration:none!important;font-size:11px;font-weight:600;transition:color .2s ease}
+.cashfy-terms-link:hover{color:#c9c3d3!important;text-decoration:underline!important}
+.cashfy-copyright{color:#77727f;font-size:10px;letter-spacing:.35px}
+.cashfy-footer-separator{color:#6d6876}
+.cashfy-terms-page{max-width:900px;margin:0 auto 28px;padding:clamp(20px,4vw,38px);border:1px solid rgba(190,164,255,.14);border-radius:22px;background:linear-gradient(145deg,rgba(30,23,43,.94),rgba(13,11,21,.96));box-shadow:0 14px 38px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.045);color:#c5bfce;line-height:1.75}
+.cashfy-terms-kicker{color:#b89aff;font-size:10px;font-weight:800;letter-spacing:1.8px}
+.cashfy-terms-page h2{margin:9px 0 4px;color:#f4efff;font:700 clamp(23px,4vw,31px) 'Space Grotesk',sans-serif;line-height:1.2}
+.cashfy-terms-updated{margin:0 0 22px!important;color:#888291!important;font-size:11px}
+.cashfy-terms-page p{font-size:13px;color:#bcb5c8}
+.cashfy-terms-page section{padding:15px 0;border-top:1px solid rgba(255,255,255,.075)}
+.cashfy-terms-page h3{margin:0 0 6px;color:#e9e1f5;font-size:14px}
+.cashfy-terms-page section p{margin:0}
+.cashfy-terms-end{margin-top:18px;padding:13px;border-radius:12px;background:rgba(169,128,255,.08);color:#e2d7f5!important}
+.cashfy-terms-back{margin-top:8px}
+@media(max-width:600px){.cashfy-site-footer{gap:7px 9px}.cashfy-terms-page{padding:19px 16px;border-radius:17px}.cashfy-terms-page p{font-size:12px}}
