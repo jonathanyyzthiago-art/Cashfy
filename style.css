@@ -2564,3 +2564,52 @@ img,svg,canvas{max-width:100%}
   .subscription-plan-lifetime .subscription-cash-price{padding:7px 8px}
   .subscription-plan-lifetime .subscription-cash-price strong{font-size:10px}
 }
+
+
+/* Otimização visual dos cards de assinatura e botão sempre visível */
+.subscription-plan-glow{
+  filter:none!important;
+  opacity:.65;
+  background:radial-gradient(circle,rgba(145,94,255,.16),transparent 70%)!important;
+}
+.subscription-plan{
+  box-shadow:0 8px 20px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.045)!important;
+  transition:transform .16s ease,border-color .16s ease!important;
+}
+.subscription-plan:hover{
+  transform:translateY(-2px)!important;
+  box-shadow:0 10px 24px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.05)!important;
+}
+.subscription-plan-lifetime .subscription-plan-foot{
+  margin-top:8px!important;
+}
+.subscription-plan-lifetime .subscription-installment-note{
+  margin-top:6px!important;
+  font-size:8px!important;
+}
+.subscription-plan-lifetime .subscription-subscribe-btn{
+  display:block!important;
+  visibility:visible!important;
+  opacity:1!important;
+  flex:0 0 auto!important;
+  min-height:38px;
+  margin-top:9px!important;
+  position:relative;
+  z-index:2;
+}
+@media(max-width:650px){
+  .subscription-plan{box-shadow:0 5px 13px rgba(0,0,0,.16)!important}
+  .subscription-plan:hover{transform:none!important}
+  .subscription-plan-lifetime .subscription-plan-foot{margin-top:6px!important}
+  .subscription-plan-lifetime .subscription-installment-note{font-size:6px!important;line-height:1.2!important;margin-top:4px!important}
+  .subscription-plan-lifetime .subscription-subscribe-btn{
+    min-height:29px!important;
+    padding:7px 5px!important;
+    margin-top:6px!important;
+    font-size:9px!important;
+    border-radius:8px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .subscription-plan{transition:none!important}
+}
