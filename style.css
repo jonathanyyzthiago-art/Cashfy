@@ -1957,3 +1957,38 @@ button, a, [role="button"], input, select, textarea, label, summary,
 .dashboard-filters .custom-select-menu[hidden]{display:none!important}
 .dashboard-filters .custom-select-option{background:#211a31!important;color:#f2ecfb!important;opacity:1!important}
 .dashboard-summary,.dashboard-summary *{position:relative;z-index:0}
+
+
+/* Dashboard: manter os rótulos Tipo, Produtos e Período acima dos botões */
+.dashboard-filters>.filter-field{
+  position:relative!important;
+  z-index:2147483003!important;
+  overflow:visible!important;
+}
+.dashboard-filters>.filter-field>.filter-label{
+  position:absolute!important;
+  top:-7px!important;
+  left:13px!important;
+  z-index:2147483646!important;
+  display:block!important;
+  width:max-content!important;
+  max-width:calc(100% - 26px)!important;
+  margin:0!important;
+  padding:0 7px!important;
+  background:#0d0b12!important;
+  color:#aaa3b8!important;
+  line-height:14px!important;
+  font-size:10px!important;
+  opacity:1!important;
+  visibility:visible!important;
+  pointer-events:none!important;
+  transform:none!important;
+}
+.dashboard-filters>.filter-field .custom-select,
+.dashboard-filters>.filter-field .custom-select-trigger{
+  position:relative!important;
+}
+.dashboard-filters>.filter-field .custom-select-trigger{
+  z-index:1!important;
+  padding-top:8px!important;
+}
