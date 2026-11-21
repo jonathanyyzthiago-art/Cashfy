@@ -1881,128 +1881,68 @@ button, a, [role="button"], input, select, textarea, label, summary,
 ::selection { background:rgba(167,122,255,.22); color:inherit; }
 
 
-/* Correção isolada do terceiro filtro do Dashboard: Período */
-.dashboard-filters > .filter-field:nth-child(3){position:relative;z-index:40;isolation:isolate}
-.dashboard-filters > .filter-field:nth-child(3) .custom-select{position:relative;z-index:41}
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-trigger{background:#191426!important;color:#f3effa!important;opacity:1!important;border-color:rgba(173,145,225,.28)!important}
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-menu{z-index:60!important;background:#191426!important;opacity:1!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;box-shadow:0 14px 34px rgba(0,0,0,.72)!important}
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-option{background-color:#191426!important;color:#eee8f7!important;opacity:1!important}
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-option:hover,.dashboard-filters > .filter-field:nth-child(3) .custom-select-option.selected{background:#302344!important;color:#fff!important}
 
 
-/* Correção definitiva do filtro Período: menu ocupa espaço e não cobre o campo seguinte */
-.dashboard-filters > .filter-field:nth-child(3){position:relative!important;z-index:50!important;isolation:isolate!important}
-.dashboard-filters > .filter-field:nth-child(3) .custom-select{position:relative!important;z-index:51!important}
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-trigger,
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-trigger:hover,
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-trigger[aria-expanded="true"]{background:#191426!important;background-image:none!important;color:#f7f2ff!important;opacity:1!important;filter:none!important}
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-menu,
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-menu:not([hidden]){position:relative!important;inset:auto!important;display:grid!important;width:100%!important;margin-top:6px!important;max-height:190px!important;overflow-y:auto!important;z-index:52!important;background:#191426!important;background-image:none!important;opacity:1!important;filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;transform:none!important;animation:none!important;box-shadow:0 8px 22px rgba(0,0,0,.55)!important}
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-menu[hidden]{display:none!important}
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-option,
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-option.selected,
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-option:hover{background:#211a31!important;color:#f2ecfb!important;opacity:1!important;filter:none!important}
-
-
-/* Dashboard: os três menus abrem SOBRE os campos seguintes, sempre opacos */
-.dashboard-filters > .filter-field{position:relative!important;z-index:1!important;isolation:auto!important}
-.dashboard-filters > .filter-field:has(.custom-select-trigger[aria-expanded="true"]){z-index:120!important}
-.dashboard-filters > .filter-field .custom-select{position:relative!important;z-index:121!important}
-.dashboard-filters > .filter-field .custom-select-menu,
-.dashboard-filters > .filter-field .custom-select-menu:not([hidden]){
+/* Filtros do Dashboard: todos os menus sobrepõem os campos seguintes */
+.dashboard-filters>.filter-field{
+  position:relative!important;
+  z-index:1!important;
+}
+.dashboard-filters>.filter-field:focus-within{
+  z-index:120!important;
+}
+.dashboard-filters>.filter-field .custom-select{
+  position:relative!important;
+  z-index:121!important;
+}
+.dashboard-filters>.filter-field .custom-select-menu,
+.dashboard-filters>.filter-field .custom-select-menu:not([hidden]){
   position:absolute!important;
   top:calc(100% + 6px)!important;
+  left:0!important;
   right:0!important;
   bottom:auto!important;
-  left:0!important;
   display:grid!important;
   width:100%!important;
   margin:0!important;
   max-height:210px!important;
   overflow-y:auto!important;
   z-index:130!important;
+  border:1px solid rgba(170,133,255,.28)!important;
+  border-radius:12px!important;
   background:#191426!important;
   background-image:none!important;
   opacity:1!important;
+  visibility:visible!important;
   filter:none!important;
   backdrop-filter:none!important;
   -webkit-backdrop-filter:none!important;
   transform:none!important;
   box-shadow:0 14px 34px rgba(0,0,0,.78)!important;
 }
-.dashboard-filters > .filter-field .custom-select-menu[hidden]{display:none!important}
-.dashboard-filters > .filter-field .custom-select-option,
-.dashboard-filters > .filter-field .custom-select-option:hover,
-.dashboard-filters > .filter-field .custom-select-option.selected{
+.dashboard-filters>.filter-field .custom-select-menu[hidden]{
+  display:none!important;
+}
+.dashboard-filters>.filter-field .custom-select-option,
+.dashboard-filters>.filter-field .custom-select-option:hover,
+.dashboard-filters>.filter-field .custom-select-option.selected{
   background:#211a31!important;
   background-image:none!important;
   color:#f2ecfb!important;
   opacity:1!important;
+  visibility:visible!important;
   filter:none!important;
 }
-.dashboard-filters > .filter-field .custom-select-trigger,
-.dashboard-filters > .filter-field .custom-select-trigger:hover,
-.dashboard-filters > .filter-field .custom-select-trigger[aria-expanded="true"]{
+.dashboard-filters>.filter-field .custom-select-trigger,
+.dashboard-filters>.filter-field .custom-select-trigger:hover,
+.dashboard-filters>.filter-field .custom-select-trigger[aria-expanded="true"]{
   background:#191426!important;
   background-image:none!important;
   color:#f7f2ff!important;
   opacity:1!important;
   filter:none!important;
 }
-
-
-/* O terceiro filtro fica acima do botão Atualizar quando seu menu está aberto */
-.dashboard-filters > .filter-field:nth-child(3):has(.custom-select-trigger[aria-expanded="true"]){
+.dashboard-filters>.dashboard-update{
   position:relative!important;
-  z-index:500!important;
-  isolation:isolate!important;
+  z-index:1!important;
 }
-.dashboard-filters > .filter-field:nth-child(3):has(.custom-select-trigger[aria-expanded="true"]) .custom-select,
-.dashboard-filters > .filter-field:nth-child(3):has(.custom-select-trigger[aria-expanded="true"]) .custom-select-menu{
-  position:relative!important;
-  z-index:501!important;
-}
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-menu,
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-menu:not([hidden]){
-  position:absolute!important;
-  top:calc(100% + 6px)!important;
-  left:0!important;
-  right:0!important;
-  bottom:auto!important;
-  background:#191426!important;
-  background-image:none!important;
-  opacity:1!important;
-  backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;
-  z-index:502!important;
-  box-shadow:0 14px 34px rgba(0,0,0,.82)!important;
-}
-.dashboard-filters > .dashboard-update{position:relative!important;z-index:1!important}
-
-
-/* Correção definitiva: o terceiro filtro usa o mesmo menu sobreposto dos demais */
-.dashboard-filters > .filter-field:nth-child(3):has(.custom-select-trigger[aria-expanded="true"]){
-  position:relative!important;z-index:500!important;isolation:auto!important;
-}
-.dashboard-filters > .filter-field:nth-child(3):has(.custom-select-trigger[aria-expanded="true"]) .custom-select{
-  position:relative!important;z-index:501!important;
-}
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-menu,
-.dashboard-filters > .filter-field:nth-child(3):has(.custom-select-trigger[aria-expanded="true"]) .custom-select-menu,
-.dashboard-filters > .filter-field:nth-child(3):has(.custom-select-trigger[aria-expanded="true"]) .custom-select-menu:not([hidden]){
-  position:absolute!important;top:calc(100% + 6px)!important;left:0!important;right:0!important;bottom:auto!important;
-  display:grid!important;width:100%!important;margin:0!important;padding:5px!important;max-height:210px!important;
-  overflow-y:auto!important;z-index:502!important;border:1px solid rgba(170,133,255,.28)!important;
-  border-radius:12px!important;background:#191426!important;background-image:none!important;
-  opacity:1!important;visibility:visible!important;filter:none!important;backdrop-filter:none!important;
-  -webkit-backdrop-filter:none!important;transform:none!important;animation:none!important;
-  box-shadow:0 14px 34px rgba(0,0,0,.82)!important;
-}
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-menu[hidden]{display:none!important}
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-option,
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-option:hover,
-.dashboard-filters > .filter-field:nth-child(3) .custom-select-option.selected{
-  background:#211a31!important;background-image:none!important;color:#f2ecfb!important;
-  opacity:1!important;visibility:visible!important;filter:none!important;
-}
-.dashboard-filters > .dashboard-update{position:relative!important;z-index:1!important}
