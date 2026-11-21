@@ -1776,3 +1776,21 @@ body:before{
     min-height:48px;
   }
 }
+
+
+/* Ajuste visível: quatro primeiros botões reais da barra lateral */
+.sidebar .nav > .nav-link[data-page="overview"],
+.sidebar .nav > .nav-link[data-page="sales"],
+.sidebar .nav > .nav-link[data-page="products"],
+.sidebar .nav > .nav-link[data-page="customers"]{
+  border-radius:22px!important;
+  overflow:hidden;
+  background-clip:padding-box;
+  padding:12px 15px!important;
+}
+.sidebar .nav > .nav-link[data-page="overview"].active,
+.sidebar .nav > .nav-link[data-page="sales"].active,
+.sidebar .nav > .nav-link[data-page="products"].active,
+.sidebar .nav > .nav-link[data-page="customers"].active{
+  border-radius:22px!important;
+}
