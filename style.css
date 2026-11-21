@@ -3013,3 +3013,30 @@ body.profile-view .profile-dashboard-panel .profile-mini-plaque .plaque-laurel{d
  .profile-cards-panel .profile-mini-card,.profile-cards-panel .profile-mini-plaque{width:100%!important;max-width:none!important}
  .profile-cards-panel .profile-mini-plaque{height:42px!important;min-height:42px!important}
 }
+
+
+/* Restaura somente o formato retangular horizontal dos mini cards */
+.profile-cards-panel .profile-minis{
+ display:grid!important;
+ grid-template-columns:repeat(5,62px)!important;
+ justify-content:center!important;
+ gap:5px!important;
+}
+.profile-cards-panel .profile-mini-card{
+ width:62px!important;
+ max-width:62px!important;
+}
+.profile-cards-panel .profile-mini-plaque{
+ width:62px!important;
+ height:44px!important;
+ min-height:44px!important;
+ aspect-ratio:auto!important;
+ padding:3px 2px!important;
+ border-radius:6px!important;
+}
+@media(max-width:370px){
+ .profile-cards-panel .profile-minis{grid-template-columns:repeat(5,62px)!important;gap:4px!important}
+ .profile-cards-panel .profile-mini-card,
+ .profile-cards-panel .profile-mini-plaque{width:62px!important;max-width:62px!important}
+ .profile-cards-panel .profile-mini-plaque{height:44px!important;min-height:44px!important}
+}
