@@ -1749,52 +1749,27 @@ body:before{
 @media(prefers-reduced-motion:reduce){body:before{display:none}}
 
 
-/* CASHFY — quatro primeiras opções da navegação mais arredondadas */
-.nav-link[data-page="overview"],
-.nav-link[data-page="sales"],
-.nav-link[data-page="products"],
-.nav-link[data-page="customers"]{
-  border-radius:17px!important;
-  padding:12px 14px!important;
-  min-height:46px;
-  border:1px solid rgba(190,164,255,.075);
-  background-clip:padding-box;
+/* CASHFY — quatro controles iniciais do Dashboard mais arredondados */
+.dashboard-filters .filter-field .custom-select-trigger,
+.dashboard-filters > .dashboard-update{
+  border-radius:24px!important;
+  overflow:hidden;
 }
-.nav-link[data-page="overview"].active,
-.nav-link[data-page="sales"].active,
-.nav-link[data-page="products"].active,
-.nav-link[data-page="customers"].active{
-  border-radius:17px!important;
-  border-color:rgba(177,139,255,.19);
+.dashboard-filters .filter-field .custom-select-trigger{
+  min-height:48px;
+}
+.dashboard-filters > .dashboard-update{
+  min-height:48px;
+  padding-left:20px!important;
+  padding-right:20px!important;
 }
 @media(max-width:700px){
-  .nav-link[data-page="overview"],
-  .nav-link[data-page="sales"],
-  .nav-link[data-page="products"],
-  .nav-link[data-page="customers"]{
-    border-radius:19px!important;
-    min-height:48px;
+  .dashboard-filters .filter-field .custom-select-trigger,
+  .dashboard-filters > .dashboard-update{
+    border-radius:22px!important;
+    min-height:46px;
   }
 }
-
-
-/* Ajuste visível: quatro primeiros botões reais da barra lateral */
-.sidebar .nav > .nav-link[data-page="overview"],
-.sidebar .nav > .nav-link[data-page="sales"],
-.sidebar .nav > .nav-link[data-page="products"],
-.sidebar .nav > .nav-link[data-page="customers"]{
-  border-radius:22px!important;
-  overflow:hidden;
-  background-clip:padding-box;
-  padding:12px 15px!important;
-}
-.sidebar .nav > .nav-link[data-page="overview"].active,
-.sidebar .nav > .nav-link[data-page="sales"].active,
-.sidebar .nav > .nav-link[data-page="products"].active,
-.sidebar .nav > .nav-link[data-page="customers"].active{
-  border-radius:22px!important;
-}
-
 
 /* Cards de conquista: identificação premium no canto superior */
 .milestone-card-tag{position:absolute!important;top:13px;right:14px;z-index:4!important;display:inline-flex;align-items:center;padding:5px 10px;border:1px solid color-mix(in srgb,var(--tier-color) 55%,#ffffff35);border-radius:999px;background:linear-gradient(135deg,color-mix(in srgb,var(--tier-color) 22%,#17131f),#100e18 75%);color:color-mix(in srgb,var(--tier-glow) 82%,#fff);font:800 8px 'Space Grotesk';letter-spacing:1.7px;text-shadow:0 0 9px color-mix(in srgb,var(--tier-color) 55%,transparent);box-shadow:inset 0 1px 0 #ffffff30,0 3px 12px #0005}
