@@ -2756,3 +2756,55 @@ img,svg,canvas{max-width:100%}
  .profile-reward-card>p{font-size:9px}
 }
 @media(max-width:360px){.profile-identity-top{flex-wrap:wrap}.profile-edit-btn{margin-left:0}.profile-data-grid{grid-template-columns:1fr}.profile-reward-grid{gap:7px}.profile-reward-card{padding-left:6px;padding-right:6px}}
+
+
+/* Perfil Cashfy — acabamento visual e cards em tamanho médio */
+.profile-identity{position:relative;overflow:hidden;border-radius:20px;padding:24px;background:radial-gradient(ellipse at 8% 0%,#9565ff30,transparent 42%),linear-gradient(145deg,#191526,#100e18 78%);border-color:#a783ef45;box-shadow:0 16px 38px #0004,inset 0 1px 0 #ffffff12}
+.profile-identity:before{content:"";position:absolute;inset:0 0 auto;height:2px;background:linear-gradient(90deg,transparent,#a982ff,#6b48bd,transparent);opacity:.8}
+.profile-identity-top{align-items:center}
+.profile-title-copy{min-width:0}
+.profile-avatar-large{border:1px solid #d5bdff66;box-shadow:0 0 0 5px #a47aff12,0 10px 24px #8e5ce944,inset 0 1px 0 #ffffff70}
+.profile-edit-btn{display:flex;align-items:center;gap:8px;transition:background .2s,border-color .2s,transform .2s}
+.profile-edit-btn:hover{background:#9b70f43a;border-color:#b99bfa;transform:translateY(-1px)}
+.profile-data-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;padding-top:16px}
+.profile-data-heading>span{font-size:9px;font-weight:900;letter-spacing:1.1px;color:#c8b4f1}
+.profile-data-heading small{display:flex;align-items:center;gap:6px;color:#8f87a0;font-size:9px}
+.profile-data-heading small i{width:6px;height:6px;border-radius:50%;background:#42d6a0;box-shadow:0 0 8px #42d6a0}
+.profile-data-grid{padding-top:10px}
+.profile-data-item{min-height:66px;border-color:#ffffff14;background:linear-gradient(145deg,#ffffff0a,#ffffff03);box-shadow:inset 0 1px 0 #ffffff08}
+.profile-data-item>strong{font-size:12px}
+.profile-password small{display:flex;align-items:center;gap:5px}
+.profile-lock-icon{color:#b99bfa;font-size:13px}
+.profile-security-note{margin:12px 0 0;color:#898198;font-size:9px;line-height:1.5}
+.profile-collection-head{margin-top:26px;align-items:center}
+.profile-collection-head>div{min-width:0}
+.profile-collection-head h3{font-size:21px}
+.profile-reward-grid{width:100%;max-width:940px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.profile-reward-card{min-height:250px;padding:16px 13px 14px;border-radius:17px}
+.profile-reward-card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--profile-tier) 75%,transparent);box-shadow:0 14px 28px #0005,inset 0 1px 0 #ffffff18}
+.profile-card-preview{margin-top:12px;padding:5px 9px;border:1px solid color-mix(in srgb,var(--profile-tier) 35%,transparent);border-radius:999px;color:var(--profile-tier);font-size:7px;font-weight:900;letter-spacing:1px;background:color-mix(in srgb,var(--profile-tier) 8%,transparent)}
+@media(max-width:650px){
+ .profile-identity{padding:15px;margin-bottom:18px}
+ .profile-data-heading{padding-top:13px}
+ .profile-data-heading small{font-size:8px}
+ .profile-data-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .profile-data-item{padding:10px;min-height:62px}
+ .profile-data-item>strong{font-size:10px}
+ .profile-security-note{font-size:8px}
+ .profile-collection-head{margin-top:20px}
+ .profile-collection-head h3{font-size:17px}
+ .profile-collection-head p{font-size:10px}
+ .profile-reward-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+ .profile-reward-card{min-height:230px;padding:12px 8px 11px;border-radius:14px}
+ .profile-card-emblem{width:42px;height:42px;font-size:24px}
+ .profile-reward-card h3{font-size:14px}
+ .profile-card-range{font-size:8px}
+ .profile-reward-card>p{font-size:9px}
+}
+@media(max-width:360px){
+ .profile-identity-top{flex-wrap:wrap}
+ .profile-edit-btn{margin-left:auto}
+ .profile-data-grid{grid-template-columns:1fr}
+ .profile-reward-grid{gap:7px}
+ .profile-reward-card{padding-left:6px;padding-right:6px}
+}
