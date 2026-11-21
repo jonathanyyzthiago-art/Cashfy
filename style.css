@@ -2613,3 +2613,28 @@ img,svg,canvas{max-width:100%}
 @media(prefers-reduced-motion:reduce){
   .subscription-plan{transition:none!important}
 }
+
+
+/* Ajuste final dos cards: conteúdo compacto sem cortar o botão */
+.subscription-plan{overflow:visible!important}
+.subscription-plan-lifetime{display:flex!important;flex-direction:column!important}
+.subscription-plan-lifetime .subscription-plan-top{flex:0 0 auto}
+.subscription-plan-lifetime .subscription-plan-desc{min-height:0!important}
+.subscription-plan-lifetime .subscription-plan-divider{flex:0 0 auto}
+.subscription-plan-lifetime ul{flex:0 0 auto}
+.subscription-plan-lifetime .subscription-plan-foot{margin-top:8px!important}
+.subscription-plan-lifetime .subscription-installment-note{flex:0 0 auto}
+.subscription-plan-lifetime .subscription-subscribe-btn{margin-top:auto!important}
+@media(max-width:650px){
+ .subscription-plan-lifetime{height:auto!important;min-height:315px!important;padding:10px 8px!important}
+ .subscription-plan-lifetime .subscription-plan-top{margin-bottom:6px!important}
+ .subscription-plan-lifetime .subscription-plan-desc{font-size:7px!important;line-height:1.25!important;margin:3px 0 5px!important}
+ .subscription-plan-lifetime .subscription-price-featured strong{font-size:19px!important}
+ .subscription-plan-lifetime .subscription-cash-price{margin-top:5px!important;padding:5px 6px!important}
+ .subscription-plan-lifetime .subscription-plan-divider{margin:7px 0 6px!important}
+ .subscription-plan-lifetime ul{gap:4px!important}
+ .subscription-plan-lifetime li{font-size:6.5px!important;line-height:1.2!important}
+ .subscription-plan-lifetime .subscription-plan-foot{font-size:6.5px!important;margin-top:6px!important;padding-top:5px!important}
+ .subscription-plan-lifetime .subscription-installment-note{font-size:5.5px!important;line-height:1.15!important;margin-top:3px!important}
+ .subscription-plan-lifetime .subscription-subscribe-btn{min-height:28px!important;margin-top:6px!important;padding:6px 4px!important}
+}
