@@ -1800,3 +1800,12 @@ body:before{
 .milestone-card-tag{position:absolute!important;top:13px;right:14px;z-index:4!important;display:inline-flex;align-items:center;padding:5px 10px;border:1px solid color-mix(in srgb,var(--tier-color) 55%,#ffffff35);border-radius:999px;background:linear-gradient(135deg,color-mix(in srgb,var(--tier-color) 22%,#17131f),#100e18 75%);color:color-mix(in srgb,var(--tier-glow) 82%,#fff);font:800 8px 'Space Grotesk';letter-spacing:1.7px;text-shadow:0 0 9px color-mix(in srgb,var(--tier-color) 55%,transparent);box-shadow:inset 0 1px 0 #ffffff30,0 3px 12px #0005}
 .milestone-top{padding-right:74px}
 @media(max-width:650px){.milestone-card-tag{top:11px;right:11px}.milestone-top{padding-right:68px}}
+
+
+/* Aviso sobre cards no perfil e benefícios VIP */
+.milestone-profile-info{display:flex;align-items:center;gap:13px;margin:0 0 17px;padding:14px 17px;border:1px solid #a77aff42;border-radius:15px;background:linear-gradient(110deg,#241735c9,#12101bd9);box-shadow:inset 0 1px 0 #ffffff13,0 8px 22px #0003}
+.milestone-profile-icon{flex:0 0 31px;width:31px;height:31px;display:grid;place-items:center;border:1px solid #c59aff70;border-radius:10px;background:linear-gradient(145deg,#9c6ae944,#4c2d7955);color:#e3caff;font-size:17px;text-shadow:0 0 12px #bb8cff;box-shadow:0 0 16px #a875ff22}
+.milestone-profile-info p{margin:0;color:#bdb4cb;font-size:10px;line-height:1.7}
+.milestone-profile-info strong{color:#f0e7ff;font-weight:800}
+.milestone-profile-info b{color:#d8b8ff;font-weight:800;text-shadow:0 0 10px #a875ff55}
+@media(max-width:650px){.milestone-profile-info{padding:12px;gap:10px}.milestone-profile-info p{font-size:10px}}
