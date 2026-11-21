@@ -2300,3 +2300,9 @@ button, a, [role="button"], input, select, textarea, label, summary,
  .subscription-subscribe-btn{min-height:37px!important}
 }
 @media(max-width:370px){.subscription-plan{min-height:465px!important}}
+
+
+/* Reduz a largura dos campos de assinatura e centraliza os dois cards */
+.subscription-plan-grid{width:100%!important;max-width:790px!important;margin-left:auto!important;margin-right:auto!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:18px!important}
+.subscription-plan{width:100%!important;min-width:0!important}
+@media(max-width:650px){.subscription-plan-grid{max-width:100%!important;gap:9px!important}}
