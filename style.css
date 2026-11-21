@@ -3385,3 +3385,59 @@ body.profile-view #pageContent .profile-cards-panel .profile-achievement-row .pl
 body.profile-view #pageContent .profile-cards-panel .profile-achievement-row > article > .profile-mini-plaque > strong{font-size:7px!important;line-height:9px!important;text-align:center!important;white-space:normal!important}
 body.profile-view #pageContent .profile-cards-panel .profile-achievement-row > article > .profile-mini-plaque > small{display:block!important;font-size:6px!important;line-height:8px!important;text-align:center!important;white-space:normal!important}
 body.profile-view #pageContent .profile-cards-panel .profile-achievement-row .plaque-laurel{display:none!important}
+
+
+/* AJUSTE FINAL: cada card conquistado individual em retângulo vertical */
+body.profile-view #pageContent .profile-cards-panel .profile-minis-panel .profile-minis.profile-achievement-row{
+  display:flex!important;
+  flex-direction:row!important;
+  flex-wrap:nowrap!important;
+  align-items:stretch!important;
+  justify-content:flex-start!important;
+  gap:8px!important;
+  width:100%!important;
+  overflow-x:auto!important;
+  overflow-y:hidden!important;
+  padding:4px 2px 10px!important;
+  box-sizing:border-box!important;
+}
+body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achievement-row > article.profile-mini-card{
+  display:block!important;
+  flex:0 0 58px!important;
+  width:58px!important;
+  min-width:58px!important;
+  max-width:58px!important;
+  height:108px!important;
+  min-height:108px!important;
+  max-height:108px!important;
+  margin:0!important;
+  padding:0!important;
+  box-sizing:border-box!important;
+}
+body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achievement-row > article.profile-mini-card > .milestone-plaque.profile-mini-plaque{
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:center!important;
+  justify-content:center!important;
+  gap:5px!important;
+  width:58px!important;
+  min-width:58px!important;
+  max-width:58px!important;
+  height:108px!important;
+  min-height:108px!important;
+  max-height:108px!important;
+  margin:0!important;
+  padding:8px 2px!important;
+  box-sizing:border-box!important;
+  aspect-ratio:auto!important;
+}
+body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achievement-row .plaque-gem{
+  font-size:15px!important;line-height:17px!important;
+}
+body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achievement-row .profile-mini-plaque > strong{
+  display:block!important;font-size:7px!important;line-height:9px!important;text-align:center!important;white-space:normal!important;
+}
+body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achievement-row .profile-mini-plaque > small{
+  display:block!important;font-size:6px!important;line-height:8px!important;text-align:center!important;white-space:normal!important;
+}
+body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achievement-row .plaque-laurel{display:none!important}
