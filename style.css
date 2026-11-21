@@ -1794,3 +1794,9 @@ body:before{
 .sidebar .nav > .nav-link[data-page="customers"].active{
   border-radius:22px!important;
 }
+
+
+/* Cards de conquista: identificação premium no canto superior */
+.milestone-card-tag{position:absolute!important;top:13px;right:14px;z-index:4!important;display:inline-flex;align-items:center;padding:5px 10px;border:1px solid color-mix(in srgb,var(--tier-color) 55%,#ffffff35);border-radius:999px;background:linear-gradient(135deg,color-mix(in srgb,var(--tier-color) 22%,#17131f),#100e18 75%);color:color-mix(in srgb,var(--tier-glow) 82%,#fff);font:800 8px 'Space Grotesk';letter-spacing:1.7px;text-shadow:0 0 9px color-mix(in srgb,var(--tier-color) 55%,transparent);box-shadow:inset 0 1px 0 #ffffff30,0 3px 12px #0005}
+.milestone-top{padding-right:74px}
+@media(max-width:650px){.milestone-card-tag{top:11px;right:11px}.milestone-top{padding-right:68px}}
