@@ -1827,3 +1827,12 @@ body:before{
 .sidebar .nav-link span svg{width:18px;height:18px;display:inline-block;vertical-align:middle;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 .sidebar .nav-link[data-page="coupons"] span svg{width:15px;height:15px}
 .sidebar .nav-link span{line-height:1;vertical-align:middle}
+
+
+/* Desempenho do aviso de instalação: encerrar sem transição pesada */
+.cashfy-install-banner{ -webkit-backdrop-filter:blur(18px) saturate(155%)!important;backdrop-filter:blur(18px) saturate(155%)!important;transition:opacity .18s ease,transform .18s ease!important; }
+.cashfy-install-banner:after{animation:none!important;filter:none!important}
+.cashfy-install-button,.cashfy-install-close{-webkit-backdrop-filter:none!important;backdrop-filter:none!important}
+.cashfy-install-banner[hidden]{display:none!important;visibility:hidden!important;pointer-events:none!important}
+@media(max-width:700px){.cashfy-install-banner{-webkit-backdrop-filter:blur(8px) saturate(125%)!important;backdrop-filter:blur(8px) saturate(125%)!important;box-shadow:0 8px 22px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.28)!important}.cashfy-install-banner:before{opacity:.65!important}}
+@media(prefers-reduced-motion:reduce){.cashfy-install-banner{transition:none!important}}
