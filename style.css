@@ -3161,3 +3161,39 @@ body.profile-view .profile-cards-panel article.profile-mini-card > .milestone-pl
 .top-search-arrow{margin-left:auto;color:#7f9ab4}
 .top-search-empty{margin:0;padding:16px 8px;color:#91a5bb;text-align:center;font-size:12px}
 @media(max-width:650px){.top-search-panel{position:fixed;top:62px;left:12px;right:12px;width:auto;padding:10px}.top-search-field{height:42px}.top-search-results{max-height:55vh}}
+
+
+/* Pesquisa do topo — identidade visual roxa Cashfy */
+.top-search-toggle:hover,
+.top-search-toggle.is-active{
+ color:#c9adff!important;
+ border-color:rgba(169,126,255,.62)!important;
+ background:linear-gradient(145deg,rgba(139,91,220,.24),rgba(91,57,153,.16))!important;
+ box-shadow:0 0 0 3px rgba(151,105,239,.09),0 5px 16px rgba(91,57,153,.18)!important;
+}
+.top-search-panel{
+ border-color:rgba(164,126,239,.38)!important;
+ background:linear-gradient(145deg,rgba(24,17,39,.985),rgba(13,10,23,.985))!important;
+ box-shadow:0 20px 55px rgba(0,0,0,.5),0 0 28px rgba(119,75,190,.12)!important;
+}
+.top-search-field{
+ border-color:rgba(157,119,226,.3)!important;
+ background:rgba(126,84,190,.09)!important;
+ color:#c5a8ff!important;
+}
+.top-search-field:focus-within{
+ border-color:rgba(177,139,255,.72)!important;
+ box-shadow:0 0 0 3px rgba(151,105,239,.13)!important;
+}
+.top-search-field input::placeholder{color:#9585b0!important}
+.top-search-field button{color:#b6a0d9!important}
+.top-search-result:hover,
+.top-search-result:focus-visible{
+ background:linear-gradient(90deg,rgba(133,91,211,.2),rgba(133,91,211,.08))!important;
+ border-color:rgba(169,126,255,.32)!important;
+}
+.top-search-result-icon{
+ background:rgba(139,91,220,.17)!important;
+ color:#c1a2ff!important;
+}
+.top-search-result small,.top-search-arrow,.top-search-empty{color:#a397b9!important}
