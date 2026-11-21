@@ -1747,3 +1747,32 @@ body:before{
   body:before{position:absolute;min-height:100%;opacity:.62}
 }
 @media(prefers-reduced-motion:reduce){body:before{display:none}}
+
+
+/* CASHFY — quatro primeiras opções da navegação mais arredondadas */
+.nav-link[data-page="overview"],
+.nav-link[data-page="sales"],
+.nav-link[data-page="products"],
+.nav-link[data-page="customers"]{
+  border-radius:17px!important;
+  padding:12px 14px!important;
+  min-height:46px;
+  border:1px solid rgba(190,164,255,.075);
+  background-clip:padding-box;
+}
+.nav-link[data-page="overview"].active,
+.nav-link[data-page="sales"].active,
+.nav-link[data-page="products"].active,
+.nav-link[data-page="customers"].active{
+  border-radius:17px!important;
+  border-color:rgba(177,139,255,.19);
+}
+@media(max-width:700px){
+  .nav-link[data-page="overview"],
+  .nav-link[data-page="sales"],
+  .nav-link[data-page="products"],
+  .nav-link[data-page="customers"]{
+    border-radius:19px!important;
+    min-height:48px;
+  }
+}
