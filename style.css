@@ -2896,3 +2896,33 @@ img,svg,canvas{max-width:100%}
 .profile-clean-field:last-child{grid-column:1/-1}
 .profile-minis-panel{margin-top:0}
 @media(max-width:370px){.profile-clean{padding:11px}.profile-clean-info{gap:6px}.profile-clean-field{padding:8px}}
+
+
+/* Perfil compacto no espaço do banner */
+body.profile-view .cashfy-hero,
+body.profile-view .page-heading{display:none!important}
+body.profile-view .content{padding-top:14px}
+.profile-dashboard-panel{width:100%;padding:13px;border:1px solid #ffffff1b;border-radius:17px;background:linear-gradient(145deg,#15131f 0%,#0b0a12 78%);box-shadow:inset 0 1px 0 #ffffff0b,0 10px 28px #0004}
+.profile-dashboard-panel .profile-clean{margin:0;padding:2px 0 12px;border:0;border-radius:0;background:transparent;box-shadow:none}
+.profile-dashboard-panel .profile-clean-heading{margin-bottom:11px}
+.profile-dashboard-panel .profile-clean-info{gap:7px}
+.profile-dashboard-panel .profile-clean-field{min-height:57px;padding:8px 9px;background:#08080e;border-color:#ffffff14}
+.profile-dashboard-panel .profile-minis-panel{margin:0;padding:9px 7px 7px;border:1px solid #ffffff16;border-radius:12px;background:linear-gradient(145deg,#0b0b12,#15131d);box-shadow:inset 0 1px 0 #ffffff08}
+.profile-dashboard-panel .profile-minis-panel .profile-minis{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px;overflow:visible;padding:0}
+.profile-dashboard-panel .profile-mini-card{width:100%;min-width:0;min-height:0;padding:0;overflow:hidden}
+.profile-dashboard-panel .profile-mini-plaque{width:100%;height:auto;aspect-ratio:.60/1;min-height:0;padding:5px 1px 4px;border-radius:7px;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.profile-dashboard-panel .profile-mini-plaque:before{inset:2px;border-radius:4px}
+.profile-dashboard-panel .profile-mini-plaque .plaque-gem{font-size:clamp(10px,3vw,14px);margin:0}
+.profile-dashboard-panel .profile-mini-plaque>strong{font-size:clamp(7px,2vw,10px);line-height:1.1;letter-spacing:0}
+.profile-dashboard-panel .profile-mini-plaque>small{font-size:clamp(4px,1.35vw,6px);line-height:1.15;letter-spacing:-.25px;white-space:normal;overflow-wrap:anywhere;text-align:center}
+.profile-dashboard-panel .profile-mini-plaque .plaque-laurel{font-size:6px;margin-top:3px;letter-spacing:0;white-space:nowrap}
+@media(max-width:370px){
+ .profile-dashboard-panel{padding:10px}
+ .profile-dashboard-panel .profile-clean-heading{gap:7px}
+ .profile-dashboard-panel .profile-clean .profile-edit-btn{padding:7px 8px;font-size:8px}
+ .profile-dashboard-panel .profile-clean-field{padding:7px 6px}
+ .profile-dashboard-panel .profile-minis-panel{padding:7px 5px}
+ .profile-dashboard-panel .profile-minis-panel .profile-minis{gap:4px}
+ .profile-dashboard-panel .profile-mini-plaque{aspect-ratio:.58/1}
+ .profile-dashboard-panel .profile-mini-plaque>strong{font-size:6px}
+}
