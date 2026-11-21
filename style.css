@@ -3486,3 +3486,14 @@ body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achie
  body.profile-view .profile-cards-panel{height:auto!important;min-height:0!important;flex:none!important}
  body.profile-view .cashfy-site-footer{margin-top:0!important;padding-top:18px!important;padding-bottom:8px!important}
 }
+
+
+/* Perfil mobile: enquadramento termina no conteúdo, sem prolongar o fundo */
+@media(max-width:650px){
+ body.profile-view{min-height:0!important;background:#050408!important;background-image:none!important;background-attachment:scroll!important}
+ body.profile-view .app-shell{height:auto!important;min-height:0!important;align-items:flex-start!important;background:none!important}
+ body.profile-view .main{height:auto!important;min-height:0!important;align-self:flex-start!important}
+ body.profile-view .content{height:auto!important;min-height:0!important;padding-bottom:0!important}
+ body.profile-view #pageContent{height:auto!important;min-height:0!important;margin-bottom:0!important}
+ body.profile-view .cashfy-site-footer{margin-top:0!important;padding-top:18px!important;padding-bottom:8px!important}
+}
