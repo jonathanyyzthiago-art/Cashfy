@@ -91,7 +91,7 @@
       var params=new URLSearchParams(window.location.search);
       if(params.get("native")==="1"){banner.hidden=true;return;}
       window.setTimeout(function(){if(!banner.hidden)banner.classList.add("is-visible");},1550);
-      if(closeButton){closeButton.addEventListener("click",function(){if(banner.hidden||banner.classList.contains("is-closing"))return;banner.classList.remove("is-visible");banner.classList.add("is-closing");window.setTimeout(function(){banner.hidden=true;banner.classList.remove("is-closing");},230);});}
+      if(closeButton){closeButton.addEventListener("click",function(){if(banner.hidden||banner.classList.contains("is-closing"))return;banner.classList.remove("is-visible");banner.classList.add("is-closing");window.setTimeout(function(){banner.hidden=true;banner.classList.remove("is-closing");},520);});}
       button.addEventListener("click",function(){
         window.location.assign("https://github.com/jonathanyyzthiago-art/Cashfy/releases/download/cashfy-android/Cashfy.apk");
       });
