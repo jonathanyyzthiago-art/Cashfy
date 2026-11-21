@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=profile-mini-wide-20261121-3">
+  <link rel="stylesheet" href="style.css?v=top-search-navigation-20261121">
 </head>
 <body>
   <div class="loading-screen" id="loadingScreen" aria-label="Carregando Cashfy"><img src="file_000000003564820e818c91cbec0141fc.png" alt="CF"></div>
@@ -61,7 +61,8 @@
       <div class="sidebar-bottom" data-page="profile" role="button" tabindex="0" aria-label="Abrir meu perfil"><div class="avatar">CT</div><div><strong>Conta de teste</strong><small>Meu perfil</small></div><span class="more" aria-hidden="true">···</span></div>
     </aside>
     <main class="main">
-      <header class="topbar"><button class="mobile-menu" id="mobileMenu">☰</button><div class="breadcrumb">Workspace <span>/</span> <strong id="crumb">Dashboard</strong></div><div class="top-actions"><span class="status"><i></i> Ambiente de demonstração</span><button class="icon-btn" title="Notificações">♧</button><button type="button" class="avatar small profile-top-avatar" data-page="profile" aria-label="Abrir meu perfil">CT</button></div></header>
+      <header class="topbar"><button class="mobile-menu" id="mobileMenu">☰</button><div class="breadcrumb">Workspace <span>/</span> <strong id="crumb">Dashboard</strong></div><div class="top-actions"><span class="status"><i></i> Ambiente de demonstração</span><button type="button" class="icon-btn top-search-toggle" id="topSearchToggle" aria-label="Abrir pesquisa" aria-expanded="false" title="Pesquisar"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg></button><button type="button" class="avatar small profile-top-avatar" data-page="profile" aria-label="Abrir meu perfil">CT</button></div></header>
+      <section class="top-search-panel" id="topSearchPanel" hidden><div class="top-search-field"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 5 5"/></svg><input id="topSearchInput" type="search" autocomplete="off" placeholder="Pesquisar áreas e opções do menu..." aria-label="Pesquisar áreas e opções do menu"><button type="button" id="topSearchClose" aria-label="Fechar pesquisa">×</button></div><div class="top-search-results" id="topSearchResults" role="listbox" aria-label="Resultados da pesquisa"></div></section>
       <section class="content">
         <section class="cashfy-install-banner" id="cashfyInstallBanner" aria-label="Instale o aplicativo Cashfy">
           <div class="cashfy-install-brand">
@@ -81,7 +82,7 @@
     </main>
   </div>
   <div class="modal-backdrop" id="modal" hidden><form class="modal" id="productForm"><div class="modal-head"><div><p class="eyebrow">CATÁLOGO</p><h2>Cadastrar produto</h2></div><button type="button" class="close-btn" id="closeModal">×</button></div><label>Nome do produto<input name="name" required maxlength="70" placeholder="Ex.: Curso de marketing"></label><label>Preço (R$)<input name="price" type="number" min="0" step="0.01" required placeholder="0,00"></label><label>Descrição<textarea name="description" rows="3" placeholder="Descreva seu produto"></textarea></label><div class="modal-actions"><button type="button" class="secondary-btn" id="cancelModal">Cancelar</button><button class="primary-btn" type="submit">Salvar produto</button></div></form></div>
-  <script src="app.js?v=profile-card-unlock-panel-20261121"></script>
+  <script src="app.js?v=top-search-navigation-20261121"></script>
   <script>
     (function(){
       var banner=document.getElementById("cashfyInstallBanner");
