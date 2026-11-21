@@ -1593,3 +1593,60 @@ button[data-refund]{
 .cashfy-install-button{border-radius:1000px!important;min-height:42px!important;}
 .cashfy-install-close{border-radius:50%!important;}
 @media(max-width:480px){.cashfy-install-banner{min-height:76px!important;padding-top:12px!important;padding-bottom:12px!important;border-radius:1000px!important;}.cashfy-install-button{min-height:38px!important;border-radius:1000px!important;}}
+
+
+/* Cashfy performance tuning — preserve the visual style with lighter rendering */
+@media (max-width: 700px) {
+  body {
+    background-attachment: scroll !important;
+    background-image: linear-gradient(145deg,#0b0814 0%,#100b1b 52%,#0a0812 100%) !important;
+  }
+  .topbar,
+  .cashfy-install-banner {
+    -webkit-backdrop-filter: blur(10px) saturate(125%) !important;
+    backdrop-filter: blur(10px) saturate(125%) !important;
+  }
+  .cashfy-install-banner:after,
+  .milestone-shine,
+  .milestone-plaque:after,
+  .milestone-progress span:after,
+  .sidebar-goal-track span:after {
+    animation: none !important;
+    opacity: .16 !important;
+  }
+  .milestone-card,
+  .milestone-card:hover,
+  .sidebar-revenue-goal,
+  .sidebar-revenue-goal:hover {
+    transform: none !important;
+    filter: none !important;
+    box-shadow: 0 7px 18px rgba(0,0,0,.22), inset 0 1px 0 rgba(255,255,255,.06) !important;
+  }
+  .milestone-card.is-locked { opacity: .86 !important; }
+  .milestone-plaque,
+  .milestone-plaque:before,
+  .milestone-emblem,
+  .sidebar-goal-icon {
+    filter: none !important;
+  }
+  .milestone-progress span,
+  .sidebar-goal-track span {
+    box-shadow: none !important;
+  }
+  .panel, .stat-card, .milestone-card, .goal-card {
+    contain: layout style;
+  }
+}
+@media (max-width: 420px) {
+  .cashfy-install-banner {
+    box-shadow: 0 8px 22px rgba(0,0,0,.24), inset 0 1px 0 rgba(255,255,255,.18) !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}
