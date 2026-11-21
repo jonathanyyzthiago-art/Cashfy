@@ -62,7 +62,7 @@ function modulePage(page){
    {id:"silver",name:"Prata",start:0,end:10000,range:"R$ 0 — R$ 10 mil",color:"#c8d0dc",desc:"Sua primeira conquista no Cashfy.",rewards:[{at:10000,text:"Cupom de 20% de desconto na assinatura"}]},
    {id:"gold",name:"Ouro",start:10000,end:100000,range:"R$ 10 mil — R$ 100 mil",color:"#f2bd54",desc:"Seu primeiro período de acesso VIP.",rewards:[{at:100000,text:"VIP por 2 meses extras"}]},
    {id:"diamond",name:"Diamante",start:100000,end:1000000,range:"R$ 100 mil — R$ 1 milhão",color:"#66c9ff",desc:"Uma conquista de alto nível com benefícios VIP ampliados.",rewards:[{at:1000000,text:"VIP por 5 meses extras"}]},
-   {id:"red",name:"Elite",start:1000000,end:5000000,range:"R$ 1 milhão — R$ 5 milhões",color:"#ff5369",desc:"Um ano inteiro de acesso VIP.",rewards:[{at:5000000,text:"VIP por 1 ano inteiro"}]},
+   {id:"red",name:"Elite",start:1000000,end:5000000,range:"R$ 1 milhão — R$ 5 milhões",color:"#ff5369",desc:"Três anos inteiros de acesso VIP.",rewards:[{at:5000000,text:"VIP por 3 anos inteiros"}]},
    {id:"pink",name:"Honra",start:5000000,end:15000000,range:"R$ 5 milhões — R$ 15 milhões",color:"#ff65d4",desc:"O nível máximo de reconhecimento no Cashfy.",rewards:[{at:15000000,text:"VIP permanente + 5 microSaaS gratuitos à sua escolha"}]}
   ];
   const currentTier=tiers.find(t=>total<t.end)||tiers[tiers.length-1];
