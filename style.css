@@ -4372,3 +4372,31 @@ body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achie
     animation:cashfy-obvious-diagonal-reflection 1.55s linear infinite!important;
   }
 }
+
+
+/* Dashboard: filtros ocupam o lugar do título abaixo do banner; conteúdo sobe junto */
+body.dashboard-view .content > .page-heading{
+  display:none!important;
+  margin:0!important;
+  padding:0!important;
+  height:0!important;
+  min-height:0!important;
+  overflow:hidden!important;
+}
+body.dashboard-view .content > .dashboard-filters{
+  width:100%!important;
+  box-sizing:border-box!important;
+  margin:0 0 16px!important;
+  padding:0!important;
+}
+body.dashboard-view #pageContent{
+  margin-top:0!important;
+  padding-top:0!important;
+}
+@media(min-width:760px){
+  body.dashboard-view .content > .dashboard-filters{
+    grid-template-columns:repeat(3,minmax(0,1fr)) auto!important;
+    align-items:end!important;
+    gap:12px!important;
+  }
+}
