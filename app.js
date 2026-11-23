@@ -448,7 +448,7 @@ document.addEventListener("submit",e=>{if(e.target.id==="conversionVisitsForm"){
 // da tela não deixe a animação presa indefinidamente.
 const loadingScreen=$("#loadingScreen");
 const appShell=$("#appShell");
-// A visibilidade inicial é controlada também pelo fallback CSS do index.html.
+if(appShell)appShell.hidden=true;
 if(loadingScreen){
  window.setTimeout(()=>{
   loadingScreen.classList.add("is-hidden");
