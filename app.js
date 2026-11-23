@@ -175,6 +175,8 @@ function profilePage(){
 }
 
 function render(){
+ const staleDashboardFilters=$(".content > .dashboard-filters");
+ if(staleDashboardFilters)staleDashboardFilters.remove();
  const current=titles[state.page]?state.page:"overview";
  document.body.classList.toggle("profile-view",current==="profile");
  document.body.classList.toggle("dashboard-view",current==="overview");
