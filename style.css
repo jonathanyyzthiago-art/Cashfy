@@ -4200,3 +4200,101 @@ body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achie
     transform:translateX(260%) skewX(-34deg)!important;
   }
 }
+
+
+/* Ajuste solicitado: trilha um pouco mais à direita e ícone centralizado verticalmente */
+.sidebar .sidebar-revenue-goal .sidebar-goal-track{
+  transform:translateX(9px)!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-icon-wrap{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  align-self:center!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-icon{
+  display:block!important;
+  margin:auto!important;
+  transform:translate(1px,3px)!important;
+  transform-origin:center!important;
+}
+
+/* Reflexo ultra-realista: halo difuso, lâmina especular inclinada e núcleo branco */
+.sidebar .sidebar-revenue-goal .sidebar-goal-track{
+  isolation:isolate!important;
+  overflow:hidden!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-track::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:8!important;
+  top:-9px!important;
+  bottom:-9px!important;
+  left:-25%!important;
+  width:23%!important;
+  border-radius:2px!important;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    rgba(185,145,255,.05) 12%,
+    rgba(211,185,255,.32) 30%,
+    rgba(255,255,255,.86) 45%,
+    #fff 50%,
+    rgba(255,255,255,.9) 54%,
+    rgba(218,192,255,.58) 64%,
+    rgba(174,128,255,.16) 78%,
+    transparent 100%)!important;
+  filter:blur(.55px)
+    drop-shadow(0 0 2px rgba(255,255,255,1))
+    drop-shadow(0 0 5px rgba(244,231,255,1))
+    drop-shadow(0 0 10px rgba(190,145,255,.98))
+    drop-shadow(0 0 18px rgba(151,91,255,.72))!important;
+  opacity:0!important;
+  transform:translateX(0) skewX(-38deg)!important;
+  animation:cashfy-realistic-sheen 1.75s cubic-bezier(.35,0,.2,1) infinite!important;
+  pointer-events:none!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-track::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:9!important;
+  top:-3px!important;
+  bottom:-3px!important;
+  left:-20%!important;
+  width:7%!important;
+  border-radius:1px!important;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,.72) 34%,
+    #fff 49%,
+    #fff 53%,
+    rgba(255,255,255,.62) 67%,
+    transparent 100%)!important;
+  filter:blur(.18px)
+    drop-shadow(0 0 2px #fff)
+    drop-shadow(0 0 6px rgba(255,255,255,1))
+    drop-shadow(0 0 12px rgba(211,178,255,1))!important;
+  opacity:0!important;
+  transform:translateX(0) skewX(-38deg)!important;
+  animation:cashfy-realistic-core 1.75s cubic-bezier(.35,0,.2,1) infinite!important;
+  pointer-events:none!important;
+}
+@keyframes cashfy-realistic-sheen{
+  0%,9%{transform:translateX(0) skewX(-38deg);opacity:0}
+  19%{opacity:1}
+  72%{opacity:.98}
+  100%{transform:translateX(820%) skewX(-38deg);opacity:0}
+}
+@keyframes cashfy-realistic-core{
+  0%,9%{transform:translateX(0) skewX(-38deg);opacity:0}
+  19%{opacity:1}
+  72%{opacity:1}
+  100%{transform:translateX(1420%) skewX(-38deg);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track::before,
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track::after{
+    animation:none!important;
+    opacity:.9!important;
+    transform:translateX(260%) skewX(-38deg)!important;
+  }
+}
