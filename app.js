@@ -444,10 +444,26 @@ document.addEventListener("submit",e=>{if(e.target.id==="settingsForm"){e.preven
 $("#productForm").addEventListener("submit",e=>{e.preventDefault();const data=new FormData(e.currentTarget);state.products.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name:data.get("name").trim(),price:Number(data.get("price")),description:data.get("description").trim(),date:new Date().toLocaleDateString("pt-BR")});save();closeModal();state.page="products";document.querySelectorAll(".nav-link").forEach(n=>n.classList.toggle("active",n.dataset.page==="products"));render();});
 $("#closeModal").addEventListener("click",closeModal);$("#cancelModal").addEventListener("click",closeModal);$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal();});$("#mobileMenu").addEventListener("click",()=>$("#sidebar").classList.toggle("open"));$("#sidebarToggle").addEventListener("click",()=>{const sidebar=$("#sidebar");if(window.matchMedia("(max-width: 650px)").matches){sidebar.classList.remove("open");}else{const collapsed=sidebar.classList.toggle("collapsed");const button=$("#sidebarToggle");button.setAttribute("aria-label",collapsed?"Expandir barra lateral":"Recolher barra lateral");button.title=collapsed?"Expandir barra lateral":"Recolher barra lateral";}});
 document.addEventListener("submit",e=>{if(e.target.id==="conversionVisitsForm"){e.preventDefault();const v=Math.max(0,Number(new FormData(e.target).get("visits")||0));localStorage.setItem("cashfy_visits_total",String(v));render();}});
-render();
+// Inicia o cronômetro antes da renderização para que um erro na montagem
+// da tela não deixe a animação presa indefinidamente.
 const loadingScreen=$("#loadingScreen");
-$("#appShell").hidden=true;
-if(loadingScreen){window.setTimeout(()=>{loadingScreen.classList.add("is-hidden");loadingScreen.setAttribute("aria-hidden","true");window.setTimeout(()=>{introFinished=true;$("#appShell").hidden=false;startRevealSequence();},650);} ,4400);}else{$("#appShell").hidden=false;startRevealSequence();}
+const appShell=$("#appShell");
+if(appShell)appShell.hidden=true;
+if(loadingScreen){
+ window.setTimeout(()=>{
+  loadingScreen.classList.add("is-hidden");
+  loadingScreen.setAttribute("aria-hidden","true");
+  window.setTimeout(()=>{
+   introFinished=true;
+   if(appShell)appShell.hidden=false;
+   startRevealSequence();
+  },650);
+ },3850);
+}else{
+ if(appShell)appShell.hidden=false;
+ introFinished=true;
+}
+render();
 
 
 document.addEventListener("submit",e=>{
