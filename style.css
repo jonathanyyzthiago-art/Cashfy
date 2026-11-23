@@ -4457,411 +4457,45 @@ body.dashboard-view #pageContent>.dashboard-summary{
 }
 
 
-/* Barra lateral preta sólida, sem efeito Glass */
-.sidebar,
-.sidebar.open,
-#sidebar.sidebar,
-#sidebar.sidebar.open{
-  background:#000!important;
-  background-image:none!important;
-  opacity:1!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
+/* Dark glass sidebar */
+.sidebar{
+  background:rgba(7,6,12,.68)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(135%)!important;
+  backdrop-filter:blur(22px) saturate(135%)!important;
   border-right:1px solid rgba(220,205,255,.13)!important;
-  box-shadow:12px 0 38px rgba(0,0,0,.24)!important;
-}
-.sidebar .sidebar-bottom{
-  background:#000!important;
-  -webkit-backdrop-filter:none!important;
-  backdrop-filter:none!important;
+  box-shadow:12px 0 38px rgba(0,0,0,.24),inset -1px 0 0 rgba(255,255,255,.035)!important;
 }
 @media(max-width:650px){
+  .sidebar{
+    background:rgba(7,6,12,.76)!important;
+    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
+    backdrop-filter:blur(24px) saturate(135%)!important;
+  }
+}
+
+
+/* Glass real da barra lateral: transparência forte para revelar o conteúdo atrás */
+@media(max-width:650px){
+  .sidebar,
+  .sidebar.open,
+  #sidebar.sidebar,
+  #sidebar.sidebar.open{
+    background:rgba(4,3,8,.28)!important;
+    background-image:none!important;
+    opacity:1!important;
+    -webkit-backdrop-filter:blur(26px) saturate(160%)!important;
+    backdrop-filter:blur(26px) saturate(160%)!important;
+    border-right:1px solid rgba(230,220,255,.22)!important;
+    box-shadow:10px 0 38px rgba(0,0,0,.22),inset -1px 0 0 rgba(255,255,255,.08)!important;
+  }
   #sidebar::before,
-  #sidebar::after{content:none!important;display:none!important}
-}
-
-/* Ajuste de tipografia: opções do menu lateral com peso médio */
-.sidebar .nav-link{font-weight:500!important}
-
-
-
-/* Refinamento visual da barra de meta na lateral */
-.sidebar .sidebar-revenue-goal .sidebar-goal-icon-wrap{
-  flex:0 0 40px!important;
-  width:40px!important;
-  height:40px!important;
-}
-.sidebar .sidebar-revenue-goal .sidebar-goal-icon{
-  width:28px!important;
-  height:28px!important;
-  stroke-width:1.8!important;
-}
-.sidebar .sidebar-revenue-goal .sidebar-goal-track{
-  height:7px!important;
-  background:#08070d!important;
-  border:1px solid rgba(255,255,255,.09)!important;
-  border-radius:999px!important;
-  box-shadow:inset 0 1px 3px rgba(0,0,0,.85),0 1px 0 rgba(255,255,255,.035)!important;
-}
-.sidebar .sidebar-revenue-goal .sidebar-goal-track>span{
-  position:relative!important;
-  overflow:hidden!important;
-  border-radius:999px!important;
-  background:linear-gradient(180deg,#d0b5ff 0%,#a77aff 35%,#7545d0 100%)!important;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.38),0 0 8px rgba(158,111,255,.32)!important;
-}
-.sidebar .sidebar-revenue-goal .sidebar-goal-track>span::after{
-  content:""!important;
-  position:absolute!important;
-  top:-20%!important;
-  bottom:-20%!important;
-  left:-38%!important;
-  width:28%!important;
-  opacity:.9!important;
-  background:linear-gradient(105deg,transparent 0%,rgba(255,255,255,.08) 25%,rgba(255,255,255,.8) 50%,rgba(255,255,255,.12) 75%,transparent 100%)!important;
-  filter:blur(.3px)!important;
-  transform:skewX(-18deg)!important;
-  animation:cashfyGoalShimmer 2.8s ease-in-out infinite!important;
-  pointer-events:none!important;
-}
-@keyframes cashfyGoalShimmer{
-  0%{left:-38%;opacity:0}
-  12%{opacity:.9}
-  58%{opacity:.85}
-  78%,100%{left:112%;opacity:0}
-}
-@media(prefers-reduced-motion:reduce){
-  .sidebar .sidebar-revenue-goal .sidebar-goal-track>span::after{animation:none!important;display:none!important}
-}
-
-/* Novos blocos do Dashboard — adicionados abaixo do gráfico */
-.dashboard-additions{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:15px 0}
-.dashboard-extra-panel{min-width:0;padding:18px}
-.dashboard-extra-panel .panel-head{margin-bottom:14px}
-.dashboard-ranking{display:grid;gap:0}
-.dashboard-ranking-row{display:grid;grid-template-columns:25px minmax(0,1fr) auto auto;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #211e2d}
-.dashboard-ranking-row:last-child,.dashboard-activity-row:last-child{border-bottom:0}
-.dashboard-rank-position{width:22px;height:22px;display:grid;place-items:center;border-radius:7px;background:#261b3b;color:#c2a3ff;font-size:10px;font-weight:700}
-.dashboard-rank-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;color:#e5e0ef}
-.dashboard-rank-count{font-size:9px;color:var(--muted);white-space:nowrap}
-.dashboard-ranking-row>strong,.dashboard-activity-row>strong{font-size:11px;white-space:nowrap}
-.dashboard-activity-list{display:grid}
-.dashboard-activity-row{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #211e2d}
-.dashboard-activity-icon{width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:#1d302b;color:#65dcb0;flex-shrink:0}
-.dashboard-activity-copy{display:grid;gap:4px;min-width:0;flex:1}
-.dashboard-activity-copy strong{font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.dashboard-activity-copy small{font-size:9px;color:var(--muted)}
-.dashboard-extra-empty{padding:20px 8px;text-align:center;color:var(--muted);font-size:11px;line-height:1.6}
-.dashboard-conversion-panel{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:18px}
-.dashboard-conversion-panel .panel-head{grid-column:1/-1}
-.dashboard-conversion-value{font:600 30px 'Space Grotesk';color:#fff}
-.dashboard-conversion-note{margin:0;color:var(--muted);font-size:10px;line-height:1.6}
-.dashboard-conversion-status{grid-column:1/-1;justify-self:start;margin-top:12px;padding:6px 9px;border-radius:20px;background:#282235;color:#b9a5e8;font-size:9px}
-@media(max-width:650px){.dashboard-additions{grid-template-columns:1fr;gap:10px;margin:12px 0}.dashboard-extra-panel{padding:15px}.dashboard-ranking-row{grid-template-columns:24px minmax(0,1fr) auto;gap:8px}.dashboard-rank-count{display:none}.dashboard-conversion-panel{grid-column:auto;grid-template-columns:1fr auto}.dashboard-conversion-panel .panel-head,.dashboard-conversion-status{grid-column:1/-1}}
-
-
-/* Cashfy — acabamento profissional dos novos indicadores do Dashboard */
-.dashboard-additions{
-  grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-  gap:18px;
-  margin:22px 0 20px;
-  align-items:stretch;
-}
-.dashboard-extra-panel{
-  position:relative;
-  isolation:isolate;
-  overflow:hidden;
-  min-width:0;
-  padding:22px 22px 18px;
-  border:1px solid rgba(184,156,255,.13);
-  border-radius:18px;
-  background:linear-gradient(145deg,rgba(27,23,39,.98),rgba(17,15,25,.98));
-  box-shadow:0 12px 30px rgba(0,0,0,.16),inset 0 1px 0 rgba(255,255,255,.035);
-  transition:border-color .2s ease,transform .2s ease,box-shadow .2s ease;
-}
-.dashboard-extra-panel::before{
-  content:"";
-  position:absolute;
-  z-index:-1;
-  top:0;left:22px;right:22px;height:1px;
-  background:linear-gradient(90deg,transparent,rgba(177,137,255,.48),transparent);
-  opacity:.8;
-}
-.dashboard-extra-panel:hover{
-  border-color:rgba(184,156,255,.25);
-  box-shadow:0 16px 34px rgba(0,0,0,.22),inset 0 1px 0 rgba(255,255,255,.045);
-  transform:translateY(-2px);
-}
-.dashboard-extra-panel .panel-head{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin:0 0 18px;
-  padding:0 0 15px;
-  border-bottom:1px solid rgba(255,255,255,.065);
-}
-.dashboard-extra-panel .panel-head .eyebrow{
-  margin:0 0 6px;
-  color:#a98be8;
-  font-size:9px;
-  font-weight:750;
-  letter-spacing:1.35px;
-}
-.dashboard-extra-panel .panel-head h3{
-  margin:0;
-  color:#f6f2ff;
-  font-size:16px;
-  font-weight:650;
-  letter-spacing:-.35px;
-}
-.dashboard-extra-panel .panel-head .muted{
-  color:#8f899e;
-  font-size:10px;
-  white-space:nowrap;
-}
-.dashboard-ranking{gap:3px}
-.dashboard-ranking-row{
-  position:relative;
-  grid-template-columns:30px minmax(0,1fr) auto;
-  grid-template-areas:"rank name amount" "rank count amount";
-  column-gap:12px;
-  row-gap:4px;
-  min-height:54px;
-  padding:10px 2px;
-  border-bottom:1px solid rgba(255,255,255,.055);
-}
-.dashboard-rank-position{
-  grid-area:rank;
-  width:27px;height:27px;
-  align-self:center;
-  border:1px solid rgba(185,151,255,.15);
-  border-radius:9px;
-  background:linear-gradient(145deg,rgba(139,92,246,.2),rgba(139,92,246,.07));
-  color:#c7aaff;
-  font-size:11px;
-  box-shadow:inset 0 1px 0 rgba(255,255,255,.05);
-}
-.dashboard-ranking-row:nth-child(1) .dashboard-rank-position{
-  background:linear-gradient(145deg,rgba(236,190,91,.2),rgba(236,190,91,.07));
-  border-color:rgba(236,190,91,.2);
-  color:#f0c66d;
-}
-.dashboard-rank-name{
-  grid-area:name;
-  align-self:end;
-  color:#eee9f7;
-  font-size:12px;
-  font-weight:600;
-}
-.dashboard-rank-count{
-  grid-area:count;
-  color:#898398;
-  font-size:10px;
-}
-.dashboard-ranking-row>strong{
-  grid-area:amount;
-  align-self:center;
-  color:#f4efff;
-  font-size:12px;
-  font-weight:650;
-  font-variant-numeric:tabular-nums;
-}
-.dashboard-activity-list{gap:2px}
-.dashboard-activity-row{
-  min-height:55px;
-  gap:12px;
-  padding:9px 1px;
-  border-bottom:1px solid rgba(255,255,255,.055);
-}
-.dashboard-activity-icon{
-  width:34px;height:34px;
-  border:1px solid rgba(86,211,164,.13);
-  border-radius:11px;
-  background:linear-gradient(145deg,rgba(55,181,137,.16),rgba(55,181,137,.055));
-  color:#72dfb4;
-  font-size:15px;
-}
-.dashboard-activity-copy{gap:5px}
-.dashboard-activity-copy strong{
-  color:#eeeaf5;
-  font-size:11px;
-  font-weight:600;
-}
-.dashboard-activity-copy small{
-  color:#898398;
-  font-size:10px;
-}
-.dashboard-activity-row>strong{
-  color:#e8e0f6;
-  font-size:11px;
-  font-weight:650;
-  font-variant-numeric:tabular-nums;
-}
-.dashboard-extra-empty{
-  display:grid;
-  min-height:160px;
-  place-content:center;
-  padding:24px;
-  border:1px dashed rgba(184,156,255,.16);
-  border-radius:12px;
-  background:rgba(255,255,255,.012);
-  color:#9690a4;
-  font-size:11px;
-  line-height:1.7;
-}
-.dashboard-conversion-panel{
-  grid-column:1/-1;
-  grid-template-columns:minmax(0,1fr) minmax(190px,.65fr);
-  grid-template-rows:auto auto;
-  column-gap:28px;
-  row-gap:0;
-  min-height:150px;
-  padding:22px 24px;
-  background:
-    radial-gradient(ellipse at 88% 20%,rgba(139,92,246,.13),transparent 42%),
-    linear-gradient(120deg,rgba(27,23,39,.98),rgba(19,16,29,.98));
-}
-.dashboard-conversion-panel .panel-head{
-  grid-column:1;
-  grid-row:1;
-  align-self:end;
-  margin:0 0 9px;
-  padding:0;
-  border:0;
-}
-.dashboard-conversion-panel .panel-head h3{font-size:17px}
-.dashboard-conversion-value{
-  grid-column:1;
-  grid-row:2;
-  align-self:start;
-  color:#fff;
-  font-size:34px;
-  line-height:1.15;
-  letter-spacing:-1.2px;
-}
-.dashboard-conversion-note{
-  grid-column:2;
-  grid-row:1;
-  align-self:end;
-  max-width:310px;
-  color:#aaa3b8;
-  font-size:11px;
-  line-height:1.7;
-}
-.dashboard-conversion-status{
-  grid-column:2;
-  grid-row:2;
-  justify-self:start;
-  align-self:start;
-  margin:9px 0 0;
-  padding:7px 11px;
-  border:1px solid rgba(177,137,255,.16);
-  border-radius:8px;
-  background:rgba(139,92,246,.09);
-  color:#c5adf4;
-  font-size:10px;
-  font-weight:550;
-}
-@media(max-width:900px){
-  .dashboard-additions{gap:12px}
-  .dashboard-extra-panel{padding:18px}
-  .dashboard-conversion-panel{column-gap:18px}
-}
-@media(max-width:650px){
-  .dashboard-additions{grid-template-columns:minmax(0,1fr);gap:12px;margin:16px 0}
-  .dashboard-extra-panel{padding:17px 16px;border-radius:15px}
-  .dashboard-extra-panel:hover{transform:none}
-  .dashboard-extra-panel .panel-head{margin-bottom:13px;padding-bottom:12px}
-  .dashboard-extra-panel .panel-head h3{font-size:15px}
-  .dashboard-extra-panel .panel-head .muted{font-size:9px}
-  .dashboard-ranking-row{
-    grid-template-columns:29px minmax(0,1fr) auto;
-    grid-template-areas:"rank name amount" "rank count amount";
-    gap:4px 10px;
-    min-height:52px;
+  #sidebar::after{
+    content:none!important;
+    display:none!important;
   }
-  .dashboard-rank-count{display:block;font-size:9px}
-  .dashboard-ranking-row>strong{font-size:11px}
-  .dashboard-activity-row{gap:10px}
-  .dashboard-activity-copy strong{font-size:11px}
-  .dashboard-activity-row>strong{font-size:10px}
-  .dashboard-conversion-panel{
-    grid-column:auto;
-    grid-template-columns:minmax(0,1fr);
-    grid-template-rows:auto auto auto;
-    gap:8px;
-    min-height:0;
-    padding:18px 17px;
+  #sidebar .sidebar-bottom{
+    background:rgba(4,3,8,.18)!important;
+    -webkit-backdrop-filter:blur(26px)!important;
+    backdrop-filter:blur(26px)!important;
   }
-  .dashboard-conversion-panel .panel-head{grid-column:1;grid-row:1;margin:0}
-  .dashboard-conversion-value{grid-column:1;grid-row:2;font-size:30px}
-  .dashboard-conversion-note{grid-column:1;grid-row:3;max-width:none;margin-top:2px}
-  .dashboard-conversion-status{grid-column:1;grid-row:4;margin-top:3px}
 }
-@media(prefers-reduced-motion:reduce){
-  .dashboard-extra-panel{transition:none}
-  .dashboard-extra-panel:hover{transform:none}
-}
-
-
-/* Área de conversão Cashfy */
-.conversion-workspace{display:grid;gap:18px}
-.conversion-topline{display:flex;align-items:flex-start;justify-content:space-between;gap:18px;padding:27px 29px;border:1px solid rgba(177,137,255,.2);border-radius:19px;background:radial-gradient(ellipse at 86% 12%,rgba(142,91,255,.24),transparent 38%),linear-gradient(115deg,#201632,#14101f 68%,#171126);box-shadow:0 18px 55px rgba(0,0,0,.16);overflow:hidden}
-.conversion-eyebrow,.conversion-section-kicker,.conversion-period-label{color:#b99aff;font-size:9px;font-weight:800;letter-spacing:1.5px}
-.conversion-topline h2{margin:8px 0 7px;color:#fbf9ff;font:700 27px 'Space Grotesk';letter-spacing:-.8px}
-.conversion-topline p{margin:0;max-width:550px;color:#aaa0ba;font-size:12px;line-height:1.7}
-.conversion-live{display:inline-flex;align-items:center;gap:8px;padding:8px 11px;border:1px solid rgba(180,147,255,.2);border-radius:30px;background:rgba(139,92,246,.1);color:#d2baff;font-size:10px;white-space:nowrap}
-.conversion-live i{width:6px;height:6px;border-radius:50%;background:#ad83ff;box-shadow:0 0 10px #a879ff}
-.conversion-toolbar{display:flex;align-items:end;justify-content:space-between;gap:15px;padding:0 2px}
-.conversion-periods{display:flex;gap:5px;margin-top:9px;padding:4px;border:1px solid rgba(177,137,255,.13);border-radius:10px;background:#15111f}
-.conversion-period{padding:8px 12px;border:0;border-radius:7px;background:transparent;color:#958ba5;font-size:10px;cursor:pointer}
-.conversion-period.active,.conversion-period:hover{background:linear-gradient(120deg,#8c5cf6,#7041d2);color:white;box-shadow:0 4px 14px rgba(126,78,224,.25)}
-.conversion-updated{padding-bottom:8px;color:#82798e;font-size:10px}
-.conversion-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
-.conversion-metric{position:relative;min-width:0;overflow:hidden;padding:17px 18px;border:1px solid rgba(180,159,210,.1);border-radius:14px;background:linear-gradient(145deg,#1c1827,#15121e);box-shadow:0 9px 25px rgba(0,0,0,.12)}
-.conversion-metric-primary{border-color:rgba(174,133,255,.3);background:radial-gradient(ellipse at 90% 0,rgba(147,91,255,.2),transparent 55%),linear-gradient(145deg,#25183b,#191326)}
-.conversion-metric-head{display:flex;align-items:center;justify-content:space-between;gap:8px;color:#a9a0b8;font-size:10px}
-.conversion-metric-head i{display:grid;place-items:center;width:27px;height:27px;border-radius:8px;background:rgba(155,111,255,.13);color:#c5a7ff;font-size:14px;font-style:normal}
-.conversion-metric strong{display:block;margin:14px 0 5px;color:#fbf9ff;font:700 25px 'Space Grotesk';letter-spacing:-.8px;overflow-wrap:anywhere}
-.conversion-metric small{color:#847b91;font-size:9px}
-.conversion-metric-glow{position:absolute;right:-24px;bottom:-44px;width:105px;height:85px;border-radius:50%;background:rgba(150,95,255,.13);filter:blur(22px)}
-.conversion-main-grid,.conversion-bottom-grid{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(280px,.85fr);gap:14px}
-.conversion-chart-panel,.conversion-funnel-card,.conversion-source-panel,.conversion-input-panel{min-width:0;padding:21px}
-.conversion-section-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
-.conversion-section-head h3{margin:6px 0 5px;color:#f4effb;font-size:15px}
-.conversion-section-head p{margin:0;color:#8f879d;font-size:10px;line-height:1.6}
-.conversion-chart-legend{display:flex;align-items:center;gap:7px;color:#b8a5d8;font-size:9px;white-space:nowrap}
-.conversion-chart-legend i{width:7px;height:7px;border-radius:50%;background:#a879ff;box-shadow:0 0 9px #a879ff}
-.conversion-chart{display:grid;grid-template-columns:35px minmax(0,1fr);align-items:stretch;gap:8px;margin-top:20px;height:140px}
-.conversion-chart-y{display:flex;flex-direction:column;justify-content:space-between;color:#716980;font-size:8px}
-.conversion-chart svg{width:100%;height:125px;overflow:visible;background:repeating-linear-gradient(to bottom,transparent 0,transparent 24px,rgba(255,255,255,.055) 25px)}
-.conversion-chart-x{display:flex;justify-content:space-between;margin:0 0 0 43px;color:#777084;font-size:8px}
-.conversion-demo-note{margin:16px 0 0;padding-top:11px;border-top:1px solid rgba(255,255,255,.055);color:#756d82;font-size:9px;line-height:1.6}
-.conversion-funnel-visual{margin-top:22px}
-.conversion-funnel-row{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#c5bdcf;font-size:10px}
-.conversion-funnel-row>div{display:flex;align-items:center;gap:9px}
-.conversion-funnel-row strong{color:#f6f1ff;font:650 15px 'Space Grotesk'}
-.conversion-funnel-dot{width:8px;height:8px;border-radius:50%;background:#b28aff;box-shadow:0 0 10px rgba(178,138,255,.5)}
-.conversion-funnel-dot.second{background:#8e5cff}
-.conversion-funnel-bar{height:9px;margin:12px 0 19px;padding:2px;border-radius:20px;background:#292238}
-.conversion-funnel-bar i{display:block;height:100%;border-radius:20px;background:linear-gradient(90deg,#8b5cf6,#c3a4ff);box-shadow:0 0 12px rgba(139,92,246,.3)}
-.conversion-funnel-bar.purchase i{background:linear-gradient(90deg,#6d3ac7,#b48aff)}
-.conversion-funnel-result{display:flex;align-items:center;justify-content:space-between;margin-top:22px;padding:13px;border:1px solid rgba(177,137,255,.15);border-radius:10px;background:rgba(139,92,246,.07);color:#a79bb9;font-size:10px}
-.conversion-funnel-result strong{color:#d4bcff;font:700 16px 'Space Grotesk'}
-.conversion-soon{padding:6px 9px;border:1px solid rgba(177,137,255,.16);border-radius:20px;background:rgba(139,92,246,.07);color:#b99aff;font-size:8px}
-.conversion-source-list{display:grid;gap:0;margin-top:17px}
-.conversion-source-list>div{display:flex;align-items:center;gap:11px;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.055)}
-.conversion-source-list>div:last-child{border:0}
-.conversion-source-icon{display:grid;place-items:center;width:31px;height:31px;border-radius:9px;background:rgba(139,92,246,.12);color:#c4a5ff;font-size:15px}
-.conversion-source-list span:nth-child(2){display:grid;gap:3px;flex:1}
-.conversion-source-list strong{color:#e9e2f2;font-size:10px}
-.conversion-source-list small{color:#81788e;font-size:8px}
-.conversion-source-list b{color:#958aa7;font-size:11px}
-.conversion-input-icon{display:grid;place-items:center;width:31px;height:31px;border:1px solid rgba(177,137,255,.2);border-radius:9px;background:rgba(139,92,246,.12);color:#c6a6ff}
-.conversion-visits-form{display:grid;gap:12px;margin-top:19px}
-.conversion-visits-form .module-field{display:grid;gap:7px}
-.conversion-visits-form .primary-btn{display:flex;align-items:center;justify-content:center;gap:8px;min-height:42px}
-.conversion-data-note{margin:12px 0 0;color:#7f768b;font-size:9px;line-height:1.65}
-@media(max-width:900px){.conversion-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.conversion-main-grid,.conversion-bottom-grid{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:600px){.conversion-workspace{gap:13px}.conversion-topline{padding:20px 18px;border-radius:15px}.conversion-topline h2{font-size:23px}.conversion-topline p{font-size:11px}.conversion-toolbar{align-items:flex-start;flex-direction:column}.conversion-periods{flex-wrap:wrap}.conversion-period{padding:8px 10px}.conversion-updated{padding:0}.conversion-metrics{gap:8px}.conversion-metric{padding:14px 13px;border-radius:12px}.conversion-metric strong{font-size:21px}.conversion-chart-panel,.conversion-funnel-card,.conversion-source-panel,.conversion-input-panel{padding:16px}.conversion-chart{height:125px}.conversion-chart svg{height:112px}}
