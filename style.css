@@ -4121,3 +4121,82 @@ body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achie
   .sidebar .sidebar-revenue-goal .sidebar-goal-track::before,
   .sidebar .sidebar-revenue-goal .sidebar-goal-track::after{animation:none!important;opacity:.85!important;transform:translateX(250%) skewX(-30deg)!important}
 }
+
+
+/* Ajuste fino da meta lateral: trilha ligeiramente à direita e ícone centralizado */
+.sidebar .sidebar-revenue-goal .sidebar-goal-track{
+  transform:translateX(5px)!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-icon-wrap{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  align-self:center!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-icon{
+  display:block!important;
+  margin:auto!important;
+  transform:translate(1px,1px)!important;
+  transform-origin:center!important;
+}
+
+/* Reflexo ultra-realista: faixa especular diagonal + núcleo branco e halo óptico */
+.sidebar .sidebar-revenue-goal .sidebar-goal-track::before{
+  top:-7px!important;
+  bottom:-7px!important;
+  left:-24%!important;
+  width:21%!important;
+  border-radius:2px!important;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,.08) 18%,
+    rgba(222,204,255,.42) 35%,
+    rgba(255,255,255,1) 49%,
+    rgba(255,255,255,.78) 53%,
+    rgba(190,151,255,.42) 66%,
+    transparent 100%)!important;
+  filter:blur(.45px) drop-shadow(0 0 2px rgba(255,255,255,1))
+    drop-shadow(0 0 5px rgba(244,231,255,.98))
+    drop-shadow(0 0 11px rgba(176,126,255,.95))
+    drop-shadow(0 0 17px rgba(151,91,255,.62))!important;
+  transform:translateX(0) skewX(-34deg)!important;
+  animation:cashfy-track-diagonal-sheen 1.85s cubic-bezier(.35,0,.2,1) infinite!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-track::after{
+  top:-3px!important;
+  bottom:-3px!important;
+  left:-19%!important;
+  width:8%!important;
+  border-radius:1px!important;
+  background:linear-gradient(90deg,
+    transparent 0%,
+    rgba(255,255,255,.48) 28%,
+    #fff 49%,
+    rgba(255,255,255,.96) 54%,
+    rgba(255,255,255,.22) 76%,
+    transparent 100%)!important;
+  filter:blur(.2px) drop-shadow(0 0 2px #fff)
+    drop-shadow(0 0 6px rgba(255,255,255,.98))
+    drop-shadow(0 0 12px rgba(198,159,255,1))!important;
+  transform:translateX(0) skewX(-34deg)!important;
+  animation:cashfy-track-diagonal-core 1.85s cubic-bezier(.35,0,.2,1) infinite!important;
+}
+@keyframes cashfy-track-diagonal-sheen{
+  0%,10%{transform:translateX(0) skewX(-34deg);opacity:0}
+  20%{opacity:1}
+  70%{opacity:.98}
+  100%{transform:translateX(820%) skewX(-34deg);opacity:0}
+}
+@keyframes cashfy-track-diagonal-core{
+  0%,10%{transform:translateX(0) skewX(-34deg);opacity:0}
+  20%{opacity:1}
+  70%{opacity:1}
+  100%{transform:translateX(1420%) skewX(-34deg);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track::before,
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track::after{
+    animation:none!important;opacity:.9!important;
+    transform:translateX(260%) skewX(-34deg)!important;
+  }
+}
