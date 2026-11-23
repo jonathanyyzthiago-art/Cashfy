@@ -436,11 +436,38 @@ topSearchInput?.addEventListener("input",()=>renderTopSearch(topSearchInput.valu
 $("#topSearchClose")?.addEventListener("click",closeTopSearch);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&topSearchPanel&&!topSearchPanel.hidden){closeTopSearch();topSearchToggle.focus();}});
 document.addEventListener("click",e=>{if(topSearchPanel&&!topSearchPanel.hidden&&!e.target.closest("#topSearchPanel")&&!e.target.closest("#topSearchToggle"))closeTopSearch();});
+function closePeriodMenu(){
+ const menu=document.querySelector(".cashfy-period-menu");
+ if(menu){const owner=menu._cashfyOwner;if(owner){menu.hidden=true;menu.classList.remove("cashfy-period-menu");menu.removeAttribute("style");owner.appendChild(menu);}else menu.remove();}
+ document.querySelectorAll(".custom-select-trigger").forEach(b=>b.setAttribute("aria-expanded","false"));
+}
 document.addEventListener("click",e=>{
- const range=e.target.closest("[data-range]");if(range){state.chartRange=range.dataset.range;render();return;}
- if(!e.target.closest(".custom-select")){document.querySelectorAll(".custom-select-menu").forEach(m=>m.hidden=true);document.querySelectorAll(".custom-select-trigger").forEach(b=>b.setAttribute("aria-expanded","false"));}
- const trigger=e.target.closest(".custom-select-trigger");if(trigger){const wrap=trigger.closest(".custom-select");const wasOpen=!wrap.querySelector(".custom-select-menu").hidden;document.querySelectorAll(".custom-select-menu").forEach(m=>m.hidden=true);document.querySelectorAll(".custom-select-trigger").forEach(b=>b.setAttribute("aria-expanded","false"));if(!wasOpen){const menu=wrap.querySelector(".custom-select-menu");menu.style.removeProperty("position");menu.style.removeProperty("top");menu.style.removeProperty("left");menu.style.removeProperty("right");menu.style.removeProperty("bottom");menu.style.removeProperty("width");menu.style.removeProperty("z-index");menu.style.removeProperty("max-height");menu.hidden=false;trigger.setAttribute("aria-expanded","true");}return;}
- const option=e.target.closest(".custom-select-option");if(option){const wrap=option.closest(".custom-select");const key=option.dataset.filterKey;state.dashboardFilters[key]=option.dataset.filterValue;wrap.querySelector(".custom-select-trigger span").textContent=option.textContent.replace("✓","").trim();wrap.querySelectorAll(".custom-select-option").forEach(b=>{b.classList.toggle("selected",b===option);const mark=b.querySelector("span");if(mark)mark.remove();if(b===option)b.insertAdjacentHTML("beforeend","<span>✓</span>");});wrap.querySelector(".custom-select-menu").hidden=true;wrap.querySelector(".custom-select-trigger").setAttribute("aria-expanded","false");return;}
+ const range=e.target.closest("[data-range]");if(range){closePeriodMenu();state.chartRange=range.dataset.range;render();return;}
+ const periodMenu=e.target.closest(".cashfy-period-menu");
+ const trigger=e.target.closest(".custom-select-trigger");
+ const inSelect=e.target.closest(".custom-select");
+ if(!inSelect&&!periodMenu&&!trigger){closePeriodMenu();document.querySelectorAll(".custom-select-menu").forEach(m=>m.hidden=true);}
+ if(trigger){
+  const wrap=trigger.closest(".custom-select"),menu=wrap.querySelector(".custom-select-menu"),wasOpen=trigger.getAttribute("aria-expanded")==="true";
+  closePeriodMenu();document.querySelectorAll(".custom-select-menu").forEach(m=>m.hidden=true);
+  if(!wasOpen){
+   menu.hidden=false;trigger.setAttribute("aria-expanded","true");
+   if(wrap.dataset.customSelect==="period"){
+    const rect=trigger.getBoundingClientRect();menu._cashfyOwner=wrap;menu.classList.add("cashfy-period-menu");document.body.appendChild(menu);
+    menu.style.position="fixed";menu.style.top=Math.min(window.innerHeight-12,rect.bottom+6)+"px";menu.style.left=Math.max(8,Math.min(window.innerWidth-rect.width-8,rect.left))+"px";menu.style.width=rect.width+"px";menu.style.maxHeight=Math.max(110,window.innerHeight-rect.bottom-18)+"px";menu.style.zIndex="2147483647";
+   }
+  }
+  return;
+ }
+ const option=e.target.closest(".custom-select-option");
+ if(option){
+  const menu=option.closest(".custom-select-menu"),wrap=menu?._cashfyOwner||option.closest(".custom-select");if(!wrap)return;
+  const key=option.dataset.filterKey;state.dashboardFilters[key]=option.dataset.filterValue;
+  wrap.querySelector(".custom-select-trigger span").textContent=option.textContent.replace("✓","").trim();
+  wrap.querySelectorAll(".custom-select-option").forEach(b=>{b.classList.toggle("selected",b===option);const mark=b.querySelector("span");if(mark)mark.remove();if(b===option)b.insertAdjacentHTML("beforeend","<span>✓</span>");});
+  if(menu?._cashfyOwner){menu.hidden=true;menu.classList.remove("cashfy-period-menu");menu.removeAttribute("style");wrap.appendChild(menu);}else if(menu)menu.hidden=true;
+  wrap.querySelector(".custom-select-trigger").setAttribute("aria-expanded","false");return;
+ }
  const update=e.target.closest("#updateDashboard");if(update){render();return;}
  const nav=e.target.closest("[data-page]");if(nav){closeTopSearch();state.page=nav.dataset.page;document.querySelectorAll(".nav-link").forEach(n=>n.classList.toggle("active",n.dataset.page===state.page));render();$("#sidebar").classList.remove("open");}
  const visibility=e.target.closest("#toggleRevenueVisibility");if(visibility){state.revenueHidden=!state.revenueHidden;const value=$(".revenue-private");value.classList.toggle("blurred",state.revenueHidden);visibility.classList.toggle("is-hidden",state.revenueHidden);visibility.setAttribute("aria-pressed",String(state.revenueHidden));visibility.setAttribute("aria-label",state.revenueHidden?"Mostrar faturamento":"Ocultar faturamento");visibility.title=state.revenueHidden?"Mostrar faturamento":"Ocultar faturamento";return;}
