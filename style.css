@@ -4510,3 +4510,9 @@ body.dashboard-view #pageContent>.dashboard-summary{
 .sidebar-items-render .nav-link{animation:sidebarOptionIn .42s cubic-bezier(.2,.75,.25,1) both}
 .sidebar-items-render .nav .nav-link:nth-child(1){animation-delay:.04s}.sidebar-items-render .nav .nav-link:nth-child(2){animation-delay:.09s}.sidebar-items-render .nav .nav-link:nth-child(3){animation-delay:.14s}.sidebar-items-render .nav .nav-link:nth-child(4){animation-delay:.19s}.sidebar-items-render .nav .nav-link:nth-child(5){animation-delay:.24s}.sidebar-items-render .nav .nav-link:nth-child(6){animation-delay:.29s}.sidebar-items-render .nav .nav-link:nth-child(7){animation-delay:.34s}.sidebar-items-render .nav .nav-link:nth-child(8){animation-delay:.39s}.sidebar-items-render .lower .nav-link:nth-child(1){animation-delay:.44s}.sidebar-items-render .lower .nav-link:nth-child(2){animation-delay:.49s}
 @media(prefers-reduced-motion:reduce){.sidebar-items-render .workspace,.sidebar-items-render .nav-label,.sidebar-items-render .sidebar-bottom,.sidebar-items-render .nav-link{animation:none!important}}
+
+/* Reflexo realista e leve na barra de progresso da meta */
+.sidebar-goal-track span{position:relative;overflow:hidden;isolation:isolate;box-shadow:0 0 7px rgba(177,126,255,.32),inset 0 1px 0 rgba(255,255,255,.28)}
+.sidebar-goal-track span::after{content:"";position:absolute;top:-45%;bottom:-45%;left:-42%;width:34%;border-radius:50%;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.08) 18%,rgba(255,255,255,.78) 48%,rgba(232,215,255,.36) 68%,transparent 100%);filter:blur(1.2px);transform:skewX(-20deg);animation:goalRealisticShine 2.8s cubic-bezier(.42,0,.35,1) infinite;pointer-events:none}
+@keyframes goalRealisticShine{0%{left:-42%;opacity:0}12%{opacity:.85}55%{opacity:.95}82%,100%{left:115%;opacity:0}}
+@media(prefers-reduced-motion:reduce){.sidebar-goal-track span::after{animation:none;opacity:.25;left:35%}}
