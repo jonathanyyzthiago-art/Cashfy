@@ -3634,3 +3634,20 @@ body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achie
   }
 }
 
+
+
+/* Ajustes da meta na barra lateral: trilha mais curta e ícone maior */
+.sidebar .sidebar-revenue-goal .sidebar-goal-track{
+  width:82%!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-icon-wrap{
+  flex-basis:40px!important;
+  width:40px!important;
+  height:40px!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-icon{
+  width:28px!important;
+  height:28px!important;
+}
