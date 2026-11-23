@@ -303,7 +303,7 @@ function overview(){
  const sales=filteredDashboardSales();
  const total=sales.reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
  const range=state.chartRange||"7d",buckets=chartBuckets(range),values=buckets.map(b=>b.amount),scale=chartScale(values),geo=chartGeometry(values,scale.max),hasSales=values.some(v=>v>0);
- const rangeLabel={"7d":"Próximos 7 dias","30d":"Próximos 30 dias","90d":"Próximas 12 semanas","12m":"Próximos 12 meses"}[range];
+ const rangeLabel={"7d":"Últimos 7 dias","30d":"Últimos 30 dias","90d":"Últimas 12 semanas","12m":"Últimos 12 meses"}[range];
  const ticks=Array.from({length:11},(_,i)=>{const y=22+i*17.6,value=scale.max-i*scale.step;return '<line x1="74" y1="'+y+'" x2="790" y2="'+y+'" stroke="#29243a" stroke-dasharray="3 6"/><text x="64" y="'+(y+4)+'" text-anchor="end" fill="#817b91" font-size="13">'+money(value)+'</text>';}).join("");
  const inds=[0,Math.floor((buckets.length-1)/3),Math.floor(2*(buckets.length-1)/3),buckets.length-1].filter((v,i,a)=>a.indexOf(v)===i);
  const labels=inds.map(i=>'<span>'+buckets[i].label+'</span>').join("");
@@ -325,11 +325,11 @@ function bindRevenueChart(){
   date.textContent=({"7d":"Últimos 7 dias","30d":"Últimos 30 dias","90d":"Últimas 12 semanas","12m":"Últimos 12 meses"}[state.chartRange||"7d"]);salesCount.textContent=values.length?buckets.reduce((n,b)=>n+b.count,0)+" venda(s) no período":"0 vendas no período";
  };
  const selectAt=e=>{
-  const rect=svg.getBoundingClientRect(),x=Math.max(0,Math.min(800,(e.clientX-rect.left)/rect.width*800)),plotX=Math.max(0,Math.min(690,x-100)),idx=Math.max(0,Math.min(buckets.length-1,Math.round(plotX/690*(buckets.length-1))));
-  const px=100+idx*690/Math.max(1,buckets.length-1),py=198-(values[idx]/max)*176,b=buckets[idx];
+  const rect=svg.getBoundingClientRect(),x=Math.max(0,Math.min(800,(e.clientX-rect.left)/rect.width*800)),plotX=Math.max(0,Math.min(708,x-82)),idx=Math.max(0,Math.min(buckets.length-1,Math.round(plotX/708*(buckets.length-1))));
+  const px=82+idx*708/Math.max(1,buckets.length-1),py=198-(values[idx]/max)*176,b=buckets[idx];
   cross.setAttribute("x1",px);cross.setAttribute("x2",px);cross.setAttribute("opacity","1");dot.setAttribute("cx",px);dot.setAttribute("cy",py);dot.setAttribute("opacity","1");
   revenue.textContent=money(b.amount);date.textContent=b.from.toLocaleDateString("pt-BR",{day:"2-digit",month:"long",year:"numeric"})+(b.to.getDate()!==b.from.getDate()?" — "+b.to.toLocaleDateString("pt-BR",{day:"2-digit",month:"long"}):"");
-  tip.hidden=false;tip.textContent=money(b.amount);tip.style.left=Math.max(3,Math.min(95,px/800*100))+"%";
+  salesCount.textContent=b.count+" venda(s) neste período";tip.hidden=false;tip.textContent=money(b.amount)+" · "+b.count+" venda(s)";tip.style.left=Math.max(3,Math.min(95,px/800*100))+"%";
  };
  svg.addEventListener("pointerdown",e=>{active=true;svg.setPointerCapture(e.pointerId);selectAt(e);});
  svg.addEventListener("pointermove",e=>{if(active||e.pointerType==="mouse")selectAt(e);});
