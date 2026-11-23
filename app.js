@@ -277,7 +277,7 @@ function chartScale(values){
  return {max,step};
 }
 function chartGeometry(values,maxScale=chartScale(values).max){
- const pts=values.map((v,i)=>({x:82+i*708/Math.max(1,values.length-1),y:198-(v/maxScale)*176}));
+ const pts=values.map((v,i)=>({x:74+i*716/Math.max(1,values.length-1),y:198-(v/maxScale)*176}));
  let line="M "+pts[0].x+" "+pts[0].y;
  for(let i=1;i<pts.length;i++){
   const a=pts[i-1],b=pts[i],mid=(a.x+b.x)/2;
