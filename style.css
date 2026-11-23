@@ -4445,8 +4445,6 @@ body.dashboard-view #pageContent>.dashboard-summary{
     padding-bottom:0!important;
   }
   body.dashboard-view .dashboard-filters>.dashboard-update{
-    height:60px!important;
-    min-height:60px!important;
     margin-top:1px!important;
   }
   body.dashboard-view #pageContent>.dashboard-summary{
