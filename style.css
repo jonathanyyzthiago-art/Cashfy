@@ -3566,3 +3566,35 @@ body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achie
     border-radius:9px!important;
   }
 }
+
+/* Brilho otimizado na linha de progresso da meta lateral */
+.sidebar .sidebar-revenue-goal .sidebar-goal-track span{
+  position:relative!important;
+  overflow:hidden!important;
+  box-shadow:0 0 7px rgba(168,119,255,.55),0 0 13px rgba(168,119,255,.24)!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-track span:after{
+  content:""!important;
+  position:absolute!important;
+  inset:0!important;
+  border-radius:inherit!important;
+  background:linear-gradient(100deg,transparent 20%,rgba(255,255,255,.58) 50%,transparent 80%)!important;
+  opacity:.72;
+  animation:sidebar-goal-shimmer 3.4s ease-in-out infinite;
+  pointer-events:none;
+}
+@media(max-width:700px){
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track span{
+    box-shadow:0 0 5px rgba(168,119,255,.48),0 0 9px rgba(168,119,255,.2)!important;
+  }
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track span:after{
+    animation:none!important;
+    opacity:.2!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track span:after{
+    animation:none!important;
+    opacity:.16!important;
+  }
+}
