@@ -4050,3 +4050,74 @@ body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achie
   .sidebar .sidebar-revenue-goal .sidebar-goal-track>span::before,
   .sidebar .sidebar-revenue-goal .sidebar-goal-track>span::after{animation:none!important;opacity:.25!important;transform:skewX(-28deg)!important}
 }
+
+
+/* CORREÇÃO DEFINITIVA: reflexo diagonal aplicado na trilha inteira, não no preenchimento */
+.sidebar .sidebar-revenue-goal .sidebar-goal-track{
+  position:relative!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  width:72%!important;
+  height:9px!important;
+  margin:13px auto 0!important;
+  border-radius:999px!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-track>span{
+  position:relative!important;
+  z-index:1!important;
+  height:100%!important;
+  overflow:hidden!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-track>span::before,
+.sidebar .sidebar-revenue-goal .sidebar-goal-track>span::after{
+  content:none!important;
+  display:none!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-track::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:4!important;
+  top:-5px!important;
+  bottom:-5px!important;
+  left:-22%!important;
+  width:17%!important;
+  border-radius:3px!important;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.12) 20%,rgba(255,255,255,.98) 49%,rgba(255,255,255,.35) 58%,transparent 100%)!important;
+  filter:blur(.7px) drop-shadow(0 0 4px #fff) drop-shadow(0 0 9px rgba(190,145,255,1))!important;
+  opacity:0!important;
+  transform:translateX(0) skewX(-30deg)!important;
+  animation:cashfy-track-diagonal-sheen 2.1s ease-in-out infinite!important;
+  pointer-events:none!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-track::after{
+  content:""!important;
+  position:absolute!important;
+  z-index:5!important;
+  top:-2px!important;
+  bottom:-2px!important;
+  left:-18%!important;
+  width:7%!important;
+  border-radius:2px!important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,1) 48%,transparent)!important;
+  filter:drop-shadow(0 0 4px #fff) drop-shadow(0 0 9px rgba(190,145,255,1))!important;
+  opacity:0!important;
+  transform:translateX(0) skewX(-30deg)!important;
+  animation:cashfy-track-diagonal-core 2.1s ease-in-out infinite!important;
+  pointer-events:none!important;
+}
+@keyframes cashfy-track-diagonal-sheen{
+  0%,12%{transform:translateX(0) skewX(-30deg);opacity:0}
+  24%{opacity:1}
+  78%{opacity:.95}
+  100%{transform:translateX(760%) skewX(-30deg);opacity:0}
+}
+@keyframes cashfy-track-diagonal-core{
+  0%,12%{transform:translateX(0) skewX(-30deg);opacity:0}
+  24%{opacity:1}
+  78%{opacity:1}
+  100%{transform:translateX(1120%) skewX(-30deg);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track::before,
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track::after{animation:none!important;opacity:.85!important;transform:translateX(250%) skewX(-30deg)!important}
+}
