@@ -1257,7 +1257,7 @@ button[data-refund]{
 
 /* Abertura rápida: animação CF logo após a splash nativa do Android */
 .loading-screen{animation:none !important;opacity:1;visibility:visible;transition:opacity .6s ease,visibility 0s linear .6s;}
-.loading-screen img{animation:cashfy-pulse 4.3s ease-in-out infinite !important}
+.loading-screen img{animation:cashfy-pulse 4.5s ease-in-out infinite !important}
 @keyframes cashfy-intro{0%,62%{opacity:1;visibility:visible}100%{opacity:0;visibility:hidden;pointer-events:none}}
 
 
