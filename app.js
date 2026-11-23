@@ -185,8 +185,24 @@ function render(){
   const filters=$("#pageContent .dashboard-filters");
   const banner=$(".content > .cashfy-hero");
   const heading=$(".content > .page-heading");
-  if(heading){heading.hidden=true;heading.setAttribute("aria-hidden","true");}
-  if(filters&&banner)banner.insertAdjacentElement("afterend",filters);
+  if(heading){
+   heading.hidden=true;
+   heading.setAttribute("aria-hidden","true");
+   heading.style.setProperty("display","none","important");
+   heading.style.setProperty("height","0","important");
+   heading.style.setProperty("min-height","0","important");
+   heading.style.setProperty("margin","0","important");
+   heading.style.setProperty("padding","0","important");
+   heading.style.setProperty("border","0","important");
+  }
+  if(filters&&banner){
+   banner.insertAdjacentElement("afterend",filters);
+   filters.style.setProperty("display","grid","important");
+   filters.style.setProperty("width","100%","important");
+   filters.style.setProperty("box-sizing","border-box","important");
+   filters.style.setProperty("margin","0 0 16px","important");
+   filters.style.setProperty("padding","0","important");
+  }
   bindRevenueChart();
  }
  updateSidebarRevenueGoal();
