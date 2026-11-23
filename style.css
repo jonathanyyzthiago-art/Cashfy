@@ -4405,3 +4405,52 @@ body.dashboard-view #pageContent{
 /* Dashboard mobile: esconder definitivamente o cabeçalho antigo */
 body.dashboard-view .content > .page-heading[hidden]{display:none!important;height:0!important;margin:0!important;padding:0!important;}
 body.dashboard-view .content > .dashboard-filters{display:grid!important;width:100%!important;margin:0 0 16px!important;}
+
+
+/* Dashboard compact spacing: bring filters together and lift revenue cards */
+body.dashboard-view .content > .dashboard-filters{
+  row-gap:2px!important;
+  column-gap:8px!important;
+  margin-bottom:8px!important;
+}
+body.dashboard-view .dashboard-filters>.filter-field{
+  margin:0!important;
+  gap:1px!important;
+}
+body.dashboard-view .dashboard-filters>.filter-field>.filter-label{
+  margin:0 0 1px!important;
+  line-height:12px!important;
+}
+body.dashboard-view #pageContent>.dashboard-summary{
+  margin-top:0!important;
+}
+@media(max-width:650px){
+  body.dashboard-view .content > .dashboard-filters{
+    row-gap:0!important;
+    column-gap:5px!important;
+    margin-bottom:7px!important;
+  }
+  body.dashboard-view .dashboard-filters>.filter-field{
+    gap:0!important;
+    margin:0!important;
+  }
+  body.dashboard-view .dashboard-filters>.filter-field>.filter-label{
+    line-height:11px!important;
+    margin:0 0 1px!important;
+  }
+  body.dashboard-view .dashboard-filters .custom-select-trigger{
+    height:62px!important;
+    min-height:62px!important;
+    padding-top:0!important;
+    padding-bottom:0!important;
+  }
+  body.dashboard-view .dashboard-filters>.dashboard-update{
+    height:60px!important;
+    min-height:60px!important;
+    margin-top:1px!important;
+  }
+  body.dashboard-view #pageContent>.dashboard-summary{
+    margin-top:0!important;
+    margin-bottom:10px!important;
+  }
+}
