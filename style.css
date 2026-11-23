@@ -4499,3 +4499,7 @@ body.dashboard-view #pageContent>.dashboard-summary{
     backdrop-filter:blur(26px)!important;
   }
 }
+
+
+/* Ajuste de tipografia: opções do menu lateral com peso médio */
+.sidebar .nav-link{font-weight:500!important}
