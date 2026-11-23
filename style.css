@@ -4865,3 +4865,10 @@ body.dashboard-view #pageContent>.dashboard-summary{
 .conversion-data-note{margin:12px 0 0;color:#7f768b;font-size:9px;line-height:1.65}
 @media(max-width:900px){.conversion-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}.conversion-main-grid,.conversion-bottom-grid{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:600px){.conversion-workspace{gap:13px}.conversion-topline{padding:20px 18px;border-radius:15px}.conversion-topline h2{font-size:23px}.conversion-topline p{font-size:11px}.conversion-toolbar{align-items:flex-start;flex-direction:column}.conversion-periods{flex-wrap:wrap}.conversion-period{padding:8px 10px}.conversion-updated{padding:0}.conversion-metrics{gap:8px}.conversion-metric{padding:14px 13px;border-radius:12px}.conversion-metric strong{font-size:21px}.conversion-chart-panel,.conversion-funnel-card,.conversion-source-panel,.conversion-input-panel{padding:16px}.conversion-chart{height:125px}.conversion-chart svg{height:112px}}
+
+
+/* Fallback de abertura: funciona mesmo se o JavaScript principal travar. */
+@keyframes cashfy-splash-css-hide{to{opacity:0;visibility:hidden;pointer-events:none}}
+@keyframes cashfy-app-css-reveal{from{opacity:0}to{opacity:1}}
+.loading-screen{animation:cashfy-splash-css-hide .6s ease 3.9s forwards!important}
+.app-shell{opacity:0;animation:cashfy-app-css-reveal .6s ease 3.9s forwards}
