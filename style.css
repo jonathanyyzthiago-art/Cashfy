@@ -4499,3 +4499,7 @@ body.dashboard-view #pageContent>.dashboard-summary{
     backdrop-filter:blur(26px)!important;
   }
 }
+
+/* Ajuste visual dos valores laterais do gráfico */
+.revenue-chart text{font-family:Inter,Arial,sans-serif;font-size:11px;font-weight:500;letter-spacing:-.35px;font-variant-numeric:tabular-nums;paint-order:stroke;}
+.chart-xlabels{font-variant-numeric:tabular-nums;letter-spacing:.1px;}
