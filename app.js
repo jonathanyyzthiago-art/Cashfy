@@ -177,6 +177,10 @@ function profilePage(){
 function render(){
  const current=titles[state.page]?state.page:"overview";
  document.body.classList.toggle("profile-view",current==="profile");
+ if(current!=="overview"){
+  const staleDashboardFilters=$(".content > .dashboard-filters");
+  if(staleDashboardFilters)staleDashboardFilters.remove();
+ }
  document.body.classList.toggle("dashboard-view",current==="overview");
  if(current!==state.page)state.page="overview";
  const [title,subtitle]=titles[current]; $("#crumb").textContent=title; $("#pageTitle").textContent=title; $("#pageSubtitle").textContent=subtitle;
