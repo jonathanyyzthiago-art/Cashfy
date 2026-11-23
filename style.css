@@ -4298,3 +4298,77 @@ body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achie
     transform:translateX(260%) skewX(-38deg)!important;
   }
 }
+
+
+/* Override final: make the diagonal highlight unmistakable on the full progress rail */
+.sidebar button.sidebar-revenue-goal .sidebar-goal-track{
+  position:relative!important;
+  display:block!important;
+  isolation:isolate!important;
+  overflow:hidden!important;
+  transform:translateX(12px)!important;
+}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-icon-wrap{
+  position:relative!important;
+  top:3px!important;
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-icon{
+  position:relative!important;
+  top:2px!important;
+  display:block!important;
+  margin:0 auto!important;
+}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-track::before{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  z-index:20!important;
+  top:-12px!important;
+  bottom:-12px!important;
+  left:-30%!important;
+  width:30%!important;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.18) 20%,rgba(230,214,255,.85) 42%,#fff 50%,rgba(255,255,255,.95) 56%,rgba(180,130,255,.5) 72%,transparent 100%)!important;
+  border-radius:1px!important;
+  filter:blur(.35px) drop-shadow(0 0 3px #fff) drop-shadow(0 0 8px #e7d5ff) drop-shadow(0 0 17px rgba(173,111,255,1))!important;
+  opacity:1!important;
+  transform:translateX(0) skewX(-42deg)!important;
+  animation:cashfy-obvious-diagonal-reflection 1.55s linear infinite!important;
+  pointer-events:none!important;
+}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-track::after{
+  content:""!important;
+  display:block!important;
+  position:absolute!important;
+  z-index:21!important;
+  top:-5px!important;
+  bottom:-5px!important;
+  left:-24%!important;
+  width:10%!important;
+  background:linear-gradient(90deg,transparent,#fff 48%,#fff 53%,transparent)!important;
+  filter:blur(.15px) drop-shadow(0 0 4px #fff) drop-shadow(0 0 12px #c9a2ff)!important;
+  opacity:1!important;
+  transform:translateX(0) skewX(-42deg)!important;
+  animation:cashfy-obvious-diagonal-core 1.55s linear infinite!important;
+  pointer-events:none!important;
+}
+@keyframes cashfy-obvious-diagonal-reflection{
+  0%{transform:translateX(0) skewX(-42deg);opacity:0}
+  12%{opacity:1}
+  88%{opacity:1}
+  100%{transform:translateX(520%) skewX(-42deg);opacity:0}
+}
+@keyframes cashfy-obvious-diagonal-core{
+  0%{transform:translateX(0) skewX(-42deg);opacity:0}
+  12%{opacity:1}
+  88%{opacity:1}
+  100%{transform:translateX(1560%) skewX(-42deg);opacity:0}
+}
+@media(prefers-reduced-motion:reduce){
+  .sidebar button.sidebar-revenue-goal .sidebar-goal-track::before,
+  .sidebar button.sidebar-revenue-goal .sidebar-goal-track::after{
+    animation:cashfy-obvious-diagonal-reflection 1.55s linear infinite!important;
+  }
+}
