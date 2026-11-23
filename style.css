@@ -4400,3 +4400,8 @@ body.dashboard-view #pageContent{
     gap:12px!important;
   }
 }
+
+
+/* Dashboard mobile: esconder definitivamente o cabeçalho antigo */
+body.dashboard-view .content > .page-heading[hidden]{display:none!important;height:0!important;margin:0!important;padding:0!important;}
+body.dashboard-view .content > .dashboard-filters{display:grid!important;width:100%!important;margin:0 0 16px!important;}
