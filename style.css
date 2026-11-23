@@ -3993,3 +3993,60 @@ body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achie
   .sidebar .sidebar-revenue-goal .sidebar-goal-track::before,
   .sidebar .sidebar-revenue-goal .sidebar-goal-track::after{animation:none!important;opacity:.18!important;transform:none!important}
 }
+
+
+/* Meta lateral: trilha mais curta e espessa, com reflexo diagonal definido */
+.sidebar .sidebar-revenue-goal .sidebar-goal-track{
+  width:72%!important;
+  height:9px!important;
+  margin-left:auto!important;
+  margin-right:auto!important;
+  border-radius:999px!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-track>span{
+  height:100%!important;
+  border-radius:999px!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-track>span::before{
+  top:-8px!important;
+  bottom:-8px!important;
+  left:-34%!important;
+  width:24%!important;
+  border-radius:2px!important;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.18) 22%,rgba(255,255,255,.98) 50%,rgba(255,255,255,.2) 78%,transparent 100%)!important;
+  filter:blur(.65px) drop-shadow(0 0 3px rgba(255,255,255,.95)) drop-shadow(0 0 8px rgba(210,178,255,.95))!important;
+  opacity:1!important;
+  transform:skewX(-28deg) translateX(0)!important;
+  animation:goal-diagonal-reflection 2.7s cubic-bezier(.4,0,.2,1) infinite!important;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-track>span::after{
+  top:-3px!important;
+  bottom:-3px!important;
+  left:-25%!important;
+  width:12%!important;
+  border-radius:2px!important;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.98) 50%,transparent)!important;
+  filter:blur(.25px) drop-shadow(0 0 4px rgba(255,255,255,1)) drop-shadow(0 0 10px rgba(195,151,255,.95))!important;
+  opacity:.95!important;
+  transform:skewX(-28deg) translateX(0)!important;
+  animation:goal-diagonal-core 2.7s cubic-bezier(.4,0,.2,1) infinite!important;
+}
+@keyframes goal-diagonal-reflection{
+  0%,18%{transform:skewX(-28deg) translateX(0);opacity:0}
+  30%{opacity:1}
+  76%{opacity:1}
+  90%,100%{transform:skewX(-28deg) translateX(520%);opacity:0}
+}
+@keyframes goal-diagonal-core{
+  0%,18%{transform:skewX(-28deg) translateX(0);opacity:0}
+  30%{opacity:1}
+  76%{opacity:1}
+  90%,100%{transform:skewX(-28deg) translateX(820%);opacity:0}
+}
+@media(max-width:700px){
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track{width:72%!important;height:9px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track>span::before,
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track>span::after{animation:none!important;opacity:.25!important;transform:skewX(-28deg)!important}
+}
