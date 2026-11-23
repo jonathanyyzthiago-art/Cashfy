@@ -395,7 +395,7 @@ $("#closeModal").addEventListener("click",closeModal);$("#cancelModal").addEvent
 render();
 const loadingScreen=$("#loadingScreen");
 $("#appShell").hidden=true;
-if(loadingScreen){window.setTimeout(()=>{loadingScreen.classList.add("is-hidden");loadingScreen.setAttribute("aria-hidden","true");window.setTimeout(()=>{introFinished=true;$("#appShell").hidden=false;startRevealSequence();},650);} ,2400);}else{$("#appShell").hidden=false;startRevealSequence();}
+if(loadingScreen){window.setTimeout(()=>{loadingScreen.classList.add("is-hidden");loadingScreen.setAttribute("aria-hidden","true");window.setTimeout(()=>{introFinished=true;$("#appShell").hidden=false;startRevealSequence();},650);} ,1400);}else{$("#appShell").hidden=false;startRevealSequence();}
 
 
 document.addEventListener("submit",e=>{
