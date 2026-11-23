@@ -3708,3 +3708,45 @@ body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achie
 @media(prefers-reduced-motion:reduce){
   .sidebar .sidebar-revenue-goal .sidebar-goal-icon{filter:none!important}
 }
+
+
+/* Reflexo mais natural: faixa fina, brilho difuso e núcleo suave */
+.sidebar .sidebar-revenue-goal .sidebar-goal-track::before{
+  content:""!important;
+  position:absolute!important;
+  z-index:2!important;
+  top:-3px!important;
+  bottom:-3px!important;
+  left:0!important;
+  width:30%!important;
+  border-radius:inherit!important;
+  background:linear-gradient(90deg,transparent,rgba(211,190,255,.12) 35%,rgba(230,216,255,.3) 50%,rgba(211,190,255,.12) 65%,transparent)!important;
+  filter:blur(3px)!important;
+  opacity:.62!important;
+  transform:translateX(-150%);
+  animation:sidebar-goal-soft-reflection 4.1s cubic-bezier(.4,0,.2,1) infinite!important;
+  pointer-events:none!important;
+  will-change:transform;
+}
+.sidebar .sidebar-revenue-goal .sidebar-goal-track::after{
+  width:18%!important;
+  background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.08) 24%,rgba(255,255,255,.62) 48%,rgba(255,255,255,.16) 62%,transparent 100%)!important;
+  filter:blur(.6px)!important;
+  opacity:.58!important;
+  animation:sidebar-goal-track-reflection 4.1s cubic-bezier(.4,0,.2,1) infinite!important;
+}
+@keyframes sidebar-goal-soft-reflection{
+  0%,18%{transform:translateX(-150%)}
+  78%,100%{transform:translateX(570%)}
+}
+@keyframes sidebar-goal-track-reflection{
+  0%,18%{transform:translateX(-160%)}
+  78%,100%{transform:translateX(570%)}
+}
+@media(max-width:700px){
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track::before{opacity:.4!important;filter:blur(2px)!important}
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track::after{opacity:.4!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .sidebar .sidebar-revenue-goal .sidebar-goal-track::before{animation:none!important;opacity:.12!important;transform:translateX(0)!important}
+}
