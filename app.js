@@ -147,7 +147,9 @@ function updateSidebarRevenueGoal(){
  const tiers=[{name:"Prata",start:0,end:10000},{name:"Ouro",start:10000,end:100000},{name:"Diamante",start:100000,end:1000000},{name:"Vermelho",start:1000000,end:5000000},{name:"Rosa",start:5000000,end:15000000}];
  const tier=tiers.find(t=>total<t.end)||tiers[tiers.length-1];
  const stagePct=Math.max(0,Math.min(100,Math.round((total-tier.start)/(tier.end-tier.start)*100)));
- if(amount)amount.textContent=money(total)+" / "+(tier.end>=1000000?"R$ "+(tier.end/1000000)+" mi":tier.end===100000?"R$ 100 mil":"R$ 10 mil");
+ const compactGoalValue=value=>value>=1000000?(value/1000000).toLocaleString("pt-BR",{maximumFractionDigits:1})+" Mi":value>=1000?(value/1000).toLocaleString("pt-BR",{maximumFractionDigits:1})+" Mil":money(value);
+ const compactGoalTarget=value=>value>=1000000?(value/1000000).toLocaleString("pt-BR",{maximumFractionDigits:1})+"M":(value/1000).toLocaleString("pt-BR",{maximumFractionDigits:1})+"K";
+ if(amount)amount.textContent=compactGoalValue(total)+" / "+compactGoalTarget(tier.end);
  if(bar)bar.style.width=stagePct+"%";
  if(label)label.textContent=stagePct+"%";
 }
