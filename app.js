@@ -315,7 +315,7 @@ function overview(){
  const total=totalRevenue();
  const range=state.chartRange||"7d",buckets=chartBuckets(range),values=buckets.map(b=>b.amount),scale=chartScale(values),geo=chartGeometry(values,scale.max),hasSales=values.some(v=>v>0);
  const rangeLabel={"7d":"Últimos 7 dias","30d":"Últimos 30 dias","90d":"Últimas 12 semanas","12m":"Últimos 12 meses"}[range];
- const ticks=Array.from({length:11},(_,i)=>{const y=22+i*17.6,value=scale.max-i*scale.step;return '<line x1="74" y1="'+y+'" x2="790" y2="'+y+'" stroke="#29243a" stroke-dasharray="3 6"/><text x="64" y="'+(y+4)+'" text-anchor="end" fill="#817b91" font-size="12" font-family="Inter,Arial,sans-serif" letter-spacing="-.25">'+money(value)+'</text>';}).join("");
+ const ticks=Array.from({length:11},(_,i)=>{const y=22+i*17.6;return '<line x1="74" y1="'+y+'" x2="790" y2="'+y+'" stroke="#29243a" stroke-dasharray="3 6"/>';}).join("");
  const inds=[0,Math.floor((buckets.length-1)/3),Math.floor(2*(buckets.length-1)/3),buckets.length-1].filter((v,i,a)=>a.indexOf(v)===i);
  const labels=inds.map(i=>'<span>'+buckets[i].label+'</span>').join("");
  const px=geo.pts[geo.pts.length-1].x,py=geo.pts[geo.pts.length-1].y,chartSaleCount=buckets.reduce((n,b)=>n+b.count,0);
