@@ -3497,3 +3497,18 @@ body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achie
  body.profile-view #pageContent{height:auto!important;min-height:0!important;margin-bottom:0!important}
  body.profile-view .cashfy-site-footer{margin-top:0!important;padding-top:18px!important;padding-bottom:8px!important}
 }
+
+
+/* Ajuste exclusivo do botão Assinar do plano vitalício de R$ 290 */
+.subscription-plan-lifetime .subscription-subscribe-btn{
+  min-height:54px!important;
+  padding:15px 20px!important;
+  font-size:14px!important;
+}
+@media(max-width:650px){
+  .subscription-plan-lifetime .subscription-subscribe-btn{
+    min-height:46px!important;
+    padding:12px 10px!important;
+    font-size:12px!important;
+  }
+}
