@@ -184,7 +184,9 @@ function render(){
  if(current==="overview"){
   const filters=$("#pageContent .dashboard-filters");
   const banner=$(".content > .cashfy-hero");
-  if(filters&&banner)banner.after(filters);
+  const heading=$(".content > .page-heading");
+  if(heading){heading.hidden=true;heading.setAttribute("aria-hidden","true");}
+  if(filters&&banner)banner.insertAdjacentElement("afterend",filters);
   bindRevenueChart();
  }
  updateSidebarRevenueGoal();
