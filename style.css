@@ -3538,3 +3538,31 @@ body.profile-view #pageContent .profile-cards-panel .profile-minis.profile-achie
     border-radius:9px!important;
   }
 }
+
+
+/* Os dois botões de assinatura usam exatamente as mesmas dimensões */
+.subscription-plan-monthly .subscription-subscribe-btn,
+.subscription-plan-lifetime .subscription-subscribe-btn{
+  min-height:54px!important;
+  padding:14px 18px!important;
+  font-size:13px!important;
+  box-sizing:border-box!important;
+}
+@media(max-width:650px){
+  .subscription-plan-monthly .subscription-subscribe-btn,
+  .subscription-plan-lifetime .subscription-subscribe-btn{
+    min-height:42px!important;
+    padding:10px 5px!important;
+    font-size:9px!important;
+    border-radius:10px!important;
+  }
+}
+@media(max-width:370px){
+  .subscription-plan-monthly .subscription-subscribe-btn,
+  .subscription-plan-lifetime .subscription-subscribe-btn{
+    min-height:30px!important;
+    padding:6px 4px!important;
+    font-size:8px!important;
+    border-radius:9px!important;
+  }
+}
