@@ -4560,3 +4560,84 @@ body.dashboard-view #pageContent>.dashboard-summary{
  .sidebar-items-render .nav-label,.sidebar-items-render .nav-link,
  .sidebar-items-render .sidebar-bottom{animation:none!important;will-change:auto}
 }
+
+
+/* Correção definitiva: preenchimento e reflexo da barra de meta */
+.sidebar button.sidebar-revenue-goal .sidebar-goal-track{
+ position:relative!important;display:block!important;width:100%!important;
+ height:8px!important;overflow:hidden!important;isolation:isolate!important;
+ transform:none!important;border-radius:20px!important;
+}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-track>span{
+ display:block!important;position:relative!important;height:100%!important;
+ min-width:0!important;max-width:100%!important;border-radius:inherit!important;
+ overflow:hidden!important;z-index:1!important;
+ background:linear-gradient(90deg,#8051d6 0%,#ae82ff 58%,#f0ddff 100%)!important;
+ box-shadow:0 0 8px rgba(184,145,255,.65),inset 0 1px 0 rgba(255,255,255,.48)!important;
+}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-track>span::after{content:none!important}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-track::before{
+ content:""!important;display:block!important;position:absolute!important;z-index:3!important;
+ top:-8px!important;bottom:-8px!important;left:-28%!important;width:27%!important;
+ background:linear-gradient(90deg,transparent,rgba(255,255,255,.22) 28%,#fff 50%,rgba(255,255,255,.7) 64%,transparent)!important;
+ filter:blur(.55px) drop-shadow(0 0 4px #fff) drop-shadow(0 0 10px #c9a2ff)!important;
+ transform:translateX(0) skewX(-32deg)!important;
+ animation:cashfyGoalSweep 2.1s cubic-bezier(.35,0,.2,1) infinite!important;
+ pointer-events:none!important;
+}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-track::after{
+ content:""!important;display:block!important;position:absolute!important;z-index:4!important;
+ top:-5px!important;bottom:-5px!important;left:-18%!important;width:8%!important;
+ background:linear-gradient(90deg,transparent,#fff 48%,#fff 54%,transparent)!important;
+ filter:blur(.25px) drop-shadow(0 0 5px #fff) drop-shadow(0 0 12px #d5b7ff)!important;
+ transform:translateX(0) skewX(-32deg)!important;
+ animation:cashfyGoalCore 2.1s cubic-bezier(.35,0,.2,1) infinite!important;
+ pointer-events:none!important;
+}
+@keyframes cashfyGoalSweep{0%{transform:translateX(0) skewX(-32deg);opacity:0}12%{opacity:1}80%{opacity:.95}100%{transform:translateX(520%) skewX(-32deg);opacity:0}}
+@keyframes cashfyGoalCore{0%{transform:translateX(0) skewX(-32deg);opacity:0}12%{opacity:1}80%{opacity:1}100%{transform:translateX(1560%) skewX(-32deg);opacity:0}}
+
+/* Gráfico: ocupar toda a área útil sem esmagar a onda */
+.revenue-panel{display:block!important;width:100%!important;padding:26px 26px 20px!important}
+.revenue-head{display:flex!important;flex-direction:row!important;justify-content:space-between!important;align-items:flex-start!important;gap:18px!important;margin-bottom:16px!important}
+.revenue-head>div:first-child{min-width:0;flex:1}
+.revenue-head .range-tabs{flex:0 0 auto!important;align-self:flex-start!important;margin:8px 0 0 auto!important}
+.revenue-chart-wrap{display:block!important;position:relative!important;width:100%!important;height:300px!important;min-height:300px!important;flex:none!important;margin:8px 0 0!important;overflow:visible!important}
+.revenue-chart{display:block!important;width:100%!important;height:100%!important;min-height:0!important;overflow:visible!important}
+.revenue-chart text{font-family:Inter,Arial,sans-serif!important;font-size:13px!important;font-weight:550!important;letter-spacing:0!important;font-variant-numeric:tabular-nums!important}
+.revenue-line{stroke-width:3.5!important;filter:drop-shadow(0 0 6px #a77aff88)!important}
+.chart-xlabels{display:flex!important;justify-content:space-between!important;width:100%!important;padding:7px 8px 0 74px!important;font-size:11px!important}
+.chart-foot{display:flex!important;justify-content:space-between!important;margin-top:17px!important;padding-top:14px!important;font-size:11px!important}
+@media(max-width:650px){
+ .revenue-panel{padding:19px 15px 16px!important}
+ .revenue-head{flex-direction:column!important;gap:13px!important;margin-bottom:12px!important}
+ .revenue-head .range-tabs{width:100%!important;align-self:stretch!important;margin:0!important}
+ .range-btn{flex:1!important;padding:9px 5px!important;font-size:10px!important}
+ .revenue-chart-wrap{height:250px!important;min-height:250px!important;margin-top:5px!important}
+ .revenue-chart text{font-size:12px!important}
+ .chart-xlabels{padding:6px 3px 0 54px!important;font-size:10px!important}
+ .chart-foot{font-size:10px!important;gap:8px!important}
+}
+
+/* Entrada sincronizada por blocos completos da barra lateral */
+@keyframes cashfySidebarBlockIn{
+ 0%{opacity:0;transform:translate3d(0,12px,0);filter:blur(2px)}
+ 70%{opacity:1;filter:blur(.2px)}
+ 100%{opacity:1;transform:translate3d(0,0,0);filter:blur(0)}
+}
+.sidebar-items-render>.brand-row,
+.sidebar-items-render>.sidebar-revenue-goal,
+.sidebar-items-render>.nav-label,
+.sidebar-items-render>nav,
+.sidebar-items-render>.sidebar-bottom{
+ animation:cashfySidebarBlockIn .62s cubic-bezier(.2,.72,.25,1) both!important;
+ animation-delay:var(--sidebar-item-delay,0ms)!important;
+ will-change:transform,opacity,filter;
+}
+.sidebar-items-render>nav .nav-link{animation:none!important;opacity:1!important;transform:none!important;filter:none!important}
+.sidebar-items-render>.nav-label{animation-duration:.62s!important}
+@media(prefers-reduced-motion:reduce){
+ .sidebar-items-render>.brand-row,.sidebar-items-render>.sidebar-revenue-goal,
+ .sidebar-items-render>.nav-label,.sidebar-items-render>nav,
+ .sidebar-items-render>.sidebar-bottom{animation:none!important;will-change:auto}
+}
