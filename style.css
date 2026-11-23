@@ -4586,3 +4586,39 @@ body.dashboard-view #pageContent>.dashboard-summary{
 @media(prefers-reduced-motion:reduce){
   .sidebar .sidebar-revenue-goal .sidebar-goal-track::after{animation:none!important;opacity:1!important;left:42%!important}
 }
+
+
+/* Ajuste pedido: meta lateral mais compacta e ícone do gráfico realmente maior */
+.sidebar button.sidebar-revenue-goal{
+  width:100%!important;
+  max-width:330px!important;
+  padding:10px 11px 9px!important;
+  margin:0 0 20px!important;
+  border-radius:13px!important;
+}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-top{
+  gap:9px!important;
+}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-icon-wrap{
+  width:40px!important;height:40px!important;flex:0 0 40px!important;
+  overflow:visible!important;
+}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-icon{
+  width:54px!important;height:54px!important;max-width:none!important;
+  transform:translate(-7px,-7px)!important;
+  stroke-width:2!important;
+}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-percent-row{
+  margin:5px 0 3px!important;min-height:16px!important;
+}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-percent-row strong{
+  min-width:0!important;padding:2px 7px!important;
+  font-size:9px!important;line-height:1.2!important;
+  border-radius:8px!important;
+}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-track{
+  height:6px!important;
+}
+.sidebar button.sidebar-revenue-goal .sidebar-goal-bottom{
+  margin-top:6px!important;font-size:8px!important;
+}
