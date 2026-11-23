@@ -208,27 +208,9 @@ function render(){
    filters.querySelectorAll(".filter-field").forEach(field=>{
     field.style.setProperty("margin","0","important");
     field.style.setProperty("gap","0","important");
-    const label=field.querySelector(".filter-label");
-    if(label){
-     label.style.setProperty("font-size","9px","important");
-     label.style.setProperty("line-height","10px","important");
-     label.style.setProperty("margin","0 0 1px","important");
-     label.style.setProperty("padding","0 4px","important");
-    }
-    const trigger=field.querySelector(".custom-select-trigger");
-    if(trigger){
-     trigger.style.setProperty("height","46px","important");
-     trigger.style.setProperty("min-height","46px","important");
-     trigger.style.setProperty("padding","0 12px","important");
-     trigger.style.setProperty("font-size","12px","important");
-    }
    });
    const update=filters.querySelector(".dashboard-update");
-   if(update){
-    update.style.setProperty("height","46px","important");
-    update.style.setProperty("min-height","46px","important");
-    update.style.setProperty("margin-top","1px","important");
-   }
+   if(update)update.style.setProperty("margin-top","1px","important");
    const summary=$("#pageContent .dashboard-summary");
    if(summary){
     summary.style.setProperty("margin-top","0","important");
