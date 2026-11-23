@@ -4454,3 +4454,20 @@ body.dashboard-view #pageContent>.dashboard-summary{
     margin-bottom:10px!important;
   }
 }
+
+
+/* Dark glass sidebar */
+.sidebar{
+  background:rgba(7,6,12,.68)!important;
+  -webkit-backdrop-filter:blur(22px) saturate(135%)!important;
+  backdrop-filter:blur(22px) saturate(135%)!important;
+  border-right:1px solid rgba(220,205,255,.13)!important;
+  box-shadow:12px 0 38px rgba(0,0,0,.24),inset -1px 0 0 rgba(255,255,255,.035)!important;
+}
+@media(max-width:650px){
+  .sidebar{
+    background:rgba(7,6,12,.76)!important;
+    -webkit-backdrop-filter:blur(24px) saturate(135%)!important;
+    backdrop-filter:blur(24px) saturate(135%)!important;
+  }
+}
