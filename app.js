@@ -183,8 +183,8 @@ function render(){
  $("#pageContent").innerHTML=current==="terms"?termsPage():current==="profile"?profilePage():current==="overview"?overview():current==="products"?productsPage():current==="sales"?salesPage():current==="customers"?customersPage():current==="settings"?settingsPage():modulePage(current);
  if(current==="overview"){
   const filters=$("#pageContent .dashboard-filters");
-  const heading=$(".content > .page-heading");
-  if(filters&&heading)heading.before(filters);
+  const banner=$(".content > .cashfy-hero");
+  if(filters&&banner)banner.after(filters);
   bindRevenueChart();
  }
  updateSidebarRevenueGoal();
@@ -195,7 +195,7 @@ function startRevealSequence(){
  const groups=[
   ...Array.from(document.querySelectorAll(".sidebar > *")),
   ...Array.from(document.querySelectorAll(".topbar > *")),
-  ...Array.from(document.querySelectorAll(".content > .cashfy-hero, .content > .page-heading, #pageContent > *, .content > footer"))
+  ...Array.from(document.querySelectorAll(".content > .cashfy-hero, .content > .dashboard-filters, .content > .page-heading, #pageContent > *, .content > footer"))
  ];
  groups.forEach((el,i)=>{
   el.classList.remove("cashfy-reveal");
