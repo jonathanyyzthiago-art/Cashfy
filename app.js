@@ -177,10 +177,16 @@ function profilePage(){
 function render(){
  const current=titles[state.page]?state.page:"overview";
  document.body.classList.toggle("profile-view",current==="profile");
+ document.body.classList.toggle("dashboard-view",current==="overview");
  if(current!==state.page)state.page="overview";
  const [title,subtitle]=titles[current]; $("#crumb").textContent=title; $("#pageTitle").textContent=title; $("#pageSubtitle").textContent=subtitle;
  $("#pageContent").innerHTML=current==="terms"?termsPage():current==="profile"?profilePage():current==="overview"?overview():current==="products"?productsPage():current==="sales"?salesPage():current==="customers"?customersPage():current==="settings"?settingsPage():modulePage(current);
- if(current==="overview")bindRevenueChart();
+ if(current==="overview"){
+  const filters=$("#pageContent .dashboard-filters");
+  const heading=$(".content > .page-heading");
+  if(filters&&heading)heading.before(filters);
+  bindRevenueChart();
+ }
  updateSidebarRevenueGoal();
  if(introFinished)startRevealSequence();
 }
