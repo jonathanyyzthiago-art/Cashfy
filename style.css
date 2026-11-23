@@ -4533,3 +4533,28 @@ body.dashboard-view #pageContent>.dashboard-summary{
 @media(prefers-reduced-motion:reduce){
   .sidebar .sidebar-revenue-goal .sidebar-goal-track>span::after{animation:none!important;display:none!important}
 }
+
+/* Novos blocos do Dashboard — adicionados abaixo do gráfico */
+.dashboard-additions{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:15px 0}
+.dashboard-extra-panel{min-width:0;padding:18px}
+.dashboard-extra-panel .panel-head{margin-bottom:14px}
+.dashboard-ranking{display:grid;gap:0}
+.dashboard-ranking-row{display:grid;grid-template-columns:25px minmax(0,1fr) auto auto;align-items:center;gap:10px;padding:12px 0;border-bottom:1px solid #211e2d}
+.dashboard-ranking-row:last-child,.dashboard-activity-row:last-child{border-bottom:0}
+.dashboard-rank-position{width:22px;height:22px;display:grid;place-items:center;border-radius:7px;background:#261b3b;color:#c2a3ff;font-size:10px;font-weight:700}
+.dashboard-rank-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:11px;color:#e5e0ef}
+.dashboard-rank-count{font-size:9px;color:var(--muted);white-space:nowrap}
+.dashboard-ranking-row>strong,.dashboard-activity-row>strong{font-size:11px;white-space:nowrap}
+.dashboard-activity-list{display:grid}
+.dashboard-activity-row{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #211e2d}
+.dashboard-activity-icon{width:27px;height:27px;display:grid;place-items:center;border-radius:8px;background:#1d302b;color:#65dcb0;flex-shrink:0}
+.dashboard-activity-copy{display:grid;gap:4px;min-width:0;flex:1}
+.dashboard-activity-copy strong{font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.dashboard-activity-copy small{font-size:9px;color:var(--muted)}
+.dashboard-extra-empty{padding:20px 8px;text-align:center;color:var(--muted);font-size:11px;line-height:1.6}
+.dashboard-conversion-panel{grid-column:1/-1;display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:18px}
+.dashboard-conversion-panel .panel-head{grid-column:1/-1}
+.dashboard-conversion-value{font:600 30px 'Space Grotesk';color:#fff}
+.dashboard-conversion-note{margin:0;color:var(--muted);font-size:10px;line-height:1.6}
+.dashboard-conversion-status{grid-column:1/-1;justify-self:start;margin-top:12px;padding:6px 9px;border-radius:20px;background:#282235;color:#b9a5e8;font-size:9px}
+@media(max-width:650px){.dashboard-additions{grid-template-columns:1fr;gap:10px;margin:12px 0}.dashboard-extra-panel{padding:15px}.dashboard-ranking-row{grid-template-columns:24px minmax(0,1fr) auto;gap:8px}.dashboard-rank-count{display:none}.dashboard-conversion-panel{grid-column:auto;grid-template-columns:1fr auto}.dashboard-conversion-panel .panel-head,.dashboard-conversion-status{grid-column:1/-1}}
