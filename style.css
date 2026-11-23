@@ -4504,6 +4504,3 @@ body.dashboard-view #pageContent>.dashboard-summary{
 /* Ajuste de tipografia: opções do menu lateral com peso médio */
 .sidebar .nav-link{font-weight:500!important}
 
-
-/* Não exibir os filtros do Dashboard na tela Meu perfil */
-body.profile-view .content > .dashboard-filters{display:none!important}
