@@ -4641,3 +4641,33 @@ body.dashboard-view #pageContent>.dashboard-summary{
  .sidebar-items-render>.nav-label,.sidebar-items-render>nav,
  .sidebar-items-render>.sidebar-bottom{animation:none!important;will-change:auto}
 }
+
+
+/* Restaurar a abertura normal da barra lateral, sem animação interna escalonada */
+.sidebar-items-render>.brand-row,.sidebar-items-render>.sidebar-revenue-goal,
+.sidebar-items-render>.nav-label,.sidebar-items-render>nav,
+.sidebar-items-render>.sidebar-bottom,.sidebar-items-render>nav .nav-link{
+ animation:none!important;opacity:1!important;transform:none!important;filter:none!important;
+}
+
+/* Gráfico: manter proporções naturais dos números e textos do SVG */
+.revenue-chart text{font-stretch:normal!important;letter-spacing:0!important;transform:none!important}
+
+/* Terceiro filtro (Período): menu totalmente opaco e acima dos demais elementos */
+.dashboard-filters>.filter-field:nth-child(3){position:relative!important;z-index:2147483646!important;overflow:visible!important}
+.dashboard-filters>.filter-field:nth-child(3):focus-within{z-index:2147483647!important}
+.dashboard-filters>.filter-field:nth-child(3) .custom-select-menu,
+.dashboard-filters>.filter-field:nth-child(3) .custom-select-menu:not([hidden]){
+ position:absolute!important;top:calc(100% + 6px)!important;left:0!important;right:0!important;bottom:auto!important;width:100%!important;
+ display:grid!important;max-height:230px!important;overflow-y:auto!important;z-index:2147483647!important;
+ background:#191426!important;background-color:#191426!important;background-image:none!important;
+ opacity:1!important;visibility:visible!important;filter:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;
+ border:1px solid rgba(181,145,255,.55)!important;border-radius:12px!important;
+ box-shadow:0 18px 48px rgba(0,0,0,.96),0 0 0 1px rgba(0,0,0,.65)!important;
+}
+.dashboard-filters>.filter-field:nth-child(3) .custom-select-option,
+.dashboard-filters>.filter-field:nth-child(3) .custom-select-option:hover,
+.dashboard-filters>.filter-field:nth-child(3) .custom-select-option.selected{
+ background:#241c35!important;background-color:#241c35!important;color:#f7f2ff!important;opacity:1!important;visibility:visible!important;
+}
+.dashboard-filters>.filter-field:nth-child(3) .custom-select-menu[hidden]{display:none!important}
