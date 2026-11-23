@@ -4854,3 +4854,5 @@ body.dashboard-view #pageContent>.dashboard-summary{
 .conversion-visits-form .module-field{flex:1}
 .conversion-visits-form .primary-btn{min-height:42px}
 @media(max-width:650px){.module-hero{padding:20px;border-radius:15px}.module-hero h2{font-size:20px}.module-hero-icon{width:46px;height:46px;flex-basis:46px;font-size:22px}.module-kpis{grid-template-columns:1fr;gap:9px}.module-kpis>.panel{padding:15px 16px}.module-kpis>.panel strong{font-size:20px}.activity-timeline-panel,.conversion-funnel-panel{padding:16px}.activity-timeline-item{padding-left:37px}.conversion-visits-form{align-items:stretch;flex-direction:column}}
+
+.dashboard-module-link{cursor:pointer}.dashboard-module-link:focus-visible{outline:2px solid #b99aff;outline-offset:3px}.dashboard-module-link:hover{border-color:rgba(184,156,255,.38)}
