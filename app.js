@@ -4,9 +4,12 @@ const state = { revenueHidden:false, dashboardFilters:{type:"all",product:"all",
 const money = value => Number(value || 0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 const save = () => { localStorage.setItem("cashfy_products",JSON.stringify(state.products)); localStorage.setItem("cashfy_sales",JSON.stringify(state.sales)); localStorage.setItem("cashfy_customers",JSON.stringify(state.customers)); };
 /* Registro demonstrativo de R$ 8 mil: recria somente se estiver ausente */
-if(!state.sales.some(s=>String(s.id)==="cashfy-demo-sale-8000")) {
+const demoSale=state.sales.find(s=>String(s.id)==="cashfy-demo-sale-8000");
+if(!demoSale) {
  state.sales.unshift({id:"cashfy-demo-sale-8000",amount:8000,type:"venda",status:"Aprovada",productName:"Venda demonstrativa",dateISO:new Date().toISOString()});
  save();
+} else if(!parseSaleDate(demoSale)) {
+ demoSale.dateISO=new Date().toISOString();save();
 }
 const revenueSale=s=>!/(reembolso|estorno|refund|cancelad|cancelled)/i.test(String(s.type||"")+" "+String(s.status||""));
 const totalRevenue=()=>state.sales.filter(revenueSale).reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
@@ -276,7 +279,10 @@ function chartScale(values){
 function chartGeometry(values,maxScale=chartScale(values).max){
  const pts=values.map((v,i)=>({x:82+i*708/Math.max(1,values.length-1),y:198-(v/maxScale)*176}));
  let line="M "+pts[0].x+" "+pts[0].y;
- for(let i=1;i<pts.length;i++){const a=pts[i-1],b=pts[i];line+=" Q "+((a.x+b.x)/2)+" "+a.y+" "+b.x+" "+b.y;}
+ for(let i=1;i<pts.length;i++){
+  const a=pts[i-1],b=pts[i],mid=(a.x+b.x)/2;
+  line+=" C "+mid+" "+a.y+" "+mid+" "+b.y+" "+b.x+" "+b.y;
+ }
  return {pts,line,area:line+" L "+pts[pts.length-1].x+" 198 L "+pts[0].x+" 198 Z"};
 }
 function filteredDashboardSales(){
@@ -305,7 +311,7 @@ function filteredDashboardSales(){
 }
 function overview(){
  const sales=filteredDashboardSales().filter(revenueSale);
- const total=sales.reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
+ const total=totalRevenue();
  const range=state.chartRange||"7d",buckets=chartBuckets(range),values=buckets.map(b=>b.amount),scale=chartScale(values),geo=chartGeometry(values,scale.max),hasSales=values.some(v=>v>0);
  const rangeLabel={"7d":"Últimos 7 dias","30d":"Últimos 30 dias","90d":"Últimas 12 semanas","12m":"Últimos 12 meses"}[range];
  const ticks=Array.from({length:11},(_,i)=>{const y=22+i*17.6,value=scale.max-i*scale.step;return '<line x1="74" y1="'+y+'" x2="790" y2="'+y+'" stroke="#29243a" stroke-dasharray="3 6"/><text x="64" y="'+(y+4)+'" text-anchor="end" fill="#817b91" font-size="12" font-family="Inter,Arial,sans-serif" letter-spacing="-.25">'+money(value)+'</text>';}).join("");
@@ -325,8 +331,8 @@ function bindRevenueChart(){
  const cross=$("#chartCrosshair"),dot=$("#chartDot"),tip=$("#chartTooltip"),revenue=$("#chartRevenue"),date=$("#chartDate"),salesCount=$("#chartSalesCount");let active=false;
  const clearSelection=()=>{
   active=false;cross.setAttribute("opacity","0");dot.setAttribute("opacity","0");tip.hidden=true;
-  revenue.textContent=money(values.reduce((sum,v)=>sum+v,0));
-  date.textContent=({"7d":"Últimos 7 dias","30d":"Últimos 30 dias","90d":"Últimas 12 semanas","12m":"Últimos 12 meses"}[state.chartRange||"7d"]);salesCount.textContent=values.length?buckets.reduce((n,b)=>n+b.count,0)+" venda(s) no período":"0 vendas no período";
+  revenue.textContent=money(totalRevenue());
+  date.textContent="Faturamento total";salesCount.textContent=state.sales.filter(revenueSale).length+" venda(s) registradas no total";
  };
  const selectAt=e=>{
   const rect=svg.getBoundingClientRect(),x=Math.max(0,Math.min(800,(e.clientX-rect.left)/rect.width*800)),plotX=Math.max(0,Math.min(708,x-82)),idx=Math.max(0,Math.min(buckets.length-1,Math.round(plotX/708*(buckets.length-1))));
