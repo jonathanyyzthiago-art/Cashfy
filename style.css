@@ -4439,13 +4439,16 @@ body.dashboard-view #pageContent>.dashboard-summary{
     margin:0 0 1px!important;
   }
   body.dashboard-view .dashboard-filters .custom-select-trigger{
-    height:62px!important;
-    min-height:62px!important;
-    padding-top:0!important;
-    padding-bottom:0!important;
+    height:36px!important;
+    min-height:36px!important;
+    padding:0 11px!important;
   }
   body.dashboard-view .dashboard-filters>.dashboard-update{
+    height:36px!important;
+    min-height:36px!important;
     margin-top:1px!important;
+    padding-top:0!important;
+    padding-bottom:0!important;
   }
   body.dashboard-view #pageContent>.dashboard-summary{
     margin-top:0!important;
