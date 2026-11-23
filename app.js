@@ -5,14 +5,15 @@ const money = value => Number(value || 0).toLocaleString("pt-BR",{style:"currenc
 const save = () => { localStorage.setItem("cashfy_products",JSON.stringify(state.products)); localStorage.setItem("cashfy_sales",JSON.stringify(state.sales)); localStorage.setItem("cashfy_customers",JSON.stringify(state.customers)); };
 /* Registro demonstrativo de R$ 8 mil: recria somente se estiver ausente */
 const demoSale=state.sales.find(s=>String(s.id)==="cashfy-demo-sale-8000");
+const cashfyStartDate=new Date(2026,10,23,0,0,0,0);
 if(!demoSale) {
- state.sales.unshift({id:"cashfy-demo-sale-8000",amount:8000,type:"venda",status:"Aprovada",productName:"Venda demonstrativa",dateISO:new Date().toISOString()});
+ state.sales.unshift({id:"cashfy-demo-sale-8000",amount:8000,type:"venda",status:"Aprovada",productName:"Venda demonstrativa",dateISO:cashfyStartDate.toISOString()});
  save();
-} else if(!parseSaleDate(demoSale)) {
- demoSale.dateISO=new Date().toISOString();save();
+} else if(!parseSaleDate(demoSale)||parseSaleDate(demoSale)<cashfyStartDate) {
+ demoSale.dateISO=cashfyStartDate.toISOString();save();
 }
 const revenueSale=s=>!/(reembolso|estorno|refund|cancelad|cancelled)/i.test(String(s.type||"")+" "+String(s.status||""));
-const totalRevenue=()=>state.sales.filter(revenueSale).reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
+const totalRevenue=()=>state.sales.filter(s=>revenueSale(s)&&parseSaleDate(s)&&parseSaleDate(s)>=cashfyStartDate).reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
 const titles = {
  overview:["Dashboard","Acompanhe suas vendas e resultados em um só lugar."],
  profile:["Meu perfil","Seus dados de acesso e sua coleção de cards Cashfy."],
@@ -262,7 +263,7 @@ function chartBuckets(range){
   if(step==="day")to.setHours(23,59,59,999);
   if(step==="week"){to.setDate(to.getDate()+6);to.setHours(23,59,59,999);}
   if(step==="month"){to.setMonth(to.getMonth()+1);to.setDate(0);to.setHours(23,59,59,999);}
-  const matching=state.sales.filter(s=>{const d=parseSaleDate(s);return revenueSale(s)&&d&&d>=from&&d<=to;});
+  const matching=state.sales.filter(s=>{const d=parseSaleDate(s);return revenueSale(s)&&d&&d>=cashfyStartDate&&d<=to;});
   const amount=matching.reduce((sum,s)=>sum+Number(s.amount||s.total||s.price||0),0);
   buckets.push({from,to,amount,count:matching.length,label:step==="month"?from.toLocaleDateString("pt-BR",{month:"short"}):step==="week"?"Sem "+from.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"}):from.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})});
  }
