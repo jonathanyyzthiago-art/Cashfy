@@ -1,14 +1,15 @@
 const $ = (s) => document.querySelector(s);
 let introFinished=false;
-const state = { revenueHidden:false, dashboardFilters:{type:"all",product:"all",period:"today"}, chartRange: "7d", page: "overview", products: JSON.parse(localStorage.getItem("cashfy_products") || "[]"), sales: JSON.parse(localStorage.getItem("cashfy_sales") || "[]"), customers: JSON.parse(localStorage.getItem("cashfy_customers") || "[]") };
+const state = { revenueHidden:false, dashboardFilters:{type:"all",product:"all",period:"all"}, chartRange: "7d", page: "overview", products: JSON.parse(localStorage.getItem("cashfy_products") || "[]"), sales: JSON.parse(localStorage.getItem("cashfy_sales") || "[]"), customers: JSON.parse(localStorage.getItem("cashfy_customers") || "[]") };
 const money = value => Number(value || 0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 const save = () => { localStorage.setItem("cashfy_products",JSON.stringify(state.products)); localStorage.setItem("cashfy_sales",JSON.stringify(state.sales)); localStorage.setItem("cashfy_customers",JSON.stringify(state.customers)); };
-/* Registro demonstrativo único para validar faturamento e histórico */
-if(!localStorage.getItem("cashfy_demo_sale_8000")) {
- state.sales.unshift({id:"cashfy-demo-sale-8000",amount:8000,type:"venda",status:"Aprovada",productName:"Venda de teste",dateISO:new Date().toISOString()});
- localStorage.setItem("cashfy_demo_sale_8000","1");
+/* Registro demonstrativo de R$ 8 mil: recria somente se estiver ausente */
+if(!state.sales.some(s=>String(s.id)==="cashfy-demo-sale-8000")) {
+ state.sales.unshift({id:"cashfy-demo-sale-8000",amount:8000,type:"venda",status:"Aprovada",productName:"Venda demonstrativa",dateISO:new Date().toISOString()});
  save();
 }
+const revenueSale=s=>!/(reembolso|estorno|refund|cancelad|cancelled)/i.test(String(s.type||"")+" "+String(s.status||""));
+const totalRevenue=()=>state.sales.filter(revenueSale).reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
 const titles = {
  overview:["Dashboard","Acompanhe suas vendas e resultados em um só lugar."],
  profile:["Meu perfil","Seus dados de acesso e sua coleção de cards Cashfy."],
@@ -59,7 +60,7 @@ function modulePage(page){
  const card=(title,desc,body)=>body?'<section class="panel module-panel"><div class="module-panel-head"><div><h3>'+title+'</h3><p>'+desc+'</p></div></div>'+body+'</section>':"";
  const form=(id,fields,button)=>"";
  if(page==="goals"){
-  const total=state.sales.reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
+  const total=totalRevenue();
   const tiers=[
    {id:"silver",name:"Prata",start:0,end:10000,range:"0–10k",color:"#c8d0dc",desc:"Sua primeira conquista no Cashfy.",rewards:[{at:10000,text:"Cupom de 20% de desconto na assinatura"}]},
    {id:"gold",name:"Ouro",start:10000,end:100000,range:"10k–100k",color:"#f2bd54",desc:"Seu primeiro período de acesso VIP.",rewards:[{at:100000,text:"VIP por 2 meses extras"}]},
@@ -258,7 +259,7 @@ function chartBuckets(range){
   if(step==="day")to.setHours(23,59,59,999);
   if(step==="week"){to.setDate(to.getDate()+6);to.setHours(23,59,59,999);}
   if(step==="month"){to.setMonth(to.getMonth()+1);to.setDate(0);to.setHours(23,59,59,999);}
-  const matching=state.sales.filter(s=>{const d=parseSaleDate(s);return d&&d>=from&&d<=to;});
+  const matching=state.sales.filter(s=>{const d=parseSaleDate(s);return revenueSale(s)&&d&&d>=from&&d<=to;});
   const amount=matching.reduce((sum,s)=>sum+Number(s.amount||s.total||s.price||0),0);
   buckets.push({from,to,amount,count:matching.length,label:step==="month"?from.toLocaleDateString("pt-BR",{month:"short"}):step==="week"?"Sem "+from.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"}):from.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})});
  }
@@ -266,8 +267,11 @@ function chartBuckets(range){
 }
 function chartScale(values){
  const maxValue=Math.max(0,...values);
- const max=maxValue<=2?2:Math.ceil(maxValue/10)*10;
- return {max,step:max/10};
+ if(maxValue<=0)return {max:2,step:.2};
+ const raw=maxValue/10,power=Math.pow(10,Math.floor(Math.log10(raw))),unit=raw/power;
+ const nice=unit<=1?1:unit<=2?2:unit<=2.5?2.5:unit<=5?5:10;
+ const step=nice*power,max=Math.ceil(maxValue/step)*step;
+ return {max,step};
 }
 function chartGeometry(values,maxScale=chartScale(values).max){
  const pts=values.map((v,i)=>({x:82+i*708/Math.max(1,values.length-1),y:198-(v/maxScale)*176}));
@@ -300,11 +304,11 @@ function filteredDashboardSales(){
  });
 }
 function overview(){
- const sales=filteredDashboardSales();
+ const sales=filteredDashboardSales().filter(revenueSale);
  const total=sales.reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
  const range=state.chartRange||"7d",buckets=chartBuckets(range),values=buckets.map(b=>b.amount),scale=chartScale(values),geo=chartGeometry(values,scale.max),hasSales=values.some(v=>v>0);
  const rangeLabel={"7d":"Últimos 7 dias","30d":"Últimos 30 dias","90d":"Últimas 12 semanas","12m":"Últimos 12 meses"}[range];
- const ticks=Array.from({length:11},(_,i)=>{const y=22+i*17.6,value=scale.max-i*scale.step;return '<line x1="74" y1="'+y+'" x2="790" y2="'+y+'" stroke="#29243a" stroke-dasharray="3 6"/><text x="64" y="'+(y+4)+'" text-anchor="end" fill="#817b91" font-size="13">'+money(value)+'</text>';}).join("");
+ const ticks=Array.from({length:11},(_,i)=>{const y=22+i*17.6,value=scale.max-i*scale.step;return '<line x1="74" y1="'+y+'" x2="790" y2="'+y+'" stroke="#29243a" stroke-dasharray="3 6"/><text x="64" y="'+(y+4)+'" text-anchor="end" fill="#817b91" font-size="12" font-family="Inter,Arial,sans-serif" letter-spacing="-.25">'+money(value)+'</text>';}).join("");
  const inds=[0,Math.floor((buckets.length-1)/3),Math.floor(2*(buckets.length-1)/3),buckets.length-1].filter((v,i,a)=>a.indexOf(v)===i);
  const labels=inds.map(i=>'<span>'+buckets[i].label+'</span>').join("");
  const px=geo.pts[geo.pts.length-1].x,py=geo.pts[geo.pts.length-1].y,chartSaleCount=buckets.reduce((n,b)=>n+b.count,0);
