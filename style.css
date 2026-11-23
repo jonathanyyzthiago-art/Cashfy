@@ -4516,3 +4516,47 @@ body.dashboard-view #pageContent>.dashboard-summary{
 .sidebar-goal-track span::after{content:"";position:absolute;top:-45%;bottom:-45%;left:-42%;width:34%;border-radius:50%;background:linear-gradient(90deg,transparent 0%,rgba(255,255,255,.08) 18%,rgba(255,255,255,.78) 48%,rgba(232,215,255,.36) 68%,transparent 100%);filter:blur(1.2px);transform:skewX(-20deg);animation:goalRealisticShine 2.8s cubic-bezier(.42,0,.35,1) infinite;pointer-events:none}
 @keyframes goalRealisticShine{0%{left:-42%;opacity:0}12%{opacity:.85}55%{opacity:.95}82%,100%{left:115%;opacity:0}}
 @media(prefers-reduced-motion:reduce){.sidebar-goal-track span::after{animation:none;opacity:.25;left:35%}}
+
+
+/* Ajuste de escala do gráfico de faturamento: recuperar área e legibilidade */
+.revenue-panel{display:block!important;width:100%;padding:26px 26px 20px!important}
+.revenue-head{display:flex!important;justify-content:space-between!important;align-items:flex-start!important;gap:18px!important;margin-bottom:18px!important}
+.revenue-head>div:first-child{min-width:0;flex:1}
+.revenue-head .range-tabs{flex:0 0 auto;align-self:flex-start;margin:8px 0 0 auto!important}
+.revenue-chart-wrap{display:block!important;width:100%!important;height:290px!important;min-height:290px!important;flex:none!important;margin-top:4px}
+.revenue-chart{width:100%!important;height:100%!important;min-height:0!important}
+.revenue-chart text{font-size:12px!important;letter-spacing:-.15px!important}
+.chart-xlabels{font-size:11px!important;padding:4px 10px 0 72px!important}
+.chart-foot{margin-top:18px!important;padding-top:14px!important;font-size:11px!important}
+@media(max-width:650px){
+ .revenue-panel{padding:19px 15px 16px!important}
+ .revenue-head{display:flex!important;flex-direction:column!important;gap:12px!important;margin-bottom:12px!important}
+ .revenue-head .range-tabs{width:100%!important;align-self:stretch!important;margin:0!important}
+ .range-btn{font-size:10px!important;padding:9px 6px!important}
+ .revenue-chart-wrap{height:245px!important;min-height:245px!important}
+ .revenue-chart text{font-size:11px!important}
+ .chart-xlabels{font-size:10px!important;padding-left:58px!important}
+ .chart-foot{font-size:10px!important;gap:8px!important}
+}
+@media(min-width:1200px){.revenue-chart-wrap{height:310px!important;min-height:310px!important}}
+
+/* Animação sincronizada de todos os elementos da barra lateral */
+@keyframes sidebarElementRender{
+ 0%{opacity:0;transform:translate3d(-13px,7px,0) scale(.985);filter:blur(2px)}
+ 65%{opacity:1;filter:blur(.25px)}
+ 100%{opacity:1;transform:translate3d(0,0,0) scale(1);filter:blur(0)}
+}
+.sidebar-items-render .brand-row,
+.sidebar-items-render .sidebar-revenue-goal,
+.sidebar-items-render .nav-label,
+.sidebar-items-render .nav-link,
+.sidebar-items-render .sidebar-bottom{
+ animation:sidebarElementRender .48s cubic-bezier(.2,.75,.25,1) both!important;
+ animation-delay:var(--sidebar-item-delay,0ms)!important;
+ will-change:transform,opacity,filter;
+}
+@media(prefers-reduced-motion:reduce){
+ .sidebar-items-render .brand-row,.sidebar-items-render .sidebar-revenue-goal,
+ .sidebar-items-render .nav-label,.sidebar-items-render .nav-link,
+ .sidebar-items-render .sidebar-bottom{animation:none!important;will-change:auto}
+}
