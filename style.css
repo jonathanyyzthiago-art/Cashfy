@@ -4770,3 +4770,71 @@ body>.cashfy-period-menu[hidden]{display:none!important}
  max-height:min(230px,45vh)!important;
  z-index:1001!important;
 }
+
+
+/* Cartão de meta da barra lateral — visual financeiro premium */
+.sidebar-revenue-goal{
+ position:relative;isolation:isolate;display:block;width:100%;overflow:hidden;
+ margin:3px 0 23px;padding:14px 13px 12px;
+ text-align:left;color:#f8f5ff;
+ border:1px solid rgba(173,143,235,.25);border-radius:14px;
+ background:
+  radial-gradient(ellipse at 100% 0%,rgba(143,102,219,.2),transparent 48%),
+  linear-gradient(155deg,#211a30 0%,#171322 48%,#100e18 100%);
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.075),inset 0 -1px 0 rgba(0,0,0,.42),0 9px 24px rgba(0,0,0,.28);
+ transition:border-color .2s ease,box-shadow .2s ease,transform .2s ease;
+}
+.sidebar-revenue-goal::before{
+ content:"";position:absolute;z-index:-1;inset:0;pointer-events:none;
+ background:linear-gradient(118deg,rgba(255,255,255,.055),transparent 32%,transparent 70%,rgba(175,139,255,.045));
+}
+.sidebar-revenue-goal::after{
+ content:"";position:absolute;z-index:-1;right:-35px;top:-48px;width:112px;height:112px;
+ border:1px solid rgba(196,169,255,.1);border-radius:50%;
+ box-shadow:0 0 0 12px rgba(196,169,255,.025),0 0 0 25px rgba(196,169,255,.018);
+ pointer-events:none;
+}
+.sidebar-revenue-goal:hover{
+ border-color:rgba(190,161,255,.48);
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.09),0 12px 28px rgba(0,0,0,.34),0 0 20px rgba(145,105,225,.1);
+ transform:translateY(-1px);
+}
+.sidebar-goal-top{display:flex;align-items:center;gap:10px}
+.sidebar-goal-icon-wrap{
+ width:36px;height:36px;flex:0 0 36px;display:grid;place-items:center;
+ border:1px solid rgba(190,160,255,.25);border-radius:11px;
+ background:linear-gradient(145deg,rgba(135,94,204,.3),rgba(68,49,99,.2));
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.13),0 4px 10px rgba(0,0,0,.2);
+}
+.sidebar-goal-icon{width:19px;height:19px;stroke:#d7c3ff;filter:drop-shadow(0 0 4px rgba(174,132,255,.32))}
+.sidebar-goal-copy small{display:block;margin:0 0 5px;color:#aaa0bd;font-size:7px;font-weight:750;letter-spacing:1.15px}
+.sidebar-goal-copy strong{display:block;margin:0;color:#fff;font:650 12px 'Space Grotesk',sans-serif;letter-spacing:-.2px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.sidebar-goal-track{
+ position:relative;height:7px;margin-top:13px;border:1px solid rgba(255,255,255,.07);
+ border-radius:20px;background:#0b0911;overflow:hidden;
+ box-shadow:inset 0 2px 4px rgba(0,0,0,.8),0 1px 0 rgba(255,255,255,.035);
+}
+.sidebar-goal-track span{
+ position:relative;display:block;height:100%;min-width:0;border-radius:20px;
+ background:linear-gradient(90deg,#7950c9 0%,#a77ce9 62%,#d5bdff 100%);
+ box-shadow:0 0 9px rgba(164,124,238,.5),inset 0 1px 0 rgba(255,255,255,.38);
+ transition:width .55s cubic-bezier(.2,.75,.25,1);
+}
+.sidebar-goal-track span::after{
+ content:"";position:absolute;inset:0;
+ background:linear-gradient(90deg,transparent,rgba(255,255,255,.38),transparent);
+ opacity:.65;
+}
+.sidebar-goal-bottom{display:flex;justify-content:space-between;align-items:center;margin-top:9px;color:#a59bb5;font-size:9px}
+.sidebar-goal-bottom>span{letter-spacing:.05px}
+.sidebar-goal-bottom strong{
+ min-width:38px;padding:4px 7px;border:1px solid rgba(182,151,242,.23);
+ border-radius:7px;background:linear-gradient(180deg,rgba(137,99,201,.2),rgba(83,59,127,.16));
+ color:#e1d2ff;font:650 9px 'Space Grotesk',sans-serif;text-align:center;
+ box-shadow:inset 0 1px 0 rgba(255,255,255,.07);font-variant-numeric:tabular-nums;
+}
+.sidebar.collapsed .sidebar-revenue-goal{padding:11px 7px}
+.sidebar.collapsed .sidebar-goal-copy,.sidebar.collapsed .sidebar-goal-track,.sidebar.collapsed .sidebar-goal-bottom{display:none}
+.sidebar.collapsed .sidebar-goal-top{justify-content:center}
+.sidebar.collapsed .sidebar-goal-icon-wrap{width:36px;height:36px}
+@media(prefers-reduced-motion:reduce){.sidebar-revenue-goal,.sidebar-goal-track span{transition:none}}
