@@ -312,10 +312,10 @@ function filteredDashboardSales(){
 function overview(){
  const sales=state.sales.filter(revenueSale);
  const total=totalRevenue();
- const range=state.chartRange||"7d",buckets=chartBuckets(range),values=buckets.map(b=>b.amount),scale=chartScale(values),geo=chartGeometry(values,scale.max),hasSales=values.some(v=>v>0);
+ const range=state.chartRange||"7d",buckets=chartBuckets(range),values=buckets.map(b=>b.amount),scale=chartScale(values),chartMax=scale.max+scale.step*2,geo=chartGeometry(values,chartMax),hasSales=values.some(v=>v>0);
  const rangeLabel={"7d":"Últimos 7 dias","30d":"Últimos 30 dias","90d":"Últimas 12 semanas","12m":"Últimos 12 meses"}[range];
  const ticks=Array.from({length:11},(_,i)=>{const y=22+i*17.6;return '<line x1="74" y1="'+y+'" x2="790" y2="'+y+'" stroke="#29243a" stroke-dasharray="3 6"/>';}).join("");
- const axisLabels=Array.from({length:6},(_,i)=>{const n=scale.max*(1-i/5);const label=n>=1000000?(n/1000000).toLocaleString("pt-BR",{maximumFractionDigits:1})+"mi":n>=1000?(n/1000).toLocaleString("pt-BR",{maximumFractionDigits:1})+"k":String(Math.round(n));return '<span>'+label+'</span>';}).join("");
+ const axisLabels=Array.from({length:6},(_,i)=>{const n=chartMax*(1-i/5);const label=n>=1000000?(n/1000000).toLocaleString("pt-BR",{maximumFractionDigits:1})+"mi":n>=1000?(n/1000).toLocaleString("pt-BR",{maximumFractionDigits:1})+"k":String(Math.round(n));return '<span>'+label+'</span>';}).join("");
  const inds=[0,Math.floor((buckets.length-1)/3),Math.floor(2*(buckets.length-1)/3),buckets.length-1].filter((v,i,a)=>a.indexOf(v)===i);
  const labels=inds.map(i=>'<span>'+buckets[i].label+'</span>').join("");
  const px=geo.pts[geo.pts.length-1].x,py=geo.pts[geo.pts.length-1].y,chartSaleCount=buckets.reduce((n,b)=>n+b.count,0);
@@ -328,7 +328,7 @@ function overview(){
 }
 function bindRevenueChart(){
  const svg=$("#revenueChart");if(!svg)return;
- const buckets=chartBuckets(state.chartRange||"7d"),values=buckets.map(b=>b.amount),max=chartScale(values).max;
+ const buckets=chartBuckets(state.chartRange||"7d"),values=buckets.map(b=>b.amount),scale=chartScale(values),max=scale.max+scale.step*2;
  const cross=$("#chartCrosshair"),dot=$("#chartDot"),tip=$("#chartTooltip"),revenue=$("#chartRevenue"),date=$("#chartDate"),salesCount=$("#chartSalesCount");let active=false;
  const clearSelection=()=>{
   active=false;cross.setAttribute("opacity","0");dot.setAttribute("opacity","0");tip.hidden=true;
