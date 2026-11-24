@@ -4707,3 +4707,54 @@ body>.cashfy-period-menu[hidden]{display:none!important}
 /* Garantir que a curva do faturamento fique sempre visível */
 #revenueChart .revenue-line{display:inline!important;visibility:visible!important;opacity:1!important;stroke:#b993ff!important;stroke-width:4px!important;fill:none!important;filter:drop-shadow(0 0 5px rgba(185,147,255,.95))!important}
 #revenueChart .revenue-line-end{display:inline!important;visibility:visible!important;opacity:1!important;filter:drop-shadow(0 0 5px rgba(185,147,255,.9))!important}
+
+
+/* Correção definitiva dos três menus do Dashboard: ancorados ao botão e com camada por foco */
+.dashboard-filters{
+ position:relative!important;
+ z-index:20!important;
+ isolation:auto!important;
+ overflow:visible!important;
+}
+.dashboard-filters>.filter-field,
+.dashboard-filters>.filter-field:nth-child(3){
+ position:relative!important;
+ z-index:1!important;
+ overflow:visible!important;
+}
+.dashboard-filters>.filter-field:focus-within,
+.dashboard-filters>.filter-field:nth-child(3):focus-within{
+ z-index:1000!important;
+}
+.dashboard-filters .custom-select{
+ position:relative!important;
+ z-index:auto!important;
+ overflow:visible!important;
+}
+.dashboard-filters .custom-select-menu,
+.dashboard-filters .custom-select-menu:not([hidden]),
+.dashboard-filters>.filter-field:nth-child(3) .custom-select-menu:not([hidden]){
+ position:absolute!important;
+ top:calc(100% + 6px)!important;
+ right:0!important;
+ bottom:auto!important;
+ left:0!important;
+ width:100%!important;
+ max-height:min(230px,45vh)!important;
+ display:grid!important;
+ overflow-y:auto!important;
+ z-index:1001!important;
+ background:#191426!important;
+ background-image:none!important;
+ opacity:1!important;
+ visibility:visible!important;
+ filter:none!important;
+ backdrop-filter:none!important;
+ -webkit-backdrop-filter:none!important;
+ transform:none!important;
+ border:1px solid rgba(181,145,255,.55)!important;
+ border-radius:12px!important;
+ box-shadow:0 18px 48px rgba(0,0,0,.96),0 0 0 1px rgba(0,0,0,.65)!important;
+}
+.dashboard-filters .custom-select-menu[hidden]{display:none!important}
+.dashboard-filters>.dashboard-update{z-index:0!important}
