@@ -459,9 +459,23 @@ $("#topSearchClose")?.addEventListener("click",closeTopSearch);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&topSearchPanel&&!topSearchPanel.hidden){closeTopSearch();topSearchToggle.focus();}});
 document.addEventListener("click",e=>{if(topSearchPanel&&!topSearchPanel.hidden&&!e.target.closest("#topSearchPanel")&&!e.target.closest("#topSearchToggle"))closeTopSearch();});
 function closePeriodMenu(){
- document.querySelectorAll(".dashboard-filters .custom-select-menu").forEach(menu=>{menu.hidden=true;});
+ document.querySelectorAll(".dashboard-filters .custom-select-menu").forEach(menu=>{
+  menu.hidden=true;
+  menu.style.removeProperty("position");
+  menu.style.removeProperty("top");
+  menu.style.removeProperty("left");
+  menu.style.removeProperty("right");
+  menu.style.removeProperty("width");
+  menu.style.removeProperty("max-height");
+ });
  document.querySelectorAll(".custom-select-trigger").forEach(b=>b.setAttribute("aria-expanded","false"));
 }
+
+/* Ao rolar a página, fecha filtros abertos para impedir que qualquer menu fique flutuando. */
+window.addEventListener("scroll",()=>{
+ const open=document.querySelector(".dashboard-filters .custom-select-menu:not([hidden])");
+ if(open)closePeriodMenu();
+},true);
 document.addEventListener("click",e=>{
  const range=e.target.closest("[data-range]");if(range){closePeriodMenu();state.chartRange=range.dataset.range;render();return;}
  const trigger=e.target.closest(".custom-select-trigger");
