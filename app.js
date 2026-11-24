@@ -3,17 +3,27 @@ let introFinished=false;
 const state = { revenueHidden:false, dashboardFilters:{type:"all",product:"all",period:"all"}, chartRange: "7d", page: "overview", products: JSON.parse(localStorage.getItem("cashfy_products") || "[]"), sales: JSON.parse(localStorage.getItem("cashfy_sales") || "[]"), customers: JSON.parse(localStorage.getItem("cashfy_customers") || "[]") };
 const money = value => Number(value || 0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 const save = () => { localStorage.setItem("cashfy_products",JSON.stringify(state.products)); localStorage.setItem("cashfy_sales",JSON.stringify(state.sales)); localStorage.setItem("cashfy_customers",JSON.stringify(state.customers)); };
-/* Registro demonstrativo de R$ 8 mil: recria somente se estiver ausente */
-const demoSale=state.sales.find(s=>String(s.id)==="cashfy-demo-sale-8000");
+/* Base de faturamento do gráfico: valores registrados no Cashfy. */
 const cashfyStartDate=new Date(2026,10,23,0,0,0,0);
-if(!demoSale) {
+function saleAmount(s){
+ const raw=s.amount??s.total??s.price??s.value??0;
+ if(typeof raw==="number")return Number.isFinite(raw)?raw:0;
+ let value=String(raw).trim().replace(/R\$|\s/g,"");
+ if(value.includes(","))value=value.replace(/\./g,"").replace(",",".");
+ const parsed=Number(value);return Number.isFinite(parsed)?parsed:0;
+}
+const demoSale=state.sales.find(s=>String(s.id)==="cashfy-demo-sale-8000");
+if(!demoSale){
  state.sales.unshift({id:"cashfy-demo-sale-8000",amount:8000,type:"venda",status:"Aprovada",productName:"Venda demonstrativa",dateISO:cashfyStartDate.toISOString()});
  save();
-} else if(!parseSaleDate(demoSale)||parseSaleDate(demoSale)<cashfyStartDate) {
- demoSale.dateISO=cashfyStartDate.toISOString();save();
+}else{
+ let changed=false;
+ if(saleAmount(demoSale)!==8000){demoSale.amount=8000;changed=true;}
+ if(!parseSaleDate(demoSale)||parseSaleDate(demoSale)<cashfyStartDate){demoSale.dateISO=cashfyStartDate.toISOString();changed=true;}
+ if(changed)save();
 }
 const revenueSale=s=>!/(reembolso|estorno|refund|cancelad|cancelled)/i.test(String(s.type||"")+" "+String(s.status||""));
-const totalRevenue=()=>state.sales.filter(s=>revenueSale(s)&&parseSaleDate(s)&&parseSaleDate(s)>=cashfyStartDate).reduce((n,s)=>n+Number(s.amount||s.total||s.price||0),0);
+const totalRevenue=()=>state.sales.filter(s=>revenueSale(s)&&parseSaleDate(s)&&parseSaleDate(s)>=cashfyStartDate).reduce((n,s)=>n+saleAmount(s),0);
 const titles = {
  overview:["Dashboard","Acompanhe suas vendas e resultados em um só lugar."],
  profile:["Meu perfil","Seus dados de acesso e sua coleção de cards Cashfy."],
@@ -263,7 +273,7 @@ function chartBuckets(range){
   if(step==="week"){to.setDate(to.getDate()+6);to.setHours(23,59,59,999);}
   if(step==="month"){to.setMonth(to.getMonth()+1);to.setDate(0);to.setHours(23,59,59,999);}
   const matching=state.sales.filter(s=>{const d=parseSaleDate(s);return revenueSale(s)&&d&&d>=cashfyStartDate&&d<=to;});
-  const amount=matching.reduce((sum,s)=>sum+Number(s.amount||s.total||s.price||0),0);
+  const amount=matching.reduce((sum,s)=>sum+saleAmount(s),0);
   buckets.push({from,to,amount,count:matching.length,label:step==="month"?from.toLocaleDateString("pt-BR",{month:"short"}):step==="week"?"Sem "+from.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"}):from.toLocaleDateString("pt-BR",{day:"2-digit",month:"2-digit"})});
  }
  return buckets;
@@ -336,8 +346,8 @@ function bindRevenueChart(){
   date.textContent="Faturamento total";salesCount.textContent=state.sales.filter(revenueSale).length+" venda(s) registradas no total";
  };
  const selectAt=e=>{
-  const rect=svg.getBoundingClientRect(),x=Math.max(0,Math.min(800,(e.clientX-rect.left)/rect.width*800)),plotX=Math.max(0,Math.min(708,x-82)),idx=Math.max(0,Math.min(buckets.length-1,Math.round(plotX/708*(buckets.length-1))));
-  const px=82+idx*708/Math.max(1,buckets.length-1),py=198-(values[idx]/max)*176,b=buckets[idx];
+  const rect=svg.getBoundingClientRect(),x=Math.max(0,Math.min(800,(e.clientX-rect.left)/rect.width*800)),plotX=Math.max(0,Math.min(716,x-74)),idx=Math.max(0,Math.min(buckets.length-1,Math.round(plotX/716*(buckets.length-1))));
+  const px=74+idx*716/Math.max(1,buckets.length-1),py=198-(values[idx]/max)*176,b=buckets[idx];
   cross.setAttribute("x1",px);cross.setAttribute("x2",px);cross.setAttribute("opacity","1");dot.setAttribute("cx",px);dot.setAttribute("cy",py);dot.setAttribute("opacity","1");
   revenue.textContent=money(b.amount);date.textContent=b.from.toLocaleDateString("pt-BR",{day:"2-digit",month:"long",year:"numeric"})+(b.to.getDate()!==b.from.getDate()?" — "+b.to.toLocaleDateString("pt-BR",{day:"2-digit",month:"long"}):"");
   salesCount.textContent=b.count+" venda(s) neste período";tip.hidden=false;tip.textContent=money(b.amount)+" · "+b.count+" venda(s)";tip.style.left=Math.max(3,Math.min(95,px/800*100))+"%";
