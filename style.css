@@ -4702,3 +4702,8 @@ body>.cashfy-period-menu[hidden]{display:none!important}
 .chart-ylabels{position:absolute;z-index:2;left:0;top:10%;bottom:10%;width:28px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;pointer-events:none;overflow:visible;font-family:Inter,Arial,sans-serif;font-size:10px;font-weight:500;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:0;color:#a99fbd;white-space:nowrap}
 .chart-ylabels span{display:block;flex:none;transform:none;font-stretch:normal}
 @media(max-width:650px){.chart-ylabels{width:27px;font-size:9px}}
+
+
+/* Garantir que a curva do faturamento fique sempre visível */
+#revenueChart .revenue-line{display:inline!important;visibility:visible!important;opacity:1!important;stroke:#b993ff!important;stroke-width:4px!important;fill:none!important;filter:drop-shadow(0 0 5px rgba(185,147,255,.95))!important}
+#revenueChart .revenue-line-end{display:inline!important;visibility:visible!important;opacity:1!important;filter:drop-shadow(0 0 5px rgba(185,147,255,.9))!important}
