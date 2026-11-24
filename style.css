@@ -4990,3 +4990,24 @@ body>.cashfy-period-menu[hidden]{display:none!important}
 }
 .sidebar.collapsed .sidebar-revenue-goal{padding:10px 6px!important}
 .sidebar.collapsed .sidebar-revenue-goal:before{display:none!important}
+
+
+/* Meta: fundo preto e progresso prata brilhante */
+.sidebar-revenue-goal{
+ background:#050505!important;
+ border-color:#343434!important;
+ border-left-color:#777!important;
+}
+.sidebar-revenue-goal:hover{
+ background:#090909!important;
+ border-color:#555!important;
+ border-left-color:#bdbdbd!important;
+}
+.sidebar-revenue-goal .sidebar-goal-track{
+ background:#242424!important;
+ border:1px solid #414141!important;
+}
+.sidebar-revenue-goal .sidebar-goal-track span{
+ background:linear-gradient(180deg,#ffffff 0%,#e7e7e7 24%,#aeb2b8 52%,#f7f7f7 76%,#bfc3c9 100%)!important;
+ box-shadow:0 0 5px rgba(235,238,242,.72),0 0 10px rgba(210,215,222,.35)!important;
+}
