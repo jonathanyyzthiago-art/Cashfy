@@ -280,11 +280,12 @@ function chartBuckets(range){
 }
 function chartScale(values){
  const maxValue=Math.max(0,...values);
- if(maxValue<=0)return {max:2,step:.2};
- const raw=maxValue/10,power=Math.pow(10,Math.floor(Math.log10(raw))),unit=raw/power;
- const nice=unit<=1?1:unit<=2?2:unit<=2.5?2.5:unit<=5?5:10;
- const step=nice*power,max=Math.ceil(maxValue/step)*step;
- return {max,step};
+ // Escala por faixas de faturamento: 0–10 mil, 0–100 mil,
+ // 0–1 milhão e assim sucessivamente. A curva e os rótulos
+ // laterais usam exatamente o mesmo limite.
+ let max=10000;
+ while(maxValue>max)max*=10;
+ return {max,step:max/5};
 }
 function chartGeometry(values,maxScale=chartScale(values).max){
  const pts=values.map((v,i)=>({x:74+i*716/Math.max(1,values.length-1),y:198-(v/maxScale)*176}));
@@ -322,7 +323,7 @@ function filteredDashboardSales(){
 function overview(){
  const sales=state.sales.filter(revenueSale);
  const total=totalRevenue();
- const range=state.chartRange||"7d",buckets=chartBuckets(range),values=buckets.map(b=>b.amount),scale=chartScale(values),chartMax=scale.max+scale.step*2,geo=chartGeometry(values,chartMax),hasSales=values.some(v=>v>0);
+ const range=state.chartRange||"7d",buckets=chartBuckets(range),values=buckets.map(b=>b.amount),scale=chartScale(values),chartMax=scale.max,geo=chartGeometry(values,chartMax),hasSales=values.some(v=>v>0);
  const rangeLabel={"7d":"Últimos 7 dias","30d":"Últimos 30 dias","90d":"Últimas 12 semanas","12m":"Últimos 12 meses"}[range];
  const ticks=Array.from({length:11},(_,i)=>{const y=22+i*17.6;return '<line x1="74" y1="'+y+'" x2="790" y2="'+y+'" stroke="#29243a" stroke-dasharray="3 6"/>';}).join("");
  const axisLabels=Array.from({length:6},(_,i)=>{const n=chartMax*(1-i/5);const label=n>=1000000?(n/1000000).toLocaleString("pt-BR",{maximumFractionDigits:1})+"mi":n>=1000?(n/1000).toLocaleString("pt-BR",{maximumFractionDigits:1})+"k":String(Math.round(n));return '<span>'+label+'</span>';}).join("");
@@ -338,7 +339,7 @@ function overview(){
 }
 function bindRevenueChart(){
  const svg=$("#revenueChart");if(!svg)return;
- const buckets=chartBuckets(state.chartRange||"7d"),values=buckets.map(b=>b.amount),scale=chartScale(values),max=scale.max+scale.step*2;
+ const buckets=chartBuckets(state.chartRange||"7d"),values=buckets.map(b=>b.amount),scale=chartScale(values),max=scale.max;
  const cross=$("#chartCrosshair"),dot=$("#chartDot"),tip=$("#chartTooltip"),revenue=$("#chartRevenue"),date=$("#chartDate"),salesCount=$("#chartSalesCount");let active=false;
  const clearSelection=()=>{
   active=false;cross.setAttribute("opacity","0");dot.setAttribute("opacity","0");tip.hidden=true;
