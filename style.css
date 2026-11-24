@@ -4696,3 +4696,9 @@ body>.cashfy-period-menu[hidden]{display:none!important}
 .revenue-chart-wrap{height:230px!important;min-height:230px!important;margin:0!important}
 .revenue-chart{preserveAspectRatio:none!important}
 @media(max-width:650px){.revenue-chart-wrap{height:190px!important;min-height:190px!important}}
+
+
+/* Escala lateral do gráfico em HTML: números proporcionais, sem deformação do SVG */
+.chart-ylabels{position:absolute;z-index:2;left:0;top:10%;bottom:10%;width:28px;display:flex;flex-direction:column;justify-content:space-between;align-items:flex-end;pointer-events:none;overflow:visible;font-family:Inter,Arial,sans-serif;font-size:10px;font-weight:500;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:0;color:#a99fbd;white-space:nowrap}
+.chart-ylabels span{display:block;flex:none;transform:none;font-stretch:normal}
+@media(max-width:650px){.chart-ylabels{width:27px;font-size:9px}}
