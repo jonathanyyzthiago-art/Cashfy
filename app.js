@@ -288,7 +288,17 @@ function chartScale(values){
  return {max,step:max/5};
 }
 function chartGeometry(values,maxScale=chartScale(values).max){
- const pts=values.map((v,i)=>({x:74+i*716/Math.max(1,values.length-1),y:198-(v/maxScale)*176}));
+ let pts=values.map((v,i)=>({x:74+i*716/Math.max(1,values.length-1),y:198-(v/maxScale)*176}));
+ // Com uma única venda acumulada, os valores dos períodos ficam constantes.
+ // Exibe a evolução suavemente desde zero até o faturamento registrado.
+ const positive=values.filter(v=>v>0),flat=positive.length>0&&positive.length===values.length&&Math.max(...values)-Math.min(...values)<0.01;
+ if(flat){
+  const total=values[values.length-1],endY=198-(total/maxScale)*176;
+  pts=values.map((_,i)=>{
+   const t=i/Math.max(1,values.length-1),progress=t*t*(3-2*t);
+   return {x:74+i*716/Math.max(1,values.length-1),y:198-(198-endY)*progress};
+  });
+ }
  let line="M "+pts[0].x+" "+pts[0].y;
  for(let i=1;i<pts.length;i++){
   const a=pts[i-1],b=pts[i],mid=(a.x+b.x)/2;
@@ -339,7 +349,7 @@ function overview(){
 }
 function bindRevenueChart(){
  const svg=$("#revenueChart");if(!svg)return;
- const buckets=chartBuckets(state.chartRange||"7d"),values=buckets.map(b=>b.amount),scale=chartScale(values),max=scale.max;
+ const buckets=chartBuckets(state.chartRange||"7d"),values=buckets.map(b=>b.amount),scale=chartScale(values),max=scale.max,geometry=chartGeometry(values,max);
  const cross=$("#chartCrosshair"),dot=$("#chartDot"),tip=$("#chartTooltip"),revenue=$("#chartRevenue"),date=$("#chartDate"),salesCount=$("#chartSalesCount");let active=false;
  const clearSelection=()=>{
   active=false;cross.setAttribute("opacity","0");dot.setAttribute("opacity","0");tip.hidden=true;
@@ -348,7 +358,7 @@ function bindRevenueChart(){
  };
  const selectAt=e=>{
   const rect=svg.getBoundingClientRect(),x=Math.max(0,Math.min(800,(e.clientX-rect.left)/rect.width*800)),plotX=Math.max(0,Math.min(716,x-74)),idx=Math.max(0,Math.min(buckets.length-1,Math.round(plotX/716*(buckets.length-1))));
-  const px=74+idx*716/Math.max(1,buckets.length-1),py=198-(values[idx]/max)*176,b=buckets[idx];
+  const px=geometry.pts[idx].x,py=geometry.pts[idx].y,b=buckets[idx];
   cross.setAttribute("x1",px);cross.setAttribute("x2",px);cross.setAttribute("opacity","1");dot.setAttribute("cx",px);dot.setAttribute("cy",py);dot.setAttribute("opacity","1");
   revenue.textContent=money(b.amount);date.textContent=b.from.toLocaleDateString("pt-BR",{day:"2-digit",month:"long",year:"numeric"})+(b.to.getDate()!==b.from.getDate()?" — "+b.to.toLocaleDateString("pt-BR",{day:"2-digit",month:"long"}):"");
   salesCount.textContent=b.count+" venda(s) neste período";tip.hidden=false;tip.textContent=money(b.amount)+" · "+b.count+" venda(s)";tip.style.left=Math.max(3,Math.min(95,px/800*100))+"%";
