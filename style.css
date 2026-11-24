@@ -4758,3 +4758,15 @@ body>.cashfy-period-menu[hidden]{display:none!important}
 }
 .dashboard-filters .custom-select-menu[hidden]{display:none!important}
 .dashboard-filters>.dashboard-update{z-index:0!important}
+
+
+/* O filtro Período usa exatamente o mesmo posicionamento dos outros dois */
+.dashboard-filters>.filter-field:nth-child(3) .custom-select{position:relative!important}
+.dashboard-filters>.filter-field:nth-child(3) .custom-select-menu,
+.dashboard-filters>.filter-field:nth-child(3) .custom-select-menu:not([hidden]){
+ position:absolute!important;
+ inset:calc(100% + 6px) 0 auto 0!important;
+ width:100%!important;
+ max-height:min(230px,45vh)!important;
+ z-index:1001!important;
+}
