@@ -4855,3 +4855,68 @@ body>.cashfy-period-menu[hidden]{display:none!important}
 @keyframes sidebar-goal-sheen{0%,28%{transform:translateX(-110%);opacity:0}45%{opacity:.8}78%,100%{transform:translateX(110%);opacity:0}}
 .sidebar.collapsed .sidebar-goal-tier{display:none}
 @media(prefers-reduced-motion:reduce){.sidebar-goal-track span,.sidebar-goal-track span:after{animation:none;transition:none}}
+
+
+/* Meta da barra lateral — identidade visual editorial Cashfy */
+.sidebar-revenue-goal{
+ position:relative;isolation:isolate;overflow:hidden;
+ padding:14px 12px 12px;margin:2px 0 22px;
+ border:1px solid #302a3d;border-radius:10px;
+ background:#12101a;
+ box-shadow:0 5px 16px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.035);
+ transition:border-color .2s ease,background .2s ease;
+}
+.sidebar-revenue-goal:before{
+ content:"";position:absolute;left:0;top:12px;bottom:12px;width:2px;
+ border-radius:0 2px 2px 0;background:#9870dc;opacity:.9;
+}
+.sidebar-revenue-goal:after{display:none}
+.sidebar-revenue-goal:hover{
+ transform:none;border-color:#514264;background:#15121e;
+ box-shadow:0 7px 18px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.04);
+}
+.sidebar-goal-top{display:flex;align-items:center;gap:9px}
+.sidebar-goal-icon-wrap{
+ width:31px;height:31px;flex:0 0 31px;border:1px solid #393047;
+ border-radius:8px;background:#1c1727;box-shadow:none;color:#c6a9f7;
+}
+.sidebar-goal-icon{width:17px;height:17px;stroke:#c6a9f7;filter:none}
+.sidebar-goal-copy{min-width:0}
+.sidebar-goal-copy small{
+ margin:0 0 5px;color:#8e879c;font-size:7px;letter-spacing:1.15px;
+ font-weight:700;
+}
+.sidebar-goal-copy strong{
+ color:#f1edf7;font:600 11px 'DM Sans',sans-serif;
+ letter-spacing:-.2px;font-variant-numeric:tabular-nums;
+}
+.sidebar-goal-tier{
+ margin-left:auto;padding:3px 0 3px 7px;border:0;border-left:1px solid #3a3345;
+ border-radius:0;background:transparent;color:#bca6df;
+ font:700 7px 'DM Sans',sans-serif;letter-spacing:1px;text-shadow:none;
+}
+.sidebar-goal-track{
+ position:relative;height:5px;margin-top:13px;border:0;border-radius:2px;
+ background:#292431;box-shadow:none;overflow:hidden;
+}
+.sidebar-goal-track:after{
+ content:"";position:absolute;inset:0;pointer-events:none;
+ background:repeating-linear-gradient(90deg,transparent 0,transparent calc(20% - 1px),#12101a calc(20% - 1px),#12101a 20%);
+}
+.sidebar-goal-track span{
+ position:relative;border-radius:2px;background:#a27bdc;
+ box-shadow:none;transition:width .65s cubic-bezier(.2,.65,.25,1);
+}
+.sidebar-goal-track span:before,.sidebar-goal-track span:after{display:none}
+.sidebar-goal-bottom{
+ display:flex;align-items:center;justify-content:space-between;
+ margin-top:9px;color:#91899e;font-size:8px;letter-spacing:.05px;
+}
+.sidebar-goal-bottom strong{
+ min-width:0;padding:0;border:0;border-radius:0;background:transparent;
+ color:#d9c8f3;font:700 9px 'DM Sans',sans-serif;
+ box-shadow:none;font-variant-numeric:tabular-nums;
+}
+.sidebar.collapsed .sidebar-revenue-goal{padding:11px 7px}
+.sidebar.collapsed .sidebar-revenue-goal:before{display:none}
+@media(prefers-reduced-motion:reduce){.sidebar-revenue-goal,.sidebar-goal-track span{transition:none}}
