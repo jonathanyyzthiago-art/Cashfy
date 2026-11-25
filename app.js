@@ -1,6 +1,6 @@
 const $ = (s) => document.querySelector(s);
 let introFinished=false;
-const state = { revenueHidden:false, dashboardFilters:{type:"all",product:"all",period:"all"}, chartRange: "7d", page: "overview", products: JSON.parse(localStorage.getItem("cashfy_products") || "[]"), sales: JSON.parse(localStorage.getItem("cashfy_sales") || "[]"), customers: JSON.parse(localStorage.getItem("cashfy_customers") || "[]") };
+const state = { revenueHidden:false, dashboardFilters:{type:"all",product:"all",period:"all"}, chartRange: "7d", page: "overview", productEditor:null, products: JSON.parse(localStorage.getItem("cashfy_products") || "[]"), sales: JSON.parse(localStorage.getItem("cashfy_sales") || "[]"), customers: JSON.parse(localStorage.getItem("cashfy_customers") || "[]") };
 const money = value => Number(value || 0).toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 const save = () => { localStorage.setItem("cashfy_products",JSON.stringify(state.products)); localStorage.setItem("cashfy_sales",JSON.stringify(state.sales)); localStorage.setItem("cashfy_customers",JSON.stringify(state.customers)); };
 /* Base de faturamento do gráfico: valores registrados no Cashfy. */
@@ -200,7 +200,7 @@ function render(){
  document.body.classList.toggle("dashboard-view",current==="overview");
  if(current!==state.page)state.page="overview";
  const [title,subtitle]=titles[current]; $("#crumb").textContent=title; $("#pageTitle").textContent=title; $("#pageSubtitle").textContent=subtitle;
- $("#pageContent").innerHTML=current==="terms"?termsPage():current==="profile"?profilePage():current==="overview"?overview():current==="products"?productsPage():current==="sales"?salesPage():current==="customers"?customersPage():current==="settings"?settingsPage():modulePage(current);
+ $("#pageContent").innerHTML=current==="terms"?termsPage():current==="profile"?profilePage():current==="overview"?overview():current==="products"?productsPage():current==="sales"?salesPage():current==="customers"?customersPage():current==="settings"?settingsPage():modulePage(current); if(current==="products")hydrateProductAssets();
  if(current==="overview"){
   const filters=$("#pageContent .dashboard-filters");
   const banner=$(".content > .cashfy-hero");
@@ -371,8 +371,102 @@ function bindRevenueChart(){
  svg.addEventListener("pointerup",clearSelection);svg.addEventListener("pointercancel",clearSelection);svg.addEventListener("pointerleave",e=>{if(e.pointerType==="mouse"&&!active)clearSelection();});
 }
 
-function productTable(limit=100){if(!state.products.length)return '<div class="empty-row">Nenhum produto cadastrado ainda.</div>';return `<div class="table-wrap"><table><thead><tr><th>PRODUTO</th><th>PREÇO</th><th>STATUS</th><th>CADASTRO</th><th></th></tr></thead><tbody>${state.products.slice(0,limit).map(p=>`<tr><td><span class="product-title">${escapeHtml(p.name)}</span><span class="product-sub">${escapeHtml(p.description||"Sem descrição")}</span></td><td>${money(p.price)}</td><td><span class="pill">Ativo</span></td><td>${p.date}</td><td><button class="text-btn" data-delete="${p.id}">Excluir</button></td></tr>`).join("")}</tbody></table></div>`}
-function productsPage(){return `<section class="panel table-panel"><div class="panel-head"><h3>Todos os produtos</h3><span class="muted">${state.products.length} produto(s)</span></div>${productTable()}</section>`}
+
+const productAssetUrls=new Map();
+let productFilesDatabase=null;
+function openProductFilesDB(){
+ if(productFilesDatabase)return productFilesDatabase;
+ productFilesDatabase=new Promise((resolve,reject)=>{
+  if(!("indexedDB" in window)){reject(new Error("Armazenamento de arquivos indisponível neste navegador."));return;}
+  const request=indexedDB.open("cashfy_product_library",1);
+  request.onupgradeneeded=()=>{const db=request.result;if(!db.objectStoreNames.contains("files"))db.createObjectStore("files");};
+  request.onsuccess=()=>resolve(request.result);
+  request.onerror=()=>reject(request.error||new Error("Não foi possível abrir a biblioteca de arquivos."));
+ });
+ return productFilesDatabase;
+}
+async function putProductFile(id,file){
+ const db=await openProductFilesDB();
+ return new Promise((resolve,reject)=>{const tx=db.transaction("files","readwrite");tx.objectStore("files").put(file,id);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);});
+}
+async function getProductFile(id){
+ const db=await openProductFilesDB();
+ return new Promise((resolve,reject)=>{const tx=db.transaction("files","readonly");const req=tx.objectStore("files").get(id);req.onsuccess=()=>resolve(req.result||null);req.onerror=()=>reject(req.error);});
+}
+async function removeProductFile(id){
+ if(!id)return;
+ const db=await openProductFilesDB();
+ return new Promise((resolve,reject)=>{const tx=db.transaction("files","readwrite");tx.objectStore("files").delete(id);tx.oncomplete=()=>resolve();tx.onerror=()=>reject(tx.error);});
+}
+function makeProductId(){return (crypto.randomUUID?crypto.randomUUID():"p"+Date.now()+Math.random().toString(16).slice(2));}
+function productFileSize(bytes){
+ if(bytes<1024)return bytes+" B";
+ if(bytes<1048576)return (bytes/1024).toLocaleString("pt-BR",{maximumFractionDigits:0})+" KB";
+ return (bytes/1048576).toLocaleString("pt-BR",{maximumFractionDigits:1})+" MB";
+}
+function productFileIcon(type,name){
+ if(type&&type.includes("pdf")||/\.pdf$/i.test(name))return "PDF";
+ if(type&&type.startsWith("video/"))return "VID";
+ if(type&&type.startsWith("image/"))return "IMG";
+ if(type&&type.includes("zip")||/\.(zip|rar|7z)$/i.test(name))return "ZIP";
+ if(type&&type.includes("audio"))return "ÁUD";
+ return "ARQ";
+}
+function productsPage(){
+ const editing=state.productEditor!==null;
+ const product=editing&&state.productEditor!=="new"?state.products.find(p=>p.id===state.productEditor):null;
+ if(editing){
+  const p=product||{};
+  const currentFiles=(p.assets||[]).map(a=>'<div class="product-existing-file"><span class="product-file-type">'+productFileIcon(a.type,a.name)+'</span><span class="product-file-name"><b>'+escapeHtml(a.name)+'</b><small>'+productFileSize(a.size||0)+'</small></span><button type="button" class="product-file-remove" data-remove-product-asset="'+escapeHtml(a.id)+'" data-product-id="'+escapeHtml(p.id||"")+'" aria-label="Remover arquivo">×</button></div>').join("");
+  return '<section class="product-editor-shell"><div class="product-editor-heading"><button type="button" class="product-back-link" data-cancel-product>← Voltar ao catálogo</button><span class="product-editor-overline">GESTÃO DE CATÁLOGO / '+(product?"EDIÇÃO":"NOVO ITEM")+'</span><h2>'+(product?"Editar produto":"Cadastrar produto")+'</h2><p>Configure a apresentação e os materiais que serão entregues ao comprador.</p></div><form id="productManagerForm" class="product-editor-form"><div class="product-editor-main"><section class="product-editor-panel"><div class="product-section-heading"><span class="product-section-index">01</span><div><h3>Informações do produto</h3><p>Os dados que aparecem na vitrine e no checkout.</p></div></div><div class="product-form-grid"><label class="product-field product-field-wide"><span>Nome do produto <i>*</i></span><input name="name" required maxlength="90" value="'+escapeHtml(p.name||"")+'" placeholder="Ex.: Biblioteca de templates premium"></label><label class="product-field"><span>Preço de venda <i>*</i></span><div class="product-price-input"><span>R$</span><input name="price" type="number" min="0" step="0.01" required value="'+(p.price??"")+'" placeholder="0,00"></div></label><label class="product-field"><span>Status</span><select name="status"><option value="Ativo" '+(p.status!=="Rascunho"?"selected":"")+'>Publicado</option><option value="Rascunho" '+(p.status==="Rascunho"?"selected":"")+'>Rascunho</option></select></label><label class="product-field product-field-wide"><span>Descrição</span><textarea name="description" rows="5" maxlength="1200" placeholder="Apresente o conteúdo, os benefícios e o que o cliente vai receber...">'+escapeHtml(p.description||"")+'</textarea><small>Uma descrição clara ajuda o comprador a entender o valor do produto.</small></label></div></section><section class="product-editor-panel"><div class="product-section-heading"><span class="product-section-index">02</span><div><h3>Identidade visual</h3><p>Uma capa consistente valoriza a apresentação do produto.</p></div></div><label class="product-cover-upload"><input type="file" name="cover" accept="image/png,image/jpeg,image/webp,image/gif"><span class="product-cover-preview" id="productCoverPreview">'+(p.imageAssetId?'<img data-product-image="'+escapeHtml(p.id)+'" alt="Capa do produto">':'<span class="product-cover-placeholder">＋<small>Prévia da capa</small></span>')+'</span><span class="product-cover-copy"><b>Imagem de capa</b><small>PNG, JPG ou WEBP. Selecione uma imagem do dispositivo.</small><em>Escolher imagem</em></span></label></section><section class="product-editor-panel"><div class="product-section-heading"><span class="product-section-index">03</span><div><h3>Conteúdo e arquivos</h3><p>Adicione os materiais que fazem parte da entrega digital.</p></div></div><label class="product-assets-upload"><input type="file" name="assets" multiple accept=".pdf,.mp4,.mov,.webm,.mp3,.wav,.png,.jpg,.jpeg,.webp,.zip,.rar,.7z,.doc,.docx,.xls,.xlsx,.ppt,.pptx,.txt"><span class="product-assets-symbol">↥</span><b>Adicionar arquivos à entrega</b><small>PDF, vídeos, imagens, áudios, documentos, ZIP e outros formatos.</small><em>Selecionar arquivos</em></label><div class="product-existing-assets"><div class="product-assets-label">MATERIAIS JÁ ADICIONADOS <span>'+(p.assets||[]).length+'</span></div>'+(currentFiles||'<p class="product-no-assets">Nenhum arquivo anexado a este produto ainda.</p>')+'</div><p class="product-storage-note">Os arquivos ficam guardados no armazenamento deste navegador e dispositivo. A disponibilidade em outros aparelhos exige uma conexão futura com armazenamento em nuvem.</p></section></div><aside class="product-editor-aside"><div class="product-publish-card"><span class="product-publish-kicker">RESUMO</span><div class="product-publish-mark">✦</div><h3>'+(product?"Atualize seu produto":"Pronto para cadastrar?")+'</h3><p>Revise as informações e salve para organizar este item no seu catálogo.</p><div class="product-publish-line"><span>Campos obrigatórios</span><b>Nome e preço</b></div><div class="product-publish-line"><span>Entrega digital</span><b>Arquivos anexados</b></div><button class="product-save-button" type="submit">'+(product?"Salvar alterações":"Criar produto")+' <span>↗</span></button><button class="product-cancel-button" type="button" data-cancel-product>Cancelar</button></div></aside></div></form></section>';
+ }
+ const active=state.products.filter(p=>p.status!=="Rascunho").length;
+ const cards=state.products.map(p=>{
+  const assets=p.assets||[];
+  return '<article class="product-catalog-card"><div class="product-card-visual">'+(p.imageAssetId?'<img data-product-image="'+escapeHtml(p.id)+'" alt="'+escapeHtml(p.name)+'">':'<div class="product-card-no-image"><span>✦</span><small>SEM CAPA</small></div>')+'<span class="product-card-status '+(p.status==="Rascunho"?"is-draft":"")+'">'+(p.status==="Rascunho"?"Rascunho":"Publicado")+'</span></div><div class="product-card-body"><div class="product-card-category">PRODUTO DIGITAL</div><h3>'+escapeHtml(p.name)+'</h3><p>'+(escapeHtml(p.description||"Sem descrição cadastrada"))+'</p><div class="product-card-meta"><strong>'+money(p.price)+'</strong><span>'+assets.length+' arquivo(s)</span></div><div class="product-card-files">'+assets.slice(0,3).map(a=>'<span>'+productFileIcon(a.type,a.name)+' '+escapeHtml(a.name)+'</span>').join("")+(assets.length>3?'<span>+'+(assets.length-3)+' outros</span>':"")+'</div><div class="product-card-actions"><button type="button" data-edit-product="'+escapeHtml(p.id)+'">Editar produto <span>↗</span></button><button type="button" class="product-delete-action" data-delete-product="'+escapeHtml(p.id)+'" aria-label="Excluir produto">Excluir</button></div></div></article>';
+ }).join("");
+ return '<section class="product-hub"><div class="product-hub-top"><div><span class="product-hub-kicker">CENTRAL DE PRODUTOS</span><h2>Seu catálogo digital</h2><p>Gerencie produtos, apresentações e arquivos de entrega em um só lugar.</p></div><button type="button" class="product-create-button" data-action="new-product"><span>＋</span> Novo produto</button></div><div class="product-overview-strip"><div><span class="product-overview-icon">▤</span><span><small>NO CATÁLOGO</small><b>'+state.products.length.toString().padStart(2,"0")+'</b></span></div><div><span class="product-overview-icon">◈</span><span><small>PUBLICADOS</small><b>'+active.toString().padStart(2,"0")+'</b></span></div><div><span class="product-overview-icon">↥</span><span><small>ARQUIVOS ANEXADOS</small><b>'+state.products.reduce((n,p)=>n+(p.assets||[]).length,0).toString().padStart(2,"0")+'</b></span></div></div>'+(state.products.length?'<div class="product-catalog-heading"><div><h3>Produtos cadastrados</h3><span>'+state.products.length+' item(ns) na sua biblioteca</span></div><span class="product-catalog-sort">CATÁLOGO ATUALIZADO</span></div><div class="product-catalog-grid">'+cards+'</div>':'<div class="product-empty-catalog"><div class="product-empty-art"><span>✦</span><i></i><b></b></div><span class="product-hub-kicker">COMECE PELO PRIMEIRO ITEM</span><h3>Seu catálogo começa aqui.</h3><p>Cadastre um produto, adicione uma capa e organize os arquivos que farão parte da entrega digital.</p><button type="button" class="product-create-button" data-action="new-product">＋ Cadastrar primeiro produto</button></div>')+'<p class="product-local-note"><span>●</span> Biblioteca salva neste dispositivo · Arquivos mantidos no armazenamento local do navegador</p></section>';
+}
+async function hydrateProductAssets(){
+ const targets=[...document.querySelectorAll("[data-product-image],[data-product-file-id]")];
+ for(const el of targets){
+  const id=el.dataset.productImage||el.dataset.productFileId;
+  if(!id)continue;
+  try{
+   let url=productAssetUrls.get(id);
+   if(!url){const blob=await getProductFile(id);if(!blob)continue;url=URL.createObjectURL(blob);productAssetUrls.set(id,url);}
+   if(el.dataset.productImage){el.src=url;}
+   else{el.href=url;el.download=el.dataset.fileName||"arquivo";}
+  }catch(err){console.warn("Falha ao carregar arquivo do produto",err);}
+ }
+}
+async function readProductUpload(file){
+ const id=makeProductId();
+ await putProductFile(id,file);
+ return {id,name:file.name,type:file.type||"application/octet-stream",size:file.size};
+}
+async function saveProductManager(form){
+ const data=new FormData(form),name=String(data.get("name")||"").trim(),price=Number(data.get("price"));
+ if(!name||!Number.isFinite(price)||price<0){alert("Informe um nome e um preço válido.");return;}
+ const editingId=state.productEditor&&state.productEditor!=="new"?state.productEditor:null;
+ const old=editingId?state.products.find(p=>p.id===editingId):null;
+ const addedIds=[];
+ try{
+  let imageAssetId=old?.imageAssetId||null;
+  const cover=form.elements.cover.files[0];
+  if(cover){const saved=await readProductUpload(cover);addedIds.push(saved.id);imageAssetId=saved.id;}
+  const newAssets=[];
+  for(const file of form.elements.assets.files){const saved=await readProductUpload(file);addedIds.push(saved.id);newAssets.push(saved);}
+  const product={...(old||{}),id:old?.id||makeProductId(),name,price,description:String(data.get("description")||"").trim(),status:String(data.get("status")||"Ativo"),imageAssetId,assets:[...(old?.assets||[]),...newAssets],date:old?.date||new Date().toLocaleDateString("pt-BR"),updatedAt:new Date().toISOString()};
+  if(old?.imageAssetId&&cover)await removeProductFile(old.imageAssetId);
+  if(old)state.products=state.products.map(p=>p.id===old.id?product:p);else state.products.unshift(product);
+  save();state.productEditor=null;render();
+ }catch(err){
+  for(const id of addedIds){try{await removeProductFile(id);}catch{}}
+  console.error(err);alert("Não foi possível salvar os arquivos. Verifique o espaço disponível no navegador e tente novamente.");
+ }
+}
+
 function salesPage(){return `<section class="panel table-panel"><div class="panel-head"><h3>Histórico de vendas</h3><span class="muted">${state.sales.length} registro(s)</span></div>${state.sales.length?`<div class="table-wrap"><table><thead><tr><th>REGISTRO</th><th>VALOR</th><th>STATUS</th><th>DATA</th></tr></thead><tbody>${state.sales.map(s=>{const d=parseSaleDate(s);return `<tr><td><span class="product-title">${escapeHtml(s.productName||s.product_name||"Venda")}</span></td><td>${money(s.amount||s.total||s.price||0)}</td><td><span class="pill">${escapeHtml(s.status||"Registrada")}</span></td><td>${d?d.toLocaleString("pt-BR"):"—"}</td></tr>`}).join("")}</tbody></table></div>`:`<div class="empty-state"><div class="empty-icon">↗</div><strong>Nenhuma venda registrada</strong><p>Os registros de venda aparecerão aqui quando o checkout for integrado.</p></div>`}</section>`}
 function customersPage(){return `<section class="panel"><div class="panel-head"><h3>Base de clientes</h3><span class="muted">${state.customers.length} cliente(s)</span></div><div class="empty-state"><div class="empty-icon">♙</div><strong>Nenhum cliente cadastrado</strong><p>Os clientes serão adicionados quando o cadastro e o checkout estiverem conectados.</p></div></section>`}
 const settingsDefaults={
@@ -502,11 +596,11 @@ document.addEventListener("click",e=>{
  const update=e.target.closest("#updateDashboard");if(update){render();return;}
  const nav=e.target.closest("[data-page]");if(nav){closeTopSearch();state.page=nav.dataset.page;document.querySelectorAll(".nav-link").forEach(n=>n.classList.toggle("active",n.dataset.page===state.page));render();$("#sidebar").classList.remove("open");}
  const visibility=e.target.closest("#toggleRevenueVisibility");if(visibility){state.revenueHidden=!state.revenueHidden;const value=$(".revenue-private");value.classList.toggle("blurred",state.revenueHidden);visibility.classList.toggle("is-hidden",state.revenueHidden);visibility.setAttribute("aria-pressed",String(state.revenueHidden));visibility.setAttribute("aria-label",state.revenueHidden?"Mostrar faturamento":"Ocultar faturamento");visibility.title=state.revenueHidden?"Mostrar faturamento":"Ocultar faturamento";return;}
- if(e.target.closest('[data-action="new-product"]'))openModal();
+ if(e.target.closest('[data-action="new-product"]')){state.productEditor="new";render();return;} const editProduct=e.target.closest("[data-edit-product]");if(editProduct){state.productEditor=editProduct.dataset.editProduct;render();return;} if(e.target.closest("[data-cancel-product]")){state.productEditor=null;render();return;} const removeAsset=e.target.closest("[data-remove-product-asset]");if(removeAsset){const p=state.products.find(x=>x.id===removeAsset.dataset.productId);if(p){const asset=p.assets.find(x=>x.id===removeAsset.dataset.removeProductAsset);p.assets=p.assets.filter(x=>x.id!==removeAsset.dataset.removeProductAsset);if(asset)removeProductFile(asset.id).catch(()=>{});save();render();}return;} const deleteProduct=e.target.closest("[data-delete-product]");if(deleteProduct&&confirm("Excluir este produto e seus arquivos anexados?")){const p=state.products.find(x=>x.id===deleteProduct.dataset.deleteProduct);if(p){if(p.imageAssetId)removeProductFile(p.imageAssetId).catch(()=>{});(p.assets||[]).forEach(a=>removeProductFile(a.id).catch(()=>{}));}state.products=state.products.filter(x=>x.id!==deleteProduct.dataset.deleteProduct);save();render();return;}
  const del=e.target.closest("[data-delete]");if(del&&confirm("Excluir este produto?")){state.products=state.products.filter(p=>p.id!==del.dataset.delete);save();render();}
 });
 document.addEventListener("submit",e=>{if(e.target.id==="settingsForm"){e.preventDefault();const next={...cashfySettings};e.target.querySelectorAll("[data-setting]").forEach(el=>{next[el.dataset.setting]=el.type==="checkbox"?el.checked:el.value;});cashfySettings=next;localStorage.setItem("cashfy_settings",JSON.stringify(cashfySettings));const saved=$("#settingsSaved");if(saved)saved.textContent="Configurações salvas neste navegador.";}});
-$("#productForm").addEventListener("submit",e=>{e.preventDefault();const data=new FormData(e.currentTarget);state.products.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name:data.get("name").trim(),price:Number(data.get("price")),description:data.get("description").trim(),date:new Date().toLocaleDateString("pt-BR")});save();closeModal();state.page="products";document.querySelectorAll(".nav-link").forEach(n=>n.classList.toggle("active",n.dataset.page==="products"));render();});
+document.addEventListener("submit",e=>{if(e.target.id==="productManagerForm"){e.preventDefault();saveProductManager(e.target);}}); $("#productForm").addEventListener("submit",e=>{e.preventDefault();const data=new FormData(e.currentTarget);state.products.unshift({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),name:data.get("name").trim(),price:Number(data.get("price")),description:data.get("description").trim(),date:new Date().toLocaleDateString("pt-BR")});save();closeModal();state.page="products";document.querySelectorAll(".nav-link").forEach(n=>n.classList.toggle("active",n.dataset.page==="products"));render();});
 $("#closeModal").addEventListener("click",closeModal);$("#cancelModal").addEventListener("click",closeModal);$("#modal").addEventListener("click",e=>{if(e.target.id==="modal")closeModal();});$("#mobileMenu").addEventListener("click",()=>{const sidebar=$("#sidebar");const opening=!sidebar.classList.contains("open");sidebar.classList.toggle("open");});$("#sidebarToggle").addEventListener("click",()=>{const sidebar=$("#sidebar");if(window.matchMedia("(max-width: 650px)").matches){sidebar.classList.remove("open");}else{const collapsed=sidebar.classList.toggle("collapsed");const button=$("#sidebarToggle");button.setAttribute("aria-label",collapsed?"Expandir barra lateral":"Recolher barra lateral");button.title=collapsed?"Expandir barra lateral":"Recolher barra lateral";}});
 render();
 const loadingScreen=$("#loadingScreen");
